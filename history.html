@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles of Regola | Lily Terrace Rome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="flower-logo.png">
+    <style>
+        :root {
+            --bg-color: #08101a;
+            --accent-gold: #c5a059;
+            --cream: #f9f6f0;
+            --text-main: #ffffff;
+            --text-muted: rgba(249, 246, 240, 0.6);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Translation Widget */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(8, 16, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        #google_translate_element {
+            display: inline-block;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.65rem !important;
+            color: var(--accent-gold) !important;
+            text-transform: uppercase;
+        }
+
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-menu-value span {
+            color: var(--accent-gold) !important;
+            font-weight: 300 !important;
+        }
+
+        .goog-te-menu-value img {
+            display: none !important;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 40px;
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-logo img {
+            height: 60px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--accent-gold);
+            letter-spacing: -0.02em;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+        }
+
+        p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+            color: var(--text-muted);
+        }
+
+        .etymology-box {
+            background: rgba(197, 160, 89, 0.05);
+            border-left: 2px solid var(--accent-gold);
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .etymology-box p {
+            color: var(--cream);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            color: var(--accent-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.22rem;
+            }
+
+            .content-container {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lang-switch">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="content-container">
+        <div class="header-logo">
+            <a href="index.html"><img src="flower-logo.png" alt="Lily Terrace"></a>
+        </div>
+
+        <h1>Chronicles of Regola</h1>
+
+        <div class="section">
+            <div class="section-header">A Legacy written in Stone</div>
+            <p>
+                The Rione Regola is one of Rome's most enduring neighborhoods, a district where the ancient craft of the
+                Renaissance persists in the shadow of imperial history. It is here, nestled along the Vicolo del Giglio,
+                that Lily Terrace marks its place—a residence born from a lineage of artistic and historic significance.
+            </p>
+            <p>
+                In the late 20th century, this terrace served as the sanctuary for Ramón Gaya, the celebrated Spanish
+                painter and writer. Gaya's presence imbued the space with a quiet, intellectual dignity that we have
+                meticulously preserved. Voted "the most beautiful city in the world" by the very artists who called it
+                home, Regola remains the last bastion of authentic Roman nobility.
+            </p>
+        </div>
+
+        <div class="etymology-box">
+            <p>
+                "Fleur-de-lis means lily flower in French; Giglio means lily in Italian. Vicolo del Giglio (Lily Lane)
+                derives its name from the crest of the House Farnese—a field of fleur-de-lis—whose historic palace
+                stands just steps away in Piazza Farnese."
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-header">The House Farnese</div>
+            <p>
+                The proximity to Palazzo Farnese, now the French Embassy, defines the local architectural character. The
+                influence of the Farnese family brought with it a standard of elegance that is reflected in the
+                surrounding piazzas and narrow lanes. To walk the stones of Vicolo del Giglio is to follow the path of
+                popes, ambassadors, and masters of the High Renaissance.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-link">Return to the Sanctuary</a>
+    </div>
+</body>
+
+</html>

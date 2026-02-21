@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial=" initial-scale=1.0">
+    <title>Grand Tour Planning | Lily Terrace Rome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="flower-logo.png">
+    <style>
+        :root {
+            --bg-color: #08101a;
+            --accent-gold: #c5a059;
+            --cream: #f9f6f0;
+            --text-main: #ffffff;
+            --text-muted: rgba(249, 246, 240, 0.6);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        /* Translation Widget */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(8, 16, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        #google_translate_element {
+            display: inline-block;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.65rem !important;
+            color: var(--accent-gold) !important;
+            text-transform: uppercase;
+        }
+
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-menu-value span {
+            color: var(--accent-gold) !important;
+            font-weight: 300 !important;
+        }
+
+        .goog-te-menu-value img {
+            display: none !important;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 40px;
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-logo img {
+            height: 60px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .tip-box {
+            margin-bottom: 60px;
+        }
+
+        .tip-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            color: var(--accent-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lang-switch">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="content-container">
+        <div class="header-logo">
+            <a href="index.html"><img src="flower-logo.png" alt="Lily Terrace"></a>
+        </div>
+
+        <h1>Planning Your Stay</h1>
+
+        <div class="tip-box">
+            <div class="tip-title">Seasonal Nuance</div>
+            <p>
+                To experience Lily Terrace at its peak, we suggest visiting in late April through June, or late
+                September through October. During these months, the Roman light is at its most golden, and the terrace
+                breeze is most cooling.
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Regola Etiquette</div>
+            <p>
+                While Rome is welcoming, our rione values understated elegance. When visiting the nearby Basilica of San
+                Lorenzo in Damaso, remember to dress respectfully. A light linen shawl or jacket is perfect for
+                transitioning from the Roman heat to the quiet cool of historic stone.
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Arrival Logistics</div>
+            <p>
+                We highly recommend arranging a private NCC car for your arrival from Fiumicino. The lanes of Regola are
+                historic and narrow; a professional driver knows exactly how to navigate the final steps to Vicolo del
+                Giglio with grace.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-link">Return to the Sanctuary</a>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

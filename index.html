@@ -160,9 +160,73 @@
         }
 
         .info-panel.visible {
-            max-height: 1000px;
+            max-height: 1200px;
             padding-top: 60px;
             border-top: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        /* Translation Widget */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(8, 16, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        #google_translate_element {
+            display: inline-block;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.65rem !important;
+            color: var(--accent-gold) !important;
+            text-transform: uppercase;
+        }
+
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-menu-value span {
+            color: var(--accent-gold) !important;
+            font-weight: 300 !important;
+        }
+
+        .goog-te-menu-value img {
+            display: none !important;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-gold);
         }
 
         .property-grid {
@@ -307,74 +371,85 @@
 </head>
 
 <body>
+    <div class="lang-switch">
+        <div id="google_translate_element"></div>
+    </div>
+
     <div class="container">
         <div class="logo-container">
-            <img src="logo.png" alt="Lily Terrace Rome Logo">
+            <img src="logo.png" alt="Lily Terrace Rome">
         </div>
 
         <div class="countdown-container">
-            <div class="countdown-title">Inaugurazione Maggio 2026</div>
+            <div class="countdown-title">Inauguration May 2026</div>
             <div class="timer" id="timer">
                 <div class="time-box">
                     <span class="time-value" id="days">00</span>
-                    <span class="time-label">Giorni</span>
+                    <span class="time-label">Days</span>
                 </div>
                 <div class="time-box">
                     <span class="time-value" id="hours">00</span>
-                    <span class="time-label">Ore</span>
+                    <span class="time-label">Hours</span>
                 </div>
                 <div class="time-box">
                     <span class="time-value" id="minutes">00</span>
-                    <span class="time-label">Minuti</span>
+                    <span class="time-label">Minutes</span>
                 </div>
                 <div class="time-box">
                     <span class="time-value" id="seconds">00</span>
-                    <span class="time-label">Secondi</span>
+                    <span class="time-label">Seconds</span>
                 </div>
             </div>
         </div>
 
         <div class="actions">
             <button class="btn-explore" id="learnMoreBtn">
-                <img src="bluelogo.png" alt="" class="btn-icon">
-                Scopri la Residenza
+                <img src="flower-logo.png" alt="" class="btn-icon">
+                Explore the Sanctuary
             </button>
             <div class="info-panel" id="infoPanel">
                 <div class="property-grid">
                     <div class="property-text">
-                        <h2>Un Ritiro di Charme nel cuore di Regola.</h2>
+                        <h2>Historic Elegance in the Heart of Regola.</h2>
                         <p>
-                            Situata negli ultimi due piani di un palazzo d'epoca, Lily Terrace incarna l'eleganza senza
-                            tempo della Roma più autentica. Già dimora del pittore Ramón Gaya, la residenza offre un
-                            connubio unico tra storia e comfort contemporaneo.
+                            Occupying the upper levels of a historic palazzo, Lily Terrace epitomizes the timeless sophistication of Rome. Formerly
+                            the residence of legendary Spanish painter Ramón Gaya, the sanctuary offers a masterful blend of heritage and
+                            contemporary luxury.
                         </p>
                         <p>
-                            A pochi passi da Campo de' Fiori, la proprietà si distingue per la sua luce straordinaria,
-                            le ampie vedute sui tetti romani e un'atmosfera di rara compostezza.
+                            Moments from Campo de' Fiori, the property is defined by extraordinary light, sweeping vistas across Roman rooftops, and
+                            an atmosphere of profound serenity.
                         </p>
                     </div>
                     <div class="property-details">
                         <ul class="amenities-list">
-                            <li>Climatizzazione <span>6kW Power / A/C</span></li>
-                            <li>Spazi Esterni <span>Terrazzo Privato</span></li>
-                            <li>Cucina <span>Design / Lavastoviglie</span></li>
-                            <li>Servizi <span>Lavatrice & Asciugatrice</span></li>
-                            <li>Living <span>Camino a legna</span></li>
-                            <li>Bagni <span>Design Moderno</span></li>
+                            <li>Climate Control <span>6kW Power / A/C</span></li>
+                            <li>Outdoor Living <span>Private Terrace</span></li>
+                            <li>Culinary Suite <span>Design / Dishwasher</span></li>
+                            <li>Laundry <span>Washer & Dryer</span></li>
+                            <li>Living Area <span>Wood-burning Fireplace</span></li>
+                            <li>Bathrooms <span>Modern Design</span></li>
                         </ul>
                     </div>
                     <form class="signup-form"
                         action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfD_XU5YvYm_J_7vJ_zXU_W_X_J_X_J_X_J_X_J_X_J_X/formResponse"
                         method="POST" target="_blank">
-                        <div class="form-title">Registra il Tuo Interesse</div>
+                        <div class="form-title">Register Your Interest</div>
                         <div class="input-group">
-                            <input type="email" name="emailAddress" placeholder="Indirizzo Email" required>
-                            <button type="submit" class="btn-submit">Invia</button>
+                            <input type="email" name="emailAddress" placeholder="Email Address" required>
+                            <button type="submit" class="btn-submit">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+<nav class="footer-nav">
+    <a href="history.html">History</a>
+    <a href="food.html">Dining</a>
+    <a href="planning.html">Planning</a>
+    <a href="transport.html">Travel</a>
+    <a href="map.html">Map</a>
+</nav>
     </div>
 
     <script>
@@ -411,15 +486,27 @@
         learnMoreBtn.addEventListener('click', () => {
             infoPanel.classList.toggle('visible');
             if (infoPanel.classList.contains('visible')) {
-                learnMoreBtn.innerText = 'Chiudi';
+                learnMoreBtn.innerText = 'Close';
                 setTimeout(() => {
                     infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                learnMoreBtn.innerText = 'Scopri la Residenza';
+                learnMoreBtn.innerText = 'Explore the Sanctuary';
             }
         });
     </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>

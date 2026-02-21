@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine Dining in Regola | Lily Terrace Rome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="flower-logo.png">
+    <style>
+        :root {
+            --bg-color: #08101a;
+            --accent-gold: #c5a059;
+            --cream: #f9f6f0;
+            --text-main: #ffffff;
+            --text-muted: rgba(249, 246, 240, 0.6);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        /* Translation Widget */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(8, 16, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        #google_translate_element {
+            display: inline-block;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.65rem !important;
+            color: var(--accent-gold) !important;
+            text-transform: uppercase;
+        }
+
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-menu-value span {
+            color: var(--accent-gold) !important;
+            font-weight: 300 !important;
+        }
+
+        .goog-te-menu-value img {
+            display: none !important;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 40px;
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-logo img {
+            height: 60px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .venue {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .venue-type {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            color: var(--accent-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lang-switch">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="content-container">
+        <div class="header-logo">
+            <a href="index.html"><img src="flower-logo.png" alt="Lily Terrace"></a>
+        </div>
+
+        <h1>Refined Dining</h1>
+
+        <div class="venue">
+            <span class="venue-type">The Institution</span>
+            <div class="venue-name">Pierluigi</div>
+            <p>
+                Since 1938, Pierluigi has been the heartbeat of Rome's seafood scene. Located in the charming Piazza de'
+                Ricci, just a short stroll from Vicolo del Giglio, it offers the city's finest al fresco dining. A
+                favorite for diplomats and travelers of distinction.
+            </p>
+        </div>
+
+        <div class="venue">
+            <span class="venue-type">Gastronomic Excellence</span>
+            <div class="venue-name">Roscioli Salumeria</div>
+            <p>
+                A sensory journey through Italy's finest ingredients. Roscioli is more than a restaurant; it is a Roman
+                legend. We recommend booking weeks in advance to secure a seat at the counter for their world-renowned
+                Carbonara.
+            </p>
+        </div>
+
+        <div class="venue">
+            <span class="venue-type">Aperitivo with a View</span>
+            <div class="venue-name">Hotel de la Ville</div>
+            <p>
+                While slightly further afield, the Cielo Bar atop Hotel de la Ville offers a vista that matches the
+                grandeur of Lily Terrace. Perfect for a sunset cocktail overlooking the Eternal City.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-link">Return to the Sanctuary</a>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
