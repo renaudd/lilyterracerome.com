@@ -1,40 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lily Terrace Rome</title>
+    <title>Lily Terrace Rome | Historic Elegance in Regola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="bluelogo.png">
     <style>
+        :root {
+            --bg-color: #08101a;
+            --accent-gold: #c5a059;
+            --cream: #f9f6f0;
+            --text-main: #ffffff;
+            --text-muted: rgba(249, 246, 240, 0.6);
+        }
+
         body {
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #1a2a3a; /* Matching dark background from logo */
+            background-color: var(--bg-color);
             font-family: 'Outfit', sans-serif;
-            color: white;
+            color: var(--text-main);
+            overflow-x: hidden;
         }
+
         .container {
             text-align: center;
-            padding: 20px;
+            padding: 80px 20px;
+            max-width: 900px;
+            width: 100%;
         }
-        img {
+
+        .logo-container img {
             max-width: 100%;
             height: auto;
-            max-height: 80vh;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            max-height: 28vh;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            transition: opacity 0.5s ease;
         }
-        img:hover {
-            transform: scale(1.02);
+
+        /* Countdown Styles */
+        .countdown-container {
+            margin-bottom: 80px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-size: 2.2rem;
+            font-weight: 200;
+            line-height: 1;
+            color: var(--cream);
+            letter-spacing: 2px;
+        }
+
+        .time-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(197, 160, 89, 0.6);
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        /* Action Section */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .btn-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            vertical-align: middle;
+            opacity: 0.8;
+            filter: brightness(0) saturate(100%) invert(74%) sepia(21%) saturate(230%) hue-rotate(1deg) brightness(91%) contrast(85%);
+            /* gold color approximation */
+        }
+
+        .btn-explore {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            padding: 18px 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border-radius: 0;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-explore:hover {
+            border-color: var(--accent-gold);
+            color: var(--bg-color);
+            background: var(--accent-gold);
+        }
+
+        /* Expanded Content */
+        .info-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: url('bluelogo.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .info-panel.visible {
+            max-height: 1000px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            text-align: left;
+        }
+
+        .property-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--cream);
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .property-text p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .amenities-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .amenities-list li {
+            font-size: 0.8rem;
+            color: var(--bg-cream);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.5px;
+        }
+
+        .amenities-list li span {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        /* Form Styles */
+        .signup-form {
+            grid-column: 1 / span 2;
+            max-width: 500px;
+            margin: 60px auto 0;
+            text-align: center;
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        input[type="email"] {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 15px 0;
+            color: var(--cream);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.4s ease;
+        }
+
+        input[type="email"]:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .btn-submit {
+            background: var(--accent-gold);
+            border: none;
+            color: var(--bg-color);
+            padding: 20px 60px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 0.75rem;
+        }
+
+        .btn-submit:hover {
+            background: var(--cream);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .signup-form {
+                grid-column: 1;
+            }
+
+            .timer {
+                gap: 20px;
+            }
+
+            .time-value {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <img src="logo.png" alt="Lily Terrace Rome Logo">
+        <div class="logo-container">
+            <img src="logo.png" alt="Lily Terrace Rome Logo">
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-title">Inaugurazione Maggio 2026</div>
+            <div class="timer" id="timer">
+                <div class="time-box">
+                    <span class="time-value" id="days">00</span>
+                    <span class="time-label">Giorni</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Ore</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Minuti</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Secondi</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-explore" id="learnMoreBtn">
+                <img src="bluelogo.png" alt="" class="btn-icon">
+                Scopri la Residenza
+            </button>
+            <div class="info-panel" id="infoPanel">
+                <div class="property-grid">
+                    <div class="property-text">
+                        <h2>Un Ritiro di Charme nel cuore di Regola.</h2>
+                        <p>
+                            Situata negli ultimi due piani di un palazzo d'epoca, Lily Terrace incarna l'eleganza senza
+                            tempo della Roma più autentica. Già dimora del pittore Ramón Gaya, la residenza offre un
+                            connubio unico tra storia e comfort contemporaneo.
+                        </p>
+                        <p>
+                            A pochi passi da Campo de' Fiori, la proprietà si distingue per la sua luce straordinaria,
+                            le ampie vedute sui tetti romani e un'atmosfera di rara compostezza.
+                        </p>
+                    </div>
+                    <div class="property-details">
+                        <ul class="amenities-list">
+                            <li>Climatizzazione <span>6kW Power / A/C</span></li>
+                            <li>Spazi Esterni <span>Terrazzo Privato</span></li>
+                            <li>Cucina <span>Design / Lavastoviglie</span></li>
+                            <li>Servizi <span>Lavatrice & Asciugatrice</span></li>
+                            <li>Living <span>Camino a legna</span></li>
+                            <li>Bagni <span>Design Moderno</span></li>
+                        </ul>
+                    </div>
+                    <form class="signup-form"
+                        action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfD_XU5YvYm_J_7vJ_zXU_W_X_J_X_J_X_J_X_J_X_J_X/formResponse"
+                        method="POST" target="_blank">
+                        <div class="form-title">Registra il Tuo Interesse</div>
+                        <div class="input-group">
+                            <input type="email" name="emailAddress" placeholder="Indirizzo Email" required>
+                            <button type="submit" class="btn-submit">Invia</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Countdown Timer
+        const targetDate = new Date("May 1, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("timer").innerHTML = "DISPONIBILE";
+            }
+        }
+
+        const timerInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Learn More Toggle
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const infoPanel = document.getElementById('infoPanel');
+
+        learnMoreBtn.addEventListener('click', () => {
+            infoPanel.classList.toggle('visible');
+            if (infoPanel.classList.contains('visible')) {
+                learnMoreBtn.innerText = 'Chiudi';
+                setTimeout(() => {
+                    infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                learnMoreBtn.innerText = 'Scopri la Residenza';
+            }
+        });
+    </script>
 </body>
+
 </html>
