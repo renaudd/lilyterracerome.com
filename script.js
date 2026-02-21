@@ -1,0 +1,77 @@
+
+// Language Translation Logic
+function toggleLangMenu() {
+    const menu = document.getElementById('langMenu');
+    if (menu) menu.classList.toggle('active');
+}
+
+function changeLang(code, name) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+        select.value = code;
+        select.dispatchEvent(new Event('change'));
+        const menu = document.getElementById('langMenu');
+        if (menu) menu.classList.remove('active');
+    } else {
+        setTimeout(() => changeLang(code, name), 500);
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.custom-translate')) {
+        const menu = document.getElementById('langMenu');
+        if (menu) menu.classList.remove('active');
+    }
+});
+
+// Countdown Timer
+const targetDate = new Date("May 1, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const dEl = document.getElementById("days");
+    const hEl = document.getElementById("hours");
+    const mEl = document.getElementById("minutes");
+    const sEl = document.getElementById("seconds");
+
+    if (dEl) dEl.innerText = days.toString().padStart(2, '0');
+    if (hEl) hEl.innerText = hours.toString().padStart(2, '0');
+    if (mEl) mEl.innerText = minutes.toString().padStart(2, '0');
+    if (sEl) sEl.innerText = seconds.toString().padStart(2, '0');
+
+    if (distance < 0) {
+        clearInterval(timerInterval);
+        const timerContainer = document.getElementById("timer");
+        if (timerContainer) timerContainer.innerHTML = "DISPONIBILE";
+    }
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Learn More Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+    const infoPanel = document.getElementById('infoPanel');
+
+    if (learnMoreBtn && infoPanel) {
+        learnMoreBtn.addEventListener('click', () => {
+            infoPanel.classList.toggle('visible');
+            if (infoPanel.classList.contains('visible')) {
+                learnMoreBtn.innerText = 'Close';
+                setTimeout(() => {
+                    infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                learnMoreBtn.innerText = 'Explore the Residence';
+            }
+        });
+    }
+});
