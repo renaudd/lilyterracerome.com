@@ -140,13 +140,20 @@
 
         .back-link {
             display: block;
-            margin-top: 100px;
+            margin-top: 80px;
             text-align: center;
-            color: var(--accent-gold);
+            color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        .container a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -184,9 +191,10 @@
                     href="https://www.google.com/maps/search/?api=1&query=Pierluigi+Restaurant,+Piazza+De'+Ricci,+144,+00186+Rome"
                     target="_blank">Pierluigi</a></div>
             <p>
-                Since 1938, Pierluigi has been the heartbeat of Rome's seafood scene. Located in the charming Piazza de'
-                Ricci, just a short stroll from Vicolo del Giglio, it offers the city's finest al fresco dining. A
-                favorite for diplomats and travelers of distinction.
+                Since 1938, Pierluigi has been the heartbeat of Rome's seafood scene. Located in the charming <a
+                    href="https://www.google.com/maps/search/?api=1&query=Piazza+De'+Ricci+Rome" target="_blank">Piazza de' Ricci</a>,
+                just a short stroll from Vicolo del Giglio, it offers the city's finest al fresco dining. A favorite for diplomats and
+                travelers of distinction.
             </p>
         </div>
 
@@ -196,30 +204,39 @@
                     href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
                     target="_blank">Roscioli Salumeria</a></div>
             <p>
-                A sensory journey through Italy's finest ingredients. Roscioli is more than a restaurant; it is a Roman
-                legend. We recommend booking weeks in advance to secure a seat at the counter for their world-renowned
-                Carbonara.
+                A sensory journey through Italy's finest ingredients. Roscioli is more than a restaurant; it is a Roman legend. We
+                recommend booking weeks in advance to secure a seat at the counter for their world-renowned Carbonara.
+                Visit the <strong>Roscioli Rimessa</strong> (<a
+                    href="https://www.google.com/maps/search/?api=1&query=Rimessa+Roscioli+Rome" target="_blank">Via dei Giubbonari</a>)
+                for an unparalleled wine tasting experience.
             </p>
         </div>
 
         <div class="venue">
-            <span class="venue-type">Aperitivo with a View</span>
-            <div class="venue-name"><a href="https://www.google.com/maps/place/Via+Sistina,+69,+00187+Roma+RM,+Italy"
-                    target="_blank">Hotel de la Ville</a></div>
+            <span class="venue-type">Neighborhood Hidden Gems</span>
+            <div class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome"
+                    target="_blank">Ruma Bottega</a></div>
             <p>
-                While slightly further afield, the Cielo Bar atop Hotel de la Ville offers a vista that matches the
-                grandeur of Lily Terrace. Perfect for a sunset cocktail overlooking the Eternal City.
+                A modern masterclass in agricultural cuisine. Their cheese boards and focus on Maremma-sourced ingredients provide a
+                fresh, contemporary contrast to the heavy Roman classics.
+                For a quick, perfect snack, the <strong>Antico Forno Roscioli</strong> (<a
+                    href="https://www.google.com/maps/search/?api=1&query=Antico+Forno+Roscioli+Rome" target="_blank">Via dei
+                    Chiavari</a>)
+                serves the best pizza bianca in the city.
             </p>
         </div>
 
         <div class="venue">
-            <span class="venue-type">The "Plan B" List</span>
-            <div class="venue-name">Refined Fallbacks</div>
+            <span class="venue-type">Aperitivo & Late Night</span>
+            <div class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Il+Vinaietto+Rome" target="_blank">Il
+                    Vinaietto</a></div>
             <p>
-                Rome's top tables book out months in advance. If the institutions are full, we recommend <strong>Emma
-                    Pizzeria</strong> for a sophisticated thin-crust experience in Parione, or <strong>Al Moro</strong> near the
-                Trevi Fountain for historic vibes. For a stunning private palace experience with zero crowds, visit
-                <strong>Doria Pamphilj</strong> on Via del Corso.
+                Step out to <strong>Il Vinaietto</strong> (<a href="https://www.google.com/maps/search/?api=1&query=Il+Vinaietto+Rome"
+                    target="_blank">Via del Monte della Farina</a>)
+                for an authentic, unpretentious local wine experience. For those in the know, the <strong>Jerry Thomas Project</strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=The+Jerry+Thomas+Project+Rome" target="_blank">Vicolo
+                    Cellini</a>)
+                is a speakeasy that requires a password but delivers the city's most creative cocktails.
             </p>
         </div>
 
@@ -236,12 +253,15 @@
                 select.value = code;
                 select.dispatchEvent(new Event('change'));
                 document.getElementById('langMenu').classList.remove('active');
+            } else {
+                setTimeout(() => changeLang(code, name), 500);
             }
         }
 
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.custom-translate')) {
-                document.getElementById('langMenu').classList.remove('active');
+                const menu = document.getElementById('langMenu');
+                if (menu) menu.classList.remove('active');
             }
         });
     </script>

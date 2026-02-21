@@ -124,13 +124,20 @@
 
         .back-link {
             display: block;
-            margin-top: 100px;
+            margin-top: 80px;
             text-align: center;
-            color: var(--accent-gold);
+            color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        .content-container a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -163,26 +170,65 @@
         <h1>Planning Your Stay</h1>
 
         <div class="tip-box">
-            <div class="tip-title">The Regal Day (Day 1)</div>
+            <div class="tip-title">The "Roman Blitz" (1 Day)</div>
             <p>
-                Begin your Roman journey with the "Welcome to Rome" 3D cinema on Corso Vittorio. It provides the artistic scaffolding
-                needed to appreciate the ruins. Follow with a seafood lunch at Pierluigi and an afternoon marveling at the Pantheon.
+                For the guest with limited time, experience the "Welcome to Rome" 3D cinema on
+                <a href="https://www.google.com/maps/search/?api=1&query=Welcome+to+Rome+Exhibit+Corso+Vittorio+Emanuele+II"
+                    target="_blank">Corso Vittorio</a>
+                for essential historical context. Follow with a walk through the <strong>Roman Forum</strong> and a refined lunch at
+                <a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma
+                    Bottega</a>.
+                Spend your afternoon at the <strong>Pantheon</strong> and conclude with a world-class Carbonara at
+                <a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
+                    target="_blank">Roscioli Salumeria</a>.
+            </p>
+            </div>
+            
+            <div class="tip-box">
+                <div class="tip-title">The "Classic Weekend" (2-3 Days)</div>
+                <p>
+                    <strong>Day 1:</strong> Focus on Ancient Rome. <strong>Colosseum</strong> and <strong>Forum</strong> in the
+                    morning,
+                    followed by an afternoon in the **Jewish Ghetto** and the <strong>AquaMadre Hammam</strong>.
+                </p>
+                <p>
+                    <strong>Day 2:</strong> The Vatican. Book the 8:00 AM slot for the <strong>Vatican Museums</strong>, then walk
+                    to
+                    <a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo+Rome" target="_blank">Castel
+                        Sant'Angelo</a>
+                    for the best view of the city.
+                </p>
+                <p>
+                        <strong>Day 3:</strong> Masterpieces. A morning at the <strong>Galleria Borghese</strong>
+                        (<a href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese+Rome" target="_blank">Villa
+                            Borghese</a>)
+                        to see Bernini's masterpieces, followed by an elegant stroll down <strong>Via dei Condotti</strong> for luxury
+                        shopping.
             </p>
         </div>
 
         <div class="tip-box">
-            <div class="tip-title">Ancient Grandeur (Day 2)</div>
+            <div class="tip-title">The "Escapist" (4-5 Days)</div>
             <p>
-                Secure an 8:30 AM entry to the Colosseum to beat the crowds. For lunch, join the locals standing at Roscioli Salumeria
-                for a world-class Carbonara, before spending your afternoon lost in the history of the Roman Forum.
+                Escape the city noise with an e-bike ride along the <strong>Appian Way</strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Appian+Way+Service+Center+Rome" target="_blank">Appia
+                    Antica</a>).
+                Visit the <strong>Baths of Caracalla</strong> for a monumental perspective of Roman leisure. Conclude your stay
+                with a farewell dinner at <strong>Armando al Pantheon</strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Salita de'
+                    Crescenzi, 31</a>).
             </p>
         </div>
 
         <div class="tip-box">
-            <div class="tip-title">Neighborhood Secret</div>
+            <div class="tip-title">The "Plan B" (Fallbacks)</div>
             <p>
-                At golden hour, seek out the "Arco degli Acetari" hidden just off Via del Pellegrino. This medieval courtyard is the
-                single most photogenic "secret" in Regola, perfectly capturing the soul of old Rome.
+                If the legends are booked: if <strong>Armando</strong> is full, try <strong>Al Moro</strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Al+Moro+Rome" target="_blank">Vicolo delle Bollette</a>).
+                If <strong>Borghese</strong> is sold out, visit the <strong>Doria Pamphilj Gallery</strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Doria+Pamphilj+Gallery+Rome" target="_blank">Via del
+                    Corso</a>)
+                for a private palace experience.
             </p>
         </div>
 
@@ -199,12 +245,15 @@
                 select.value = code;
                 select.dispatchEvent(new Event('change'));
                 document.getElementById('langMenu').classList.remove('active');
+            } else {
+                setTimeout(() => changeLang(code, name), 500);
             }
         }
 
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.custom-translate')) {
-                document.getElementById('langMenu').classList.remove('active');
+                const menu = document.getElementById('langMenu');
+                if (menu) menu.classList.remove('active');
             }
         });
     </script>
