@@ -40,24 +40,22 @@
             top: 25px;
             right: 25px;
             z-index: 2000;
-            font-family: 'Outfit', sans-serif;
         }
 
         .translate-btn {
             background: rgba(8, 16, 26, 0.9);
             border: 1px solid rgba(197, 160, 89, 0.4);
             color: var(--accent-gold);
-            padding: 10px 20px;
-            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            padding: 0;
         }
 
         .lang-menu {
@@ -173,12 +171,11 @@
 
 <body>
     <div class="custom-translate">
-        <button class="translate-btn" onclick="toggleLangMenu()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path
                     d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
             </svg>
-            <span id="current-lang">Translate</span>
         </button>
         <div class="lang-menu" id="langMenu">
             <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
@@ -200,17 +197,12 @@
         <h1>Chronicles of Regola</h1>
 
         <div class="section">
-            <div class="section-header">A Legacy written in Stone</div>
+            <div class="section-header">Hidden in Plain Sight</div>
             <p>
-                The Rione Regola is one of Rome's most enduring neighborhoods, a district where the ancient craft of the
-                Renaissance persists in the shadow of imperial history. It is here, nestled along the Vicolo del Giglio,
-                that Lily Terrace marks its place—a residence born from a lineage of artistic and historic significance.
-            </p>
-            <p>
-                In the late 20th century, this terrace served as the residence for Ramón Gaya, the celebrated Spanish
-                painter and writer. Gaya's presence imbued the space with a quiet, intellectual dignity that we have
-                meticulously preserved. Voted "the most beautiful city in the world" by the very artists who called it
-                home, Regola remains the last bastion of authentic Roman nobility.
+                Beyond the grand palazzos lie the secrets of Regola. Seek out the <strong>Arco degli Acetari</strong> (Arch of the
+                Vinegar Makers) at Via del Pellegrino 19, a medieval courtyard that feels frozen in the year 1600. For a deeper descent
+                into history, visit the <strong>Stadium of Domitian</strong> beneath Piazza Navona to see the ancient foundations of the
+                city.
             </p>
         </div>
 

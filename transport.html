@@ -40,24 +40,22 @@
             top: 25px;
             right: 25px;
             z-index: 2000;
-            font-family: 'Outfit', sans-serif;
         }
 
         .translate-btn {
             background: rgba(8, 16, 26, 0.9);
             border: 1px solid rgba(197, 160, 89, 0.4);
             color: var(--accent-gold);
-            padding: 10px 20px;
-            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            padding: 0;
         }
 
         .lang-menu {
@@ -142,12 +140,11 @@
 
 <body>
 <div class="custom-translate">
-    <button class="translate-btn" onclick="toggleLangMenu()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path
                 d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
         </svg>
-        <span id="current-lang">Translate</span>
     </button>
     <div class="lang-menu" id="langMenu">
         <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
@@ -186,10 +183,12 @@
         </div>
 
         <div class="mode">
-            <div class="mode-title">The Airport Standard</div>
+            <div class="mode-title">The "Zero Stress" Arrival</div>
             <p>
-                A licensed white taxi from Fiumicino (FCO) operates at a fixed rate of €55 to our rione. For a more personalized
-                experience, our private chauffeur (NCC) service provides meet-and-greet in the arrivals hall.
+                From Fiumicino (FCO), strictly follow signs to the official white taxi stand. Ignore anyone inside the terminal offering
+                a ride. The fare is fixed at €55 including luggage. Confirm this with the driver by asking "Tariffa fissa?" before
+                departing. For a "Smart" alternative, take the FL1 Regional Train to <strong>Stazione Trastevere</strong> (€8) then Tram
+                8 to Arenula/Cairoli, which avoids the chaos of Termini.
             </p>
         </div>
 
@@ -213,7 +212,6 @@
             if (select) {
                 select.value = code;
                 select.dispatchEvent(new Event('change'));
-                document.getElementById('current-lang').innerText = name;
                 document.getElementById('langMenu').classList.remove('active');
             }
         }
