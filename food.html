@@ -29,42 +29,61 @@
         }
 
         /* Translation Widget */
-        .lang-switch {
+        .goog-te-menu-value img {
+            display: none !important;
+        }
+
+        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        body { top: 0 !important; }
+
+        .custom-translate {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(8, 16, 26, 0.8);
+            top: 25px;
+            right: 25px;
+            z-index: 2000;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .translate-btn {
+            background: rgba(8, 16, 26, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-
-        #google_translate_element {
-            display: inline-block;
-        }
-
-        .goog-te-gadget {
-            font-family: 'Outfit', sans-serif !important;
-            font-size: 0.65rem !important;
-            color: var(--accent-gold) !important;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .goog-te-gadget-simple {
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0 !important;
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(8, 16, 26, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            padding: 10px 0;
+            display: none;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
         }
 
-        .goog-te-menu-value span {
-            color: var(--accent-gold) !important;
-            font-weight: 300 !important;
-        }
+        .lang-menu.active { display: block; }
 
-        .goog-te-menu-value img {
-            display: none !important;
+        .lang-option {
+            padding: 10px 25px;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
         }
 
         .content-container {
@@ -135,9 +154,25 @@
 </head>
 
 <body>
-    <div class="lang-switch">
-        <div id="google_translate_element"></div>
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+            <span id="current-lang">Translate</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
+            <div class="lang-option" onclick="changeLang('it', 'Italiano')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es', 'Español')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr', 'Français')">Français</div>
+            <div class="lang-option" onclick="changeLang('de', 'Deutsch')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN', '中文')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja', '日本語')">日本語</div>
+        </div>
     </div>
+    <div id="google_translate_element" style="display:none"></div>
 
     <div class="content-container">
         <div class="header-logo">
@@ -148,7 +183,9 @@
 
         <div class="venue">
             <span class="venue-type">The Institution</span>
-            <div class="venue-name">Pierluigi</div>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Pierluigi+Restaurant,+Piazza+De'+Ricci,+144,+00186+Rome"
+                    target="_blank">Pierluigi</a></div>
             <p>
                 Since 1938, Pierluigi has been the heartbeat of Rome's seafood scene. Located in the charming Piazza de'
                 Ricci, just a short stroll from Vicolo del Giglio, it offers the city's finest al fresco dining. A
@@ -158,7 +195,9 @@
 
         <div class="venue">
             <span class="venue-type">Gastronomic Excellence</span>
-            <div class="venue-name">Roscioli Salumeria</div>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
+                    target="_blank">Roscioli Salumeria</a></div>
             <p>
                 A sensory journey through Italy's finest ingredients. Roscioli is more than a restaurant; it is a Roman
                 legend. We recommend booking weeks in advance to secure a seat at the counter for their world-renowned
@@ -168,15 +207,37 @@
 
         <div class="venue">
             <span class="venue-type">Aperitivo with a View</span>
-            <div class="venue-name">Hotel de la Ville</div>
+            <div class="venue-name"><a href="https://www.google.com/maps/place/Via+Sistina,+69,+00187+Roma+RM,+Italy"
+                    target="_blank">Hotel de la Ville</a></div>
             <p>
                 While slightly further afield, the Cielo Bar atop Hotel de la Ville offers a vista that matches the
                 grandeur of Lily Terrace. Perfect for a sunset cocktail overlooking the Eternal City.
             </p>
         </div>
 
-        <a href="index.html" class="back-link">Return to the Sanctuary</a>
+        <a href="index.html" class="back-link">Return to the Residence</a>
     </div>
+    <script>
+        function toggleLangMenu() {
+            document.getElementById('langMenu').classList.toggle('active');
+        }
+
+        function changeLang(code, name) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = code;
+                select.dispatchEvent(new Event('change'));
+                document.getElementById('current-lang').innerText = name;
+                document.getElementById('langMenu').classList.remove('active');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.custom-translate')) {
+                document.getElementById('langMenu').classList.remove('active');
+            }
+        });
+    </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({

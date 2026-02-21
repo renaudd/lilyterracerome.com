@@ -28,43 +28,58 @@
             line-height: 1.8;
         }
 
-        /* Translation Widget */
-        .lang-switch {
+        /* Google Translate Widget Hiding */
+        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        body { top: 0 !important; }
+
+        .custom-translate {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(8, 16, 26, 0.8);
+            top: 25px;
+            right: 25px;
+            z-index: 2000;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .translate-btn {
+            background: rgba(8, 16, 26, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-
-        #google_translate_element {
-            display: inline-block;
-        }
-
-        .goog-te-gadget {
-            font-family: 'Outfit', sans-serif !important;
-            font-size: 0.65rem !important;
-            color: var(--accent-gold) !important;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .goog-te-gadget-simple {
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0 !important;
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(8, 16, 26, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            padding: 10px 0;
+            display: none;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
         }
 
-        .goog-te-menu-value span {
-            color: var(--accent-gold) !important;
-            font-weight: 300 !important;
-        }
+        .lang-menu.active { display: block; }
 
-        .goog-te-menu-value img {
-            display: none !important;
+        .lang-option {
+            padding: 10px 25px;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
         }
 
         .content-container {
@@ -123,9 +138,25 @@
 </head>
 
 <body>
-    <div class="lang-switch">
-        <div id="google_translate_element"></div>
+<div class="custom-translate">
+    <button class="translate-btn" onclick="toggleLangMenu()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+                d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+        </svg>
+        <span id="current-lang">Translate</span>
+    </button>
+    <div class="lang-menu" id="langMenu">
+        <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
+        <div class="lang-option" onclick="changeLang('it', 'Italiano')">Italiano</div>
+        <div class="lang-option" onclick="changeLang('es', 'Español')">Español</div>
+        <div class="lang-option" onclick="changeLang('fr', 'Français')">Français</div>
+        <div class="lang-option" onclick="changeLang('de', 'Deutsch')">Deutsch</div>
+        <div class="lang-option" onclick="changeLang('zh-CN', '中文')">中文</div>
+        <div class="lang-option" onclick="changeLang('ja', '日本語')">日本語</div>
     </div>
+    </div>
+    <div id="google_translate_element" style="display:none"></div>
 
     <div class="content-container">
         <div class="header-logo">
@@ -135,34 +166,52 @@
         <h1>Planning Your Stay</h1>
 
         <div class="tip-box">
-            <div class="tip-title">Seasonal Nuance</div>
+            <div class="tip-title">The Regal Day (Day 1)</div>
             <p>
-                To experience Lily Terrace at its peak, we suggest visiting in late April through June, or late
-                September through October. During these months, the Roman light is at its most golden, and the terrace
-                breeze is most cooling.
+                Begin your Roman journey with the "Welcome to Rome" 3D cinema on Corso Vittorio. It provides the artistic scaffolding
+                needed to appreciate the ruins. Follow with a seafood lunch at Pierluigi and an afternoon marveling at the Pantheon.
             </p>
         </div>
 
         <div class="tip-box">
-            <div class="tip-title">Regola Etiquette</div>
+            <div class="tip-title">Ancient Grandeur (Day 2)</div>
             <p>
-                While Rome is welcoming, our rione values understated elegance. When visiting the nearby Basilica of San
-                Lorenzo in Damaso, remember to dress respectfully. A light linen shawl or jacket is perfect for
-                transitioning from the Roman heat to the quiet cool of historic stone.
+                Secure an 8:30 AM entry to the Colosseum to beat the crowds. For lunch, join the locals standing at Roscioli Salumeria
+                for a world-class Carbonara, before spending your afternoon lost in the history of the Roman Forum.
             </p>
         </div>
 
         <div class="tip-box">
-            <div class="tip-title">Arrival Logistics</div>
+            <div class="tip-title">Neighborhood Secret</div>
             <p>
-                We highly recommend arranging a private NCC car for your arrival from Fiumicino. The lanes of Regola are
-                historic and narrow; a professional driver knows exactly how to navigate the final steps to Vicolo del
-                Giglio with grace.
+                At golden hour, seek out the "Arco degli Acetari" hidden just off Via del Pellegrino. This medieval courtyard is the
+                single most photogenic "secret" in Regola, perfectly capturing the soul of old Rome.
             </p>
         </div>
 
-        <a href="index.html" class="back-link">Return to the Sanctuary</a>
+        <a href="index.html" class="back-link">Return to the Residence</a>
     </div>
+    <script>
+        function toggleLangMenu() {
+            document.getElementById('langMenu').classList.toggle('active');
+        }
+
+        function changeLang(code, name) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = code;
+                select.dispatchEvent(new Event('change'));
+                document.getElementById('current-lang').innerText = name;
+                document.getElementById('langMenu').classList.remove('active');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.custom-translate')) {
+                document.getElementById('langMenu').classList.remove('active');
+            }
+        });
+    </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({

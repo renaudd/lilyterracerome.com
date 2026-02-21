@@ -32,6 +32,70 @@
             overflow-x: hidden;
         }
 
+        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        body { top: 0 !important; }
+
+        .custom-translate {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 2000;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .translate-btn {
+            background: rgba(8, 16, 26, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .translate-btn:hover {
+            border-color: var(--accent-gold);
+            background: rgba(197, 160, 89, 0.1);
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(8, 16, 26, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            padding: 10px 0;
+            display: none;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .lang-menu.active { display: block; }
+
+        .lang-option {
+            padding: 10px 25px;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+
+        .lang-option:hover {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--accent-gold);
+        }
+
         .container {
             text-align: center;
             padding: 80px 20px;
@@ -42,7 +106,7 @@
         .logo-container img {
             max-width: 100%;
             height: auto;
-            max-height: 28vh;
+            max-height: 56vh;
             margin-bottom: 60px;
             opacity: 0.95;
             transition: opacity 0.5s ease;
@@ -163,45 +227,6 @@
             max-height: 1200px;
             padding-top: 60px;
             border-top: 1px solid rgba(197, 160, 89, 0.15);
-        }
-
-        /* Translation Widget */
-        .lang-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(8, 16, 26, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-
-        #google_translate_element {
-            display: inline-block;
-        }
-
-        .goog-te-gadget {
-            font-family: 'Outfit', sans-serif !important;
-            font-size: 0.65rem !important;
-            color: var(--accent-gold) !important;
-            text-transform: uppercase;
-        }
-
-        .goog-te-gadget-simple {
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-        }
-
-        .goog-te-menu-value span {
-            color: var(--accent-gold) !important;
-            font-weight: 300 !important;
-        }
-
-        .goog-te-menu-value img {
-            display: none !important;
         }
 
         /* Footer Navigation */
@@ -371,9 +396,25 @@
 </head>
 
 <body>
-    <div class="lang-switch">
-        <div id="google_translate_element"></div>
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+            <span id="current-lang">Translate</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
+            <div class="lang-option" onclick="changeLang('it', 'Italiano')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es', 'Español')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr', 'Français')">Français</div>
+            <div class="lang-option" onclick="changeLang('de', 'Deutsch')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN', '中文')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja', '日本語')">日本語</div>
+        </div>
     </div>
+    <div id="google_translate_element" style="display:none"></div>
 
     <div class="container">
         <div class="logo-container">
@@ -405,7 +446,7 @@
         <div class="actions">
             <button class="btn-explore" id="learnMoreBtn">
                 <img src="flower-logo.png" alt="" class="btn-icon">
-                Explore the Sanctuary
+                Explore the Residence
             </button>
             <div class="info-panel" id="infoPanel">
                 <div class="property-grid">
@@ -413,7 +454,7 @@
                         <h2>Historic Elegance in the Heart of Regola.</h2>
                         <p>
                             Occupying the upper levels of a historic palazzo, Lily Terrace epitomizes the timeless sophistication of Rome. Formerly
-                            the residence of legendary Spanish painter Ramón Gaya, the sanctuary offers a masterful blend of heritage and
+                            the residence of legendary Spanish painter Ramón Gaya, the residence offers a masterful blend of heritage and
                             contemporary luxury.
                         </p>
                         <p>
@@ -453,6 +494,27 @@
     </div>
 
     <script>
+                function toggleLangMenu() {
+                    document.getElementById('langMenu').classList.toggle('active');
+                }
+
+                function changeLang(code, name) {
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select) {
+                        select.value = code;
+                        select.dispatchEvent(new Event('change'));
+                        document.getElementById('current-lang').innerText = name;
+                        document.getElementById('langMenu').classList.remove('active');
+                    }
+                }
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.custom-translate')) {
+                        document.getElementById('langMenu').classList.remove('active');
+                    }
+                });
+
         // Countdown Timer
         const targetDate = new Date("May 1, 2026 00:00:00").getTime();
 
@@ -491,7 +553,7 @@
                     infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                learnMoreBtn.innerText = 'Explore the Sanctuary';
+                learnMoreBtn.innerText = 'Explore the Residence';
             }
         });
     </script>
