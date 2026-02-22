@@ -243,20 +243,18 @@
         }
 
         /* Footer Navigation */
-        .footer-nav {
-            margin-top: 80px;
-            padding: 40px 0;
-            border-top: 1px solid rgba(197, 160, 89, 0.1);
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            font-weight: bold;
+        .footer-nav a:hover {
+            color: var(--accent-gold);
         }
 
         .footer-nav a {
