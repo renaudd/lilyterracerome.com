@@ -253,10 +253,94 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
+    
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 500px;
+            background: rgba(10, 20, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 3000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .cookie-banner.visible { bottom: 40px; }
+        .cookie-banner p {
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+        .cookie-btn {
+            background: transparent;
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            padding: 10px 30px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        /* Info Panel Contrast Fix */
+        .info-panel.visible {
+            background-color: #0a141d !important;
+            color: #ffffff !important;
+            padding: 60px 40px !important;
+            margin-left: -40px !important;
+            margin-right: -40px !important;
+            border-radius: 0 !important;
+            border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+        }
+        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
+        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
+        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+        .info-panel.visible .form-title {
+            color: #ffffff !important;
+        }
+        .info-panel.visible .feature-card {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(197, 160, 89, 0.2) !important;
+        }
+        .info-panel.visible input[type="email"] {
+            border-bottom-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .info-panel.visible .btn-submit {
+            background: #c5a059 !important;
+            color: #0a141d !important;
+        }
+
     </style>
 </head>
 
 <body>
+
+    <div id="cookie-consent" class="cookie-banner">
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <div class="cookie-actions">
+            <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
+            <button onclick="declineCookies()" class="cookie-btn">Decline</button>
+        </div>
+    </div>
+
 <div class="custom-translate">
     <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

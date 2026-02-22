@@ -12,9 +12,43 @@ function changeLang(code) {
         select.dispatchEvent(new Event('change', { bubbles: true }));
         const menu = document.getElementById('langMenu');
         if (menu) menu.classList.remove('active');
+
+        // Persist selection
+        localStorage.setItem('selectedLanguage', code);
+        // Set Google Translate cookie (optional but helpful for cross-page)
+        document.cookie = `googtrans=/en/${code}; path=/;`;
+        if (code === 'en') {
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
     } else {
         setTimeout(() => changeLang(code), 300);
     }
+}
+
+// Language Persistence & Cookie Consent initialization
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang && savedLang !== 'en') {
+        changeLang(savedLang);
+    }
+
+    const consent = localStorage.getItem('cookieConsent');
+    const banner = document.getElementById('cookie-consent');
+    if (!consent && banner) {
+        banner.classList.add('visible');
+    }
+});
+
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    const banner = document.getElementById('cookie-consent');
+    if (banner) banner.classList.remove('visible');
+}
+
+function declineCookies() {
+    localStorage.setItem('cookieConsent', 'declined');
+    const banner = document.getElementById('cookie-consent');
+    if (banner) banner.classList.remove('visible');
 }
 
 document.addEventListener('click', (e) => {
@@ -49,7 +83,7 @@ function updateCountdown() {
     if (distance < 0) {
         clearInterval(timerInterval);
         const timerContainer = document.getElementById("timer");
-        if (timerContainer) timerContainer.innerHTML = "DISPONIBILE";
+        if (timerContainer) timerContainer.innerHTML = "PROPERTY RELEASED";
     }
 }
 
@@ -70,8 +104,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                learnMoreBtn.innerText = 'Explore the Residence';
+                learnMoreBtn.innerText = 'Explore the Pad';
             }
+        });
+    }
+});
+
+// Nav Overlay Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    if (menuToggle && navOverlay) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
     }
 });
@@ -98,10 +155,10 @@ function selectTriviaOption(btn, isCorrect, feedbackId) {
         btn.classList.add('incorrect-choice');
     }
 
-    // Update feedback status
+    // Update feedback status text
     if (feedbackStatus) {
         feedbackStatus.innerText = isCorrect ? 'Correct!' : 'Not quite.';
-        feedbackStatus.style.color = isCorrect ? 'var(--accent-gold)' : '#888';
+        feedbackStatus.style.color = isCorrect ? '#0a141d' : '#888';
     }
 
     // Show feedback
