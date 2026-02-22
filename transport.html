@@ -13,11 +13,10 @@
     <link rel="icon" type="image/png" href="flower-logo.png">
     <style>
         :root {
-            --bg-color: #08101a;
+            --bg-color: #0a141d;
             --accent-gold: #c5a059;
-            --cream: #f9f6f0;
             --text-main: #ffffff;
-            --text-muted: rgba(249, 246, 240, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.6);
         }
 
         body {
@@ -43,7 +42,7 @@
         }
 
         .translate-btn {
-            background: rgba(8, 16, 26, 0.9);
+            background: rgba(10, 20, 29, 0.9);
             border: 1px solid rgba(197, 160, 89, 0.4);
             color: var(--accent-gold);
             width: 40px;
@@ -63,7 +62,7 @@
             top: 100%;
             right: 0;
             margin-top: 10px;
-            background: rgba(8, 16, 26, 0.95);
+            background: rgba(10, 20, 29, 0.95);
             border: 1px solid rgba(197, 160, 89, 0.2);
             border-radius: 15px;
             padding: 10px 0;
@@ -77,7 +76,7 @@
 
         .lang-option {
             padding: 10px 25px;
-            color: var(--cream);
+            color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 0.8rem;
@@ -137,10 +136,107 @@
             font-weight: 400;
         }
 
-        .content-container a {
+        a {
             color: inherit;
             text-decoration: none;
             font-weight: bold;
+        }
+
+        /* Trivia Styles Redesign */
+        .trivia-container {
+            background: #0a141d;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .trivia-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .trivia-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .trivia-option {
+            background: none;
+            border: none;
+            padding: 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .trivia-option:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .trivia-option.correct {
+            color: var(--accent-gold) !important;
+            font-weight: 500;
+        }
+
+        .trivia-option.incorrect-reveal {
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .trivia-option.incorrect-choice {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .trivia-feedback {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: none;
+        }
+
+        .feedback-status {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .footer-nav {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-gold);
         }
     </style>
 </head>
@@ -154,13 +250,13 @@
         </svg>
     </button>
     <div class="lang-menu" id="langMenu">
-        <div class="lang-option" onclick="changeLang('en', 'English')">English</div>
-        <div class="lang-option" onclick="changeLang('it', 'Italiano')">Italiano</div>
-        <div class="lang-option" onclick="changeLang('es', 'Español')">Español</div>
-        <div class="lang-option" onclick="changeLang('fr', 'Français')">Français</div>
-        <div class="lang-option" onclick="changeLang('de', 'Deutsch')">Deutsch</div>
-        <div class="lang-option" onclick="changeLang('zh-CN', '中文')">中文</div>
-        <div class="lang-option" onclick="changeLang('ja', '日本語')">日本語</div>
+        <div class="lang-option" onclick="changeLang('en')">English</div>
+        <div class="lang-option" onclick="changeLang('it')">Italiano</div>
+        <div class="lang-option" onclick="changeLang('es')">Español</div>
+        <div class="lang-option" onclick="changeLang('fr')">Français</div>
+        <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
+        <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
+        <div class="lang-option" onclick="changeLang('ja')">日本語</div>
     </div>
     </div>
     <div id="google_translate_element" style="display:none"></div>
@@ -206,29 +302,36 @@
                 Argentina is just a 5-minute walk away.
             </p>
         </div>
-        
+
+        <div class="trivia-container">
+            <div class="trivia-question">A Naming Mystery</div>
+            <p style="margin-bottom: 25px;">Why is Rione Regola called "Regola"?</p>
+            <div class="trivia-options">
+                <button class="trivia-option" data-correct="true"
+                    onclick="selectTriviaOption(this, true, 'regola-feedback')">River Sand</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Trade
+                    Regulations</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Monastic
+                    Rules</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Regal
+                    Palaces</button>
+            </div>
+            <div class="trivia-feedback" id="regola-feedback">
+                <span class="feedback-status"></span>
+                <p>The name comes from <em>Arenula</em> (little sand). Before the Tiber's high walls were built, the river would
+                    deposit fine silt here during floods, defining the ground you're walking on today.</p>
+            </div>
+        </div>
         <a href="index.html" class="back-link">Return to the Residence</a>
+        <nav class="footer-nav">
+            <a href="history.html">History</a>
+            <a href="food.html">Dining</a>
+            <a href="planning.html">Planning</a>
+            <a href="transport.html">Travel</a>
+            <a href="map.html">Map</a>
+        </nav>
     </div>
-    <script>
-        function toggleLangMenu() {
-            document.getElementById('langMenu').classList.toggle('active');
-        }
-
-        function changeLang(code, name) {
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = code;
-                select.dispatchEvent(new Event('change'));
-                document.getElementById('langMenu').classList.remove('active');
-            }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.custom-translate')) {
-                document.getElementById('langMenu').classList.remove('active');
-            }
-        });
-    </script>
+    <script src="script.js"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
