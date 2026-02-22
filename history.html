@@ -35,19 +35,26 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('farnesefleur.png'), url('farnesefleur.png');
+            background-image: url('whitelogoplusspace.png'), url('whitelogoplusspace.png');
             background-position: 0 0, 110px 110px;
             background-size: 220px 220px;
             opacity: 0.04;
             pointer-events: none;
             z-index: -1;
         }
+
         .goog-te-menu-value img {
             display: none !important;
         }
 
-        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
-        body { top: 0 !important; }
+        .goog-te-banner-frame,
+        .goog-te-gadget {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
 
         .custom-translate {
             position: fixed;
@@ -83,11 +90,13 @@
             padding: 10px 0;
             display: none;
             min-width: 160px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
         }
 
-        .lang-menu.active { display: block; }
+        .lang-menu.active {
+            display: block;
+        }
 
         .lang-option {
             padding: 10px 25px;
@@ -177,6 +186,31 @@
             opacity: 0.7;
         }
 
+        /* Footer Navigation */
+        .footer-nav {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-gold);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.22rem;
@@ -204,7 +238,9 @@
             text-align: left;
         }
 
-        .trivia-content { flex: 1; }
+        .trivia-content {
+            flex: 1;
+        }
 
         .trivia-image-side {
             width: 120px;
@@ -286,13 +322,25 @@
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 600px) {
-            .trivia-options { grid-template-columns: 1fr; }
-            .trivia-container { padding: 40px 20px; }
+            .trivia-options {
+                grid-template-columns: 1fr;
+            }
+
+            .trivia-container {
+                padding: 40px 20px;
+            }
         }
     </style>
 </head>
@@ -327,19 +375,22 @@
         <div class="section">
             <div class="section-header">Secret Regola</div>
             <p>
-                Beyond the grand palazzos lie the secrets of the neighborhood. Seek out the <strong>Arco degli Acetari</strong>
+                Beyond the grand palazzos lie the secrets of the neighborhood. Seek out the <strong>Arco degli
+                    Acetari</strong>
                 (Arch of the Vinegar Makers) at <a
                     href="https://www.google.com/maps/search/?api=1&query=Arco+degli+Acetari+Via+del+Pellegrino+19+Rome"
                     target="_blank">Via del Pellegrino 19</a>,
                 a medieval courtyard that feels frozen in the year 1600.
-                </p>
-                <p>
-                    For a deeper descent into history, visit the <strong>Stadium of Domitian</strong> beneath
-                    <a href="https://www.google.com/maps/search/?api=1&query=Stadium+of+Domitian+Piazza+Navona+Rome"
-                        target="_blank">Piazza Navona</a>
-                    to see the ancient foundations of the city. For a quiet afternoon, the <strong>AquaMadre Hammam</strong> in the
-                    <a href="https://www.google.com/maps/search/?api=1&query=AquaMadre+Hammam+Rome" target="_blank">Jewish Ghetto</a>
-                    offers a historic bathhouse experience that is a lifesaver after walking the Roman cobblestones.
+            </p>
+            <p>
+                For a deeper descent into history, visit the <strong>Stadium of Domitian</strong> beneath
+                <a href="https://www.google.com/maps/search/?api=1&query=Stadium+of+Domitian+Piazza+Navona+Rome"
+                    target="_blank">Piazza Navona</a>
+                to see the ancient foundations of the city. For a quiet afternoon, the <strong>AquaMadre Hammam</strong>
+                in the
+                <a href="https://www.google.com/maps/search/?api=1&query=AquaMadre+Hammam+Rome" target="_blank">Jewish
+                    Ghetto</a>
+                offers a historic bathhouse experience that is a lifesaver after walking the Roman cobblestones.
             </p>
         </div>
 
@@ -349,11 +400,14 @@
                     <div class="trivia-question">Heraldry of Regola</div>
                     <p style="margin-bottom: 25px;">What is a fleur-de-lis?</p>
                     <div class="trivia-options">
-                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A crown</button>
-                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A sword</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A
+                            crown</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A
+                            sword</button>
                         <button class="trivia-option" data-correct="true"
                             onclick="selectTriviaOption(this, true, 'feedback1')">A lily</button>
-                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A scepter</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'feedback1')">A
+                            scepter</button>
                     </div>
                 </div>
                 <img src="farnesefleur.png" alt="Fleur-de-lis" class="trivia-image-side">
@@ -361,7 +415,8 @@
             <div class="trivia-feedback" id="feedback1">
                 <span class="feedback-status"></span>
                 <p>The <em>fleur-de-lis</em> translates from French as "lily flower."</p>
-                <p>Lily Terrace takes its name from this historic symbol. Our street, Vicolo del Giglio, was named for the
+                <p>Lily Terrace takes its name from this historic symbol. Our street, Vicolo del Giglio, was named for
+                    the
                     nearby Palazzo Farnese, whose family crest featured a field of golden lilies.</p>
             </div>
         </div>
@@ -394,12 +449,11 @@
         new google.translate.TranslateElement({
             pageLanguage: 'en',
             includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false
         }, 'google_translate_element');
     }
 </script>
 <script type="text/javascript"
-    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </html>
