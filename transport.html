@@ -46,8 +46,14 @@
             display: none !important;
         }
 
-        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
-        body { top: 0 !important; }
+        .goog-te-banner-frame,
+        .goog-te-gadget {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
 
         .custom-translate {
             position: fixed;
@@ -83,11 +89,13 @@
             padding: 10px 0;
             display: none;
             min-width: 160px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
         }
 
-        .lang-menu.active { display: block; }
+        .lang-menu.active {
+            display: block;
+        }
 
         .lang-option {
             padding: 10px 25px;
@@ -253,8 +261,8 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
-    
-        
+
+
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -271,11 +279,15 @@
             z-index: 3000;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
             text-transform: none;
             letter-spacing: 0;
         }
-        .cookie-banner.visible { bottom: 40px; }
+
+        .cookie-banner.visible {
+            bottom: 40px;
+        }
+
         .cookie-banner p {
             margin: 0 0 20px 0;
             font-size: 0.85rem;
@@ -283,7 +295,13 @@
             line-height: 1.6;
             font-family: 'Outfit', sans-serif;
         }
-        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+
+        .cookie-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
         .cookie-btn {
             background: transparent;
             border: 1px solid #c5a059;
@@ -297,8 +315,16 @@
             transition: all 0.3s ease;
             border-radius: 5px;
         }
-        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
-        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        .cookie-btn.accept {
+            background: #c5a059;
+            color: #0a141d;
+        }
+
+        .cookie-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
+        }
 
         /* Info Panel Contrast & Watermark Fix */
         .info-panel.visible {
@@ -311,58 +337,68 @@
             border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
             isolation: isolate !important;
         }
+
         .info-panel.visible::before {
             opacity: 0.08 !important;
             z-index: -1 !important;
         }
-        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
-        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
-        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+
+        .info-panel.visible h1,
+        .info-panel.visible h2,
+        .info-panel.visible h3,
+        .info-panel.visible p,
+        .info-panel.visible li,
+        .info-panel.visible span,
+        .info-panel.visible .feature-card h3,
+        .info-panel.visible .feature-card p,
         .info-panel.visible .form-title {
             color: #ffffff !important;
         }
+
         .info-panel.visible .feature-card {
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(197, 160, 89, 0.2) !important;
         }
+
         .info-panel.visible input[type="email"] {
             border-bottom-color: #ffffff !important;
             color: #ffffff !important;
         }
+
         .info-panel.visible .btn-submit {
             background: #c5a059 !important;
             color: #0a141d !important;
         }
-
     </style>
 </head>
 
 <body>
 
     <div id="cookie-consent" class="cookie-banner">
-        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use
+            the site, you agree to our use of cookies.</p>
         <div class="cookie-actions">
             <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
             <button onclick="declineCookies()" class="cookie-btn">Decline</button>
         </div>
     </div>
 
-<div class="custom-translate">
-    <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path
-                d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
-        </svg>
-    </button>
-    <div class="lang-menu" id="langMenu">
-        <div class="lang-option" onclick="changeLang('en')">English</div>
-        <div class="lang-option" onclick="changeLang('it')">Italiano</div>
-        <div class="lang-option" onclick="changeLang('es')">Español</div>
-        <div class="lang-option" onclick="changeLang('fr')">Français</div>
-        <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
-        <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
-        <div class="lang-option" onclick="changeLang('ja')">日本語</div>
-    </div>
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en')">English</div>
+            <div class="lang-option" onclick="changeLang('it')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr')">Français</div>
+            <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja')">日本語</div>
+        </div>
     </div>
     <div id="google_translate_element" style="display:none"></div>
 
@@ -377,33 +413,41 @@
             <div class="mode-title">The Art of Walking</div>
             <p>
                 From Lily Terrace, the most significant sites of Rome are within an effortless 15-minute walk. Piazza
-                Navona, the Pantheon, and Trastevere are all easily reachable by foot. We suggest comfortable but
-                elegant footwear to navigate the historic Sampietrini cobble stones.
+                Navona, the Pantheon, and Trastevere are all easily reachable by foot.
             </p>
         </div>
 
         <div class="mode">
             <div class="mode-title">Express to Termini</div>
             <p>
-                For a direct connection to Roma Termini station, we recommend Bus 40 (Express) from Corso Vittorio Emanuele II. It
-                avoids the local stops of the 64 and provides a swift 20-minute transit to the main rail hub.
+                We recommend <strong><a href="https://maps.app.goo.gl/MiBSyDuX4NJR2kQF9" target="_blank">Bus 40
+                        (Express)</a></strong> from Corso Vittorio Emanuele II. It avoids the local stops of the 64 and
+                provides a swift
+                20-minute transit to the main rail hub.
             </p>
         </div>
 
         <div class="mode">
             <div class="mode-title">The "Zero Stress" Arrival</div>
             <p>
-                From Fiumicino (FCO), strictly follow signs to the official white taxi stand. Ignore anyone inside the terminal offering
-                a ride. The fare is fixed at €55 including luggage. Confirm this with the driver by asking "Tariffa fissa?" before
-                departing. For a "Smart" alternative, take the FL1 Regional Train to <strong>Stazione Trastevere</strong> (€8) then Tram
-                8 to Arenula/Cairoli, which avoids the chaos of Termini.
-            </p>
+                From Fiumicino (FCO), follow signs to the <strong><a href="https://maps.app.goo.gl/9ZHfe9Z4ZnyzYmRj7"
+                        target="_blank">official white taxi stand</a></strong>. Ignore anyone inside the terminal
+                offering
+                a ride. The fare is fixed at €55 including luggage. Confirm this with the driver by asking "Tariffa
+                fissa?" before
+                departing.</p>
+            <p>For a "Smart" alternative, take the <strong><a
+                        href="https://www.italiarail.com/pages/routes/rome-fiumicino-airport-to-florence?utm_term=italy%20train&utm_campaign=Italy-Train-USA&utm_source=google&utm_medium=cpc&gad_source=1&gad_campaignid=22858472791&gbraid=0AAAAADwosrD6_d9k2V9wFtmWP408-DMI1&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BQ-EhS810PXFDLxv5C8JKMRoLhONyM3R-6Ii1nObSsh_MHMQcCJqkBoCvR8QAvD_BwE"
+                        target="_blank">FL1 Regional Train</a></strong> to <strong>Stazione Trastevere</strong> (€8)
+                then Tram
+                8 to Arenula/Cairoli, which avoids the chaos of Termini.</p>
         </div>
 
         <div class="mode">
             <div class="mode-title">Uber & Local Taxis</div>
             <p>
-                Uber Black is highly active and reliable in central Rome. For a traditional taxi, the stand at Largo di Torre
+                Uber Black is highly active and reliable in central Rome. For a traditional taxi, the stand at Largo di
+                Torre
                 Argentina is just a 5-minute walk away.
             </p>
         </div>
@@ -423,7 +467,8 @@
             </div>
             <div class="trivia-feedback" id="regola-feedback">
                 <span class="feedback-status"></span>
-                <p>The name comes from <em>Arenula</em> (little sand). Before the Tiber's high walls were built, the river would
+                <p>The name comes from <em>Arenula</em> (little sand). Before the Tiber's high walls were built, the
+                    river would
                     deposit fine silt here during floods, defining the ground you're walking on today.</p>
             </div>
         </div>

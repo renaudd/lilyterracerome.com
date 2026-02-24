@@ -47,8 +47,14 @@
             z-index: -1;
         }
 
-        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
-        body { top: 0 !important; }
+        .goog-te-banner-frame,
+        .goog-te-gadget {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
 
         .custom-translate {
             position: fixed;
@@ -89,11 +95,13 @@
             padding: 10px 0;
             display: none;
             min-width: 160px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
         }
 
-        .lang-menu.active { display: block; }
+        .lang-menu.active {
+            display: block;
+        }
 
         .lang-option {
             padding: 10px 25px;
@@ -406,8 +414,8 @@
                 padding: 40px 20px;
             }
         }
-    
-        
+
+
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -424,11 +432,15 @@
             z-index: 3000;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
             text-transform: none;
             letter-spacing: 0;
         }
-        .cookie-banner.visible { bottom: 40px; }
+
+        .cookie-banner.visible {
+            bottom: 40px;
+        }
+
         .cookie-banner p {
             margin: 0 0 20px 0;
             font-size: 0.85rem;
@@ -436,7 +448,13 @@
             line-height: 1.6;
             font-family: 'Outfit', sans-serif;
         }
-        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+
+        .cookie-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
         .cookie-btn {
             background: transparent;
             border: 1px solid #c5a059;
@@ -450,8 +468,16 @@
             transition: all 0.3s ease;
             border-radius: 5px;
         }
-        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
-        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        .cookie-btn.accept {
+            background: #c5a059;
+            color: #0a141d;
+        }
+
+        .cookie-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
+        }
 
         /* Info Panel Contrast & Watermark Fix */
         .info-panel.visible {
@@ -464,36 +490,46 @@
             border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
             isolation: isolate !important;
         }
+
         .info-panel.visible::before {
             opacity: 0.08 !important;
             z-index: -1 !important;
         }
-        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
-        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
-        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+
+        .info-panel.visible h1,
+        .info-panel.visible h2,
+        .info-panel.visible h3,
+        .info-panel.visible p,
+        .info-panel.visible li,
+        .info-panel.visible span,
+        .info-panel.visible .feature-card h3,
+        .info-panel.visible .feature-card p,
         .info-panel.visible .form-title {
             color: #ffffff !important;
         }
+
         .info-panel.visible .feature-card {
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(197, 160, 89, 0.2) !important;
         }
+
         .info-panel.visible input[type="email"] {
             border-bottom-color: #ffffff !important;
             color: #ffffff !important;
         }
+
         .info-panel.visible .btn-submit {
             background: #c5a059 !important;
             color: #0a141d !important;
         }
-
     </style>
 </head>
 
 <body>
 
     <div id="cookie-consent" class="cookie-banner">
-        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use
+            the site, you agree to our use of cookies.</p>
         <div class="cookie-actions">
             <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
             <button onclick="declineCookies()" class="cookie-btn">Decline</button>
@@ -556,12 +592,15 @@
                     <div class="property-text">
                         <h2>Historic Elegance in the Heart of Regola.</h2>
                         <p>
-                            Occupying the upper levels of a historic palazzo, Lily Terrace epitomizes the timeless sophistication of Rome. Formerly
-                            the residence of legendary Spanish painter Ramón Gaya, the residence offers a masterful blend of heritage and
+                            Occupying the upper levels of a historic palazzo, Lily Terrace epitomizes the timeless
+                            sophistication of Rome. Formerly
+                            the residence of legendary Spanish painter Ramón Gaya, the residence offers a masterful
+                            blend of heritage and
                             contemporary luxury.
                         </p>
                         <p>
-                            Moments from Campo de' Fiori, the property is defined by extraordinary light, sweeping vistas across Roman rooftops, and
+                            Moments from Campo de' Fiori, the property is defined by extraordinary light, sweeping
+                            vistas across Roman rooftops, and
                             an atmosphere of profound serenity.
                         </p>
                     </div>
@@ -587,13 +626,13 @@
                 </div>
             </div>
         </div>
-<nav class="footer-nav">
-    <a href="history.html">History</a>
-    <a href="food.html">Dining</a>
-    <a href="planning.html">Planning</a>
-    <a href="transport.html">Travel</a>
-    <a href="map.html">Map</a>
-</nav>
+        <nav class="footer-nav">
+            <a href="history.html">History</a>
+            <a href="food.html">Dining</a>
+            <a href="planning.html">Planning</a>
+            <a href="transport.html">Travel</a>
+            <a href="map.html">Map</a>
+        </nav>
     </div>
 
     <script src="script.js"></script>

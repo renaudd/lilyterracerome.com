@@ -43,8 +43,14 @@
         }
 
         /* Google Translate Widget Hiding */
-        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
-        body { top: 0 !important; }
+        .goog-te-banner-frame,
+        .goog-te-gadget {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
 
         .custom-translate {
             position: fixed;
@@ -80,11 +86,13 @@
             padding: 10px 0;
             display: none;
             min-width: 160px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
         }
 
-        .lang-menu.active { display: block; }
+        .lang-menu.active {
+            display: block;
+        }
 
         .lang-option {
             padding: 10px 25px;
@@ -177,8 +185,8 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
-    
-        
+
+
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -195,11 +203,15 @@
             z-index: 3000;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
             text-transform: none;
             letter-spacing: 0;
         }
-        .cookie-banner.visible { bottom: 40px; }
+
+        .cookie-banner.visible {
+            bottom: 40px;
+        }
+
         .cookie-banner p {
             margin: 0 0 20px 0;
             font-size: 0.85rem;
@@ -207,7 +219,13 @@
             line-height: 1.6;
             font-family: 'Outfit', sans-serif;
         }
-        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+
+        .cookie-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
         .cookie-btn {
             background: transparent;
             border: 1px solid #c5a059;
@@ -221,8 +239,16 @@
             transition: all 0.3s ease;
             border-radius: 5px;
         }
-        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
-        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        .cookie-btn.accept {
+            background: #c5a059;
+            color: #0a141d;
+        }
+
+        .cookie-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
+        }
 
         /* Info Panel Contrast & Watermark Fix */
         .info-panel.visible {
@@ -235,58 +261,68 @@
             border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
             isolation: isolate !important;
         }
+
         .info-panel.visible::before {
             opacity: 0.08 !important;
             z-index: -1 !important;
         }
-        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
-        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
-        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+
+        .info-panel.visible h1,
+        .info-panel.visible h2,
+        .info-panel.visible h3,
+        .info-panel.visible p,
+        .info-panel.visible li,
+        .info-panel.visible span,
+        .info-panel.visible .feature-card h3,
+        .info-panel.visible .feature-card p,
         .info-panel.visible .form-title {
             color: #ffffff !important;
         }
+
         .info-panel.visible .feature-card {
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(197, 160, 89, 0.2) !important;
         }
+
         .info-panel.visible input[type="email"] {
             border-bottom-color: #ffffff !important;
             color: #ffffff !important;
         }
+
         .info-panel.visible .btn-submit {
             background: #c5a059 !important;
             color: #0a141d !important;
         }
-
     </style>
 </head>
 
 <body>
 
     <div id="cookie-consent" class="cookie-banner">
-        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use
+            the site, you agree to our use of cookies.</p>
         <div class="cookie-actions">
             <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
             <button onclick="declineCookies()" class="cookie-btn">Decline</button>
         </div>
     </div>
 
-<div class="custom-translate">
-    <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path
-                d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
-        </svg>
-    </button>
-    <div class="lang-menu" id="langMenu">
-        <div class="lang-option" onclick="changeLang('en')">English</div>
-        <div class="lang-option" onclick="changeLang('it')">Italiano</div>
-        <div class="lang-option" onclick="changeLang('es')">Español</div>
-        <div class="lang-option" onclick="changeLang('fr')">Français</div>
-        <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
-        <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
-        <div class="lang-option" onclick="changeLang('ja')">日本語</div>
-    </div>
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en')">English</div>
+            <div class="lang-option" onclick="changeLang('it')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr')">Français</div>
+            <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja')">日本語</div>
+        </div>
     </div>
     <div id="google_translate_element" style="display:none"></div>
 
@@ -300,50 +336,71 @@
         <div class="tip-box">
             <div class="tip-title">The "Roman Blitz" (1 Day)</div>
             <p>
-                For the guest with limited time, experience the "Welcome to Rome" 3D cinema on
+                For the guest with limited time, experience the <strong><a href="https://welcometorome.it/en/"
+                        target="_blank">Welcome to Rome</a></strong> 3D cinema on
                 <a href="https://www.google.com/maps/search/?api=1&query=Welcome+to+Rome+Exhibit+Corso+Vittorio+Emanuele+II"
                     target="_blank">Corso Vittorio</a>
-                for essential historical context. Follow with a walk through the <strong>Roman Forum</strong> and a refined lunch at
-                <a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma
+                for essential historical context. Follow with a walk through the <strong><a
+                        href="https://colosseo.it/en/tickets/24h-colosseum-roman-forum-and-palatine/"
+                        target="_blank">Roman Forum</a></strong> and a refined lunch at
+                <a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome"
+                    target="_blank">Ruma
                     Bottega</a>.
-                Spend your afternoon at the <strong>Pantheon</strong> and conclude with a world-class Carbonara at
+                Spend your afternoon at the <strong><a href="https://direzionemuseiroma.cultura.gov.it/en/pantheon/"
+                        target="_blank">Pantheon</a></strong> and conclude with a world-class Carbonara at
                 <a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
                     target="_blank">Roscioli Salumeria</a>.
             </p>
-            </div>
-            
-            <div class="tip-box">
-                <div class="tip-title">The "Classic Weekend" (2-3 Days)</div>
-                <p>
-                    <strong>Day 1:</strong> Focus on Ancient Rome. <strong>Colosseum</strong> and <strong>Forum</strong> in the
-                    morning,
-                    followed by an afternoon in the **Jewish Ghetto** and the <strong>AquaMadre Hammam</strong>.
-                </p>
-                <p>
-                    <strong>Day 2:</strong> The Vatican. Book the 8:00 AM slot for the <strong>Vatican Museums</strong>, then walk
-                    to
-                    <a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo+Rome" target="_blank">Castel
-                        Sant'Angelo</a>
-                    for the best view of the city.
-                </p>
-                <p>
-                        <strong>Day 3:</strong> Masterpieces. A morning at the <strong>Galleria Borghese</strong>
-                        (<a href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese+Rome" target="_blank">Villa
-                            Borghese</a>)
-                        to see Bernini's masterpieces, followed by an elegant stroll down <strong>Via dei Condotti</strong> for luxury
-                        shopping.
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">The "Classic Weekend" (2-3 Days)</div>
+            <p>
+                <strong>Day 1:</strong> Focus on Ancient Rome. <strong><a
+                        href="https://colosseo.it/en/tickets/24h-colosseum-roman-forum-and-palatine/"
+                        target="_blank">Colosseum</a></strong> and <strong><a
+                        href="https://colosseo.it/en/tickets/24h-colosseum-roman-forum-and-palatine/"
+                        target="_blank">Roman Forum</a></strong> in the
+                morning,
+                followed by an afternoon in the **<a href="https://maps.app.goo.gl/r658j7cFr2R2gB79A"
+                    target="_blank">Jewish Ghetto</a>** and the <strong><a
+                        href="https://maps.app.goo.gl/r658j7cFr2R2gB79A" target="_blank">AquaMadre Hammam</a></strong>.
+            </p>
+            <p>
+                <strong>Day 2:</strong> The Vatican. Book the 8:00 AM slot for the <strong><a
+                        href="https://www.museivaticani.va/content/museivaticani/en/organizza-visita/tariffe-e-biglietti.html"
+                        target="_blank">Vatican Museums</a></strong>, then walk
+                to
+                <a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo+Rome" target="_blank">Castel
+                    Sant'Angelo</a>
+                for the best view of the city.
+            </p>
+            <p>
+                <strong>Day 3:</strong> Masterpieces. A morning at the <strong><a
+                        href="https://galleriaborghese.beniculturali.it/en/" target="_blank">Galleria
+                        Borghese</a></strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese+Rome" target="_blank">Villa
+                    Borghese</a>)
+                to see Bernini's masterpieces, followed by an elegant stroll down <strong><a
+                        href="https://maps.app.goo.gl/NLC6hW4pDcH8HDXn8" target="_blank">Via dei Condotti</a></strong>
+                for luxury
+                shopping.
             </p>
         </div>
 
         <div class="tip-box">
             <div class="tip-title">The "Escapist" (4-5 Days)</div>
             <p>
-                Escape the city noise with an e-bike ride along the <strong>Appian Way</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Appian+Way+Service+Center+Rome" target="_blank">Appia
+                Escape the city noise with an e-bike ride along the <strong><a
+                        href="https://maps.app.goo.gl/VPXgxyvRSmd88yfR9" target="_blank">Appian Way</a></strong>
+                (<a href="https://maps.app.goo.gl/VPXgxyvRSmd88yfR9" target="_blank">Appia
                     Antica</a>).
-                Visit the <strong>Baths of Caracalla</strong> for a monumental perspective of Roman leisure. Conclude your stay
-                with a farewell dinner at <strong>Armando al Pantheon</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Salita de'
+                Visit the <strong><a href="https://www.coopculture.it/en/poi/baths-of-caracalla/" target="_blank">Baths
+                        of Caracalla</a></strong> for a monumental perspective of Roman leisure. Conclude your stay
+                with a farewell dinner at <strong><a href="https://www.armandoalpantheon.it/en/" target="_blank">Armando
+                        al Pantheon</a></strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome"
+                    target="_blank">Salita de'
                     Crescenzi, 31</a>).
             </p>
         </div>
@@ -352,9 +409,11 @@
             <div class="tip-title">The "Plan B" (Fallbacks)</div>
             <p>
                 If the legends are booked: if <strong>Armando</strong> is full, try <strong>Al Moro</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Al+Moro+Rome" target="_blank">Vicolo delle Bollette</a>).
+                (<a href="https://www.google.com/maps/search/?api=1&query=Al+Moro+Rome" target="_blank">Vicolo delle
+                    Bollette</a>).
                 If <strong>Borghese</strong> is sold out, visit the <strong>Doria Pamphilj Gallery</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Doria+Pamphilj+Gallery+Rome" target="_blank">Via del
+                (<a href="https://www.google.com/maps/search/?api=1&query=Doria+Pamphilj+Gallery+Rome"
+                    target="_blank">Via del
                     Corso</a>)
                 for a private palace experience.
             </p>
