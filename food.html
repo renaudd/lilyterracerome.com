@@ -96,12 +96,123 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* Branding Header */
+        .branding-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .branding-logo {
+            max-width: 150px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .branding-logo:hover {
+            opacity: 1;
+        }
+
+        /* Protrusion Images (Scroll-Anchored) */
+        .protrusion-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .protrusion-item {
+            position: absolute;
+            width: 85vw;
+            max-width: 650px;
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .protrusion-item.left {
+            left: -65vw;
+            top: 10%;
+        }
+
+        .protrusion-item.right {
+            right: -65vw;
+            top: 60%;
+        }
+
+        @media (min-width: 800px) {
+            .protrusion-item.left { left: -500px; }
+            .protrusion-item.right { right: -500px; }
+        }
+
+        .protrusion-item.expanded.left {
+            left: 0;
+        }
+
+        .protrusion-item.expanded.right {
+            right: 0;
+        }
+
+        .protrusion-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: none;
+            border: none;
+        }
+
+        .protrusion-item.left img {
+            border-radius: 0;
+        }
+
+        .protrusion-item.right img {
+            border-radius: 0;
+            transform: rotate(90deg);
+        }
+
+        .protrusion-explainer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 20, 29, 0.95);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            width: 250px;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+            line-height: 1.4;
+            pointer-events: none;
+        }
+
+        .protrusion-item.expanded .protrusion-explainer {
+            opacity: 1;
+        }
+
+        .protrusion-explainer strong {
+            display: block;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+            font-size: 0.85rem;
         }
 
         .content-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 120px 40px;
+            position: relative;
         }
 
         .header-logo {
@@ -127,6 +238,16 @@
             margin-bottom: 60px;
             padding-bottom: 40px;
             border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        /* Prevent text overlap with protruding images */
+        .venue:nth-child(-n+4) {
+            padding-left: 10%;
+        }
+
+        .venue:nth-last-child(-n+4) {
+            padding-right: 10%;
         }
 
         .venue-name {
@@ -274,6 +395,21 @@
             color: #0a141d !important;
         }
 
+        .practical-note {
+            margin-top: 80px;
+            padding: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            background: rgba(197, 160, 89, 0.05);
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .practical-note p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 
@@ -307,11 +443,23 @@
     <div id="google_translate_element" style="display:none"></div>
 
     <div class="content-container">
-        <div class="header-logo">
-            <a href="index.html"><img src="flower-logo.png" alt="Lily Terrace"></a>
+        <div class="branding-header">
+            <a href="index.html">
+                <img src="logo.png" alt="Lily Terrace Rome" class="branding-logo">
+            </a>
         </div>
 
         <h1>Refined Dining</h1>
+
+        <div class="venue">
+            <span class="venue-type">Contemporary Neapolitan Pizza</span>
+            <div class="venue-name" style="font-size: 2.2rem; font-weight: 800;"><a
+                    href="https://maps.google.com/?q=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></div>
+            <p>
+                Steps from the Trevi Fountain, this tiny gem delivers the city's most innovative pizza. Famous for its
+                pillowy "canotto" crust and high-end toppings. It's a mandatory stop for any food lover in Rome.
+            </p>
+        </div>
 
         <div class="venue">
             <span class="venue-type">The Institution</span>
@@ -368,6 +516,16 @@
             </p>
         </div>
 
+<div class="venue">
+    <span class="venue-type">Classic Roman Institution</span>
+    <div class="venue-name" style="font-size: 2.2rem; font-weight: 800;"><a
+            href="https://maps.google.com/?q=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></div>
+    <p>
+        A historic family institution offering perfectly executed Roman classics. Their Rigatoni all'Amatriciana is
+        unrivaled. Ensure you book weeks ahead to dine in the shadow of the Pantheon.
+    </p>
+</div>
+
         <a href="index.html" class="back-link">Return to the Residence</a>
         <nav class="footer-nav">
             <a href="history.html">History</a>
@@ -376,6 +534,22 @@
             <a href="transport.html">Travel</a>
             <a href="map.html">Map</a>
         </nav>
+        <div class="protrusion-container">
+            <div class="protrusion-item left" onclick="this.classList.toggle('expanded')">
+                <img src="yellowspicesalami.png" alt="Yellow Spice Salami Pizza">
+                <div class="protrusion-explainer">
+                    <strong>Yellow Spice Salami Pizza</strong>
+                    Piccolo Buco
+                </div>
+            </div>
+            <div class="protrusion-item right" onclick="this.classList.toggle('expanded')">
+                <img src="amatriciana.png" alt="Rigatoni all'Amatriciana">
+                <div class="protrusion-explainer">
+                    <strong>Rigatoni all'Amatriciana</strong>
+                    Armando al Pantheon
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
     <script type="text/javascript">
