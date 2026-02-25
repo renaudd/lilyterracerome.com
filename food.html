@@ -134,21 +134,22 @@
             pointer-events: auto;
             cursor: pointer;
             z-index: 1000;
+            box-shadow: none;
         }
 
         .protrusion-item.left {
-            left: -65vw;
+            left: -42.5vw; /* Exactly half of 85vw hidden */
             top: 10%;
         }
 
         .protrusion-item.right {
-            right: -65vw;
-            top: 60%;
+            right: -42.5vw; /* Exactly half of 85vw hidden */
+            top: 78%; /* Lowered to clear text and Vinaietto/Armando */
         }
 
         @media (min-width: 800px) {
-            .protrusion-item.left { left: -500px; }
-            .protrusion-item.right { right: -500px; }
+            .protrusion-item.left { left: -325px; } /* Half of 650px */
+            .protrusion-item.right { right: -325px; } /* Half of 650px */
         }
 
         .protrusion-item.expanded.left {
