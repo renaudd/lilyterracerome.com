@@ -115,15 +115,16 @@
             opacity: 1;
         }
 
-        /* Protrusion Images (Scroll-Anchored) */
+        /* Protrusion Images (Viewport-Relative) */
         .protrusion-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             height: 100%;
             pointer-events: none;
             z-index: 1000;
+            overflow-x: hidden;
         }
 
         .protrusion-item {
@@ -138,26 +139,27 @@
         }
 
         .protrusion-item.left {
-            left: -42.5vw; /* Exactly half of 85vw hidden */
+            left: 0;
             top: 10%;
+            transform: translateX(-90%); /* subtle 10% peak */
         }
 
         .protrusion-item.right {
-            right: -42.5vw; /* Exactly half of 85vw hidden */
-            top: 78%; /* Lowered to clear text and Vinaietto/Armando */
+            right: 0;
+            top: 78%; /* Staggered */
+            transform: translateX(90%); /* subtle 10% peak */
         }
 
         @media (min-width: 800px) {
-            .protrusion-item.left { left: -325px; } /* Half of 650px */
-            .protrusion-item.right { right: -325px; } /* Half of 650px */
+            .protrusion-item { width: 650px; }
         }
 
         .protrusion-item.expanded.left {
-            left: 0;
+            transform: translateX(0);
         }
 
         .protrusion-item.expanded.right {
-            right: 0;
+            transform: translateX(0);
         }
 
         .protrusion-item img {
@@ -175,6 +177,7 @@
         .protrusion-item.right img {
             border-radius: 0;
             transform: rotate(90deg);
+            transform-origin: center;
         }
 
         .protrusion-explainer {
@@ -535,20 +538,21 @@
             <a href="transport.html">Travel</a>
             <a href="map.html">Map</a>
         </nav>
-        <div class="protrusion-container">
-            <div class="protrusion-item left" onclick="this.classList.toggle('expanded')">
-                <img src="yellowspicesalami.png" alt="Yellow Spice Salami Pizza">
-                <div class="protrusion-explainer">
-                    <strong>Yellow Spice Salami Pizza</strong>
-                    Piccolo Buco
-                </div>
+    </div>
+
+    <div class="protrusion-container">
+        <div class="protrusion-item left" onclick="this.classList.toggle('expanded')">
+            <img src="yellowspicesalami.png" alt="Yellow Spice Salami Pizza">
+            <div class="protrusion-explainer">
+                <strong>Yellow Spice Salami Pizza</strong>
+                Piccolo Buco
             </div>
-            <div class="protrusion-item right" onclick="this.classList.toggle('expanded')">
-                <img src="amatriciana.png" alt="Rigatoni all'Amatriciana">
-                <div class="protrusion-explainer">
-                    <strong>Rigatoni all'Amatriciana</strong>
-                    Armando al Pantheon
-                </div>
+        </div>
+        <div class="protrusion-item right" onclick="this.classList.toggle('expanded')">
+            <img src="amatriciana.png" alt="Rigatoni all'Amatriciana">
+            <div class="protrusion-explainer">
+                <strong>Rigatoni all'Amatriciana</strong>
+                Armando al Pantheon
             </div>
         </div>
     </div>
