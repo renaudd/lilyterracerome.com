@@ -158,7 +158,7 @@ function selectTriviaOption(btn, isCorrect, feedbackId) {
     // Update feedback status text
     if (feedbackStatus) {
         feedbackStatus.innerText = isCorrect ? 'Correct!' : 'Not quite.';
-        feedbackStatus.style.color = isCorrect ? '#0a141d' : '#888';
+        feedbackStatus.style.color = isCorrect ? '#ffffff' : '#888';
     }
 
     // Show feedback

@@ -162,6 +162,115 @@
             font-weight: bold;
         }
 
+        /* Trivia Styles (Dark Theme) */
+        .trivia-container {
+            background: #0a141d;
+            border: 1px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 600px;
+            color: var(--text-main);
+        }
+
+        .trivia-layout-side {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .trivia-content { flex: 1; }
+
+        .trivia-image-side {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+
+        .trivia-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .trivia-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .trivia-option {
+            background: none;
+            border: none;
+            padding: 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .trivia-option:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .trivia-option.correct {
+            color: var(--text-main) !important;
+            font-weight: 500;
+        }
+
+        .trivia-option.incorrect-reveal {
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .trivia-option.incorrect-choice {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .trivia-feedback {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            display: none;
+        }
+
+        .feedback-status {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+        }
+
+        .trivia-feedback p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .trivia-layout-side {
+                flex-direction: column;
+                text-align: center;
+            }
+            .trivia-image-side {
+                order: -1;
+            }
+            .trivia-options {
+                align-items: center;
+            }
+        }
+
         .footer-nav {
             margin-top: 80px;
             padding: 40px 0;
@@ -338,18 +447,17 @@
             <p>
                 For the guest with limited time, experience the <strong><a href="https://welcometo-rome.it/welcome-to-rome-experience/"
                         target="_blank">Welcome to Rome</a></strong> 3D cinema on
-                <a href="https://maps.app.goo.gl/ZgLpQdvKpbr1rNxL7"
-                    target="_blank">Corso Vittorio</a>
+                <strong><a href="https://www.google.com/maps/search/?api=1&query=Corso+Vittorio+Emanuele+II+Rome" target="_blank">Corso
+                        Vittorio</a></strong>
                 for essential historical context. Follow with a walk through the <strong><a
                         href="https://colosseo.it/en/tickets/24h-colosseum-roman-forum-and-palatine/"
                         target="_blank">Roman Forum</a></strong> and a refined lunch at
-                <a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome"
-                    target="_blank">Ruma
-                    Bottega</a>.
+                <strong><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma
+                        Bottega</a></strong>.
                 Spend your afternoon at the <strong><a href="https://direzionemuseiroma.cultura.gov.it/en/pantheon/"
                         target="_blank">Pantheon</a></strong> and conclude with a world-class Carbonara at
-                <a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
-                    target="_blank">Roscioli Salumeria</a>.
+                <strong><a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
+                        target="_blank">Roscioli Salumeria</a></strong>.
             </p>
         </div>
 
@@ -371,18 +479,18 @@
                         href="https://www.museivaticani.va/content/museivaticani/en/organizza-visita/tariffe-e-biglietti.html"
                         target="_blank">Vatican Museums</a></strong>, then walk
                 to
-                <a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo+Rome" target="_blank">Castel
-                    Sant'Angelo</a>
+                <strong><a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo+Rome" target="_blank">Castel
+                        Sant'Angelo</a></strong>
                 for the best view of the city.
             </p>
             <p>
                 <strong>Day 3:</strong> Masterpieces. A morning at the <strong><a
                         href="https://galleriaborghese.beniculturali.it/en/" target="_blank">Galleria
                         Borghese</a></strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese+Rome" target="_blank">Villa
-                    Borghese</a>)
+                (<strong><a href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese+Rome" target="_blank">Villa
+                        Borghese</a></strong>)
                 to see Bernini's masterpieces, followed by an elegant stroll down <strong><a
-                        href="https://maps.app.goo.gl/NLC6hW4pDcH8HDXn8" target="_blank">Via dei Condotti</a></strong>
+                        href="https://www.google.com/maps/search/?api=1&query=Via+dei+Condotti+Rome" target="_blank">Via dei Condotti</a></strong>
                 for luxury
                 shopping.
             </p>
@@ -392,8 +500,8 @@
             <div class="tip-title">The "Escapist" (4-5 Days)</div>
             <p>
                 Escape the city noise with an e-bike ride along the <strong><a
-                        href="https://maps.app.goo.gl/VPXgxyvRSmd88yfR9" target="_blank">Appian Way</a></strong>
-                (<a href="https://maps.app.goo.gl/VPXgxyvRSmd88yfR9" target="_blank">Appia
+                        href="https://www.google.com/maps/search/?api=1&query=Appia+Antica+Rome" target="_blank">Appian Way</a></strong>
+                (<a href="https://www.google.com/maps/search/?api=1&query=Appia+Antica+Rome" target="_blank">Appia
                     Antica</a>).
                 Visit the <strong><a href="https://www.museiitaliani.it/musei/c763f66b-8295-4800-a92d-b96a26659396" target="_blank">Baths
                         of Caracalla</a></strong> for a monumental perspective of Roman leisure. Conclude your stay
@@ -409,19 +517,100 @@
             <div class="tip-title">The "Plan B" (Fallbacks)</div>
             <p>
                 If the legends are booked: if <strong>Armando</strong> is full, try <strong>Al Moro</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Al+Moro+Rome" target="_blank">Vicolo delle
-                    Bollette</a>).
+                (<strong><a href="https://www.google.com/maps/search/?api=1&query=Al+Moro+Rome" target="_blank">Vicolo delle
+                        Bollette</a></strong>).
                 If <strong>Borghese</strong> is sold out, visit the <strong>Doria Pamphilj Gallery</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=Doria+Pamphilj+Gallery+Rome"
+                (<strong><a href="https://www.google.com/maps/search/?api=1&query=Doria+Pamphilj+Gallery+Rome"
                     target="_blank">Via del
-                    Corso</a>)
+                    Corso</a></strong>)
                 for a private palace experience.
             </p>
         </div>
+        <div class="trivia-container">
+            <div class="trivia-layout-side">
+                <div class="trivia-content">
+                    <div class="trivia-question">A Little Etymology</div>
+                    <p style="margin-bottom: 25px; color: var(--text-muted); font-weight: 300;">What does the name
+                        "Italy" originally translate to?</p>
+                    <div class="trivia-options">
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'italy-feedback')">A) The
+                            Land of Wine</button>
+                        <button class="trivia-option" data-correct="true"
+                            onclick="selectTriviaOption(this, true, 'italy-feedback')">B) The Land of Veal</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'italy-feedback')">C) The
+                            Land of Wheat</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'italy-feedback')">D) The
+                            Land of Marble</button>
+                    </div>
+                </div>
+                <div class="trivia-image-side">
+                    <img src="italycutout.png" alt="Italy Trivia" style="width: 100%; border-radius: 10px; opacity: 0.9;">
+                </div>
+            </div>
+            <div class="trivia-feedback" id="italy-feedback">
+                <span class="feedback-status"></span>
+                <p>Answer: <strong>B - The Land of Veal</strong> ("víteliú", "vitulus" -> "vitella").</p>
+                <p>The name Italy originally applied only to the southern tip of the peninsula (modern-day Calabria). It was
+                    only during Roman expansion that the term grew to encompass the entire peninsula up to the Alps.</p>
+            </div>
+        </div>
+        
+        <div class="trivia-container">
+            <div class="trivia-layout-side">
+                <div class="trivia-content">
+                    <div class="trivia-question">Geographical Trivia</div>
+                    <p style="margin-bottom: 25px; color: var(--text-muted); font-weight: 300;">How many hills was Rome
+                        originally built on?</p>
+                    <div class="trivia-options">
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'hills-feedback')">A) 3</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'hills-feedback')">B) 5</button>
+                        <button class="trivia-option" data-correct="true"
+                            onclick="selectTriviaOption(this, true, 'hills-feedback')">C) 7</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'hills-feedback')">D) 9</button>
+                    </div>
+                </div>
+            </div>
+            <div class="trivia-feedback" id="hills-feedback">
+                <span class="feedback-status"></span>
+                <p>Answer: <strong>C - 7 Hills</strong>.</p>
+                <p>The seven hills of Rome east of the Tiber form the geographical heart of Rome. They were the site of the
+                    first settlement of the ancient city.</p>
+            </div>
+        </div>
+        
+        <div class="trivia-container">
+            <div class="trivia-layout-side">
+                <div class="trivia-content">
+                    <div class="trivia-question">Architectural Trivia</div>
+                    <p style="margin-bottom: 25px; color: var(--text-muted); font-weight: 300;">Which Renaissance bridge
+                        connects Regola to Trastevere?</p>
+                    <div class="trivia-options">
+                        <button class="trivia-option" data-correct="true"
+                            onclick="selectTriviaOption(this, true, 'bridge-feedback')">A) Ponte Sisto</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">B) Ponte
+                            Garibaldi</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">C) Ponte
+                            Mazzini</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">D) Ponte
+                            Cestio</button>
+                    </div>
+                </div>
+                <div class="trivia-image-side">
+                    <img src="flower-logo.png" alt="Ponte Sisto" style="width: 100%; border-radius: 10px; opacity: 0.9;">
+                </div>
+            </div>
+            <div class="trivia-feedback" id="bridge-feedback">
+                <span class="feedback-status"></span>
+                <p>Answer: <strong>A - Ponte Sisto</strong>.</p>
+                <p>Built by Pope Sixtus IV for the Jubilee of 1475, it is one of the most iconic and photographed bridges in
+                    Rome.</p>
+            </div>
+        </div>
 
-        <div class="tip-box">
-            <div class="tip-title">Practical Information</div>
-            <p>
+        <div class="tip-box"
+            style="border: 1px solid rgba(197, 160, 89, 0.3); padding: 40px; background: rgba(197, 160, 89, 0.05); border-radius: 15px;">
+            <div class="tip-title" style="text-align: center;">Practical Information</div>
+            <p style="text-align: center; margin-bottom: 0;">
                 Our building was constructed in 1800. Therefore there are no elevators to reach Lily Terrace on the third and
                 fourth piani (4th and 5th floors for Americans). Please make sure all guests are able to handle four flights of
                 stairs before booking.

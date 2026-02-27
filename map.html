@@ -301,7 +301,30 @@
             </nav>
         </div>
 
-        <script src="script.js"></script>
+        <script>
+            // Map Layer Toggle Logic
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const directions = params.get('directions');
+                const mapIframe = document.querySelector('iframe');
+
+                if (mapIframe) {
+                    let baseUrl = "https://www.google.com/maps/d/embed?mid=1bSnYXfwpI0n4DMh7fL9G3fgxS0RS9o4&ehbc=2E312F&noprof=1";
+
+                    const directionConfig = {
+                        'termini-to-campo': '&z=14&ll=41.8996,12.4862',
+                        'campo-to-termini': '&z=14&ll=41.8996,12.4862'
+                    };
+
+                    if (directions && directionConfig[directions]) {
+                        mapIframe.src = baseUrl + directionConfig[directions];
+                    } else {
+                        mapIframe.src = baseUrl + "&z=17&ll=41.8953,12.4721";
+                    }
+                }
+            });
+        </script>
+    <script src="script.js"></script>
         <script type="text/javascript">
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({
