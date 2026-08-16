@@ -346,6 +346,11 @@ const PortalEmail = {
                 const templateParams = {
                     to_email: to,
                     to_name: recipientName || to,
+                    email: to,
+                    recipient: to,
+                    name: recipientName || to,
+                    from_name: "Regola Property Administration",
+                    reply_to: "admin@lilypad.it",
                     subject: subject,
                     message: body,
                     body: body,
