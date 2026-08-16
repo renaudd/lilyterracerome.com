@@ -363,8 +363,8 @@ const PortalEmail = {
                     recipient: to,
                     user_email: to,
                     name: recipientName || to,
-                    from_name: "Regola Property Administration",
-                    reply_to: "admin@lilypad.it",
+                    from_name: "Lily Terrace Property Administration",
+                    reply_to: "[EMAIL_ADDRESS]",
                     subject: subject,
                     message: body,
                     body: body,
@@ -448,7 +448,7 @@ const PortalEmail = {
                 to: applicant.email,
                 recipientName: applicant.name,
                 subject: `Application Received: Regola Resident Membership`,
-                body: `Dear ${applicant.name},\n\nThank you for submitting your application to become a Regola resident member. The property administration has received your request and is currently reviewing it.\n\nYou will receive an email confirmation once your membership is approved.\n\nWarm regards,\nProperty Administration`,
+                body: `Dear ${applicant.name},\n\nThank you for submitting your application to become a Lily Terrace Regola. We have received your request and will review it shortly.\n\nYou will receive an email confirmation once your membership is approved.\n\nWarm regards,\nLily Terrace`,
                 type: 'application_received'
             });
         }
@@ -474,7 +474,7 @@ const PortalEmail = {
             to: member.email,
             recipientName: member.name,
             subject: `Stay Request Confirmed: ${event.startDate} to ${event.endDate}`,
-            body: `Dear ${member.name},\n\nWe are delighted to confirm that your stay request from ${event.startDate} to ${event.endDate} (${event.guestCount} guests) has been APPROVED.\n\nYour dates are now officially reserved on the calendar. You can review apartment access details and the apartment guide in the Member Portal.\n\nWarm regards,\nProperty Administration`,
+            body: `Dear ${member.name},\n\nWe are delighted to confirm that your stay request from ${event.startDate} to ${event.endDate} (${event.guestCount} guests) has been APPROVED.\n\nYour dates are now officially reserved on the calendar. You can review apartment access details and the apartment guide in the Member Portal.\n\nWarm regards,\nLily Terrace`,
             type: 'stay_approval'
         });
     },
@@ -486,7 +486,7 @@ const PortalEmail = {
             to: member.email,
             recipientName: member.name,
             subject: `Update on Stay Request: ${event.startDate} to ${event.endDate}`,
-            body: `Dear ${member.name},\n\nThank you for your stay request for ${event.startDate} to ${event.endDate}. Unfortunately, we are unable to accommodate these dates at this time.\n\nReason: ${reason || 'Dates unavailable or conflicting schedule.'}\n\nPlease check the calendar in the Member Portal for alternative available dates.\n\nWarm regards,\nProperty Administration`,
+            body: `Dear ${member.name},\n\nThank you for your stay request for ${event.startDate} to ${event.endDate}. Unfortunately, we are unable to accommodate these dates at this time.\n\nReason: ${reason || 'Dates unavailable or conflicting schedule.'}\n\nPlease check the calendar in the Member Portal for alternative available dates.\n\nWarm regards,\nLily Terrace`,
             type: 'stay_denial'
         });
     },
@@ -498,7 +498,7 @@ const PortalEmail = {
             to: member.email,
             recipientName: member.name,
             subject: `Welcome to Regola: Your Membership has been Approved!`,
-            body: `Dear ${member.name},\n\nWe are pleased to inform you that your application for membership has been APPROVED!\n\nYou may now sign in to the Member Portal using your username (@${member.username}) and the password you created.\n\nWelcome to the residence,\nProperty Administration`,
+            body: `Dear ${member.name},\n\nWe are pleased to inform you that your application for membership has been APPROVED!\n\nYou may now sign in to the Member Portal using your username (@${member.username}) and the password you created.\n\nWelcome to the residence,\nLily Terrace`,
             type: 'member_approved'
         });
     }
