@@ -207,6 +207,69 @@ const INITIAL_DB = {
     emailOutbox: []
 };
 
+// Firebase Realtime Cloud Synchronization Layer
+const PortalFirebase = {
+    dbRef: null,
+    isInitialized: false,
+
+    init() {
+        if (this.isInitialized) return;
+        if (typeof firebase !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY') {
+            try {
+                if (!firebase.apps || !firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                this.dbRef = firebase.database().ref('roma_portal_db');
+                this.isInitialized = true;
+
+                // Real-time multi-device sync listener
+                this.dbRef.on('value', (snapshot) => {
+                    const cloudData = snapshot.val();
+                    if (cloudData && typeof cloudData === 'object') {
+                        if (!cloudData.users) cloudData.users = INITIAL_DB.users;
+                        if (!cloudData.pendingMembers) cloudData.pendingMembers = [];
+                        if (!cloudData.events) cloudData.events = [];
+                        if (!cloudData.guestbook) cloudData.guestbook = [];
+                        if (!cloudData.emailOutbox) cloudData.emailOutbox = [];
+
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudData));
+                        if (typeof window.onPortalCloudSync === 'function') {
+                            window.onPortalCloudSync(cloudData);
+                        }
+                    } else {
+                        // If cloud database is empty, seed it with initial database
+                        this.dbRef.set(INITIAL_DB);
+                    }
+                });
+                console.log('%c[FIREBASE] Realtime Cloud Database Connected & Synced', 'color: #28a745; font-weight: bold;');
+            } catch (e) {
+                console.warn('[FIREBASE] Cloud initialization warning (using local storage fallback):', e);
+            }
+        }
+    },
+
+    syncToCloud(db) {
+        if (!this.isInitialized) {
+            this.init();
+        }
+        if (this.isInitialized && this.dbRef) {
+            try {
+                this.dbRef.set(db);
+            } catch (e) {
+                console.error('[FIREBASE] Sync to cloud error:', e);
+            }
+        }
+    }
+};
+
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => PortalFirebase.init());
+    } else {
+        PortalFirebase.init();
+    }
+}
+
 // Database Access & Auto-Repair
 const PortalDB = {
     get() {
@@ -250,6 +313,7 @@ const PortalDB = {
     save(db) {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+            PortalFirebase.syncToCloud(db);
         } catch (e) {
             console.error('Failed to save portal database', e);
         }

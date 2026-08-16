@@ -666,6 +666,7 @@
         }
     
         
+        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -1242,6 +1243,10 @@
         </nav>
     </div>
 
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="portal.js"></script>
     <script>
         let currentMonthIdx = 0; // 0 = Sept 2026
@@ -1251,6 +1256,20 @@
         let selectedEnd = null;
         let adminBlockStart = null;
         let adminBlockEnd = null;
+
+        // Real-time multi-device cloud synchronization listener
+        window.onPortalCloudSync = function(cloudData) {
+            console.log('[FIREBASE] Real-time cloud sync received, refreshing portal views...');
+            const user = PortalAuth.getCurrentUser();
+            if (user) {
+                renderCalendar();
+                renderMyRequests();
+                renderGuestbook();
+                if (isUserAdmin(user)) {
+                    renderAdminSection();
+                }
+            }
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             initAuth();
