@@ -670,99 +670,10 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
-    
-        /* Cookie Consent Banner */
-        .cookie-banner {
-            position: fixed;
-            bottom: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 500px;
-            background: rgba(10, 20, 29, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            z-index: 3000;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
-            text-transform: none;
-            letter-spacing: 0;
-        }
-        .cookie-banner.visible { bottom: 40px; }
-        .cookie-banner p {
-            margin: 0 0 20px 0;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            font-family: 'Outfit', sans-serif;
-        }
-        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
-        .cookie-btn {
-            background: transparent;
-            border: 1px solid #c5a059;
-            color: #c5a059;
-            padding: 10px 30px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 5px;
-        }
-        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
-        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
-
-        /* Info Panel Contrast & Watermark Fix */
-        .info-panel.visible {
-            background-color: #0a141d !important;
-            color: #ffffff !important;
-            padding: 60px 40px !important;
-            margin-left: -40px !important;
-            margin-right: -40px !important;
-            border-radius: 0 !important;
-            border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
-            isolation: isolate !important;
-        }
-        .info-panel.visible::before {
-            opacity: 0.08 !important;
-            z-index: -1 !important;
-        }
-        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
-        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
-        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
-        .info-panel.visible .form-title {
-            color: #ffffff !important;
-        }
-        .info-panel.visible .feature-card {
-            background: rgba(255, 255, 255, 0.05) !important;
-            border-color: rgba(197, 160, 89, 0.2) !important;
-        }
-        .info-panel.visible input[type="email"] {
-            border-bottom-color: #ffffff !important;
-            color: #ffffff !important;
-        }
-        .info-panel.visible .btn-submit {
-            background: #c5a059 !important;
-            color: #0a141d !important;
-        }
-
     </style>
 </head>
 
 <body>
-
-    <div id="cookie-consent" class="cookie-banner">
-        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
-        <div class="cookie-actions">
-            <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
-            <button onclick="declineCookies()" class="cookie-btn">Decline</button>
-        </div>
-    </div>
-
 
     <div class="container">
         <div class="branding-header">
@@ -819,7 +730,7 @@
                 <button class="portal-tab-btn" onclick="switchTab('guide')">📖 Apartment Guide</button>
                 <button class="portal-tab-btn" onclick="switchTab('guestbook')">✍️ Guest Book</button>
                 <button class="portal-tab-btn" onclick="switchTab('profile')">👤 Profile & Security</button>
-                <!-- Admin-Only Tab (Shown dynamically for Admin and Co-Admin) -->
+                <!-- Admin-Only Tab Button (Strictly hidden for normal members) -->
                 <button id="adminTabBtn" class="portal-tab-btn" style="display: none; border-color: rgba(197, 160, 89, 0.5); color: var(--accent-gold);" onclick="switchTab('admin')">⚙️ Administration</button>
             </div>
 
@@ -1031,192 +942,15 @@
                 </div>
             </div>
 
-            <!-- TAB 5: ADMINISTRATION (Admin & Co-Admin Only) -->
-            <div id="tab-admin" class="tab-content">
-                
-                <!-- Admin Header Card -->
-                <div class="admin-card" style="border-left: 4px solid var(--accent-gold); margin-bottom: 30px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                        <div>
-                            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 5px 0;">Property Administration</h2>
-                            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Review stay requests, manage applications, roster hierarchy, and block calendar dates.</p>
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <span id="adminPendingStaysBadge" class="status-badge pending">0 Pending Stays</span>
-                            <span id="adminPendingAppsBadge" class="status-badge" style="background: rgba(197, 160, 89, 0.25); color: var(--accent-gold);">0 Pending Applications</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Priority: Pending Requests Queue -->
-                <div class="admin-card" style="border-left: 4px solid var(--status-pending);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fbbf24; margin: 0;">⏳ Pending Stay Requests</h3>
-                        <span style="font-size: 0.85rem; color: var(--text-muted);">Approvals & denials dispatch automated email notifications</span>
-                    </div>
-                    <div id="adminPendingRequestsQueue">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Unilateral Block Tool with Interactive Calendar Selection -->
-                <div class="admin-card">
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">🔒 Unilateral Date Block & Reservation Tool</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
-                        Select dates directly on the calendar or enter dates below to reserve or block property dates.
-                    </p>
-                    <form id="adminBlockForm" onsubmit="handleAdminUnilateralBlock(event)">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Check-In Date</label>
-                                <input type="date" id="adminBlockStart" class="form-control" min="2026-09-01" max="2028-08-31" required>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Check-Out Date</label>
-                                <input type="date" id="adminBlockEnd" class="form-control" min="2026-09-01" max="2028-08-31" required>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Reservation Label</label>
-                                <input type="text" id="adminBlockGuest" class="form-control" placeholder="e.g. Owner Stay, Maintenance" required>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Notes</label>
-                                <input type="text" id="adminBlockReason" class="form-control" placeholder="Reason for block...">
-                            </div>
-                            <div>
-                                <button type="submit" class="btn-primary" style="margin-top: 0; padding: 12px 20px;">Block Dates</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Pending Member Applications ("Become a Regola") -->
-                <div class="admin-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">📝 Pending Member Applications ("Become a Regola")</h3>
-                        <span style="font-size: 0.85rem; color: var(--text-muted);">Passwords are cryptographically protected</span>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Applied Date</th>
-                                    <th>Full Name</th>
-                                    <th>Desired Username</th>
-                                    <th>Email Address</th>
-                                    <th>Phone</th>
-                                    <th>Referral Notes</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminPendingAppsTableBody">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Member Roster & Role Hierarchy -->
-                <div class="admin-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">👥 Member Directory & Role Hierarchy</h3>
-                        <button onclick="openAddMemberModal()" class="btn-sm" style="background: var(--accent-gold); color: #0a141d; border: none; font-weight: bold;">+ Add New Member</button>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <input type="text" id="adminMemberSearchInput" class="form-control" placeholder="🔍 Search members by name, username, email, or role..." oninput="filterAdminMembersTable()">
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Full Name</th>
-                                    <th>Email Address</th>
-                                    <th>Phone</th>
-                                    <th>Role & Actions</th>
-                                    <th>Joined</th>
-                                    <th>Notes</th>
-                                    <th>Management</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminMembersTableBody">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Confirmed Reservations Management -->
-                <div class="admin-card">
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">📋 Confirmed Reservations & Blocks</h3>
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Dates</th>
-                                    <th>Guest / Title</th>
-                                    <th>Username</th>
-                                    <th>Guests</th>
-                                    <th>Notes</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminReservationsTableBody">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
+            <!-- TAB 5: ADMINISTRATION (Dynamic DOM: Only rendered for Admins and Co-Admins) -->
+            <div id="tab-admin" class="tab-content" style="display: none;">
+                <!-- Dynamically constructed by renderAdminSection() ONLY for Admins & Co-Admins -->
             </div>
 
         </div>
 
-        <!-- Add Member Modal -->
-        <div id="addMemberModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; box-sizing: border-box;">
-            <div style="background: #0d1b27; border-radius: 20px; border: 1px solid var(--accent-gold); max-width: 480px; width: 100%; padding: 35px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 20px 0;">Add New Member</h3>
-                <form id="addMemberForm" onsubmit="handleAddMember(event)">
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" id="newUsername" class="form-control" placeholder="e.g. clara" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Temporary Password</label>
-                        <input type="password" id="newPassword" class="form-control" placeholder="Minimum 8 characters" required minlength="8">
-                    </div>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="newName" class="form-control" placeholder="e.g. Clara Rossi" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" id="newEmail" class="form-control" placeholder="clara.rossi@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="text" id="newPhone" class="form-control" placeholder="+39 340 000 0000">
-                    </div>
-                    <div class="form-group">
-                        <label>Role</label>
-                        <select id="newRole" class="form-control">
-                            <option value="member" selected>Ordinary Member</option>
-                            <option value="co-admin">Co-Admin</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Internal Notes</label>
-                        <textarea id="newNotes" class="form-control" rows="2" placeholder="Member preferences, referral info..."></textarea>
-                    </div>
-                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-                        <button type="button" onclick="closeAddMemberModal()" class="btn-sm">Cancel</button>
-                        <button type="submit" class="btn-primary" style="width: auto; margin-top: 0; padding: 10px 24px;">Create Member</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <!-- Add Member Modal Container -->
+        <div id="adminModalContainer"></div>
 
         <div id="toastNotification" class="toast"></div>
 
@@ -1242,18 +976,26 @@
             populateMonthDropdown();
         });
 
+        function isUserAdmin(user) {
+            return user && (user.role === 'admin' || user.role === 'co-admin');
+        }
+
         function initAuth() {
             const user = PortalAuth.getCurrentUser();
+            const adminTabBtn = document.getElementById('adminTabBtn');
+            const adminTab = document.getElementById('tab-admin');
+
             if (!user) {
                 document.getElementById('authGate').style.display = 'block';
                 document.getElementById('portalDashboard').style.display = 'none';
+                if (adminTabBtn) adminTabBtn.style.display = 'none';
+                if (adminTab) adminTab.innerHTML = '';
             } else {
                 document.getElementById('authGate').style.display = 'none';
                 document.getElementById('portalDashboard').style.display = 'block';
                 document.getElementById('memberNameDisplay').innerText = user.name;
                 
                 const roleBadge = document.getElementById('memberRoleBadge');
-                const adminTabBtn = document.getElementById('adminTabBtn');
 
                 if (user.role === 'admin') {
                     roleBadge.innerText = '★ Primary Admin';
@@ -1266,11 +1008,18 @@
                     adminTabBtn.style.display = 'inline-block';
                     renderAdminSection();
                 } else {
+                    // Normal Member: strictly hide and purge admin section
                     roleBadge.innerText = 'Resident';
                     roleBadge.className = 'status-badge';
                     roleBadge.style.background = 'rgba(197, 160, 89, 0.2)';
                     roleBadge.style.color = 'var(--accent-gold)';
                     adminTabBtn.style.display = 'none';
+                    if (adminTab) {
+                        adminTab.innerHTML = '';
+                        adminTab.classList.remove('active');
+                    }
+                    // If currently on admin tab, force switch to calendar
+                    switchTab('calendar');
                 }
 
                 // Populate profile fields
@@ -1283,10 +1032,14 @@
                 renderMyRequests();
                 renderGuestbook();
 
-                // Check URL parameter for tab
+                // Check URL parameter for tab (only permitted for admins/co-admins)
                 const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('tab') === 'admin' && (user.role === 'admin' || user.role === 'co-admin')) {
-                    switchTab('admin');
+                if (urlParams.get('tab') === 'admin') {
+                    if (isUserAdmin(user)) {
+                        switchTab('admin');
+                    } else {
+                        switchTab('calendar');
+                    }
                 }
             }
         }
@@ -1302,6 +1055,8 @@
                 initAuth();
                 if (res.isAdmin) {
                     switchTab('admin');
+                } else {
+                    switchTab('calendar');
                 }
             } else {
                 showToast(res.message || 'Login failed');
@@ -1311,10 +1066,21 @@
         function handleLogout() {
             PortalAuth.logout();
             showToast('Logged out successfully');
+            const adminTab = document.getElementById('tab-admin');
+            const adminTabBtn = document.getElementById('adminTabBtn');
+            if (adminTab) adminTab.innerHTML = '';
+            if (adminTabBtn) adminTabBtn.style.display = 'none';
             initAuth();
         }
 
         function switchTab(tabId) {
+            const user = PortalAuth.getCurrentUser();
+            
+            // Strictly guard admin tab
+            if (tabId === 'admin' && !isUserAdmin(user)) {
+                tabId = 'calendar';
+            }
+
             document.querySelectorAll('.portal-tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             
@@ -1324,7 +1090,7 @@
             const target = document.getElementById('tab-' + tabId);
             if (target) target.classList.add('active');
 
-            if (tabId === 'admin') {
+            if (tabId === 'admin' && isUserAdmin(user)) {
                 renderAdminSection();
             }
         }
@@ -1417,6 +1183,8 @@
             }
 
             const db = PortalDB.get();
+            const user = PortalAuth.getCurrentUser();
+            const isAdmin = isUserAdmin(user);
 
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${m.year}-${String(m.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
@@ -1440,7 +1208,8 @@
                 if (statusObj.status === 'available' || statusObj.status === 'pending') {
                     dayEl.onclick = () => handleDateClick(dateStr);
                 } else if (statusObj.status === 'reserved') {
-                    dayEl.title = `Reserved: ${statusObj.event ? statusObj.event.guestName : ''}`;
+                    // Only admins see reservation name; normal members simply see "Reserved"
+                    dayEl.title = isAdmin && statusObj.event ? `Reserved: ${statusObj.event.guestName}` : 'Reserved';
                 }
 
                 grid.appendChild(dayEl);
@@ -1465,7 +1234,7 @@
                 selectedEnd = null;
                 renderCalendar();
                 renderMyRequests();
-                if (user.role === 'admin' || user.role === 'co-admin') {
+                if (isUserAdmin(user)) {
                     renderAdminSection();
                 }
             } else {
@@ -1515,7 +1284,8 @@
                 showToast('Request cancelled');
                 renderCalendar();
                 renderMyRequests();
-                renderAdminSection();
+                const user = PortalAuth.getCurrentUser();
+                if (isUserAdmin(user)) renderAdminSection();
             }
         }
 
@@ -1604,10 +1374,191 @@
             }
         }
 
-        // ADMINISTRATION SECTION
+        // ADMINISTRATION SECTION (Strictly accessible ONLY to Admins & Co-Admins)
         function renderAdminSection() {
             const user = PortalAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'co-admin')) return;
+            if (!isUserAdmin(user)) {
+                const adminTab = document.getElementById('tab-admin');
+                if (adminTab) adminTab.innerHTML = '';
+                return;
+            }
+
+            const adminTab = document.getElementById('tab-admin');
+            adminTab.innerHTML = `
+                <!-- Admin Header Card -->
+                <div class="admin-card" style="border-left: 4px solid var(--accent-gold); margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 5px 0;">Property Administration</h2>
+                            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Review stay requests, manage applications, roster hierarchy, and block calendar dates.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <span id="adminPendingStaysBadge" class="status-badge pending">0 Pending Stays</span>
+                            <span id="adminPendingAppsBadge" class="status-badge" style="background: rgba(197, 160, 89, 0.25); color: var(--accent-gold);">0 Pending Applications</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priority: Pending Requests Queue -->
+                <div class="admin-card" style="border-left: 4px solid var(--status-pending);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fbbf24; margin: 0;">⏳ Pending Stay Requests</h3>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Approvals & denials dispatch automated email notifications</span>
+                    </div>
+                    <div id="adminPendingRequestsQueue"></div>
+                </div>
+
+                <!-- Unilateral Block Tool -->
+                <div class="admin-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">🔒 Unilateral Date Block & Reservation Tool</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                        Select dates directly on the calendar or enter dates below to reserve or block property dates.
+                    </p>
+                    <form id="adminBlockForm" onsubmit="handleAdminUnilateralBlock(event)">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Check-In Date</label>
+                                <input type="date" id="adminBlockStart" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Check-Out Date</label>
+                                <input type="date" id="adminBlockEnd" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Reservation Label</label>
+                                <input type="text" id="adminBlockGuest" class="form-control" placeholder="e.g. Owner Stay, Maintenance" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Notes</label>
+                                <input type="text" id="adminBlockReason" class="form-control" placeholder="Reason for block...">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-primary" style="margin-top: 0; padding: 12px 20px;">Block Dates</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Pending Member Applications -->
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">📝 Pending Member Applications ("Become a Regola")</h3>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Passwords are cryptographically protected</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Applied Date</th>
+                                    <th>Full Name</th>
+                                    <th>Desired Username</th>
+                                    <th>Email Address</th>
+                                    <th>Phone</th>
+                                    <th>Referral Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPendingAppsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Member Directory & Role Hierarchy -->
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">👥 Member Directory & Role Hierarchy</h3>
+                        <button onclick="openAddMemberModal()" class="btn-sm" style="background: var(--accent-gold); color: #0a141d; border: none; font-weight: bold;">+ Add New Member</button>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="adminMemberSearchInput" class="form-control" placeholder="🔍 Search members by name, username, email, or role..." oninput="filterAdminMembersTable()">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Phone</th>
+                                    <th>Role & Actions</th>
+                                    <th>Joined</th>
+                                    <th>Notes</th>
+                                    <th>Management</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminMembersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Confirmed Reservations Management -->
+                <div class="admin-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">📋 Confirmed Reservations & Blocks</h3>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Dates</th>
+                                    <th>Guest / Title</th>
+                                    <th>Username</th>
+                                    <th>Guests</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminReservationsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            // Modal HTML
+            document.getElementById('adminModalContainer').innerHTML = `
+                <div id="addMemberModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; box-sizing: border-box;">
+                    <div style="background: #0d1b27; border-radius: 20px; border: 1px solid var(--accent-gold); max-width: 480px; width: 100%; padding: 35px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 20px 0;">Add New Member</h3>
+                        <form id="addMemberForm" onsubmit="handleAddMember(event)">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="newUsername" class="form-control" placeholder="e.g. clara" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Temporary Password</label>
+                                <input type="password" id="newPassword" class="form-control" placeholder="Minimum 8 characters" required minlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="newName" class="form-control" placeholder="e.g. Clara Rossi" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="newEmail" class="form-control" placeholder="clara.rossi@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" id="newPhone" class="form-control" placeholder="+39 340 000 0000">
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select id="newRole" class="form-control">
+                                    <option value="member" selected>Ordinary Member</option>
+                                    <option value="co-admin">Co-Admin</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Internal Notes</label>
+                                <textarea id="newNotes" class="form-control" rows="2" placeholder="Member preferences, referral info..."></textarea>
+                            </div>
+                            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                                <button type="button" onclick="closeAddMemberModal()" class="btn-sm">Cancel</button>
+                                <button type="submit" class="btn-primary" style="width: auto; margin-top: 0; padding: 10px 24px;">Create Member</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
 
             renderAdminPendingStays();
             renderAdminPendingApps();
@@ -1621,7 +1572,9 @@
             const queueEl = document.getElementById('adminPendingRequestsQueue');
             const badge = document.getElementById('adminPendingStaysBadge');
 
-            badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Stay' : 'Stays'}`;
+            if (!queueEl) return;
+            if (badge) badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Stay' : 'Stays'}`;
+
             if (pending.length === 0) {
                 queueEl.innerHTML = '<p style="color: var(--text-muted); font-style: italic; margin: 10px 0;">No pending stay requests currently awaiting approval.</p>';
                 return;
@@ -1685,9 +1638,10 @@
             const pending = PortalMembers.getPending();
             const tbody = document.getElementById('adminPendingAppsTableBody');
             const badge = document.getElementById('adminPendingAppsBadge');
+            if (!tbody) return;
             tbody.innerHTML = '';
 
-            badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Application' : 'Applications'}`;
+            if (badge) badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Application' : 'Applications'}`;
 
             if (pending.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); font-style: italic;">No pending membership applications.</td></tr>';
@@ -1754,6 +1708,7 @@
             const members = PortalMembers.getAll();
             const currentAdmin = PortalAuth.getCurrentUser();
             const tbody = document.getElementById('adminMembersTableBody');
+            if (!tbody) return;
             tbody.innerHTML = '';
 
             const filtered = members.filter(m => {
@@ -1848,12 +1803,15 @@
         }
 
         function openAddMemberModal() {
-            document.getElementById('addMemberModal').style.display = 'flex';
+            const modal = document.getElementById('addMemberModal');
+            if (modal) modal.style.display = 'flex';
         }
 
         function closeAddMemberModal() {
-            document.getElementById('addMemberModal').style.display = 'none';
-            document.getElementById('addMemberForm').reset();
+            const modal = document.getElementById('addMemberModal');
+            if (modal) modal.style.display = 'none';
+            const form = document.getElementById('addMemberForm');
+            if (form) form.reset();
         }
 
         async function handleAddMember(e) {
@@ -1896,6 +1854,7 @@
             const db = PortalDB.get();
             const reserved = db.events.filter(e => e.status === 'reserved');
             const tbody = document.getElementById('adminReservationsTableBody');
+            if (!tbody) return;
             tbody.innerHTML = '';
 
             if (reserved.length === 0) {
