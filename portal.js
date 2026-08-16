@@ -178,32 +178,7 @@ const INITIAL_DB = {
             adminNotes: ''
         }
     ],
-    guestbook: [
-        {
-            id: 'gb_1',
-            userId: 'user_1',
-            author: 'Elena Rostova',
-            username: 'elena',
-            date: '2026-06-20',
-            message: 'There is nothing quite like having morning espresso on the terrace listening to the bells of Sant’Andrea della Valle. A truly magical sanctuary in Regola.'
-        },
-        {
-            id: 'gb_2',
-            userId: 'user_2',
-            author: 'Marco Bellini',
-            username: 'marco',
-            date: '2026-07-04',
-            message: 'The apartment’s connection to Ramón Gaya is palpable in every room. The light in the afternoon across the terracotta floors is breathtaking. Cannot wait to return in the spring.'
-        },
-        {
-            id: 'gb_3',
-            userId: 'user_4',
-            author: 'Julian Sterling',
-            username: 'guest1',
-            date: '2026-07-28',
-            message: 'Sto Bene sandwiches for lunch and Piccolo Buco for dinner—this location in Regola is absolute perfection. Seamless stay from start to finish.'
-        }
-    ],
+    guestbook: [],
     emailOutbox: []
 };
 
@@ -301,6 +276,12 @@ const PortalDB = {
                     }
                 });
             }
+            // Clear default sample guestbook posts if present
+            if (parsed.guestbook && parsed.guestbook.some(g => g.id === 'gb_1' || g.id === 'gb_2' || g.id === 'gb_3')) {
+                parsed.guestbook = parsed.guestbook.filter(g => g.id !== 'gb_1' && g.id !== 'gb_2' && g.id !== 'gb_3');
+                upgraded = true;
+            }
+
             if (upgraded) this.save(parsed);
 
             return parsed;

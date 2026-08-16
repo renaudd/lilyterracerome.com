@@ -613,7 +613,17 @@
             margin: 0 0 12px 0;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .guide-item h3 .guide-icon {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+            font-size: 1.25rem;
+            line-height: 1;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Toast Notifications */
@@ -665,6 +675,7 @@
             color: var(--accent-gold);
         }
     
+        
         
         
         
@@ -911,28 +922,33 @@
 
                     <div class="guide-grid">
                         <div class="guide-item">
-                            <h3> Departure</h3>
+                            <h3><span class="guide-icon">🛫</span> Departure</h3>
                             <p>Turn off the A/C and all lights.</p>
+                            <p>Ensure that the oven and stove tops are off.</p>
+                            <p>Ensure that the projector and PS5 are completely off.</p>
+                            <p>Ensure all windows and doors are closed.</p>
                             <p>Take all perishable food with you.</p>
-                            <p>Ensure all windows are closed.</p>
                             <p>Empty all bins and take the trash to the bins in the courtyard.</p>
                             <p>Clean and put away the dishes.</p>
                             <p>Launder the sheets and towels and make the beds.</p>
                         </div>
 
                         <div class="guide-item">
-                            <h3>🔑 Key & Building Access</h3>
+                            <h3><span class="guide-icon">🔑</span> Key &amp; Building Access</h3>
                             <p><strong>Front Street Door:</strong> Long, round-back "CISA" key (insert with teeth up and turn clockwise).</p>
                             <p><strong>Living Room Door:</strong> At the top of the stairs, open the door on the left (unlocked), and follow the
                                 veranda to the living room door. The green shutter door is also unlocked. The small round-back key opens the door to
                                 the living room.</p>
-                            <p><strong>Kitchen Door:</strong> Long rectangular key with a red H symbol on the Bow. Inserts into the kitchen door
+                            <p><strong>Kitchen Door:</strong> Long rectangular key with a red H symbol on the bow. Inserts into the kitchen door
                                 (opposite the veranda door) horizontally, turn clockwise to open.</p>
+                            <p>Once you enter the building, all of the buttons that have a little dot of light on them will illuminate the
+                                stairwell.</p>
                             <p>All doors lock automatically when closed.</p>
+                            <p>Please return the keys to Dashiell unless otherwise instructed.</p>
                         </div>
 
                         <div class="guide-item">
-                            <h3>❄️ Climate</h3>
+                            <h3><span class="guide-icon">❄️</span> Climate</h3>
                             <p><strong>Please turn the a/c off when leaving the apartment.</strong></p>
                             <p>The upstairs bedroom a/c should only be needed when in use (the small room cools fast).</p>
                             <p>Please keep windows closed during summer when the a/c is running.</p>
@@ -940,7 +956,7 @@
                         </div>
 
                         <div class="guide-item">
-                            <h3>🍽️ Kitchen & Appliances</h3>
+                            <h3><span class="guide-icon">🍽️</span> Kitchen &amp; Appliances</h3>
                             <p>Equipped with induction cooktop, compact dishwasher, small oven.</p>
                             <p>Plates, bowls, and glasses are in the cabinet above the sink. Silverware is in the cabinet to the left of the
                                 refrigerator.</p>
@@ -948,19 +964,71 @@
                         </div>
 
                         <div class="guide-item">
-                            <h3>♻️ Waste & Recycling</h3>
+                            <h3><span class="guide-icon">♻️</span> Waste &amp; Recycling</h3>
                             <p>Separated collection per Rome regulations:</p>
                             <ul style="font-size: 0.85rem; padding-left: 20px; color: var(--text-muted);">
                                 <li><strong>Organic (Umido):</strong> Brown bin</li>
-                                <li><strong>Paper & Cardboard:</strong> Blue bag</li>
-                                <li><strong>Plastic & Metal:</strong> Yellow bin</li>
+                                <li><strong>Paper &amp; Cardboard:</strong> Blue bag</li>
+                                <li><strong>Plastic &amp; Metal:</strong> Yellow bin</li>
                                 <li><strong>Glass:</strong> Green street bin (Piazza della Quercia)</li>
                             </ul>
                         </div>
 
                         <div class="guide-item">
-                            <h3>🏛️ Heritage & Ramón Gaya</h3>
+                            <h3><span class="guide-icon">🏛️</span> Heritage &amp; Ramón Gaya</h3>
                             <p>This residence was the creative sanctuary and home of legendary Spanish painter Ramón Gaya during his time in Rome. Please treat all historic materials and artwork with care.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">📽️</span> Projector</h3>
+                            <p>Please do not move the projector or media console. The apartment does not have Internet yet. The PS5 has a number of games installed, and more on disk in the righthand media cabinet.</p>
+                            <p><strong>Turning The Projector Off:</strong> Hold the power button down for two seconds and then select shutdown. If you just click the power button once it goes into sleep mode and the “formovie” light stays illuminated.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">👹</span> Mischief</h3>
+                            <p>Do not climb onto the roof from the terrace or from the living room window.</p>
+                            <p>Do not slam the front door or the apartment doors.</p>
+                            <p>Do not have more than four people on the terrace at one time.</p>
+                            <p>Do not be loud on the terrace.</p>
+                            <p>Keep the projector volume below 25.</p>
+                            <p>Please use sheets when sleeping on the sofa bed.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🚌</span> Public Transportation</h3>
+                            <p><strong>Bus:</strong> Buy paper bus tickets. You have to validate your paper ticket in the machine on the bus or pay by card. Not all cards work with the tap to pay system. They check for validated tickets on the bus and will fine you.</p>
+                            <p><strong>Train:</strong> Validate your train ticket by using the validation machine at the station before boarding the train.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🌇</span> Terrace</h3>
+                            <p>The terrace light and awning are controlled by the same light switch. Switching the terrace light off and on again changes its brightness setting.</p>
+                            <p>Whoever sits next to the terrace faucet needs to look out to make sure they don’t accidentally injure themselves on the faucet.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🍝</span> Culture</h3>
+                            <p>Don’t cut your pasta.</p>
+                            <p>Don’t talk loudly.</p>
+                            <p>Don’t mix pasta sauces.</p>
+                            <p>Don't order cappuccino past noon.</p>
+                            <p>Don’t go to fancy places underdressed.</p>
+                            <p>Stay hydrated.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🚩</span> Tours</h3>
+                            <p>The Caravaggio walking tour is excellent.</p>
+                            <p>Skip the Vatican organized tour. They miss many parts of the museum and waste a lot of time explaining stuff you’ll already know (Trojan horse, head of Medusa).</p>
+                            <p>Palazzo Farnese tour is a must if you can find availability.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🧀</span> Buying Cheese</h3>
+                            <p>An “etto” is 100 grams (it costs a tenth of whatever the stated price per kilo is), and is enough for 4+ people to get a decent sample of it.</p>
+                            <p>If you ask for a "piatto degustazione" they will slice the meats and cheeses up for you and package them together.</p>
+                            <p>You can explain that you want 10 or 20 euros worth of cheese overall and they can figure out the right portions to give you.</p>
                         </div>
                     </div>
                 </div>
@@ -1155,9 +1223,8 @@
 
                 <!-- Member Directory & Role Hierarchy -->
                 <div class="admin-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <div style="margin-bottom: 20px;">
                         <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">👥 Member Directory & Role Hierarchy</h3>
-                        <button onclick="openAddMemberModal()" class="btn-sm" style="background: var(--accent-gold); color: #0a141d; border: none; font-weight: bold;">+ Add New Member</button>
                     </div>
 
                     <div style="margin-bottom: 15px;">
@@ -1265,13 +1332,13 @@
     <!-- Firebase SDK (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <script src="firebase-config.js?v=2.1"></script>
+    <script src="firebase-config.js?v=2.2"></script>
 
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="email-config.js?v=2.1"></script>
+    <script src="email-config.js?v=2.2"></script>
 
-    <script src="portal.js?v=2.1"></script>
+    <script src="portal.js?v=2.2"></script>
     <script>
         let currentMonthIdx = 0; // 0 = Sept 2026
         let adminBlockMonthIdx = 0;
