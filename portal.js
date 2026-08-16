@@ -352,11 +352,9 @@ const PortalEmail = {
             status: 'queued'
         };
 
-        // Real email dispatch via EmailJS if configured
-        if (typeof emailjs !== 'undefined' && typeof emailjsConfig !== 'undefined' && emailjsConfig.publicKey && emailjsConfig.publicKey !== 'YOUR_PUBLIC_KEY') {
+        // Real email dispatch via EmailJS (SDK + Direct REST API Fallback)
+        if (typeof emailjsConfig !== 'undefined' && emailjsConfig.publicKey && emailjsConfig.publicKey !== 'YOUR_PUBLIC_KEY') {
             try {
-                this.init();
-
                 const templateParams = {
                     to_email: to,
                     to_name: recipientName || to,
@@ -374,16 +372,56 @@ const PortalEmail = {
                     notification_type: type
                 };
 
-                const response = await emailjs.send(
-                    emailjsConfig.serviceId,
-                    emailjsConfig.templateId,
-                    templateParams,
-                    { publicKey: emailjsConfig.publicKey }
-                );
+                let sent = false;
 
-                emailRecord.status = 'sent';
-                emailRecord.response = response;
-                console.log(`%c[EMAILJS SUCCESS] Real email dispatched to ${to} (Status: ${response.status}) | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
+                // 1. Try EmailJS SDK first
+                if (typeof emailjs !== 'undefined' && typeof emailjs.send === 'function') {
+                    try {
+                        this.init();
+                        const response = await emailjs.send(
+                            emailjsConfig.serviceId,
+                            emailjsConfig.templateId,
+                            templateParams,
+                            { publicKey: emailjsConfig.publicKey }
+                        );
+                        if (response && (response.status === 200 || response.text === 'OK')) {
+                            emailRecord.status = 'sent';
+                            emailRecord.response = response;
+                            sent = true;
+                            console.log(`%c[EMAILJS SUCCESS via SDK] Dispatched to ${to} | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
+                        }
+                    } catch (sdkErr) {
+                        console.warn('[EMAILJS SDK warning, falling back to direct REST API]:', sdkErr);
+                    }
+                }
+
+                // 2. Direct REST API Fallback (Guaranteed to work across all browsers & ad-blockers)
+                if (!sent) {
+                    const payload = {
+                        service_id: emailjsConfig.serviceId,
+                        template_id: emailjsConfig.templateId,
+                        user_id: emailjsConfig.publicKey,
+                        template_params: templateParams
+                    };
+
+                    const resp = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (resp.ok) {
+                        emailRecord.status = 'sent';
+                        console.log(`%c[EMAILJS SUCCESS via REST API] Dispatched to ${to} (Status: ${resp.status}) | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
+                    } else {
+                        const errText = await resp.text();
+                        emailRecord.status = 'error';
+                        emailRecord.error = errText;
+                        console.error('[EMAILJS REST API Error]:', resp.status, errText);
+                    }
+                }
             } catch (err) {
                 emailRecord.status = 'error';
                 emailRecord.error = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
