@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Favorites | Lily Terrace Rome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="flower-logo.png">
+    <style>
+        :root {
+            --bg-color: #0a141d;
+            --accent-gold: #c5a059;
+            --accent-gold-light: rgba(197, 160, 89, 0.15);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --border-color: rgba(197, 160, 89, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(197, 160, 89, 0.25);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('whitelogoplusspace.png'), url('whitelogoplusspace.png');
+            background-position: 0 0, 110px 110px;
+            background-size: 220px 220px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        body { top: 0 !important; }
+
+        .custom-translate {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 2000;
+        }
+
+        .translate-btn {
+            background: rgba(10, 20, 29, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            padding: 0;
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(10, 20, 29, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            padding: 10px 0;
+            display: none;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .lang-menu.active { display: block; }
+
+        .lang-option {
+            padding: 10px 25px;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .lang-option:hover {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 30px 100px;
+        }
+
+        .branding-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .branding-logo {
+            max-width: 130px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .branding-logo:hover {
+            opacity: 1;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            margin: 0 0 12px;
+            color: var(--accent-gold);
+            letter-spacing: -0.5px;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        /* Category Nav */
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 45px;
+        }
+
+        .nav-pill {
+            display: inline-block;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 25px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-pill:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        /* Guides Legend */
+        .guide-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+        }
+
+        .guide-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin: 0 0 15px;
+            color: var(--accent-gold);
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--accent-gold-light);
+            padding-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .guide-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-list li {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 9px;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        .guide-key {
+            font-weight: 700;
+            color: var(--accent-gold);
+            min-width: 65px;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+
+        /* Section Headings */
+        .section-header {
+            margin: 60px 0 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin: 0;
+            color: var(--accent-gold);
+            font-weight: 400;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Venue Cards */
+        .venue-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .venue-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px 26px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-gold);
+        }
+
+        .venue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .venue-name {
+            font-size: 1.3rem;
+            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .venue-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .venue-name a:hover {
+            color: #ffffff;
+        }
+
+        .venue-badges {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .badge-rating {
+            background: var(--accent-gold-light);
+            color: var(--accent-gold);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge-price {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .venue-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Numbered List Layout for Subsections */
+        .sub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .sub-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            transition: all 0.25s ease;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .sub-item:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sub-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            min-width: 28px;
+            line-height: 1;
+            padding-top: 2px;
+        }
+
+        .sub-body {
+            flex-grow: 1;
+        }
+
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .sub-title {
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            color: var(--accent-gold);
+        }
+
+        .sub-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .sub-title a:hover {
+            color: #ffffff;
+        }
+
+        .sub-body p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Intro prose styling */
+        .prose-block {
+            background: rgba(197, 160, 89, 0.08);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* Pizza quick list */
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .pizza-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.25s ease;
+        }
+
+        .pizza-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .pizza-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .pizza-details h4 {
+            margin: 0 0 3px;
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--accent-gold);
+        }
+
+        .pizza-details h4 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .pizza-details h4 a:hover {
+            color: #ffffff;
+        }
+
+        .pizza-details span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-weight: 400;
+            padding: 12px 28px;
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-link:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .back-container {
+            text-align: center;
+        }
+
+        .footer-nav {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            .guide-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .venue-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .sub-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .pizza-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        
+        
+        
+        
+        
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 500px;
+            background: rgba(10, 20, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 3000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .cookie-banner.visible { bottom: 40px; }
+        .cookie-banner p {
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
+        }
+        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+        .cookie-btn {
+            background: transparent;
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            padding: 10px 30px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        /* Info Panel Contrast & Watermark Fix */
+        .info-panel.visible {
+            background-color: #0a141d !important;
+            color: #ffffff !important;
+            padding: 60px 40px !important;
+            margin-left: -40px !important;
+            margin-right: -40px !important;
+            border-radius: 0 !important;
+            border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+            isolation: isolate !important;
+        }
+        .info-panel.visible::before {
+            opacity: 0.08 !important;
+            z-index: -1 !important;
+        }
+        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
+        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
+        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+        .info-panel.visible .form-title {
+            color: #ffffff !important;
+        }
+        .info-panel.visible .feature-card {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(197, 160, 89, 0.2) !important;
+        }
+        .info-panel.visible input[type="email"] {
+            border-bottom-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .info-panel.visible .btn-submit {
+            background: #c5a059 !important;
+            color: #0a141d !important;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="cookie-consent" class="cookie-banner">
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <div class="cookie-actions">
+            <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
+            <button onclick="declineCookies()" class="cookie-btn">Decline</button>
+        </div>
+    </div>
+
+
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en')">English</div>
+            <div class="lang-option" onclick="changeLang('it')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr')">Français</div>
+            <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja')">日本語</div>
+        </div>
+    </div>
+    <div id="google_translate_element" style="display:none"></div>
+
+    <div class="container">
+        <div class="branding-header">
+            <a href="index.html">
+                <img src="logo.png" alt="Lily Terrace Rome" class="branding-logo">
+            </a>
+        </div>
+
+        <div class="header-section">
+            <h1>The Favorites Guide</h1>
+            <p class="subtitle">The spots we actually go to, vetted rankings, and insider notes for dining and drinking in Rome.</p>
+            
+            <div class="category-nav">
+                <a href="#top-picks" class="nav-pill">Top Picks</a>
+                <a href="#gelato" class="nav-pill">I. Gelato</a>
+                <a href="#pizza" class="nav-pill">II. Pizza</a>
+                <a href="#amatriciana" class="nav-pill">III. Amatriciana</a>
+                <a href="#wine-bars" class="nav-pill">IV. Wine Bars</a>
+                <a href="#foreign-food" class="nav-pill">V. Foreign Food</a>
+            </div>
+        </div>
+
+        <!-- Rating & Price Guides -->
+        <div class="guide-box">
+            <div class="guide-grid">
+                <div class="guide-col">
+                    <h3>Quality Guide</h3>
+                    <ul class="guide-list">
+                        <li><span class="guide-key">★</span> You will not like it. You’ve been warned.</li>
+                        <li><span class="guide-key">★★</span> I don’t love it. But you might like it.</li>
+                        <li><span class="guide-key">★★★</span> Recommended. You will not regret eating there.</li>
+                        <li><span class="guide-key">★★★★</span> Strong recommendation. You should prioritize these.</li>
+                        <li><span class="guide-key">★★★★★</span> An absolute must. You will regret not eating there.</li>
+                    </ul>
+                </div>
+                <div class="guide-col">
+                    <h3>Price Guide</h3>
+                    <ul class="guide-list">
+                        <li><span class="guide-key">$</span> Under €10 per person.</li>
+                        <li><span class="guide-key">$$</span> Under €30 euro per person.</li>
+                        <li><span class="guide-key">$$$</span> Under €50 euro per person.</li>
+                        <li><span class="guide-key">$$$$</span> Over €50 euro per person.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Favorites -->
+        <div id="top-picks" class="section-header">
+            <h2>Top Favorites</h2>
+            <span class="section-tag">Essential Recommendations</span>
+        </div>
+
+        <div class="venue-grid">
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★★</span>
+                        <span class="badge-price">$</span>
+                    </div>
+                </div>
+                <p>Tell Gui I sent you. Possibly the best gelato, cheese, and wine you'll have in Europe. Reasonably priced. Good music. Great location.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Sto+Bene+Rome" target="_blank">Sto Bene</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$</span>
+                    </div>
+                </div>
+                <p>Closest sandwich shop to the apartment - Very cheap. Very good. No wait. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>Even if you show up before they open, expect to wait in line. It is worth it. Order the yellow spice salami pie.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>Be on their website at 11:59 pm Italy time exactly one month before the day you want to eat there or you will not get to eat there. Definitely order the Amatriciana, it’s the best in town. The other stuff is just good, and the menu is heavy on offal.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Osteria+La+Quercia+Rome" target="_blank">La Quercia</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>If not just as good as Armando’s their Amatriciana is easily number two, and their menu overall has a lot of great stuff on it. A block from the apartment and generally no wait. Attire recommended but not mandatory.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Scrocchia+Rome" target="_blank">Scrocchia</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$</span>
+                    </div>
+                </div>
+                <p>The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Close, never a line.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Fiore+Rome" target="_blank">Fiore</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>Neapolitan snack food spot - the montanare are awesome. Possibly the best suppli in town.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Rome" target="_blank">Trapizzino</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>Triangular pizza pocket sandwiches. The closest one is right across from ponte sisto, but the one near the Vatican is attached to a great artisanal beer bar.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Rome" target="_blank">All’Antico Vinaio</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★★</span>
+                        <span class="badge-price">$$</span>
+                    </div>
+                </div>
+                <p>The Numero #1 is my favorite porchetta sandwich in town. I recommend going in the evening to avoid the lines.</p>
+            </div>
+
+            <div class="venue-card">
+                <div class="venue-header">
+                    <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Campo+de+Fiori+Market+Rome" target="_blank">Campo market</a></h3>
+                    <div class="venue-badges">
+                        <span class="badge-rating">★★★</span>
+                        <span class="badge-price">$</span>
+                    </div>
+                </div>
+                <p>Get fresh juice and wild strawberries. Skip everything else.</p>
+            </div>
+        </div>
+
+        <!-- Subsection I: Gelato -->
+        <div id="gelato" class="section-header">
+            <h2>I. Gelato</h2>
+            <span class="section-tag">Ranked Gelaterie</span>
+        </div>
+
+        <div class="sub-list">
+            <div class="sub-item">
+                <div class="sub-number">1</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma Bottega</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">€3.50</span>
+                        </div>
+                    </div>
+                    <p>The toasted hay is outstanding and the pistachio might be the best in the world.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">2</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Frigidarium+Gelateria+Rome" target="_blank">Frigidarium</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€3</span>
+                        </div>
+                    </div>
+                    <p>Very decent and they have an excellent small-size waffle cone.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">3</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Gelateria+del+Teatro+Rome" target="_blank">Gelato del Teatro</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">€4</span>
+                        </div>
+                    </div>
+                    <p>Super high quality with great flavors.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">4</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Giolitti+Rome" target="_blank">Giolitti</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">€3.50</span>
+                        </div>
+                    </div>
+                    <p>Old school, exceptional flavors, high quality. Remember to pay first and then go to get your ice cream.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">5</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Otaleg+Rome" target="_blank">Otaleg</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€3.50</span>
+                        </div>
+                    </div>
+                    <p>Artisanal gelato deep in Trastevere with creative flavors. Generic cone.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">6</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Un+gelato+a+Roma+Eugenio+Morrone+Rome" target="_blank">Un gelato a Roma by Eugenio Morrone</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€4</span>
+                        </div>
+                    </div>
+                    <p>Fancy gelato right at Trilussa. The mango was particularly good but not every flavor was a hit.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">7</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Gelateria+La+Romana+Rome" target="_blank">La Romana dal 1947</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€3</span>
+                        </div>
+                    </div>
+                    <p>High quality, very close the apartment. Generally has a long line, but it moves quickly. Nice honey-flavored small waffle cone.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">8</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Gelateria+Fatamorgana+Rome" target="_blank">Fatamorgana</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★</span>
+                            <span class="badge-price">€3.50</span>
+                        </div>
+                    </div>
+                    <p>A good number of flavors. Decent quality.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">9</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Gunther+Gelato+Rome" target="_blank">Gunther</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★</span>
+                            <span class="badge-price">€3.70</span>
+                        </div>
+                    </div>
+                    <p>Quality gelato, but I wouldn't get it again.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">10</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Old+Bridge+Gelateria+Rome" target="_blank">Old Bridge</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★</span>
+                            <span class="badge-price">€2.50</span>
+                        </div>
+                    </div>
+                    <p>Not as good as the others on this list but pairs well with a trip to the Vatican.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subsection II: Pizza -->
+        <div id="pizza" class="section-header">
+            <h2>II. Pizza</h2>
+            <span class="section-tag">By Mood & Strategy</span>
+        </div>
+
+        <div class="pizza-grid">
+            <div class="pizza-card">
+                <div class="pizza-num">1</div>
+                <div class="pizza-details">
+                    <h4><a href="https://www.google.com/maps/search/?api=1&query=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></h4>
+                    <span>Willing to wait</span>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="pizza-num">2</div>
+                <div class="pizza-details">
+                    <h4><a href="https://www.google.com/maps/search/?api=1&query=Seu+Pizza+Illuminati+Rome" target="_blank">Seu Illuminati</a></h4>
+                    <span>Willing to book ahead</span>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="pizza-num">3</div>
+                <div class="pizza-details">
+                    <h4><a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Mariuccia+Rome" target="_blank">Mariuccia</a></h4>
+                    <span>Not willing to wait or book ahead or go far</span>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="pizza-num">4</div>
+                <div class="pizza-details">
+                    <h4><a href="https://www.google.com/maps/search/?api=1&query=Corner+Pizza+Rome" target="_blank">Corner Pizza</a></h4>
+                    <span>For pizza al taglio</span>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="pizza-num">5</div>
+                <div class="pizza-details">
+                    <h4><a href="https://www.google.com/maps/search/?api=1&query=Fiore+Rome" target="_blank">Fiori</a></h4>
+                    <span>For montanare</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subsection III: Amatriciana -->
+        <div id="amatriciana" class="section-header">
+            <h2>III. Amatriciana</h2>
+            <span class="section-tag">The Supreme Arbiter Guide</span>
+        </div>
+
+        <div class="prose-block">
+            Of the four classic Roman pastas, Amatriciana is the most complex. It requires perfecting guanciale, which ranges from something-less-than-bacon to something-bacon-could-only-dream-of-aspiring-to. It also includes pecorino and parmiggiano, which must be of suitable quality. But then it also requires an exceptional tomato sauce, which is an incredibly difficult metric to distinguish yourself in a cuisine where tomatoes are first class citizens on every menu. Here are the restaurants with the best Amatriciana I’ve found in Rome so far:
+        </div>
+
+        <div class="sub-list">
+            <div class="sub-item">
+                <div class="sub-number">1</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>The gold standard of Amatriciana (€16). I don’t know how they get their guanciale to be so crispy and delicious. I asked the waiter. He said something about baking it, I think. Honestly, I should really learn Italian. You go here and the smugness of Stanley Tucci consumes you. You get to judge every pasta henceforth from the perspective of a supreme arbiter. The other pastas on the menu are great, but much less differentiated from the norm (imho I like my puttanesca more than theirs), and the rest of the menu is very offal forward. Book at midnight Italian time one month before you want to eat there, or you will not eat there.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">2</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Osteria+La+Quercia+Rome" target="_blank">La Quercia</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>The only restaurant in Rome where I’ve felt judged for how poorly we were dressed, which is very fun. Their Amatriciana (€16) is just about as good as Armando’s, and the menu as a whole is more American-friendly. Excellent wines by the glass. Less than a block from the apartment. Generally no wait.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">3</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Antica+Pesa+Rome" target="_blank">Antica Pesa</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">$$$$</span>
+                        </div>
+                    </div>
+                    <p>Overall, a little more form than function. But the Amatriciana is only €20 and is excellent (so is the spigola and the pork pluma). Not hard to get a reservation, but there is a €75 per person minimum, so don’t go with the aim of just eating a bowl of pasta.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">4</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Rosina+Trattoria+Rome" target="_blank">Rosina</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Also immediately next to the apartment. The owner is awesome. Never a wait. Not going to outclass Armando with the guanciale, but otherwise a terrific Amatriciana (€13). The menu is quite traditional, and not huge, but solid across the board. The Genovese meatball is stellar.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">5</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Rome" target="_blank">Roscioli</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$$</span>
+                        </div>
+                    </div>
+                    <p>The amatriciana (€17) is very good, but candidly, a distant fifth. Still better than anything you’ll eat at Campo. I’m a big fan of their deli. And I remember really loving their raviolo and burro e alici (butter and anchovy) pasta years ago, but it’s become a pricey tourist trap. You have to get reservations online, but they are often available with short notice.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subsection IV: Wine Bars -->
+        <div id="wine-bars" class="section-header">
+            <h2>IV. Wine Bars</h2>
+            <span class="section-tag">Aperitivo & Enoteche</span>
+        </div>
+
+        <div class="sub-list">
+            <div class="sub-item">
+                <div class="sub-number">1</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Il+Vinaietto+Rome" target="_blank">Il Vinaietto</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">€5-€8</span>
+                        </div>
+                    </div>
+                    <p>My favorite wine bar. Even their cheapest wines are all excellent. The music is always good. Popular with locals. Not service oriented.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">2</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma Bottega</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">€6-€9</span>
+                        </div>
+                    </div>
+                    <p>Fantastic wines and great cheeses and gelato made in house. The guy behind the bar, Gui, used to be the chef at Sorella in SF and is super cool.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">3</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=L+Angolo+Divino+Rome" target="_blank">Angolo Divino</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">€6-€8</span>
+                        </div>
+                    </div>
+                    <p>Directly downstairs. Great wines. Knowledgeable docents who speak English.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">4</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Enoteca+Bortone+Rome" target="_blank">Enoteca Bortone</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">€9</span>
+                        </div>
+                    </div>
+                    <p>Priciest on the list, but well worth it. You will not have a glass of wine here that you don’t love.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">5</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Enoteca+La+Barchetta+Rome" target="_blank">La Barchetta</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">€8-€18</span>
+                        </div>
+                    </div>
+                    <p>Right next door to Enoteca Bortone and very similar.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">6</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Il+Piccolo+Wine+Bar+Rome" target="_blank">Il Piccolo</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€6</span>
+                        </div>
+                    </div>
+                    <p>Interesting wines you won’t find elsewhere. Good music. In a tourist trap part of town and no a/c.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">7</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Vini+e+Vinili+Rome" target="_blank">Vini e Vinyl</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€8</span>
+                        </div>
+                    </div>
+                    <p>It’s okay. The music is a gimmick. They don’t have many exciting records and a lot of them are scratched.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">8</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Il+Goccetto+Rome" target="_blank">Il Goccetto</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">€7</span>
+                        </div>
+                    </div>
+                    <p>Slower service than the others because it gets crowded, but the wines are good.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subsection V: Foreign Food -->
+        <div id="foreign-food" class="section-header">
+            <h2>V. Foreign Food</h2>
+            <span class="section-tag">Global Flavors in Rome</span>
+        </div>
+
+        <div class="sub-list">
+            <div class="sub-item">
+                <div class="sub-number">1</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Kabizza+Rome" target="_blank">Kabizza</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★★</span>
+                            <span class="badge-price">$</span>
+                        </div>
+                    </div>
+                    <p>World class kebab. The medium is only €8.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">2</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Nest+Rome+Piazza+Farnese" target="_blank">Nest</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Dim sum and great fried rice, right at Piazza Farnese.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">3</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Miami+Joe+Smash+Burgers+Rome" target="_blank">Miami Joe</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Very good smash burgers and milk shakes.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">4</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Saaz+Restobar+Rome" target="_blank">Saaz Restobar</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Very decent modern Indian food with decent chaat options. It’s a far walk, but very reasonably priced and well worth it if you’re in the mood for Indian food.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">5</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Cabulo+Rome" target="_blank">Cabulo</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>If you’re craving a legit pulled pork sandwich, you will not be disappointed (€11). If you order one of their burgers (€11.50), you will be disappointed. As with most burger places in Italy, they use lean beef which makes for a tough, dry, flavorless burger. Very close to the apartment and stays open late.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">6</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Bao+Bao+Dumpling+Rome" target="_blank">Bao Bao</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Further than Nest, but very good. The Ja Mo (Chinese pancake stuffed with shredded pork) is €8.50. The fried rice and noodles are better at Nest.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">7</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Don+s+American+Restaurant+Rome" target="_blank">Don’s</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$$</span>
+                        </div>
+                    </div>
+                    <p>The sister restaurant of Miami Joe (they share a kitchen). Really good American food with decent prices and no wait.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">8</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Open+Baladin+Roma" target="_blank">Open Baladin</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Best classic (thick style) burger in town, large artisan beer list (but light on sours). Excellent house-made potato chips. Skip the Pulled pork.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">9</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Mollie+s+Garden+Rome" target="_blank">Mollie’s Garden</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★</span>
+                            <span class="badge-price">$$$</span>
+                        </div>
+                    </div>
+                    <p>Juices, smoothies, avocado toast, breakfast burritos, pulled pork.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">10</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=El+Tiburon+Ital+Mex+Rome" target="_blank">El Tiburon</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$$</span>
+                        </div>
+                    </div>
+                    <p>Ital-Mex: high prices, small portions, high quality ingredients, cheese forward, the birria is beef.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">11</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Panfuwa+Rome" target="_blank">Panfuwa</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>Legit Japanese souffle pancakes. The closest one is not listed on Maps yet, but it’s in the former location of “It Bread & Salad” at Piazza di S. Claudio.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">12</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Uncommon+Ramen+Dumplings+Rome" target="_blank">Uncommon Ramen&Dumplings</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★★</span>
+                            <span class="badge-price">$$</span>
+                        </div>
+                    </div>
+                    <p>This is a ways out of town and the board game store next door has a very limited selection of games in English, so I don’t actually encourage you to head out this way, but if you’re craving really good peking duck, this place has it.</p>
+                </div>
+            </div>
+
+            <div class="sub-item">
+                <div class="sub-number">13</div>
+                <div class="sub-body">
+                    <div class="sub-header">
+                        <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Culto+Rome" target="_blank">Culto</a></h3>
+                        <div class="venue-badges">
+                            <span class="badge-rating">★★</span>
+                            <span class="badge-price">$$$</span>
+                        </div>
+                    </div>
+                    <p>Asian/American/Italian fusion tapas. Decent cocktails, small portions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-container">
+            <a href="food.html" class="back-link">Return to Dining</a>
+        </div>
+    </div>
+
+    <nav class="footer-nav">
+        <a href="history.html">History</a>
+        <a href="food.html">Dining</a>
+        <a href="planning.html">Planning</a>
+        <a href="transport.html">Travel</a>
+        <a href="map.html">Map</a>
+    </nav>
+    
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

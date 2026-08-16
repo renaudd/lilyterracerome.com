@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="flower-logo.png">
     <style>
@@ -16,7 +16,7 @@
             --bg-color: #0a141d;
             --accent-gold: #c5a059;
             --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.65);
         }
 
         body {
@@ -96,7 +96,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 0.8rem;
-            font-size: 0.8rem;
+        }
+
+        .lang-option:hover {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--accent-gold);
         }
 
         /* Branding Header */
@@ -140,13 +144,13 @@
 
         .protrusion-item.left {
             left: 0;
-            top: 11%;
+            top: 6%;
             transform: translateX(-75%); /* 25% exposure */
         }
 
         .protrusion-item.right {
             right: 0;
-            top: 62%; /* Higher, closer to Armando */
+            top: 72%; /* Closer to Armando al Pantheon */
             transform: translateX(85%); /* 15% exposure */
         }
 
@@ -246,11 +250,11 @@
         }
 
         /* Prevent text overlap with protruding images */
-        .venue:nth-child(-n+4) {
+        .venue.pad-left {
             padding-left: 10%;
         }
 
-        .venue:nth-last-child(-n+4) {
+        .venue.pad-right {
             padding-right: 10%;
         }
 
@@ -318,7 +322,57 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
-    
+
+        /* Practical callout box */
+        .deep-guide-box {
+            margin-top: 60px;
+            padding: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            background: rgba(197, 160, 89, 0.05);
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .deep-guide-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            margin: 0 0 10px;
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+
+        .deep-guide-box p {
+            margin: 0 0 15px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .deep-guide-box a.btn-link {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--accent-gold);
+            color: #0a141d;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .deep-guide-box a.btn-link:hover {
+            background: #ffffff;
+            color: #0a141d;
+            transform: translateY(-2px);
+        }
+
+        
+        
+        
+        
+        
+        
+        
         
         /* Cookie Consent Banner */
         .cookie-banner {
@@ -399,21 +453,6 @@
             color: #0a141d !important;
         }
 
-        .practical-note {
-            margin-top: 80px;
-            padding: 30px;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            background: rgba(197, 160, 89, 0.05);
-            text-align: center;
-            border-radius: 15px;
-        }
-
-        .practical-note p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--accent-gold);
-            letter-spacing: 1px;
-        }
     </style>
 </head>
 
@@ -455,83 +494,109 @@
 
         <h1>Refined Dining</h1>
 
-        <div class="venue">
+        <div class="venue pad-left">
             <span class="venue-type">Contemporary Neapolitan Pizza</span>
             <div class="venue-name" style="font-size: 2.2rem; font-weight: 800;"><a
                     href="https://maps.google.com/?q=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></div>
             <p>
-                Start with a slice of pizza rossa at <a
-                    href="https://www.google.com/maps/search/?api=1&query=Forno+Campo+de'+Fiori+Rome" target="_blank">Forno Campo de'
-                    Fiori</a>.
                 Steps from the Trevi Fountain, this tiny gem delivers the city's most innovative pizza. Famous for its
-                pillowy "canotto" crust and high-end toppings. It's a mandatory stop for any food lover in Rome.
+                pillowy "canotto" crust and high-end toppings. Even if you show up before they open, expect to wait in line — it is worth it. Order the yellow spice salami pie.
             </p>
         </div>
 
-        <div class="venue">
-            <span class="venue-type">The Institution</span>
+        <div class="venue pad-left">
+            <span class="venue-type">Sandwich Shop & Lunch Plates · ★★★★ · $</span>
             <div class="venue-name"><a
-                    href="https://www.google.com/maps/search/?api=1&query=Pierluigi+Restaurant,+Piazza+De'+Ricci,+144,+00186+Rome"
-                    target="_blank">Pierluigi</a></div>
+                    href="https://www.google.com/maps/search/?api=1&query=Sto+Bene+Rome"
+                    target="_blank">Sto Bene</a></div>
             <p>
-                Since 1938, Pierluigi has been the heartbeat of Rome's seafood scene. Located in the charming <a
-                    href="https://www.google.com/maps/search/?api=1&query=Piazza+De'+Ricci+Rome" target="_blank">Piazza de' Ricci</a>,
-                just a short stroll from Vicolo del Giglio, it offers the city's finest al fresco dining. A favorite for diplomats and
-                travelers of distinction.
+                Closest sandwich shop to the apartment — very cheap, very good, and no wait. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.
             </p>
         </div>
 
-        <div class="venue">
-            <span class="venue-type">Gastronomic Excellence</span>
+        <div class="venue pad-left">
+            <span class="venue-type">Neapolitan Snack Food Spot · ★★★★ · $$</span>
             <div class="venue-name"><a
-                    href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Via+dei+Giubbonari+21+Rome"
-                    target="_blank">Roscioli Salumeria</a></div>
+                    href="https://www.google.com/maps/search/?api=1&query=Fiore+Rome"
+                    target="_blank">Fiore</a></div>
             <p>
-                A sensory journey through Italy's finest ingredients. Roscioli is more than a restaurant; it is a Roman legend. We
-                recommend booking weeks in advance to secure a seat at the counter for their world-renowned Carbonara.
-                Visit the <strong>Roscioli Rimessa</strong> (<a
-                    href="https://www.google.com/maps/search/?api=1&query=Rimessa+Roscioli+Rome" target="_blank">Via dei Giubbonari</a>)
-                for an unparalleled wine tasting experience.
+                Neapolitan snack food spot — the montanare are awesome. Possibly the best supplì in town.
+            </p>
+        </div>
+
+        <div class="venue pad-left">
+            <span class="venue-type">Florentine Sandwiches · ★★★★ · $$</span>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Rome"
+                    target="_blank">All’Antico Vinaio</a></div>
+            <p>
+                The one on Corso has the shortest line, but the quality control on Via delle Colonnelle is a little better. I recommend going at night right before they close to avoid the lines.
             </p>
         </div>
 
         <div class="venue">
-            <span class="venue-type">Neighborhood Hidden Gems</span>
+            <span class="venue-type">Pizza Pocket Sandwiches · ★★★★ · $$</span>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Rome"
+                    target="_blank">Trapizzino</a></div>
+            <p>
+                Triangular pizza pocket sandwiches. The closest one is right across from ponte sisto, but the one near the Vatican is attached to a great artisanal beer bar.
+            </p>
+        </div>
+
+        <div class="venue">
+            <span class="venue-type">Neighborhood Hidden Gems · ★★★★★ · $</span>
             <div class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome"
-                    target="_blank">Ruma Bottega</a></div>
+                    target="_blank">Ruma</a></div>
             <p>
-                A modern masterclass in agricultural cuisine. Their cheese boards and focus on Maremma-sourced ingredients provide a
-                fresh, contemporary contrast to the heavy Roman classics.
-                For a quick, perfect snack, the <strong>Antico Forno Roscioli</strong> (<a
-                    href="https://www.google.com/maps/search/?api=1&query=Antico+Forno+Roscioli+Rome" target="_blank">Via dei
-                    Chiavari</a>)
-                serves the best pizza bianca in the city.
+                Tell Gui I sent you. Possibly the best gelato, cheese, and wine you'll have in Europe. Reasonably priced. Good music. Great location. A modern masterclass in agricultural cuisine.
             </p>
         </div>
 
-        <div class="venue">
-            <span class="venue-type">Aperitivo & Late Night</span>
-            <div class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Il+Vinaietto+Rome" target="_blank">Il
-                    Vinaietto</a></div>
+        <div class="venue pad-right">
+            <span class="venue-type">Roman Osteria & Pasta · ★★★★ · $$</span>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Osteria+La+Quercia+Rome"
+                    target="_blank">La Quercia</a></div>
             <p>
-                Step out to <strong>Il Vinaietto</strong> (<a href="https://www.google.com/maps/search/?api=1&query=Il+Vinaietto+Rome"
-                    target="_blank">Via del Monte della Farina</a>)
-                for an authentic, unpretentious local wine experience. For those in the know, the <strong>Jerry Thomas Project</strong>
-                (<a href="https://www.google.com/maps/search/?api=1&query=The+Jerry+Thomas+Project+Rome" target="_blank">Vicolo
-                    Cellini</a>)
-                is a speakeasy that requires a password but delivers the city's most creative cocktails.
+                If not just as good as Armando’s their Amatriciana is easily number two, and their menu overall has a lot of great stuff on it. A block from the apartment and generally no wait. Attire recommended but not mandatory.
             </p>
         </div>
 
-<div class="venue">
-    <span class="venue-type">Classic Roman Institution</span>
-    <div class="venue-name" style="font-size: 2.2rem; font-weight: 800;"><a
-            href="https://maps.google.com/?q=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></div>
-    <p>
-        A historic family institution offering perfectly executed Roman classics. Their Rigatoni all'Amatriciana is
-        unrivaled. Ensure you book weeks ahead to dine in the shadow of the Pantheon.
-    </p>
-</div>
+        <div class="venue pad-right">
+            <span class="venue-type">Historic Local Café · ★★★ · $$</span>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Caffe+Peru+Rome"
+                    target="_blank">Caffè Perù</a></div>
+            <p>
+                A classic neighborhood bar on Via di Monserrato. Popular with locals.
+            </p>
+        </div>
+
+        <div class="venue pad-right">
+            <span class="venue-type">Crispy Roman Sandwiches · ★★★★ · $</span>
+            <div class="venue-name"><a
+                    href="https://www.google.com/maps/search/?api=1&query=Scrocchia+Rome"
+                    target="_blank">Scrocchia</a></div>
+            <p>
+                The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Close, never a line.
+            </p>
+        </div>
+
+        <div class="venue pad-right">
+            <span class="venue-type">Classic Roman Institution · ★★★★ · $$</span>
+            <div class="venue-name" style="font-size: 2.2rem; font-weight: 800;"><a
+                    href="https://maps.google.com/?q=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></div>
+            <p>
+                Be on their website at 11:59 pm Italy time exactly one month before the day you want to eat there or you will not get to eat there. Definitely order the Amatriciana, it’s the best in town. The other stuff is just good, and the menu is heavy on offal.
+            </p>
+        </div>
+
+        <div class="deep-guide-box">
+            <h3>The Deep Guide</h3>
+            <p>Explore our complete shortlist of curated venues, gelato rankings, Amatriciana showdown, and global dining.</p>
+            <a href="favorites.html" class="btn-link">View Full Favorites List</a>
+        </div>
 
         <a href="index.html" class="back-link">Return to the Residence</a>
         <nav class="footer-nav">

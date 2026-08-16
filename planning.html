@@ -296,6 +296,14 @@
         }
 
 
+        
+        
+        
+        
+        
+        
+        
+        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -312,15 +320,11 @@
             z-index: 3000;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
             text-transform: none;
             letter-spacing: 0;
         }
-
-        .cookie-banner.visible {
-            bottom: 40px;
-        }
-
+        .cookie-banner.visible { bottom: 40px; }
         .cookie-banner p {
             margin: 0 0 20px 0;
             font-size: 0.85rem;
@@ -328,13 +332,7 @@
             line-height: 1.6;
             font-family: 'Outfit', sans-serif;
         }
-
-        .cookie-actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
+        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
         .cookie-btn {
             background: transparent;
             border: 1px solid #c5a059;
@@ -348,16 +346,8 @@
             transition: all 0.3s ease;
             border-radius: 5px;
         }
-
-        .cookie-btn.accept {
-            background: #c5a059;
-            color: #0a141d;
-        }
-
-        .cookie-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
-        }
+        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
 
         /* Info Panel Contrast & Watermark Fix */
         .info-panel.visible {
@@ -370,38 +360,29 @@
             border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
             isolation: isolate !important;
         }
-
         .info-panel.visible::before {
             opacity: 0.08 !important;
             z-index: -1 !important;
         }
-
-        .info-panel.visible h1,
-        .info-panel.visible h2,
-        .info-panel.visible h3,
-        .info-panel.visible p,
-        .info-panel.visible li,
-        .info-panel.visible span,
-        .info-panel.visible .feature-card h3,
-        .info-panel.visible .feature-card p,
+        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
+        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
+        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
         .info-panel.visible .form-title {
             color: #ffffff !important;
         }
-
         .info-panel.visible .feature-card {
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(197, 160, 89, 0.2) !important;
         }
-
         .info-panel.visible input[type="email"] {
             border-bottom-color: #ffffff !important;
             color: #ffffff !important;
         }
-
         .info-panel.visible .btn-submit {
             background: #c5a059 !important;
             color: #0a141d !important;
         }
+
     </style>
 </head>
 
@@ -513,6 +494,91 @@
             </p>
         </div>
 
+        <div class="tip-box"
+            style="margin-top: 40px; padding: 30px; border: 1px solid var(--accent-gold); border-radius: 15px; background: rgba(197, 160, 89, 0.05);">
+            <div class="tip-title" style="font-size: 1.6rem; margin-bottom: 15px;">The Caravaggio Trail (One-Day Itinerary)
+            </div>
+            <p style="margin-bottom: 25px;">Rome holds the world's densest concentration of Michelangelo Merisi da Caravaggio's
+                dramatic chiaroscuro masterpieces. Here is a curated one-day walking route to experience his revolutionary
+                public altarpieces, major gallery collections, and historic haunts:</p>
+        
+            <div class="caravaggio-stop" style="margin-bottom: 22px;">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">1. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Basilica+di+Sant+Agostino+Rome"
+                        target="_blank">Basilica di Sant’Agostino</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Masterpiece:</strong> <em>Madonna di Loreto</em> (also known as
+                    <em>Madonna dei Pellegrini</em>), Cavalletti Chapel.
+                </p>
+                <p style="margin: 0; font-size: 0.95rem;">Caravaggio scandalized Roman society by depicting the Virgin Mary
+                    barefoot on a weathered doorstep, greeting kneeling peasants with dirt-stained feet. Free admission (open
+                    daily).</p>
+            </div>
+        
+            <div class="caravaggio-stop" style="margin-bottom: 22px;">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">2. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Chiesa+di+San+Luigi+dei+Francesi+Rome"
+                        target="_blank">Chiesa di San Luigi dei Francesi</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Masterpieces:</strong> The Saint Matthew Cycle (<em>The Calling of Saint
+                        Matthew</em>, <em>The Inspiration of Saint Matthew</em>, and <em>The Martyrdom of Saint Matthew</em>),
+                    Contarelli Chapel.</p>
+                <p style="margin: 0; font-size: 0.95rem;">Just steps from Sant'Agostino. Bring €1 or €2 coins to light the
+                    chapel and watch Caravaggio's dramatic beam of divine light illuminate Matthew's conversion. Free admission.
+                </p>
+            </div>
+        
+            <div class="caravaggio-stop" style="margin-bottom: 22px;">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">3. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Galleria+Doria+Pamphilj+Rome"
+                        target="_blank">Galleria Doria Pamphilj</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Masterpieces:</strong> <em>Rest on the Flight into Egypt</em>,
+                    <em>Penitent Magdalene</em>, and <em>John the Baptist (Youth with a Ram)</em>.
+                </p>
+                <p style="margin: 0; font-size: 0.95rem;">Housed along Via del Corso within a magnificent private princely
+                    palace. These works highlight Caravaggio's early, lyrical mastery of light, nature, and human vulnerability.
+                </p>
+            </div>
+        
+            <div class="caravaggio-stop" style="margin-bottom: 22px;">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">4. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Palazzo+Barberini+Rome" target="_blank">Gallerie
+                        Nazionali di Arte Antica - Palazzo Barberini</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Masterpieces:</strong> <em>Judith Beheading Holofernes</em>,
+                    <em>Narcissus</em>, and <em>Saint Francis in Meditation</em>.
+                </p>
+                <p style="margin: 0; font-size: 0.95rem;">Experience the visceral intensity of <em>Judith</em> in this palatial
+                    Baroque museum, complete with Bernini's celebrated grand staircase and Pietro da Cortona's soaring ceilings.
+                </p>
+            </div>
+        
+            <div class="caravaggio-stop" style="margin-bottom: 22px;">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">5. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Santa+Maria+del+Popolo+Rome"
+                        target="_blank">Basilica Parrocchiale di Santa Maria del Popolo</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Masterpieces:</strong> <em>The Crucifixion of Saint Peter</em> and <em>The
+                        Conversion on the Way to Damascus</em>, Cerasi Chapel.</p>
+                <p style="margin: 0; font-size: 0.95rem;">Located at Piazza del Popolo. These two monumental canvases flank
+                    Annibale Carracci's altarpiece, displaying Caravaggio's mastery of raw realism and dynamic diagonal tension.
+                    Free admission (bring coins for lights).</p>
+            </div>
+        
+            <div class="caravaggio-stop">
+                <div style="font-weight: 500; color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">6. <a
+                        href="https://www.google.com/maps/search/?api=1&query=Vicolo+del+Divino+Amore+Rome" target="_blank">Casa
+                        di Caravaggio (Vicolo del Divino Amore)</a></div>
+                <p style="margin: 0 0 5px 0;"><strong>Historic Studio & Haunt:</strong> Caravaggio's residence and atelier
+                    (1603–1605).</p>
+                <p style="margin: 0; font-size: 0.95rem;">Wander down this quiet cobblestone alley in Campo Marzio where the
+                    master lived and worked. He was notoriously sued by his landlady Prudenzia Bruni after cutting a hole in the
+                    ceiling without permission to let overhead light in for his towering canvases. <em>Insider Note:</em> The
+                    home of <strong>Maddalena Antognetti</strong> ("Lena")—Caravaggio's model and lover who posed as Mary—is
+                    just down the street near where <a
+                        href="https://www.google.com/maps/search/?api=1&query=Via+dei+Prefetti+Rome" target="_blank">Vicolo del
+                        Divino Amore meets Via dei Prefetti</a>; her actual doorway is celebrated as the doorstep seen in
+                    <em>Madonna di Loreto</em>.
+                </p>
+            </div>
+        </div>
+
         <div class="tip-box">
             <div class="tip-title">The "Plan B" (Fallbacks)</div>
             <p>
@@ -611,9 +677,9 @@
             style="border: 1px solid rgba(197, 160, 89, 0.3); padding: 40px; background: rgba(197, 160, 89, 0.05); border-radius: 15px;">
             <div class="tip-title" style="text-align: center;">Practical Information</div>
             <p style="text-align: center; margin-bottom: 0;">
-                Our building was constructed in 1800. Therefore there are no elevators to reach Lily Terrace on the third and
-                fourth piani (4th and 5th floors for Americans). Please make sure all guests are able to handle four flights of
-                stairs before booking.
+                Our building was constructed in 1800. Therefore there are no elevators to reach Lily Terrace on the third piano (4th
+                floor for Americans). Please make sure all guests are able to handle three flights of
+                stairs.
             </p>
         </div>
 
