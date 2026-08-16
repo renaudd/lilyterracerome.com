@@ -670,6 +670,7 @@
         
         
         
+        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -1890,8 +1891,8 @@
             });
         }
 
-        function approveStay(id) {
-            const res = PortalCalendar.approveRequest(id, 'Approved by Administrator');
+        async function approveStay(id) {
+            const res = await PortalCalendar.approveRequest(id, 'Approved by Administrator');
             if (res.success) {
                 showToast(`Stay approved! Confirmation email dispatched to ${res.member ? res.member.email : 'member'}`);
                 renderCalendar();
@@ -1904,10 +1905,10 @@
             }
         }
 
-        function denyStay(id) {
+        async function denyStay(id) {
             const reason = prompt('Reason for denial (included in member email notification):', 'Dates unavailable');
             if (reason !== null) {
-                const res = PortalCalendar.denyRequest(id, reason);
+                const res = await PortalCalendar.denyRequest(id, reason);
                 if (res.success) {
                     showToast(`Request denied. Notification email dispatched to ${res.member ? res.member.email : 'member'}`);
                     renderCalendar();
@@ -1955,8 +1956,8 @@
             });
         }
 
-        function approveApplication(appId) {
-            const res = PortalMembers.approvePending(appId);
+        async function approveApplication(appId) {
+            const res = await PortalMembers.approvePending(appId);
             if (res.success) {
                 showToast(`Member @${res.user.username} approved! Welcome email dispatched to ${res.user.email}`);
                 renderAdminPendingApps();

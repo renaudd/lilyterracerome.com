@@ -327,6 +327,18 @@ const PortalDB = {
 
 // Email Notification Service (with EmailJS real email dispatch)
 const PortalEmail = {
+    init() {
+        if (typeof emailjs !== 'undefined' && typeof emailjsConfig !== 'undefined' && emailjsConfig.publicKey && emailjsConfig.publicKey !== 'YOUR_PUBLIC_KEY') {
+            try {
+                emailjs.init({
+                    publicKey: emailjsConfig.publicKey
+                });
+            } catch (e) {
+                console.warn('[EMAILJS] Init warning:', e);
+            }
+        }
+    },
+
     async send({ to, recipientName = '', subject, body, type = 'general' }) {
         const db = PortalDB.get();
         const emailRecord = {
@@ -343,31 +355,43 @@ const PortalEmail = {
         // Real email dispatch via EmailJS if configured
         if (typeof emailjs !== 'undefined' && typeof emailjsConfig !== 'undefined' && emailjsConfig.publicKey && emailjsConfig.publicKey !== 'YOUR_PUBLIC_KEY') {
             try {
+                this.init();
+
                 const templateParams = {
                     to_email: to,
                     to_name: recipientName || to,
                     email: to,
+                    recipient_email: to,
                     recipient: to,
+                    user_email: to,
                     name: recipientName || to,
                     from_name: "Regola Property Administration",
                     reply_to: "admin@lilypad.it",
                     subject: subject,
                     message: body,
                     body: body,
+                    content: body,
                     notification_type: type
                 };
 
-                await emailjs.send(emailjsConfig.serviceId, emailjsConfig.templateId, templateParams, emailjsConfig.publicKey);
+                const response = await emailjs.send(
+                    emailjsConfig.serviceId,
+                    emailjsConfig.templateId,
+                    templateParams,
+                    { publicKey: emailjsConfig.publicKey }
+                );
+
                 emailRecord.status = 'sent';
-                console.log(`%c[EMAILJS SUCCESS] Real email dispatched to ${to} | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
+                emailRecord.response = response;
+                console.log(`%c[EMAILJS SUCCESS] Real email dispatched to ${to} (Status: ${response.status}) | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
             } catch (err) {
                 emailRecord.status = 'error';
-                emailRecord.error = err.text || err.message || JSON.stringify(err);
-                console.error('[EMAILJS ERROR] Failed to send real email to ' + to, err);
+                emailRecord.error = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
+                console.error('[EMAILJS ERROR] Failed to send real email to ' + to + ':', err);
             }
         } else {
             emailRecord.status = 'sent';
-            console.log(`%c[EMAIL DISPATCH] To: ${to} | Subject: ${subject}`, 'color: #c5a059; font-weight: bold;');
+            console.log(`%c[EMAIL DISPATCH (Local Mode)] To: ${to} | Subject: ${subject}`, 'color: #c5a059; font-weight: bold;');
         }
 
         db.emailOutbox.unshift(emailRecord);
@@ -376,13 +400,25 @@ const PortalEmail = {
     },
 
     // Notify admins & co-admins of new member application
-    notifyAdminsOfApplication(applicant) {
+    async notifyAdminsOfApplication(applicant) {
         const db = PortalDB.get();
         const admins = db.users.filter(u => u.role === 'admin' || u.role === 'co-admin');
 
-        admins.forEach(admin => {
+        // 1. Send confirmation to the applicant
+        if (applicant.email) {
+            await this.send({
+                to: applicant.email,
+                recipientName: applicant.name,
+                subject: `Application Received: Regola Resident Membership`,
+                body: `Dear ${applicant.name},\n\nThank you for submitting your application to become a Regola resident member. The property administration has received your request and is currently reviewing it.\n\nYou will receive an email confirmation once your membership is approved.\n\nWarm regards,\nProperty Administration`,
+                type: 'application_received'
+            });
+        }
+
+        // 2. Send notification to all admins and co-admins
+        for (const admin of admins) {
             if (admin.email) {
-                this.send({
+                await this.send({
                     to: admin.email,
                     recipientName: admin.name,
                     subject: `New Regola Membership Application: ${applicant.name}`,
@@ -390,13 +426,13 @@ const PortalEmail = {
                     type: 'new_application'
                 });
             }
-        });
+        }
     },
 
     // Notify member of stay approval
-    notifyStayApproved(member, event) {
+    async notifyStayApproved(member, event) {
         if (!member || !member.email) return;
-        this.send({
+        await this.send({
             to: member.email,
             recipientName: member.name,
             subject: `Stay Request Confirmed: ${event.startDate} to ${event.endDate}`,
@@ -406,9 +442,9 @@ const PortalEmail = {
     },
 
     // Notify member of stay denial
-    notifyStayDenied(member, event, reason = '') {
+    async notifyStayDenied(member, event, reason = '') {
         if (!member || !member.email) return;
-        this.send({
+        await this.send({
             to: member.email,
             recipientName: member.name,
             subject: `Update on Stay Request: ${event.startDate} to ${event.endDate}`,
@@ -418,9 +454,9 @@ const PortalEmail = {
     },
 
     // Notify member of membership approval
-    notifyMemberApproved(member) {
+    async notifyMemberApproved(member) {
         if (!member || !member.email) return;
-        this.send({
+        await this.send({
             to: member.email,
             recipientName: member.name,
             subject: `Welcome to Regola: Your Membership has been Approved!`,
@@ -428,6 +464,19 @@ const PortalEmail = {
             type: 'member_approved'
         });
     }
+};
+
+// Global Test Helper
+window.testEmailJS = async function(toEmail = 'admin@lilypad.it') {
+    console.log('[EMAILJS] Sending test email to ' + toEmail + '...');
+    const res = await PortalEmail.send({
+        to: toEmail,
+        recipientName: 'Test Recipient',
+        subject: 'EmailJS Live Test from Regola Portal',
+        body: 'This is a live test email confirming that EmailJS dispatch is working correctly from the Regola Portal.',
+        type: 'test'
+    });
+    return res;
 };
 
 // Auth Service (Unified member login)
@@ -624,7 +673,7 @@ const PortalCalendar = {
         return { success: true, event: newEvent };
     },
 
-    approveRequest(eventId, adminNotes = '') {
+    async approveRequest(eventId, adminNotes = '') {
         const db = PortalDB.get();
         const evt = db.events.find(e => e.id === eventId);
         if (!evt) return { success: false, message: 'Request not found' };
@@ -636,13 +685,13 @@ const PortalCalendar = {
         // Find member and trigger email notification
         const member = db.users.find(u => u.id === evt.userId) || db.users.find(u => u.username === evt.username);
         if (member) {
-            PortalEmail.notifyStayApproved(member, evt);
+            await PortalEmail.notifyStayApproved(member, evt);
         }
 
         return { success: true, event: evt, member };
     },
 
-    denyRequest(eventId, adminNotes = '') {
+    async denyRequest(eventId, adminNotes = '') {
         const db = PortalDB.get();
         const evt = db.events.find(e => e.id === eventId);
         if (!evt) return { success: false, message: 'Request not found' };
@@ -654,7 +703,7 @@ const PortalCalendar = {
         // Find member and trigger email notification
         const member = db.users.find(u => u.id === evt.userId) || db.users.find(u => u.username === evt.username);
         if (member) {
-            PortalEmail.notifyStayDenied(member, evt, adminNotes);
+            await PortalEmail.notifyStayDenied(member, evt, adminNotes);
         }
 
         return { success: true, event: evt, member };
@@ -757,14 +806,14 @@ const PortalMembers = {
         db.pendingMembers.push(application);
         PortalDB.save(db);
 
-        // Notify Admin and Co-Admins
-        PortalEmail.notifyAdminsOfApplication(application);
+        // Notify Admin and Co-Admins & Applicant
+        await PortalEmail.notifyAdminsOfApplication(application);
 
         return { success: true, application };
     },
 
     // Approve pending application
-    approvePending(appId) {
+    async approvePending(appId) {
         const db = PortalDB.get();
         const idx = db.pendingMembers.findIndex(p => p.id === appId);
         if (idx === -1) return { success: false, message: 'Application not found' };
@@ -788,7 +837,7 @@ const PortalMembers = {
         PortalDB.save(db);
 
         // Send approval email to member
-        PortalEmail.notifyMemberApproved(newUser);
+        await PortalEmail.notifyMemberApproved(newUser);
 
         return { success: true, user: newUser };
     },
