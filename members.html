@@ -198,23 +198,6 @@
             color: #ffffff;
         }
 
-        .auth-help {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            text-align: left;
-        }
-
-        .auth-help code {
-            background: rgba(197, 160, 89, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
         /* Member Header Bar */
         .member-header-bar {
             display: flex;
@@ -278,11 +261,22 @@
         }
 
         .portal-tab-btn.active {
-            background: var(--accent-gold);
-            color: #0a141d;
-            border-color: var(--accent-gold);
+            background: var(--accent-gold) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-gold) !important;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .admin-tab-btn {
+            border-color: rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+        }
+
+        .admin-tab-btn.active {
+            background: var(--accent-gold) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-gold) !important;
         }
 
         .tab-content {
@@ -462,7 +456,7 @@
 
         .cal-day.selected {
             background: var(--accent-gold) !important;
-            color: #0a141d !important;
+            color: #ffffff !important;
             border-color: var(--accent-gold) !important;
             font-weight: bold;
         }
@@ -670,10 +664,99 @@
         .footer-nav a:hover {
             color: var(--accent-gold);
         }
+    
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 500px;
+            background: rgba(10, 20, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 3000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .cookie-banner.visible { bottom: 40px; }
+        .cookie-banner p {
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
+        }
+        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+        .cookie-btn {
+            background: transparent;
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            padding: 10px 30px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        /* Info Panel Contrast & Watermark Fix */
+        .info-panel.visible {
+            background-color: #0a141d !important;
+            color: #ffffff !important;
+            padding: 60px 40px !important;
+            margin-left: -40px !important;
+            margin-right: -40px !important;
+            border-radius: 0 !important;
+            border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+            isolation: isolate !important;
+        }
+        .info-panel.visible::before {
+            opacity: 0.08 !important;
+            z-index: -1 !important;
+        }
+        .info-panel.visible h1, .info-panel.visible h2, .info-panel.visible h3, 
+        .info-panel.visible p, .info-panel.visible li, .info-panel.visible span,
+        .info-panel.visible .feature-card h3, .info-panel.visible .feature-card p,
+        .info-panel.visible .form-title {
+            color: #ffffff !important;
+        }
+        .info-panel.visible .feature-card {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(197, 160, 89, 0.2) !important;
+        }
+        .info-panel.visible input[type="email"] {
+            border-bottom-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .info-panel.visible .btn-submit {
+            background: #c5a059 !important;
+            color: #0a141d !important;
+        }
+
     </style>
 </head>
 
 <body>
+
+    <div id="cookie-consent" class="cookie-banner">
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <div class="cookie-actions">
+            <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
+            <button onclick="declineCookies()" class="cookie-btn">Decline</button>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="branding-header">
@@ -701,13 +784,6 @@
                 </div>
                 <button type="submit" class="btn-primary">Sign In</button>
             </form>
-
-            <div class="auth-help">
-                <p><strong>Demo Accounts:</strong></p>
-                <p>Primary Admin: <code>admin</code> / <code>password</code></p>
-                <p>Co-Admin: <code>elena</code> / <code>password</code></p>
-                <p>Members: <code>marco</code> / <code>password</code> &nbsp;|&nbsp; <code>sophie</code> / <code>password</code></p>
-            </div>
         </div>
 
         <!-- Portal Dashboard (Shown if logged in) -->
@@ -731,7 +807,7 @@
                 <button class="portal-tab-btn" onclick="switchTab('guestbook')">✍️ Guest Book</button>
                 <button class="portal-tab-btn" onclick="switchTab('profile')">👤 Profile & Security</button>
                 <!-- Admin-Only Tab Button (Strictly hidden for normal members) -->
-                <button id="adminTabBtn" class="portal-tab-btn" style="display: none; border-color: rgba(197, 160, 89, 0.5); color: var(--accent-gold);" onclick="switchTab('admin')">⚙️ Administration</button>
+                <button id="adminTabBtn" class="portal-tab-btn admin-tab-btn" style="display: none;" onclick="switchTab('admin')">⚙️ Administration</button>
             </div>
 
             <!-- TAB 1: CALENDAR & REQUESTS -->
@@ -967,9 +1043,12 @@
     <script src="portal.js"></script>
     <script>
         let currentMonthIdx = 0; // 0 = Sept 2026
+        let adminBlockMonthIdx = 0;
         const months = PortalCalendar.getMonths();
         let selectedStart = null;
         let selectedEnd = null;
+        let adminBlockStart = null;
+        let adminBlockEnd = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             initAuth();
@@ -1133,19 +1212,13 @@
                 selectedEnd = null;
                 document.getElementById('reqStartDate').value = dateStr;
                 document.getElementById('reqEndDate').value = '';
-                const blockStartInput = document.getElementById('adminBlockStart');
-                if (blockStartInput) blockStartInput.value = dateStr;
             } else if (selectedStart && !selectedEnd) {
                 if (dateStr < selectedStart) {
                     selectedStart = dateStr;
                     document.getElementById('reqStartDate').value = dateStr;
-                    const blockStartInput = document.getElementById('adminBlockStart');
-                    if (blockStartInput) blockStartInput.value = dateStr;
                 } else {
                     selectedEnd = dateStr;
                     document.getElementById('reqEndDate').value = dateStr;
-                    const blockEndInput = document.getElementById('adminBlockEnd');
-                    if (blockEndInput) blockEndInput.value = dateStr;
                 }
             }
             renderCalendar();
@@ -1208,7 +1281,6 @@
                 if (statusObj.status === 'available' || statusObj.status === 'pending') {
                     dayEl.onclick = () => handleDateClick(dateStr);
                 } else if (statusObj.status === 'reserved') {
-                    // Only admins see reservation name; normal members simply see "Reserved"
                     dayEl.title = isAdmin && statusObj.event ? `Reserved: ${statusObj.event.guestName}` : 'Reserved';
                 }
 
@@ -1408,35 +1480,58 @@
                     <div id="adminPendingRequestsQueue"></div>
                 </div>
 
-                <!-- Unilateral Block Tool -->
+                <!-- Unilateral Date Block with Interactive Calendar Date Selection -->
                 <div class="admin-card">
                     <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">🔒 Unilateral Date Block & Reservation Tool</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
-                        Select dates directly on the calendar or enter dates below to reserve or block property dates.
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                        Select check-in and check-out dates directly on the calendar below or enter dates to reserve or block property dates.
                     </p>
-                    <form id="adminBlockForm" onsubmit="handleAdminUnilateralBlock(event)">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Check-In Date</label>
-                                <input type="date" id="adminBlockStart" class="form-control" min="2026-09-01" max="2028-08-31" required>
+
+                    <div class="calendar-layout">
+                        <!-- Admin Block Calendar Visualizer -->
+                        <div class="calendar-card" style="padding: 20px; margin-bottom: 0;">
+                            <div class="calendar-header">
+                                <h3 class="calendar-title" id="adminBlockCalTitle" style="font-size: 1.3rem;">September 2026</h3>
+                                <div class="month-nav">
+                                    <button class="nav-arrow" type="button" onclick="prevAdminBlockMonth()" title="Previous Month">‹</button>
+                                    <select id="adminBlockMonthSelect" class="month-select" onchange="jumpToAdminBlockMonth(this.value)">
+                                        <!-- Populated by JS -->
+                                    </select>
+                                    <button class="nav-arrow" type="button" onclick="nextAdminBlockMonth()" title="Next Month">›</button>
+                                </div>
                             </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Check-Out Date</label>
-                                <input type="date" id="adminBlockEnd" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                            <div class="calendar-legend" style="margin-bottom: 12px; font-size: 0.72rem;">
+                                <div class="legend-item"><span class="legend-dot available"></span> Available (Click)</div>
+                                <div class="legend-item"><span class="legend-dot pending"></span> Pending</div>
+                                <div class="legend-item"><span class="legend-dot reserved"></span> Reserved</div>
+                                <div class="legend-item"><span class="legend-dot selected"></span> Selected Block</div>
                             </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Reservation Label</label>
-                                <input type="text" id="adminBlockGuest" class="form-control" placeholder="e.g. Owner Stay, Maintenance" required>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label>Notes</label>
-                                <input type="text" id="adminBlockReason" class="form-control" placeholder="Reason for block...">
-                            </div>
-                            <div>
-                                <button type="submit" class="btn-primary" style="margin-top: 0; padding: 12px 20px;">Block Dates</button>
-                            </div>
+                            <div class="cal-grid" id="adminBlockCalGrid"></div>
                         </div>
-                    </form>
+
+                        <!-- Admin Block Input Form -->
+                        <div class="widget-card" style="padding: 20px; margin-bottom: 0;">
+                            <form id="adminBlockForm" onsubmit="handleAdminUnilateralBlock(event)">
+                                <div class="form-group">
+                                    <label>Check-In Date</label>
+                                    <input type="date" id="adminBlockStart" class="form-control" min="2026-09-01" max="2028-08-31" required onchange="onAdminBlockInputChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Check-Out Date</label>
+                                    <input type="date" id="adminBlockEnd" class="form-control" min="2026-09-01" max="2028-08-31" required onchange="onAdminBlockInputChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Reservation Label / Guest</label>
+                                    <input type="text" id="adminBlockGuest" class="form-control" placeholder="e.g. Owner Stay, Maintenance" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Notes / Reason</label>
+                                    <textarea id="adminBlockReason" class="form-control" rows="2" placeholder="Reason for block..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">Block Dates as Reserved</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Pending Member Applications -->
@@ -1560,10 +1655,145 @@
                 </div>
             `;
 
+            populateAdminBlockMonthDropdown();
+            renderAdminBlockCalendar();
             renderAdminPendingStays();
             renderAdminPendingApps();
             renderAdminMembersTable();
             renderAdminReservationsTable();
+        }
+
+        function populateAdminBlockMonthDropdown() {
+            const select = document.getElementById('adminBlockMonthSelect');
+            if (!select) return;
+            select.innerHTML = '';
+            months.forEach((m, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.innerText = m.name;
+                select.appendChild(opt);
+            });
+            select.value = adminBlockMonthIdx;
+        }
+
+        function jumpToAdminBlockMonth(idx) {
+            adminBlockMonthIdx = parseInt(idx, 10);
+            renderAdminBlockCalendar();
+        }
+
+        function prevAdminBlockMonth() {
+            if (adminBlockMonthIdx > 0) {
+                adminBlockMonthIdx--;
+                const sel = document.getElementById('adminBlockMonthSelect');
+                if (sel) sel.value = adminBlockMonthIdx;
+                renderAdminBlockCalendar();
+            }
+        }
+
+        function nextAdminBlockMonth() {
+            if (adminBlockMonthIdx < months.length - 1) {
+                adminBlockMonthIdx++;
+                const sel = document.getElementById('adminBlockMonthSelect');
+                if (sel) sel.value = adminBlockMonthIdx;
+                renderAdminBlockCalendar();
+            }
+        }
+
+        function handleAdminBlockDateClick(dateStr) {
+            if (!adminBlockStart || (adminBlockStart && adminBlockEnd)) {
+                adminBlockStart = dateStr;
+                adminBlockEnd = null;
+                const s = document.getElementById('adminBlockStart');
+                const e = document.getElementById('adminBlockEnd');
+                if (s) s.value = dateStr;
+                if (e) e.value = '';
+            } else if (adminBlockStart && !adminBlockEnd) {
+                if (dateStr < adminBlockStart) {
+                    adminBlockStart = dateStr;
+                    const s = document.getElementById('adminBlockStart');
+                    if (s) s.value = dateStr;
+                } else {
+                    adminBlockEnd = dateStr;
+                    const e = document.getElementById('adminBlockEnd');
+                    if (e) e.value = dateStr;
+                }
+            }
+            renderAdminBlockCalendar();
+        }
+
+        function onAdminBlockInputChange() {
+            adminBlockStart = document.getElementById('adminBlockStart').value;
+            adminBlockEnd = document.getElementById('adminBlockEnd').value;
+            renderAdminBlockCalendar();
+        }
+
+        function renderAdminBlockCalendar() {
+            const m = months[adminBlockMonthIdx];
+            const title = document.getElementById('adminBlockCalTitle');
+            const select = document.getElementById('adminBlockMonthSelect');
+            const grid = document.getElementById('adminBlockCalGrid');
+
+            if (!grid || !title) return;
+            title.innerText = m.name;
+            if (select) select.value = adminBlockMonthIdx;
+
+            grid.innerHTML = '';
+
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayNames.forEach(d => {
+                const h = document.createElement('div');
+                h.className = 'cal-day-header';
+                h.innerText = d;
+                grid.appendChild(h);
+            });
+
+            const firstDay = new Date(m.year, m.month, 1).getDay();
+            const daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'cal-day empty';
+                grid.appendChild(empty);
+            }
+
+            const db = PortalDB.get();
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${m.year}-${String(m.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEl = document.createElement('div');
+                dayEl.className = 'cal-day';
+                dayEl.innerText = day;
+
+                const statusObj = PortalCalendar.getDateStatus(dateStr, db);
+                dayEl.classList.add(statusObj.status);
+
+                if (adminBlockStart && adminBlockEnd) {
+                    if (dateStr === adminBlockStart || dateStr === adminBlockEnd) {
+                        dayEl.classList.add('selected');
+                    } else if (dateStr > adminBlockStart && dateStr < adminBlockEnd) {
+                        dayEl.classList.add('in-range');
+                    }
+                } else if (adminBlockStart && dateStr === adminBlockStart) {
+                    dayEl.classList.add('selected');
+                }
+
+                if (statusObj.status === 'available' || statusObj.status === 'pending') {
+                    dayEl.onclick = () => handleAdminBlockDateClick(dateStr);
+                } else if (statusObj.status === 'reserved') {
+                    dayEl.title = `Reserved: ${statusObj.event ? statusObj.event.guestName : ''} - Click to cancel`;
+                    dayEl.onclick = () => {
+                        if (confirm(`Cancel reservation block for "${statusObj.event.guestName}" (${statusObj.event.startDate} to ${statusObj.event.endDate})?`)) {
+                            PortalCalendar.cancelEvent(statusObj.event.id);
+                            showToast('Reservation removed');
+                            renderCalendar();
+                            renderAdminBlockCalendar();
+                            renderAdminReservationsTable();
+                        }
+                    };
+                }
+
+                grid.appendChild(dayEl);
+            }
         }
 
         function renderAdminPendingStays() {
@@ -1613,7 +1843,9 @@
                 showToast(`Stay approved! Confirmation email dispatched to ${res.member ? res.member.email : 'member'}`);
                 renderCalendar();
                 renderMyRequests();
-                renderAdminSection();
+                renderAdminBlockCalendar();
+                renderAdminPendingStays();
+                renderAdminReservationsTable();
             } else {
                 showToast(res.message);
             }
@@ -1627,7 +1859,9 @@
                     showToast(`Request denied. Notification email dispatched to ${res.member ? res.member.email : 'member'}`);
                     renderCalendar();
                     renderMyRequests();
-                    renderAdminSection();
+                    renderAdminBlockCalendar();
+                    renderAdminPendingStays();
+                    renderAdminReservationsTable();
                 } else {
                     showToast(res.message);
                 }
@@ -1672,7 +1906,8 @@
             const res = PortalMembers.approvePending(appId);
             if (res.success) {
                 showToast(`Member @${res.user.username} approved! Welcome email dispatched to ${res.user.email}`);
-                renderAdminSection();
+                renderAdminPendingApps();
+                renderAdminMembersTable();
             } else {
                 showToast(res.message);
             }
@@ -1682,7 +1917,7 @@
             if (confirm('Decline and remove this membership application?')) {
                 PortalMembers.declinePending(appId);
                 showToast('Application declined.');
-                renderAdminSection();
+                renderAdminPendingApps();
             }
         }
 
@@ -1697,8 +1932,11 @@
             if (res.success) {
                 showToast('Dates successfully blocked as Reserved!');
                 document.getElementById('adminBlockForm').reset();
+                adminBlockStart = null;
+                adminBlockEnd = null;
                 renderCalendar();
-                renderAdminSection();
+                renderAdminBlockCalendar();
+                renderAdminReservationsTable();
             } else {
                 showToast(res.message);
             }
@@ -1883,7 +2121,8 @@
                 PortalCalendar.cancelEvent(id);
                 showToast('Reservation removed');
                 renderCalendar();
-                renderAdminSection();
+                renderAdminBlockCalendar();
+                renderAdminReservationsTable();
             }
         }
 
