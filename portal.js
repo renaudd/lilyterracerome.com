@@ -308,7 +308,7 @@ const PortalEmail = {
             to: member.email,
             recipientName: member.name,
             subject: `Stay Request Confirmed: ${event.startDate} to ${event.endDate}`,
-            body: `Dear ${member.name},\n\nWe are delighted to confirm that your stay request from ${event.startDate} to ${event.endDate} (${event.guestCount} guests) has been APPROVED.\n\nYour dates are now officially reserved on the calendar. You can review apartment access details and the resident guide in the Member Portal.\n\nWarm regards,\nProperty Administration`,
+            body: `Dear ${member.name},\n\nWe are delighted to confirm that your stay request from ${event.startDate} to ${event.endDate} (${event.guestCount} guests) has been APPROVED.\n\nYour dates are now officially reserved on the calendar. You can review apartment access details and the apartment guide in the Member Portal.\n\nWarm regards,\nProperty Administration`,
             type: 'stay_approval'
         });
     },

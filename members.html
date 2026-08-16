@@ -665,6 +665,7 @@
             color: var(--accent-gold);
         }
     
+        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -764,23 +765,23 @@
                 <img src="flower-logo.png" alt="Lily Terrace Rome" class="branding-logo">
             </a>
         </div>
-        <h1>Regola Resident Portal</h1>
-        <p class="portal-subtitle">Private residence access, reservation calendar & resident community</p>
+        <h1>Regola Guest Portal</h1>
+        <p class="portal-subtitle">Reservation calendar & house guide</p>
 
         <!-- Auth Gate (Shown if not logged in) -->
         <div id="authGate" class="auth-card">
             <h2>Member Sign In</h2>
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">
-                Enter your resident username and password to access the private calendar and apartment guides.
+                Enter your username and password to access the private calendar and apartment guides.
             </p>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="loginUsername" class="form-control" placeholder="e.g. marco" required>
+                    <input type="text" id="loginUsername" class="form-control" placeholder="e.g. marco" autocapitalize="none" autocorrect="off" spellcheck="false" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" autocapitalize="none" autocorrect="off" spellcheck="false" required>
                 </div>
                 <button type="submit" class="btn-primary">Sign In</button>
             </form>
@@ -798,7 +799,8 @@
             <div class="member-header-bar">
                 <div class="member-welcome">
                     Welcome back, <strong id="memberNameDisplay">Member</strong> 
-                    <span id="memberRoleBadge" class="status-badge" style="margin-left: 8px; background: rgba(197, 160, 89, 0.2); color: var(--accent-gold);">Resident</span>
+                    <span id="memberRoleBadge" class="status-badge"
+                        style="margin-left: 8px; background: rgba(197, 160, 89, 0.2); color: var(--accent-gold);">Regola</span>
                 </div>
                 <div class="member-actions">
                     <button onclick="handleLogout()" class="btn-sm">Log Out</button>
@@ -893,9 +895,11 @@
             <!-- TAB 2: APARTMENT GUIDE -->
             <div id="tab-guide" class="tab-content">
                 <div class="guide-card">
-                    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">Resident Apartment Guide</h2>
+                    <h2
+                        style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">
+                        Apartment Guide</h2>
                     <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 35px auto;">
-                        Essential operating instructions, building protocols, and resident amenities for your stay at Lily Terrace.
+                        Essential operating instructions, building protocols, and guest amenities for your stay at Lily Terrace.
                     </p>
 
                     <div class="guide-grid">
@@ -945,7 +949,9 @@
             <!-- TAB 3: GUEST BOOK -->
             <div id="tab-guestbook" class="tab-content">
                 <div class="guestbook-card">
-                    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">Resident Guest Book</h2>
+                    <h2
+                        style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">
+                        Guest Book</h2>
                     <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px auto;">
                         Share your impressions, favorite neighborhood discoveries, and reflections with fellow Regola members.
                     </p>
@@ -1189,7 +1195,7 @@
             <div style="background: #0d1b27; border-radius: 20px; border: 1px solid var(--accent-gold); max-width: 480px; width: 100%; padding: 35px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); max-height: 90vh; overflow-y: auto; text-align: left;">
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin: 0 0 10px 0; text-align: center;">Apply for Membership</h3>
                 <p style="font-size: 0.88rem; color: var(--text-muted); text-align: center; margin-bottom: 25px;">
-                    Submit your resident membership application. All passwords are cryptographically protected.
+                    Submit your membership application. All passwords are cryptographically protected.
                 </p>
                 <form id="applyForm" onsubmit="handleApplySubmit(event)">
                     <div class="form-group">
@@ -1198,11 +1204,11 @@
                     </div>
                     <div class="form-group">
                         <label>Desired Username</label>
-                        <input type="text" id="applyUsername" required class="form-control" placeholder="e.g. matteo">
+                        <input type="text" id="applyUsername" required class="form-control" placeholder="e.g. matteo" autocapitalize="none" autocorrect="off" spellcheck="false">
                     </div>
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" id="applyEmail" required class="form-control" placeholder="matteo@example.com">
+                        <input type="email" id="applyEmail" required class="form-control" placeholder="matteo@example.com" autocapitalize="none" autocorrect="off" spellcheck="false">
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
@@ -1210,7 +1216,7 @@
                     </div>
                     <div class="form-group">
                         <label>Create Password</label>
-                        <input type="password" id="applyPassword" required minlength="8" class="form-control" placeholder="Minimum 8 characters">
+                        <input type="password" id="applyPassword" required minlength="8" class="form-control" placeholder="Minimum 8 characters" autocapitalize="none" autocorrect="off" spellcheck="false">
                     </div>
                     <div class="form-group">
                         <label>Introduction / Referral Note</label>
@@ -1283,7 +1289,7 @@
                     renderAdminSection();
                 } else {
                     // Normal Member: strictly hide admin tab button
-                    roleBadge.innerText = 'Resident';
+                    roleBadge.innerText = 'Regola';
                     roleBadge.className = 'status-badge';
                     roleBadge.style.background = 'rgba(197, 160, 89, 0.2)';
                     roleBadge.style.color = 'var(--accent-gold)';
@@ -1662,7 +1668,7 @@
             const res = await PortalMembers.apply(formData);
             if (res.success) {
                 showToast('Application submitted! Admin has received your request.');
-                alert('Thank you! Your application for resident membership has been submitted. The administration has received your request and will review it shortly.');
+                alert('Thank you! Your application for membership has been submitted. The administration has received your request and will review it shortly.');
                 closeApplyModal();
             } else {
                 showToast(res.message || 'Application failed.');
