@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="flower-logo.png">
     <style>
@@ -50,32 +50,27 @@
         }
 
         .container {
-            max-width: 1050px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 80px 25px 120px 25px;
+            padding: 70px 25px 120px 25px;
         }
 
         /* Branding Header */
         .branding-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .branding-logo {
-            width: 90px;
+            width: 85px;
             height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .branding-logo:hover {
-            transform: scale(1.05);
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
             text-align: center;
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             color: var(--accent-gold);
         }
 
@@ -86,7 +81,7 @@
             margin-bottom: 40px;
         }
 
-        /* Auth Gate Screen */
+        /* Auth Gate Card */
         .auth-card {
             max-width: 440px;
             margin: 40px auto;
@@ -94,22 +89,16 @@
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px 35px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px);
             text-align: center;
         }
 
-        .auth-title {
+        .auth-card h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
+            margin-top: 0;
             color: var(--accent-gold);
-            margin-bottom: 10px;
-        }
-
-        .auth-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
         }
 
         .form-group {
@@ -169,53 +158,6 @@
             box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
         }
 
-        .auth-help {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        .auth-help code {
-            background: rgba(197, 160, 89, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            color: var(--accent-gold);
-        }
-
-        /* Member Nav Bar */
-        .member-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 15px 25px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .member-welcome {
-            font-size: 1rem;
-            color: var(--text-main);
-        }
-
-        .member-welcome strong {
-            color: var(--accent-gold);
-        }
-
-        .member-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
         .btn-sm {
             padding: 8px 16px;
             border-radius: 8px;
@@ -236,10 +178,72 @@
             color: var(--accent-gold);
         }
 
-        .btn-sm.admin-btn {
+        .btn-action-approve {
+            background: #28a745;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-action-approve:hover {
+            background: #218838;
+            color: #ffffff;
+        }
+
+        .btn-action-deny {
+            background: #dc3545;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-action-deny:hover {
+            background: #c82333;
+            color: #ffffff;
+        }
+
+        .auth-help {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: left;
+        }
+
+        .auth-help code {
             background: rgba(197, 160, 89, 0.2);
-            border-color: var(--accent-gold);
+            padding: 2px 6px;
+            border-radius: 4px;
             color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Member Header Bar */
+        .member-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .member-welcome {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .member-welcome strong {
+            color: var(--accent-gold);
+        }
+
+        .member-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
         /* Navigation Tabs */
@@ -256,10 +260,10 @@
         .portal-tab-btn {
             background: transparent;
             border: 1px solid transparent;
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 30px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 500;
@@ -295,12 +299,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Calendar & Booking Layout */
+        /* Calendar Layout */
         .calendar-layout {
             display: grid;
-            grid-template-columns: 1fr 340px;
+            grid-template-columns: 1.5fr 1fr;
             gap: 30px;
-            align-items: start;
+            margin-bottom: 40px;
         }
 
         @media (max-width: 900px) {
@@ -309,90 +313,90 @@
             }
         }
 
-        .calendar-card {
+        .calendar-card,
+        .widget-card,
+        .guide-card,
+        .guestbook-card,
+        .admin-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(15px);
+            margin-bottom: 30px;
         }
 
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .calendar-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color: var(--accent-gold);
             margin: 0;
+            color: var(--accent-gold);
         }
 
         .month-nav {
             display: flex;
+            gap: 8px;
             align-items: center;
-            gap: 10px;
-        }
-
-        .month-select {
-            padding: 8px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: rgba(10, 20, 29, 0.9);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            color: #ffffff;
-            cursor: pointer;
         }
 
         .nav-arrow {
-            background: rgba(10, 20, 29, 0.9);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
-            color: var(--accent-gold);
-            width: 36px;
-            height: 36px;
             border-radius: 50%;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-main);
             transition: all 0.2s ease;
-            font-weight: bold;
         }
 
         .nav-arrow:hover {
             border-color: var(--accent-gold);
-            background: rgba(197, 160, 89, 0.2);
+            color: var(--accent-gold);
+        }
+
+        .month-select {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: rgba(10, 20, 29, 0.9);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            color: #ffffff;
         }
 
         /* Calendar Legend */
         .calendar-legend {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 20px;
-            padding: 12px 18px;
-            background: rgba(197, 160, 89, 0.08);
-            border-radius: 10px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             flex-wrap: wrap;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 6px;
         }
 
         .legend-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
         }
 
@@ -427,19 +431,18 @@
             border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            user-select: none;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(197, 160, 89, 0.15);
             color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
-        .cal-day:hover:not(.out-of-range):not(.reserved) {
+        .cal-day.available:hover {
             border-color: var(--accent-gold);
-            transform: scale(1.05);
-            z-index: 2;
+            background: rgba(197, 160, 89, 0.15);
+            transform: scale(1.04);
         }
 
         .cal-day.pending {
@@ -449,29 +452,18 @@
             font-weight: 600;
         }
 
-        .cal-day.pending::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #fbbf24;
-        }
-
         .cal-day.reserved {
             background: rgba(220, 38, 38, 0.2);
             border-color: rgba(220, 38, 38, 0.4);
             color: #f87171;
-            cursor: not-allowed;
             font-weight: 600;
+            cursor: not-allowed;
         }
 
         .cal-day.selected {
             background: var(--accent-gold) !important;
             color: #0a141d !important;
             border-color: var(--accent-gold) !important;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
             font-weight: bold;
         }
 
@@ -483,59 +475,23 @@
 
         .cal-day.out-of-range {
             opacity: 0.2;
-            cursor: not-allowed;
             background: transparent;
             border-color: transparent;
+            cursor: not-allowed;
         }
 
         .cal-day.empty {
-            cursor: default;
             background: transparent;
             border: none;
+            cursor: default;
         }
 
-        /* Request Stay Widget */
-        .widget-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-        }
-
-        .widget-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--accent-gold);
-            margin: 0 0 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        /* Requests List Panel */
-        .my-requests-section {
-            margin-top: 40px;
-        }
-
-        .request-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
+        /* Status Badges */
         .status-badge {
             display: inline-block;
             padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -554,126 +510,116 @@
         }
 
         .status-badge.denied {
-            background: rgba(107, 114, 128, 0.25);
-            color: #9ca3af;
-            border: 1px solid rgba(107, 114, 128, 0.4);
+            background: rgba(220, 38, 38, 0.25);
+            color: #f87171;
+            border: 1px solid rgba(220, 38, 38, 0.4);
         }
 
-        /* Apartment Guide Styling */
+        .status-badge.admin-primary {
+            background: rgba(220, 38, 38, 0.25);
+            color: #f87171;
+            border: 1px solid rgba(220, 38, 38, 0.4);
+        }
+
+        .status-badge.co-admin {
+            background: rgba(197, 160, 89, 0.25);
+            color: var(--accent-gold);
+            border: 1px solid rgba(197, 160, 89, 0.5);
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background: rgba(197, 160, 89, 0.12);
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 14px 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .admin-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .admin-table tr:hover td {
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        /* Guest Book Wall */
+        .guestbook-wall {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .guestbook-entry {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 22px 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .guestbook-entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .guestbook-author {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .guestbook-date {
+            color: var(--text-muted);
+        }
+
+        .guestbook-text {
+            color: var(--text-main);
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Guide Sections */
         .guide-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .guide-box {
-            background: var(--card-bg);
+        .guide-item {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
         }
 
-        .guide-box-title {
+        .guide-item h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             color: var(--accent-gold);
-            margin: 0 0 15px 0;
+            margin: 0 0 12px 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .guide-box p {
-            margin: 0 0 10px 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        .guide-box ul {
-            margin: 0;
-            padding-left: 20px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .guide-box li {
-            margin-bottom: 6px;
-        }
-
-        .alert-box {
-            background: rgba(220, 38, 38, 0.15);
-            border-left: 3px solid #dc2626;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-top: 12px;
-            font-size: 0.88rem;
-            color: #ffffff;
-        }
-
-        /* Guest Book Styling */
-        .guestbook-layout {
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 30px;
-            align-items: start;
-        }
-
-        @media (max-width: 850px) {
-            .guestbook-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .comment-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease;
-        }
-
-        .comment-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .comment-author {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #ffffff;
-        }
-
-        .comment-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .comment-body {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-
-        /* Profile & Security Layout */
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: 8px;
         }
 
         /* Toast Notifications */
@@ -687,12 +633,12 @@
             border-radius: 12px;
             border: 1px solid var(--accent-gold);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 5000;
+            z-index: 7000;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.9rem;
-            max-width: 350px;
+            max-width: 380px;
         }
 
         .toast.visible {
@@ -824,18 +770,19 @@
                 <img src="flower-logo.png" alt="Lily Terrace Rome" class="branding-logo">
             </a>
         </div>
-        <h1>Member Portal</h1>
-        <p class="portal-subtitle">Exclusive resident access, calendar requests, apartment guide & security</p>
+        <h1>Regola Resident Portal</h1>
+        <p class="portal-subtitle">Private residence access, reservation calendar & resident community</p>
 
-        <!-- Auth Gate (Shown if logged out) -->
-        <div id="authGate" class="auth-card" style="display: none;">
-            <div class="auth-title">Member Sign In</div>
-            <p class="auth-desc">Please enter your credentials to access the resident portal or administrative dashboard.</p>
-            
+        <!-- Auth Gate (Shown if not logged in) -->
+        <div id="authGate" class="auth-card">
+            <h2>Member Sign In</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">
+                Enter your resident username and password to access the private calendar and apartment guides.
+            </p>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="loginUsername" class="form-control" placeholder="e.g. elena" required autofocus>
+                    <input type="text" id="loginUsername" class="form-control" placeholder="e.g. marco" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -862,9 +809,6 @@
                     <span id="memberRoleBadge" class="status-badge" style="margin-left: 8px; background: rgba(197, 160, 89, 0.2); color: var(--accent-gold);">Resident</span>
                 </div>
                 <div class="member-actions">
-                    <span id="adminPortalLinkContainer" style="display: none;">
-                        <a href="admin.html" class="btn-sm admin-btn">Admin Headquarters ⚙️</a>
-                    </span>
                     <button onclick="handleLogout()" class="btn-sm">Log Out</button>
                 </div>
             </div>
@@ -875,6 +819,8 @@
                 <button class="portal-tab-btn" onclick="switchTab('guide')">📖 Apartment Guide</button>
                 <button class="portal-tab-btn" onclick="switchTab('guestbook')">✍️ Guest Book</button>
                 <button class="portal-tab-btn" onclick="switchTab('profile')">👤 Profile & Security</button>
+                <!-- Admin-Only Tab (Shown dynamically for Admin and Co-Admin) -->
+                <button id="adminTabBtn" class="portal-tab-btn" style="display: none; border-color: rgba(197, 160, 89, 0.5); color: var(--accent-gold);" onclick="switchTab('admin')">⚙️ Administration</button>
             </div>
 
             <!-- TAB 1: CALENDAR & REQUESTS -->
@@ -910,9 +856,9 @@
 
                     <!-- Right: Request Stay Widget -->
                     <div class="widget-card">
-                        <h3 class="widget-title">Request a Stay</h3>
+                        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 0; color: var(--accent-gold);">Request a Stay</h2>
                         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-                            Click arrival and departure dates on the calendar, or pick your check-in and check-out dates below (Sept 2026 – Aug 2028).
+                            Select check-in and check-out dates directly on the calendar or enter them below. Your request will immediately appear as pending.
                         </p>
 
                         <form id="stayRequestForm" onsubmit="handleStayRequest(event)">
@@ -926,7 +872,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Number of Guests</label>
-                                <select id="reqGuests" class="form-control">
+                                <select id="reqGuestCount" class="form-control">
                                     <option value="1">1 Guest</option>
                                     <option value="2" selected>2 Guests</option>
                                     <option value="3">3 Guests</option>
@@ -934,19 +880,18 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Trip Notes / Special Requests</label>
-                                <textarea id="reqNotes" class="form-control" rows="3" placeholder="e.g. Early arrival, anniversary celebration..."></textarea>
+                                <label>Notes / Stay Details</label>
+                                <textarea id="reqNotes" class="form-control" rows="3" placeholder="Purpose of visit, special arrangements..."></textarea>
                             </div>
                             <button type="submit" class="btn-primary">Submit Stay Request</button>
                         </form>
                     </div>
+
                 </div>
 
-                <!-- My Requests List -->
-                <div class="my-requests-section">
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 20px;">
-                        My Requests & Reservations
-                    </h3>
+                <!-- My Requests & Upcoming Stays -->
+                <div class="widget-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent-gold); margin-top: 0;">My Stay Requests & Reservations</h3>
                     <div id="myRequestsList">
                         <!-- Populated by JS -->
                     </div>
@@ -955,103 +900,94 @@
 
             <!-- TAB 2: APARTMENT GUIDE -->
             <div id="tab-guide" class="tab-content">
-                <div class="guide-grid">
-                    
-                    <div class="guide-box">
-                        <div class="guide-box-title">🔑 Keys & Access</div>
-                        <p><strong>Street Portal:</strong> Use the brass key to unlock the main green street door at Vicolo del Giglio 13.</p>
-                        <p><strong>Pad Entry:</strong> The apartment is on the third piano (4th floor). Use the upper deadbolt key followed by the handle lock.</p>
-                        <p><strong>Checking Out:</strong> Leave both sets of keys on the dining room table and pull the door firmly shut behind you.</p>
-                    </div>
+                <div class="guide-card">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">Resident Apartment Guide</h2>
+                    <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 35px auto;">
+                        Essential operating instructions, building protocols, and resident amenities for your stay at Lily Terrace.
+                    </p>
 
-                    <div class="guide-box">
-                        <div class="guide-box-title">❄️ Climate Control & A/C</div>
-                        <p>Central A/C units are located in the living room, master bedroom, and kitchen. Remotes are mounted near each doorway.</p>
-                        <p>To cool the sleeping nook, keep the living room A/C on and switch on the nook circulating fan.</p>
-                        <p>The kitchen also features a ceiling fan with its own wall remote.</p>
-                    </div>
+                    <div class="guide-grid">
+                        <div class="guide-item">
+                            <h3>📶 High-Speed Wi-Fi</h3>
+                            <p><strong>Network:</strong> <code>LilyTerrace_Ultra</code></p>
+                            <p><strong>Password:</strong> <code>ramongaya1956</code></p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Fiber optic connection covering all salon spaces and the upper terrace.</p>
+                        </div>
 
-                    <div class="guide-box">
-                        <div class="guide-box-title">🧺 Laundry & Care</div>
-                        <p><strong>In-Unit Washer:</strong> Located in the main bathroom. Best suited for small loads. Hang dry on the veranda clotheslines.</p>
-                        <p><strong>Laundromat Across the Alley:</strong> Full-size express washers and dryers (30-minute dry cycles). Open by 9:00 AM daily. Accepts cash and credit cards.</p>
-                    </div>
+                        <div class="guide-item">
+                            <h3>🔑 Key & Building Access</h3>
+                            <p><strong>Front Street Door:</strong> Brass key (turn clockwise twice).</p>
+                            <p><strong>Palazzo Piano:</strong> Third piano (4th American floor). Handle three flights of stairs.</p>
+                            <p><strong>Apartment Door:</strong> High-security deadbolt key.</p>
+                        </div>
 
-                    <div class="guide-box">
-                        <div class="guide-box-title">🌿 Terrace Rules</div>
-                        <ul>
-                            <li><strong>Occupancy:</strong> Maximum of 4 persons at all times.</li>
-                            <li><strong>Quiet Hours:</strong> No amplified music or loud socializing after 10:00 PM out of respect for neighbors.</li>
-                            <li><strong>Awning:</strong> Extend the canvas awning to roughly above the railing during sunny afternoons; retract fully before heavy winds or rain.</li>
-                        </ul>
-                    </div>
+                        <div class="guide-item">
+                            <h3>❄️ Climate & 6kW Power</h3>
+                            <p>Multi-zone heating and air conditioning controls throughout. The property is equipped with an upgraded <strong>6kW electrical system</strong>.</p>
+                        </div>
 
-                    <div class="guide-box">
-                        <div class="guide-box-title">🚿 Bathroom & Plumbing</div>
-                        <p>The water heater operates on a dedicated 6kW supply ensuring strong pressure and rapid reheating.</p>
-                        <div class="alert-box">
-                            <strong>Care Note:</strong> The knob controlling the overhead rainfall shower should be turned gently; pulling at an angle will detach the trim.
+                        <div class="guide-item">
+                            <h3>🌿 Private Terrace Etiquette</h3>
+                            <p>Enjoy morning espresso and evening aperitivi on the rooftop terrace. Please retract the retractable awning during heavy winds or upon departure.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3>♻️ Waste & Recycling</h3>
+                            <p>Separated collection per Rome regulations:</p>
+                            <ul style="font-size: 0.85rem; padding-left: 20px; color: var(--text-muted);">
+                                <li><strong>Organic (Umido):</strong> Brown bin under sink</li>
+                                <li><strong>Paper & Cardboard:</strong> Blue bag</li>
+                                <li><strong>Plastic & Metal:</strong> Yellow bin</li>
+                                <li><strong>Glass:</strong> Green street bin (Piazza della Quercia)</li>
+                            </ul>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3>🏛️ Heritage & Ramón Gaya</h3>
+                            <p>This residence was the creative sanctuary and home of legendary Spanish painter Ramón Gaya during his time in Rome. Please treat all historic materials and artwork with care.</p>
                         </div>
                     </div>
-
-                    <div class="guide-box">
-                        <div class="guide-box-title">📶 Wi-Fi & Support</div>
-                        <p><strong>Network:</strong> <code>LilyTerrace_5G</code></p>
-                        <p><strong>Password:</strong> <code>FarneseLily13</code></p>
-                        <p><strong>High-Speed Fiber:</strong> 1 Gbps ultra-fast connection for remote work and streaming.</p>
-                        <p style="margin-top: 10px;"><strong>Host Contact:</strong> +39 06 6880 1234 (WhatsApp & Emergency assistance)</p>
-                    </div>
-
                 </div>
             </div>
 
             <!-- TAB 3: GUEST BOOK -->
             <div id="tab-guestbook" class="tab-content">
-                <div class="guestbook-layout">
-                    
-                    <!-- Left: Comment Stream -->
-                    <div>
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold); margin-top: 0; margin-bottom: 20px;">
-                            Resident Chronicles & Memories
-                        </h3>
-                        <div id="guestbookStream">
-                            <!-- Populated by JS -->
+                <div class="guestbook-card">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin-top: 0; text-align: center;">Resident Guest Book</h2>
+                    <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px auto;">
+                        Share your impressions, favorite neighborhood discoveries, and reflections with fellow Regola members.
+                    </p>
+
+                    <!-- Add Comment Form -->
+                    <form id="guestbookForm" onsubmit="handleGuestbookSubmit(event)" style="max-width: 650px; margin: 0 auto 40px auto; background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 15px; border: 1px solid var(--border-color);">
+                        <div class="form-group">
+                            <label>Leave a Reflection</label>
+                            <textarea id="guestbookMessage" class="form-control" rows="3" placeholder="Share a favorite memory or recommendation..." required></textarea>
                         </div>
-                    </div>
+                        <button type="submit" class="btn-primary" style="width: auto; padding: 10px 24px;">Post to Guest Book</button>
+                    </form>
 
-                    <!-- Right: Post a Note -->
-                    <div class="widget-card">
-                        <h3 class="widget-title">Sign the Guest Book</h3>
-                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px;">
-                            Leave a tip, favorite local finding, or note for future residents and the host.
-                        </p>
-                        <form id="guestbookForm" onsubmit="handleGuestbookPost(event)">
-                            <div class="form-group">
-                                <label>Your Message</label>
-                                <textarea id="gbMessage" class="form-control" rows="5" placeholder="Share your favorite memory or dining recommendation..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary">Post to Guest Book</button>
-                        </form>
+                    <!-- Comments Wall -->
+                    <div class="guestbook-wall" id="guestbookWall">
+                        <!-- Populated by JS -->
                     </div>
-
                 </div>
             </div>
 
             <!-- TAB 4: PROFILE & SECURITY -->
             <div id="tab-profile" class="tab-content">
-                <div class="profile-grid">
+                <div class="calendar-layout">
                     
-                    <!-- Profile Contact Information -->
+                    <!-- Update Profile Info -->
                     <div class="widget-card">
-                        <h3 class="widget-title">Contact Information</h3>
+                        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold); margin-top: 0;">Member Contact Information</h2>
                         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-                            Update your personal details and contact preferences.
+                            Keep your contact details up to date for reservation confirmations and property updates.
                         </p>
-
-                        <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+                        <form id="profileForm" onsubmit="handleUpdateProfile(event)">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" id="profUsername" class="form-control" disabled style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5);">
+                                <input type="text" id="profUsername" class="form-control" disabled style="background: rgba(255, 255, 255, 0.05); color: var(--text-muted);">
                             </div>
                             <div class="form-group">
                                 <label>Full Name</label>
@@ -1065,29 +1001,28 @@
                                 <label>Phone Number</label>
                                 <input type="text" id="profPhone" class="form-control" placeholder="+39 000 000 0000">
                             </div>
-                            <button type="submit" class="btn-primary">Save Profile Updates</button>
+                            <button type="submit" class="btn-primary">Save Profile Changes</button>
                         </form>
                     </div>
 
                     <!-- Change Password -->
                     <div class="widget-card">
-                        <h3 class="widget-title">Security & Password</h3>
+                        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold); margin-top: 0;">Security & Password</h2>
                         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-                            Passwords are cryptographically hashed and protected.
+                            Update your login password. Passwords are protected via one-way cryptographic hashing.
                         </p>
-
-                        <form id="passwordForm" onsubmit="handlePasswordChange(event)">
+                        <form id="passwordForm" onsubmit="handleChangePassword(event)">
                             <div class="form-group">
                                 <label>Current Password</label>
-                                <input type="password" id="currPassword" class="form-control" placeholder="••••••••" required>
+                                <input type="password" id="passCurrent" class="form-control" required placeholder="••••••••">
                             </div>
                             <div class="form-group">
-                                <label>New Password</label>
-                                <input type="password" id="newPasswordInput" class="form-control" placeholder="Minimum 8 characters" required minlength="8">
+                                <label>New Password (min 8 characters)</label>
+                                <input type="password" id="passNew" class="form-control" minlength="8" required placeholder="••••••••">
                             </div>
                             <div class="form-group">
                                 <label>Confirm New Password</label>
-                                <input type="password" id="confirmPasswordInput" class="form-control" placeholder="Re-enter new password" required minlength="8">
+                                <input type="password" id="passConfirm" class="form-control" minlength="8" required placeholder="••••••••">
                             </div>
                             <button type="submit" class="btn-primary">Update Password</button>
                         </form>
@@ -1096,6 +1031,191 @@
                 </div>
             </div>
 
+            <!-- TAB 5: ADMINISTRATION (Admin & Co-Admin Only) -->
+            <div id="tab-admin" class="tab-content">
+                
+                <!-- Admin Header Card -->
+                <div class="admin-card" style="border-left: 4px solid var(--accent-gold); margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 5px 0;">Property Administration</h2>
+                            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Review stay requests, manage applications, roster hierarchy, and block calendar dates.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <span id="adminPendingStaysBadge" class="status-badge pending">0 Pending Stays</span>
+                            <span id="adminPendingAppsBadge" class="status-badge" style="background: rgba(197, 160, 89, 0.25); color: var(--accent-gold);">0 Pending Applications</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priority: Pending Requests Queue -->
+                <div class="admin-card" style="border-left: 4px solid var(--status-pending);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fbbf24; margin: 0;">⏳ Pending Stay Requests</h3>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Approvals & denials dispatch automated email notifications</span>
+                    </div>
+                    <div id="adminPendingRequestsQueue">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Unilateral Block Tool with Interactive Calendar Selection -->
+                <div class="admin-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">🔒 Unilateral Date Block & Reservation Tool</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                        Select dates directly on the calendar or enter dates below to reserve or block property dates.
+                    </p>
+                    <form id="adminBlockForm" onsubmit="handleAdminUnilateralBlock(event)">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Check-In Date</label>
+                                <input type="date" id="adminBlockStart" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Check-Out Date</label>
+                                <input type="date" id="adminBlockEnd" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Reservation Label</label>
+                                <input type="text" id="adminBlockGuest" class="form-control" placeholder="e.g. Owner Stay, Maintenance" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Notes</label>
+                                <input type="text" id="adminBlockReason" class="form-control" placeholder="Reason for block...">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-primary" style="margin-top: 0; padding: 12px 20px;">Block Dates</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Pending Member Applications ("Become a Regola") -->
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">📝 Pending Member Applications ("Become a Regola")</h3>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Passwords are cryptographically protected</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Applied Date</th>
+                                    <th>Full Name</th>
+                                    <th>Desired Username</th>
+                                    <th>Email Address</th>
+                                    <th>Phone</th>
+                                    <th>Referral Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPendingAppsTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Member Roster & Role Hierarchy -->
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin: 0;">👥 Member Directory & Role Hierarchy</h3>
+                        <button onclick="openAddMemberModal()" class="btn-sm" style="background: var(--accent-gold); color: #0a141d; border: none; font-weight: bold;">+ Add New Member</button>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="adminMemberSearchInput" class="form-control" placeholder="🔍 Search members by name, username, email, or role..." oninput="filterAdminMembersTable()">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Phone</th>
+                                    <th>Role & Actions</th>
+                                    <th>Joined</th>
+                                    <th>Notes</th>
+                                    <th>Management</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminMembersTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Confirmed Reservations Management -->
+                <div class="admin-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent-gold); margin-top: 0;">📋 Confirmed Reservations & Blocks</h3>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Dates</th>
+                                    <th>Guest / Title</th>
+                                    <th>Username</th>
+                                    <th>Guests</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminReservationsTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Add Member Modal -->
+        <div id="addMemberModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; box-sizing: border-box;">
+            <div style="background: #0d1b27; border-radius: 20px; border: 1px solid var(--accent-gold); max-width: 480px; width: 100%; padding: 35px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-gold); margin: 0 0 20px 0;">Add New Member</h3>
+                <form id="addMemberForm" onsubmit="handleAddMember(event)">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="newUsername" class="form-control" placeholder="e.g. clara" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Temporary Password</label>
+                        <input type="password" id="newPassword" class="form-control" placeholder="Minimum 8 characters" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="newName" class="form-control" placeholder="e.g. Clara Rossi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="newEmail" class="form-control" placeholder="clara.rossi@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="newPhone" class="form-control" placeholder="+39 340 000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select id="newRole" class="form-control">
+                            <option value="member" selected>Ordinary Member</option>
+                            <option value="co-admin">Co-Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Internal Notes</label>
+                        <textarea id="newNotes" class="form-control" rows="2" placeholder="Member preferences, referral info..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" onclick="closeAddMemberModal()" class="btn-sm">Cancel</button>
+                        <button type="submit" class="btn-primary" style="width: auto; margin-top: 0; padding: 10px 24px;">Create Member</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div id="toastNotification" class="toast"></div>
@@ -1107,7 +1227,6 @@
             <a href="favorites.html">Favorites</a>
             <a href="planning.html">Planning</a>
             <a href="members.html" style="color: var(--accent-gold); font-weight: bold;">Members</a>
-            <a href="admin.html">Admin</a>
         </nav>
     </div>
 
@@ -1134,21 +1253,24 @@
                 document.getElementById('memberNameDisplay').innerText = user.name;
                 
                 const roleBadge = document.getElementById('memberRoleBadge');
+                const adminTabBtn = document.getElementById('adminTabBtn');
+
                 if (user.role === 'admin') {
-                    roleBadge.innerText = 'Primary Admin';
-                    roleBadge.style.background = 'rgba(220, 38, 38, 0.25)';
-                    roleBadge.style.color = '#f87171';
-                    document.getElementById('adminPortalLinkContainer').style.display = 'inline-block';
+                    roleBadge.innerText = '★ Primary Admin';
+                    roleBadge.className = 'status-badge admin-primary';
+                    adminTabBtn.style.display = 'inline-block';
+                    renderAdminSection();
                 } else if (user.role === 'co-admin') {
                     roleBadge.innerText = 'Co-Admin';
-                    roleBadge.style.background = 'rgba(197, 160, 89, 0.25)';
-                    roleBadge.style.color = 'var(--accent-gold)';
-                    document.getElementById('adminPortalLinkContainer').style.display = 'inline-block';
+                    roleBadge.className = 'status-badge co-admin';
+                    adminTabBtn.style.display = 'inline-block';
+                    renderAdminSection();
                 } else {
                     roleBadge.innerText = 'Resident';
-                    roleBadge.style.background = 'rgba(197, 160, 89, 0.15)';
+                    roleBadge.className = 'status-badge';
+                    roleBadge.style.background = 'rgba(197, 160, 89, 0.2)';
                     roleBadge.style.color = 'var(--accent-gold)';
-                    document.getElementById('adminPortalLinkContainer').style.display = 'none';
+                    adminTabBtn.style.display = 'none';
                 }
 
                 // Populate profile fields
@@ -1160,6 +1282,12 @@
                 renderCalendar();
                 renderMyRequests();
                 renderGuestbook();
+
+                // Check URL parameter for tab
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('tab') === 'admin' && (user.role === 'admin' || user.role === 'co-admin')) {
+                    switchTab('admin');
+                }
             }
         }
 
@@ -1171,12 +1299,9 @@
             const res = await PortalAuth.login(u, p);
             if (res.success) {
                 showToast(`Welcome back, ${res.user.name}`);
+                initAuth();
                 if (res.isAdmin) {
-                    setTimeout(() => {
-                        window.location.href = 'admin.html';
-                    }, 600);
-                } else {
-                    initAuth();
+                    switchTab('admin');
                 }
             } else {
                 showToast(res.message || 'Login failed');
@@ -1193,11 +1318,15 @@
             document.querySelectorAll('.portal-tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             
-            const btn = event.currentTarget || document.querySelector(`[onclick="switchTab('${tabId}')"]`);
+            const btn = document.querySelector(`[onclick="switchTab('${tabId}')"]`);
             if (btn) btn.classList.add('active');
             
             const target = document.getElementById('tab-' + tabId);
             if (target) target.classList.add('active');
+
+            if (tabId === 'admin') {
+                renderAdminSection();
+            }
         }
 
         function populateMonthDropdown() {
@@ -1232,6 +1361,36 @@
             }
         }
 
+        function handleDateClick(dateStr) {
+            if (!selectedStart || (selectedStart && selectedEnd)) {
+                selectedStart = dateStr;
+                selectedEnd = null;
+                document.getElementById('reqStartDate').value = dateStr;
+                document.getElementById('reqEndDate').value = '';
+                const blockStartInput = document.getElementById('adminBlockStart');
+                if (blockStartInput) blockStartInput.value = dateStr;
+            } else if (selectedStart && !selectedEnd) {
+                if (dateStr < selectedStart) {
+                    selectedStart = dateStr;
+                    document.getElementById('reqStartDate').value = dateStr;
+                    const blockStartInput = document.getElementById('adminBlockStart');
+                    if (blockStartInput) blockStartInput.value = dateStr;
+                } else {
+                    selectedEnd = dateStr;
+                    document.getElementById('reqEndDate').value = dateStr;
+                    const blockEndInput = document.getElementById('adminBlockEnd');
+                    if (blockEndInput) blockEndInput.value = dateStr;
+                }
+            }
+            renderCalendar();
+        }
+
+        function onDateInputChange() {
+            selectedStart = document.getElementById('reqStartDate').value;
+            selectedEnd = document.getElementById('reqEndDate').value;
+            renderCalendar();
+        }
+
         function renderCalendar() {
             const m = months[currentMonthIdx];
             document.getElementById('calMonthTitle').innerText = m.name;
@@ -1264,18 +1423,10 @@
                 const dayEl = document.createElement('div');
                 dayEl.className = 'cal-day';
                 dayEl.innerText = day;
-                dayEl.dataset.date = dateStr;
 
                 const statusObj = PortalCalendar.getDateStatus(dateStr, db);
                 dayEl.classList.add(statusObj.status);
 
-                if (statusObj.status === 'pending') {
-                    dayEl.title = `Pending Request: ${statusObj.event ? statusObj.event.guestName : ''}`;
-                } else if (statusObj.status === 'reserved') {
-                    dayEl.title = `Reserved: ${statusObj.event ? statusObj.event.guestName : ''}`;
-                }
-
-                // Check if currently selected
                 if (selectedStart && selectedEnd) {
                     if (dateStr === selectedStart || dateStr === selectedEnd) {
                         dayEl.classList.add('selected');
@@ -1286,36 +1437,14 @@
                     dayEl.classList.add('selected');
                 }
 
-                if (statusObj.status !== 'out-of-range' && statusObj.status !== 'reserved') {
+                if (statusObj.status === 'available' || statusObj.status === 'pending') {
                     dayEl.onclick = () => handleDateClick(dateStr);
+                } else if (statusObj.status === 'reserved') {
+                    dayEl.title = `Reserved: ${statusObj.event ? statusObj.event.guestName : ''}`;
                 }
 
                 grid.appendChild(dayEl);
             }
-        }
-
-        function handleDateClick(dateStr) {
-            if (!selectedStart || (selectedStart && selectedEnd)) {
-                selectedStart = dateStr;
-                selectedEnd = null;
-                document.getElementById('reqStartDate').value = dateStr;
-                document.getElementById('reqEndDate').value = '';
-            } else if (selectedStart && !selectedEnd) {
-                if (dateStr < selectedStart) {
-                    selectedStart = dateStr;
-                    document.getElementById('reqStartDate').value = dateStr;
-                } else {
-                    selectedEnd = dateStr;
-                    document.getElementById('reqEndDate').value = dateStr;
-                }
-            }
-            renderCalendar();
-        }
-
-        function onDateInputChange() {
-            selectedStart = document.getElementById('reqStartDate').value;
-            selectedEnd = document.getElementById('reqEndDate').value;
-            renderCalendar();
         }
 
         function handleStayRequest(e) {
@@ -1325,19 +1454,22 @@
 
             const start = document.getElementById('reqStartDate').value;
             const end = document.getElementById('reqEndDate').value;
-            const guests = document.getElementById('reqGuests').value;
+            const count = document.getElementById('reqGuestCount').value;
             const notes = document.getElementById('reqNotes').value;
 
-            const res = PortalCalendar.requestStay(user.id, start, end, guests, notes);
+            const res = PortalCalendar.requestStay(user.id, start, end, count, notes);
             if (res.success) {
-                showToast('Stay request submitted successfully as Pending!');
+                showToast('Stay request submitted! Pending admin approval.');
                 document.getElementById('stayRequestForm').reset();
                 selectedStart = null;
                 selectedEnd = null;
                 renderCalendar();
                 renderMyRequests();
+                if (user.role === 'admin' || user.role === 'co-admin') {
+                    renderAdminSection();
+                }
             } else {
-                showToast(res.message || 'Request failed');
+                showToast(res.message);
             }
         }
 
@@ -1351,80 +1483,85 @@
             container.innerHTML = '';
 
             if (myEvts.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">You have no active stay requests.</p>';
+                container.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">You have no active stay requests or reservations.</p>';
                 return;
             }
 
             myEvts.forEach(evt => {
-                const item = document.createElement('div');
-                item.className = 'request-item';
-                item.innerHTML = `
-                    <div>
-                        <strong>${evt.startDate} → ${evt.endDate}</strong> (${evt.guestCount} ${evt.guestCount === 1 ? 'Guest' : 'Guests'})
-                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
-                            ${evt.notes ? `"${evt.notes}"` : 'No additional notes'}
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="status-badge ${evt.status}">${evt.status === 'reserved' ? 'Confirmed' : evt.status}</span>
-                        ${evt.status === 'pending' ? `<button onclick="cancelMyRequest('${evt.id}')" class="btn-sm" style="color: #dc2626; border-color: rgba(220,38,38,0.3);">Cancel</button>` : ''}
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        function cancelMyRequest(id) {
-            if (confirm('Are you sure you want to cancel this pending request?')) {
-                PortalCalendar.cancelEvent(id);
-                showToast('Request cancelled');
-                renderCalendar();
-                renderMyRequests();
-            }
-        }
-
-        function renderGuestbook() {
-            const list = PortalGuestbook.getAll();
-            const container = document.getElementById('guestbookStream');
-            container.innerHTML = '';
-
-            if (list.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No comments yet. Be the first to sign the guest book!</p>';
-                return;
-            }
-
-            list.forEach(c => {
                 const card = document.createElement('div');
-                card.className = 'comment-card';
+                card.style.cssText = 'background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;';
                 card.innerHTML = `
-                    <div class="comment-header">
-                        <div class="comment-author">${c.author} <span style="font-weight: normal; font-size: 0.85rem; color: var(--accent-gold);">@${c.username}</span></div>
-                        <div class="comment-meta">${c.date}</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 1.05rem; color: #ffffff;">
+                            🗓️ ${evt.startDate} → ${evt.endDate}
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 3px;">
+                            ${evt.guestCount} ${evt.guestCount === 1 ? 'Guest' : 'Guests'} &nbsp;|&nbsp; Submitted ${evt.createdAt}
+                        </div>
+                        ${evt.notes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 4px;">Notes: "${evt.notes}"</div>` : ''}
                     </div>
-                    <div class="comment-body">${c.message}</div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span class="status-badge ${evt.status}">${evt.status}</span>
+                        ${evt.status === 'pending' ? `<button onclick="cancelMyRequest('${evt.id}')" class="btn-sm" style="color: #dc2626;">Cancel</button>` : ''}
+                    </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function handleGuestbookPost(e) {
+        function cancelMyRequest(id) {
+            if (confirm('Are you sure you want to cancel this stay request?')) {
+                PortalCalendar.cancelEvent(id);
+                showToast('Request cancelled');
+                renderCalendar();
+                renderMyRequests();
+                renderAdminSection();
+            }
+        }
+
+        // GUEST BOOK
+        function renderGuestbook() {
+            const list = PortalGuestbook.getAll();
+            const wall = document.getElementById('guestbookWall');
+            wall.innerHTML = '';
+
+            if (list.length === 0) {
+                wall.innerHTML = '<p style="color: var(--text-muted); font-style: italic; text-align: center;">No reflections yet. Be the first to leave a message!</p>';
+                return;
+            }
+
+            list.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'guestbook-entry';
+                el.innerHTML = `
+                    <div class="guestbook-entry-header">
+                        <span class="guestbook-author">${item.author} <small style="color: var(--accent-gold); font-weight: normal;">(@${item.username})</small></span>
+                        <span class="guestbook-date">${item.date}</span>
+                    </div>
+                    <p class="guestbook-text">"${item.message}"</p>
+                `;
+                wall.appendChild(el);
+            });
+        }
+
+        function handleGuestbookSubmit(e) {
             e.preventDefault();
             const user = PortalAuth.getCurrentUser();
             if (!user) return;
 
-            const msg = document.getElementById('gbMessage').value;
+            const msg = document.getElementById('guestbookMessage').value;
             const res = PortalGuestbook.add(user.id, msg);
             if (res.success) {
-                showToast('Message added to the Guest Book!');
-                document.getElementById('gbMessage').value = '';
+                showToast('Reflection posted to Guest Book!');
+                document.getElementById('guestbookForm').reset();
                 renderGuestbook();
             } else {
-                showToast(res.message || 'Failed to post message');
+                showToast(res.message);
             }
         }
 
-        // PROFILE & PASSWORD
-        function handleProfileUpdate(e) {
+        // PROFILE & SECURITY
+        function handleUpdateProfile(e) {
             e.preventDefault();
             const user = PortalAuth.getCurrentUser();
             if (!user) return;
@@ -1437,33 +1574,357 @@
 
             const res = PortalMembers.updateProfile(user.id, updates);
             if (res.success) {
-                showToast('Profile updated successfully!');
+                showToast('Profile contact information updated!');
                 initAuth();
             } else {
-                showToast(res.message || 'Update failed');
+                showToast(res.message);
             }
         }
 
-        async function handlePasswordChange(e) {
+        async function handleChangePassword(e) {
             e.preventDefault();
             const user = PortalAuth.getCurrentUser();
             if (!user) return;
 
-            const curr = document.getElementById('currPassword').value;
-            const newP = document.getElementById('newPasswordInput').value;
-            const conf = document.getElementById('confirmPasswordInput').value;
+            const cur = document.getElementById('passCurrent').value;
+            const newP = document.getElementById('passNew').value;
+            const conf = document.getElementById('passConfirm').value;
 
             if (newP !== conf) {
-                showToast('New passwords do not match.');
+                showToast('New passwords do not match');
                 return;
             }
 
-            const res = await PortalMembers.changePassword(user.id, curr, newP);
+            const res = await PortalMembers.changePassword(user.id, cur, newP);
             if (res.success) {
-                showToast('Password updated securely!');
+                showToast('Password updated successfully!');
                 document.getElementById('passwordForm').reset();
             } else {
-                showToast(res.message || 'Password update failed.');
+                showToast(res.message);
+            }
+        }
+
+        // ADMINISTRATION SECTION
+        function renderAdminSection() {
+            const user = PortalAuth.getCurrentUser();
+            if (!user || (user.role !== 'admin' && user.role !== 'co-admin')) return;
+
+            renderAdminPendingStays();
+            renderAdminPendingApps();
+            renderAdminMembersTable();
+            renderAdminReservationsTable();
+        }
+
+        function renderAdminPendingStays() {
+            const db = PortalDB.get();
+            const pending = db.events.filter(e => e.status === 'pending');
+            const queueEl = document.getElementById('adminPendingRequestsQueue');
+            const badge = document.getElementById('adminPendingStaysBadge');
+
+            badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Stay' : 'Stays'}`;
+            if (pending.length === 0) {
+                queueEl.innerHTML = '<p style="color: var(--text-muted); font-style: italic; margin: 10px 0;">No pending stay requests currently awaiting approval.</p>';
+                return;
+            }
+
+            queueEl.innerHTML = '';
+            pending.forEach(req => {
+                const member = PortalMembers.getById(req.userId) || PortalMembers.getByUsername(req.username);
+                const item = document.createElement('div');
+                item.style.cssText = 'background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;';
+                item.innerHTML = `
+                    <div>
+                        <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">
+                            ${req.guestName} <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: normal;">(@${req.username})</span>
+                        </div>
+                        <div style="font-size: 0.95rem; font-weight: 600; color: var(--accent-gold); margin: 3px 0;">
+                            🗓️ ${req.startDate} → ${req.endDate} (${req.guestCount} ${req.guestCount === 1 ? 'Guest' : 'Guests'})
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">
+                            ✉️ ${member ? member.email : 'N/A'} &nbsp;|&nbsp; 📞 ${member ? member.phone : 'N/A'}
+                        </div>
+                        ${req.notes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 5px; background: rgba(197, 160, 89, 0.15); padding: 5px 10px; border-radius: 6px;">Notes: "${req.notes}"</div>` : ''}
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="approveStay('${req.id}')" class="btn-sm btn-action-approve">✓ Approve & Email</button>
+                        <button onclick="denyStay('${req.id}')" class="btn-sm btn-action-deny">✕ Deny & Email</button>
+                    </div>
+                `;
+                queueEl.appendChild(item);
+            });
+        }
+
+        function approveStay(id) {
+            const res = PortalCalendar.approveRequest(id, 'Approved by Administrator');
+            if (res.success) {
+                showToast(`Stay approved! Confirmation email dispatched to ${res.member ? res.member.email : 'member'}`);
+                renderCalendar();
+                renderMyRequests();
+                renderAdminSection();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function denyStay(id) {
+            const reason = prompt('Reason for denial (included in member email notification):', 'Dates unavailable');
+            if (reason !== null) {
+                const res = PortalCalendar.denyRequest(id, reason);
+                if (res.success) {
+                    showToast(`Request denied. Notification email dispatched to ${res.member ? res.member.email : 'member'}`);
+                    renderCalendar();
+                    renderMyRequests();
+                    renderAdminSection();
+                } else {
+                    showToast(res.message);
+                }
+            }
+        }
+
+        function renderAdminPendingApps() {
+            const pending = PortalMembers.getPending();
+            const tbody = document.getElementById('adminPendingAppsTableBody');
+            const badge = document.getElementById('adminPendingAppsBadge');
+            tbody.innerHTML = '';
+
+            badge.innerText = `${pending.length} Pending ${pending.length === 1 ? 'Application' : 'Applications'}`;
+
+            if (pending.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); font-style: italic;">No pending membership applications.</td></tr>';
+                return;
+            }
+
+            pending.forEach(app => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${app.appliedDate}</td>
+                    <td><strong>${app.name}</strong></td>
+                    <td><span style="color: var(--accent-gold);">@${app.username}</span></td>
+                    <td><a href="mailto:${app.email}" style="color: var(--accent-gold); text-decoration: none;">${app.email}</a></td>
+                    <td>${app.phone || '—'}</td>
+                    <td><small>${app.notes || '—'}</small></td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="approveApplication('${app.id}')" class="btn-sm btn-action-approve">✓ Approve</button>
+                            <button onclick="declineApplication('${app.id}')" class="btn-sm btn-action-deny">✕ Decline</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function approveApplication(appId) {
+            const res = PortalMembers.approvePending(appId);
+            if (res.success) {
+                showToast(`Member @${res.user.username} approved! Welcome email dispatched to ${res.user.email}`);
+                renderAdminSection();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function declineApplication(appId) {
+            if (confirm('Decline and remove this membership application?')) {
+                PortalMembers.declinePending(appId);
+                showToast('Application declined.');
+                renderAdminSection();
+            }
+        }
+
+        function handleAdminUnilateralBlock(e) {
+            e.preventDefault();
+            const start = document.getElementById('adminBlockStart').value;
+            const end = document.getElementById('adminBlockEnd').value;
+            const guest = document.getElementById('adminBlockGuest').value;
+            const reason = document.getElementById('adminBlockReason').value;
+
+            const res = PortalCalendar.unilateralBlock(start, end, reason, guest);
+            if (res.success) {
+                showToast('Dates successfully blocked as Reserved!');
+                document.getElementById('adminBlockForm').reset();
+                renderCalendar();
+                renderAdminSection();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function renderAdminMembersTable(filter = '') {
+            const members = PortalMembers.getAll();
+            const currentAdmin = PortalAuth.getCurrentUser();
+            const tbody = document.getElementById('adminMembersTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = members.filter(m => {
+                const term = filter.toLowerCase();
+                return m.name.toLowerCase().includes(term) ||
+                       m.username.toLowerCase().includes(term) ||
+                       m.email.toLowerCase().includes(term) ||
+                       (m.phone && m.phone.toLowerCase().includes(term)) ||
+                       m.role.toLowerCase().includes(term);
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">No members match search.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(m => {
+                const tr = document.createElement('tr');
+                
+                let roleHtml = '';
+                if (m.role === 'admin') {
+                    roleHtml = `<span class="status-badge admin-primary">★ Primary Admin</span>`;
+                } else if (m.role === 'co-admin') {
+                    roleHtml = `
+                        <span class="status-badge co-admin">Co-Admin</span>
+                        <div style="display: flex; gap: 4px; margin-top: 6px;">
+                            ${currentAdmin.role === 'admin' ? `<button onclick="elevateToPrimary('${m.id}')" class="btn-sm" style="font-size: 0.65rem; padding: 4px 8px;" title="Promote to Primary Admin (Current Admin becomes Co-Admin)">★ Make Primary</button>` : ''}
+                            <button onclick="demoteToMember('${m.id}')" class="btn-sm" style="font-size: 0.65rem; padding: 4px 8px; color: var(--text-muted);">Demote</button>
+                        </div>
+                    `;
+                } else {
+                    roleHtml = `
+                        <span class="status-badge" style="background: rgba(255, 255, 255, 0.08); color: var(--text-main);">Member</span>
+                        <div style="margin-top: 6px;">
+                            <button onclick="elevateToCoAdmin('${m.id}')" class="btn-sm" style="font-size: 0.65rem; padding: 4px 8px; color: var(--accent-gold);">+ Make Co-Admin</button>
+                        </div>
+                    `;
+                }
+
+                tr.innerHTML = `
+                    <td><strong>@${m.username}</strong></td>
+                    <td>${m.name}</td>
+                    <td><a href="mailto:${m.email}" style="color: var(--accent-gold); text-decoration: none;">${m.email || '—'}</a></td>
+                    <td>${m.phone || '—'}</td>
+                    <td>${roleHtml}</td>
+                    <td>${m.joinedDate || '—'}</td>
+                    <td><small>${m.notes || '—'}</small></td>
+                    <td>
+                        ${m.role !== 'admin' ? `<button onclick="deleteMember('${m.id}')" class="btn-sm" style="color: #dc2626;">Delete</button>` : '<span style="color: var(--text-muted); font-size: 0.75rem;">Protected</span>'}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterAdminMembersTable() {
+            const q = document.getElementById('adminMemberSearchInput').value;
+            renderAdminMembersTable(q);
+        }
+
+        function elevateToCoAdmin(userId) {
+            const res = PortalMembers.elevateToCoAdmin(userId);
+            if (res.success) {
+                showToast(`Member @${res.user.username} elevated to Co-Admin.`);
+                renderAdminMembersTable();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function demoteToMember(userId) {
+            const res = PortalMembers.demoteToMember(userId);
+            if (res.success) {
+                showToast(`Co-Admin @${res.user.username} changed to ordinary Member.`);
+                renderAdminMembersTable();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function elevateToPrimary(coAdminId) {
+            const current = PortalAuth.getCurrentUser();
+            if (confirm(`Elevate this Co-Admin to Primary Admin? This will cause your account (@${current.username}) to become a Co-Admin.`)) {
+                const res = PortalMembers.elevateToPrimaryAdmin(coAdminId, current.id);
+                if (res.success) {
+                    showToast(`Primary Admin transferred to @${res.newAdmin.username}.`);
+                    initAuth();
+                } else {
+                    showToast(res.message);
+                }
+            }
+        }
+
+        function openAddMemberModal() {
+            document.getElementById('addMemberModal').style.display = 'flex';
+        }
+
+        function closeAddMemberModal() {
+            document.getElementById('addMemberModal').style.display = 'none';
+            document.getElementById('addMemberForm').reset();
+        }
+
+        async function handleAddMember(e) {
+            e.preventDefault();
+            const data = {
+                username: document.getElementById('newUsername').value,
+                password: document.getElementById('newPassword').value,
+                name: document.getElementById('newName').value,
+                email: document.getElementById('newEmail').value,
+                phone: document.getElementById('newPhone').value,
+                role: document.getElementById('newRole').value,
+                notes: document.getElementById('newNotes').value
+            };
+
+            const res = await PortalMembers.add(data);
+            if (res.success) {
+                showToast(`Member @${res.user.username} created with secure cryptographic password hash!`);
+                closeAddMemberModal();
+                renderAdminMembersTable();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        function deleteMember(id) {
+            const member = PortalMembers.getById(id);
+            if (!member) return;
+            if (confirm(`Are you sure you want to delete member @${member.username} (${member.name})?`)) {
+                const res = PortalMembers.delete(id);
+                if (res.success) {
+                    showToast('Member deleted');
+                    renderAdminMembersTable();
+                } else {
+                    showToast(res.message);
+                }
+            }
+        }
+
+        function renderAdminReservationsTable() {
+            const db = PortalDB.get();
+            const reserved = db.events.filter(e => e.status === 'reserved');
+            const tbody = document.getElementById('adminReservationsTableBody');
+            tbody.innerHTML = '';
+
+            if (reserved.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No confirmed reservations.</td></tr>';
+                return;
+            }
+
+            reserved.forEach(evt => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${evt.startDate} → ${evt.endDate}</strong></td>
+                    <td>${evt.guestName}</td>
+                    <td><span style="color: var(--accent-gold);">@${evt.username}</span></td>
+                    <td>${evt.guestCount}</td>
+                    <td>${evt.notes || '—'}</td>
+                    <td>
+                        <button onclick="cancelReservationById('${evt.id}')" class="btn-sm" style="color: #dc2626; border-color: rgba(220,38,38,0.4);">Cancel Block</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function cancelReservationById(id) {
+            if (confirm('Are you sure you want to cancel and remove this reservation?')) {
+                PortalCalendar.cancelEvent(id);
+                showToast('Reservation removed');
+                renderCalendar();
+                renderAdminSection();
             }
         }
 
@@ -1473,8 +1934,9 @@
             toast.classList.add('visible');
             setTimeout(() => {
                 toast.classList.remove('visible');
-            }, 3500);
+            }, 4000);
         }
     </script>
 </body>
+
 </html>

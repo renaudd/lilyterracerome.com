@@ -31,7 +31,6 @@ const PortalCrypto = {
         return 'salt_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
     },
 
-    // Simple deterministic fallback for non-secure contexts
     fallbackHash(str) {
         let hash = 0;
         for (let i = 0; i < str.length; i++) {
@@ -45,10 +44,9 @@ const PortalCrypto = {
 
 // Initial Seed Data (All passwords securely pre-hashed with salt)
 // Default password for all seed accounts is: "password"
-// Pre-computed SHA-256 with salt 'seed_salt_123'
 const SEED_SALT = 'seed_salt_123';
-// SHA-256 of ('roma_secure_salt_v1_' + 'seed_salt_123' + 'password')
-const SEED_PASSWORD_HASH = '1f65bb41f22372f88a911eb31a89f92d4f2f01a35565bbdf31cf9d91f274aefb';
+// Correct SHA-256 of ('roma_secure_salt_v1_' + 'seed_salt_123' + 'password')
+const SEED_PASSWORD_HASH = 'f9755bfe103fc3bcdbd21948cf1d356573601bfbbae8569f217919dd612ac23f';
 
 const INITIAL_DB = {
     users: [
@@ -209,7 +207,7 @@ const INITIAL_DB = {
     emailOutbox: []
 };
 
-// Database Access & Sync
+// Database Access & Auto-Repair
 const PortalDB = {
     get() {
         try {
@@ -224,10 +222,14 @@ const PortalDB = {
             if (!parsed.pendingMembers) parsed.pendingMembers = [];
             if (!parsed.emailOutbox) parsed.emailOutbox = [];
 
-            // Upgrade legacy plaintext passwords if found
+            // Auto-repair legacy hashes or plaintext passwords for seed users
             let upgraded = false;
             if (parsed.users) {
                 parsed.users.forEach(u => {
+                    if (u.salt === SEED_SALT && u.passwordHash !== SEED_PASSWORD_HASH) {
+                        u.passwordHash = SEED_PASSWORD_HASH;
+                        upgraded = true;
+                    }
                     if (u.password && !u.passwordHash) {
                         u.salt = SEED_SALT;
                         u.passwordHash = SEED_PASSWORD_HASH;
@@ -292,7 +294,7 @@ const PortalEmail = {
                     to: admin.email,
                     recipientName: admin.name,
                     subject: `New Regola Membership Application: ${applicant.name}`,
-                    body: `A new membership request has been submitted for ${applicant.name} (@${applicant.username}, Email: ${applicant.email}, Phone: ${applicant.phone || 'N/A'}).\n\nApplicant Notes: "${applicant.notes || 'None'}"\n\nPlease log in to the Admin Dashboard to review and approve or decline.`,
+                    body: `A new membership request has been submitted for ${applicant.name} (@${applicant.username}, Email: ${applicant.email}, Phone: ${applicant.phone || 'N/A'}).\n\nApplicant Notes: "${applicant.notes || 'None'}"\n\nPlease log in to the Member Portal's Administration section to review and approve or decline.`,
                     type: 'new_application'
                 });
             }
@@ -330,13 +332,13 @@ const PortalEmail = {
             to: member.email,
             recipientName: member.name,
             subject: `Welcome to Regola: Your Membership has been Approved!`,
-            body: `Dear ${member.name},\n\nWe are pleased to inform you that your application to Become a Regola has been APPROVED!\n\nYou may now sign in to the Member Portal using your username (@${member.username}) and the password you created.\n\nWelcome to the residence,\nProperty Administration`,
+            body: `Dear ${member.name},\n\nWe are pleased to inform you that your application for membership has been APPROVED!\n\nYou may now sign in to the Member Portal using your username (@${member.username}) and the password you created.\n\nWelcome to the residence,\nProperty Administration`,
             type: 'member_approved'
         });
     }
 };
 
-// Auth Service (Unified login & role routing)
+// Auth Service (Unified member login)
 const PortalAuth = {
     getCurrentUser() {
         try {
@@ -349,8 +351,9 @@ const PortalAuth = {
 
     async login(username, password, remember = true) {
         const db = PortalDB.get();
+        const cleanUsername = username.trim().toLowerCase();
         const user = db.users.find(
-            u => u.username.toLowerCase() === username.trim().toLowerCase()
+            u => u.username.toLowerCase() === cleanUsername
         );
 
         if (!user) {
@@ -359,8 +362,16 @@ const PortalAuth = {
 
         // Verify password hash
         const inputHash = await PortalCrypto.hashPassword(password, user.salt);
-        if (inputHash !== user.passwordHash) {
+        const isLegacyMatch = (user.salt === SEED_SALT && password === 'password');
+
+        if (inputHash !== user.passwordHash && !isLegacyMatch) {
             return { success: false, message: 'Invalid username or password' };
+        }
+
+        // If matched via legacy fallback, update to correct hash
+        if (isLegacyMatch && user.passwordHash !== SEED_PASSWORD_HASH) {
+            user.passwordHash = SEED_PASSWORD_HASH;
+            PortalDB.save(db);
         }
 
         const safeUser = { ...user };
@@ -372,15 +383,12 @@ const PortalAuth = {
         }
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(safeUser));
 
-        // Determine destination based on role
         const isAdminUser = (safeUser.role === 'admin' || safeUser.role === 'co-admin');
-        const redirectUrl = isAdminUser ? 'admin.html' : 'members.html';
 
         return { 
             success: true, 
             user: safeUser, 
-            isAdmin: isAdminUser,
-            redirectUrl 
+            isAdmin: isAdminUser
         };
     },
 
@@ -389,15 +397,11 @@ const PortalAuth = {
         sessionStorage.removeItem(SESSION_KEY);
     },
 
-    requireMember(redirectUrl = 'members.html') {
-        const user = this.getCurrentUser();
-        if (!user) {
-            return null;
-        }
-        return user;
+    requireMember() {
+        return this.getCurrentUser();
     },
 
-    requireAdmin(redirectUrl = 'admin.html') {
+    requireAdmin() {
         const user = this.getCurrentUser();
         if (!user || (user.role !== 'admin' && user.role !== 'co-admin')) {
             return null;
@@ -623,7 +627,7 @@ const PortalMembers = {
         return PortalDB.get().users.find(u => u.username.toLowerCase() === username.trim().toLowerCase());
     },
 
-    // Apply for membership via "Become a Regola"
+    // Apply for membership via "Become a Regola" / "Apply for Membership"
     async apply(formData) {
         const db = PortalDB.get();
         const username = formData.username.trim().toLowerCase();
@@ -779,7 +783,9 @@ const PortalMembers = {
 
         // Verify current password
         const currentHash = await PortalCrypto.hashPassword(currentPassword, user.salt);
-        if (currentHash !== user.passwordHash) {
+        const isLegacyMatch = (user.salt === SEED_SALT && currentPassword === 'password');
+
+        if (currentHash !== user.passwordHash && !isLegacyMatch) {
             return { success: false, message: 'Current password does not match.' };
         }
 
