@@ -325,9 +325,9 @@ const PortalDB = {
     }
 };
 
-// Email Notification Service
+// Email Notification Service (with EmailJS real email dispatch)
 const PortalEmail = {
-    send({ to, recipientName = '', subject, body, type = 'general' }) {
+    async send({ to, recipientName = '', subject, body, type = 'general' }) {
         const db = PortalDB.get();
         const emailRecord = {
             id: 'mail_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
@@ -337,13 +337,36 @@ const PortalEmail = {
             body,
             type,
             sentAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
-            status: 'sent'
+            status: 'queued'
         };
+
+        // Real email dispatch via EmailJS if configured
+        if (typeof emailjs !== 'undefined' && typeof emailjsConfig !== 'undefined' && emailjsConfig.publicKey && emailjsConfig.publicKey !== 'YOUR_PUBLIC_KEY') {
+            try {
+                const templateParams = {
+                    to_email: to,
+                    to_name: recipientName || to,
+                    subject: subject,
+                    message: body,
+                    body: body,
+                    notification_type: type
+                };
+
+                await emailjs.send(emailjsConfig.serviceId, emailjsConfig.templateId, templateParams, emailjsConfig.publicKey);
+                emailRecord.status = 'sent';
+                console.log(`%c[EMAILJS SUCCESS] Real email dispatched to ${to} | Subject: ${subject}`, 'color: #28a745; font-weight: bold;');
+            } catch (err) {
+                emailRecord.status = 'error';
+                emailRecord.error = err.text || err.message || JSON.stringify(err);
+                console.error('[EMAILJS ERROR] Failed to send real email to ' + to, err);
+            }
+        } else {
+            emailRecord.status = 'sent';
+            console.log(`%c[EMAIL DISPATCH] To: ${to} | Subject: ${subject}`, 'color: #c5a059; font-weight: bold;');
+        }
 
         db.emailOutbox.unshift(emailRecord);
         PortalDB.save(db);
-
-        console.log(`%c[EMAIL DISPATCH] To: ${to} | Subject: ${subject}`, 'color: #c5a059; font-weight: bold;');
         return emailRecord;
     },
 
