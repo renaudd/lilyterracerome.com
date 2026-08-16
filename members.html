@@ -256,10 +256,10 @@
         .portal-tab-btn {
             background: transparent;
             border: 1px solid transparent;
-            padding: 10px 22px;
+            padding: 10px 20px;
             border-radius: 30px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 500;
@@ -663,6 +663,19 @@
             line-height: 1.6;
         }
 
+        /* Profile & Security Layout */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Toast Notifications */
         .toast {
             position: fixed;
@@ -712,8 +725,6 @@
             color: var(--accent-gold);
         }
     
-        
-        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -814,12 +825,12 @@
             </a>
         </div>
         <h1>Member Portal</h1>
-        <p class="portal-subtitle">Exclusive resident access, calendar requests & apartment guide</p>
+        <p class="portal-subtitle">Exclusive resident access, calendar requests, apartment guide & security</p>
 
         <!-- Auth Gate (Shown if logged out) -->
         <div id="authGate" class="auth-card" style="display: none;">
             <div class="auth-title">Member Sign In</div>
-            <p class="auth-desc">Please enter your credentials to access the resident portal.</p>
+            <p class="auth-desc">Please enter your credentials to access the resident portal or administrative dashboard.</p>
             
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -835,8 +846,9 @@
 
             <div class="auth-help">
                 <p><strong>Demo Accounts:</strong></p>
-                <p>Member: <code>elena</code> / <code>password</code> &nbsp;|&nbsp; <code>marco</code> / <code>password</code></p>
-                <p>Admin: <code>admin</code> / <code>password</code> &nbsp;(<a href="admin.html" style="color: var(--accent-gold); text-decoration: none;">Go to Admin Portal →</a>)</p>
+                <p>Primary Admin: <code>admin</code> / <code>password</code></p>
+                <p>Co-Admin: <code>elena</code> / <code>password</code></p>
+                <p>Members: <code>marco</code> / <code>password</code> &nbsp;|&nbsp; <code>sophie</code> / <code>password</code></p>
             </div>
         </div>
 
@@ -846,11 +858,12 @@
             <!-- Member Header Bar -->
             <div class="member-header-bar">
                 <div class="member-welcome">
-                    Welcome back, <strong id="memberNameDisplay">Member</strong> <span id="memberRoleBadge" class="status-badge" style="margin-left: 8px;">Resident</span>
+                    Welcome back, <strong id="memberNameDisplay">Member</strong> 
+                    <span id="memberRoleBadge" class="status-badge" style="margin-left: 8px; background: rgba(197, 160, 89, 0.2); color: var(--accent-gold);">Resident</span>
                 </div>
                 <div class="member-actions">
                     <span id="adminPortalLinkContainer" style="display: none;">
-                        <a href="admin.html" class="btn-sm admin-btn">Admin Portal ⚙️</a>
+                        <a href="admin.html" class="btn-sm admin-btn">Admin Headquarters ⚙️</a>
                     </span>
                     <button onclick="handleLogout()" class="btn-sm">Log Out</button>
                 </div>
@@ -861,6 +874,7 @@
                 <button class="portal-tab-btn active" onclick="switchTab('calendar')">🗓️ Calendar & Requests</button>
                 <button class="portal-tab-btn" onclick="switchTab('guide')">📖 Apartment Guide</button>
                 <button class="portal-tab-btn" onclick="switchTab('guestbook')">✍️ Guest Book</button>
+                <button class="portal-tab-btn" onclick="switchTab('profile')">👤 Profile & Security</button>
             </div>
 
             <!-- TAB 1: CALENDAR & REQUESTS -->
@@ -898,7 +912,7 @@
                     <div class="widget-card">
                         <h3 class="widget-title">Request a Stay</h3>
                         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-                            Select dates on the calendar or choose your check-in and check-out dates below (Sept 2026 – Aug 2028).
+                            Click arrival and departure dates on the calendar, or pick your check-in and check-out dates below (Sept 2026 – Aug 2028).
                         </p>
 
                         <form id="stayRequestForm" onsubmit="handleStayRequest(event)">
@@ -944,16 +958,16 @@
                 <div class="guide-grid">
                     
                     <div class="guide-box">
-                        <div class="guide-box-title">🔑 Keys & Building Access</div>
-                        <p><strong>Building Portal:</strong> Use the brass key to unlock the main green street door at Vicolo del Giglio 13.</p>
-                        <p><strong>Pad Entry:</strong> The apartment is located on the second piano (3rd floor). Use the upper deadbolt key followed by the handle lock.</p>
+                        <div class="guide-box-title">🔑 Keys & Access</div>
+                        <p><strong>Street Portal:</strong> Use the brass key to unlock the main green street door at Vicolo del Giglio 13.</p>
+                        <p><strong>Pad Entry:</strong> The apartment is on the third piano (4th floor). Use the upper deadbolt key followed by the handle lock.</p>
                         <p><strong>Checking Out:</strong> Leave both sets of keys on the dining room table and pull the door firmly shut behind you.</p>
                     </div>
 
                     <div class="guide-box">
                         <div class="guide-box-title">❄️ Climate Control & A/C</div>
-                        <p>Central A/C units are located in the living room, master bedroom, and kitchen. Remotes are mounted near each door.</p>
-                        <p>To cool the sleeping nook, keep the living room A/C on and turn on the nook circulating fan.</p>
+                        <p>Central A/C units are located in the living room, master bedroom, and kitchen. Remotes are mounted near each doorway.</p>
+                        <p>To cool the sleeping nook, keep the living room A/C on and switch on the nook circulating fan.</p>
                         <p>The kitchen also features a ceiling fan with its own wall remote.</p>
                     </div>
 
@@ -964,7 +978,7 @@
                     </div>
 
                     <div class="guide-box">
-                        <div class="guide-box-title">🌿 Terrace / Patio Rules</div>
+                        <div class="guide-box-title">🌿 Terrace Rules</div>
                         <ul>
                             <li><strong>Occupancy:</strong> Maximum of 4 persons at all times.</li>
                             <li><strong>Quiet Hours:</strong> No amplified music or loud socializing after 10:00 PM out of respect for neighbors.</li>
@@ -1023,6 +1037,65 @@
                 </div>
             </div>
 
+            <!-- TAB 4: PROFILE & SECURITY -->
+            <div id="tab-profile" class="tab-content">
+                <div class="profile-grid">
+                    
+                    <!-- Profile Contact Information -->
+                    <div class="widget-card">
+                        <h3 class="widget-title">Contact Information</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            Update your personal details and contact preferences.
+                        </p>
+
+                        <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="profUsername" class="form-control" disabled style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5);">
+                            </div>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="profName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="profEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" id="profPhone" class="form-control" placeholder="+39 000 000 0000">
+                            </div>
+                            <button type="submit" class="btn-primary">Save Profile Updates</button>
+                        </form>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="widget-card">
+                        <h3 class="widget-title">Security & Password</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            Passwords are cryptographically hashed and protected.
+                        </p>
+
+                        <form id="passwordForm" onsubmit="handlePasswordChange(event)">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="currPassword" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="newPasswordInput" class="form-control" placeholder="Minimum 8 characters" required minlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmPasswordInput" class="form-control" placeholder="Re-enter new password" required minlength="8">
+                            </div>
+                            <button type="submit" class="btn-primary">Update Password</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <div id="toastNotification" class="toast"></div>
@@ -1060,9 +1133,29 @@
                 document.getElementById('portalDashboard').style.display = 'block';
                 document.getElementById('memberNameDisplay').innerText = user.name;
                 
+                const roleBadge = document.getElementById('memberRoleBadge');
                 if (user.role === 'admin') {
+                    roleBadge.innerText = 'Primary Admin';
+                    roleBadge.style.background = 'rgba(220, 38, 38, 0.25)';
+                    roleBadge.style.color = '#f87171';
                     document.getElementById('adminPortalLinkContainer').style.display = 'inline-block';
+                } else if (user.role === 'co-admin') {
+                    roleBadge.innerText = 'Co-Admin';
+                    roleBadge.style.background = 'rgba(197, 160, 89, 0.25)';
+                    roleBadge.style.color = 'var(--accent-gold)';
+                    document.getElementById('adminPortalLinkContainer').style.display = 'inline-block';
+                } else {
+                    roleBadge.innerText = 'Resident';
+                    roleBadge.style.background = 'rgba(197, 160, 89, 0.15)';
+                    roleBadge.style.color = 'var(--accent-gold)';
+                    document.getElementById('adminPortalLinkContainer').style.display = 'none';
                 }
+
+                // Populate profile fields
+                document.getElementById('profUsername').value = user.username;
+                document.getElementById('profName').value = user.name;
+                document.getElementById('profEmail').value = user.email || '';
+                document.getElementById('profPhone').value = user.phone || '';
 
                 renderCalendar();
                 renderMyRequests();
@@ -1070,14 +1163,21 @@
             }
         }
 
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             const u = document.getElementById('loginUsername').value;
             const p = document.getElementById('loginPassword').value;
-            const res = PortalAuth.login(u, p);
+            
+            const res = await PortalAuth.login(u, p);
             if (res.success) {
-                showToast(`Welcome, ${res.user.name}`);
-                initAuth();
+                showToast(`Welcome back, ${res.user.name}`);
+                if (res.isAdmin) {
+                    setTimeout(() => {
+                        window.location.href = 'admin.html';
+                    }, 600);
+                } else {
+                    initAuth();
+                }
             } else {
                 showToast(res.message || 'Login failed');
             }
@@ -1320,6 +1420,50 @@
                 renderGuestbook();
             } else {
                 showToast(res.message || 'Failed to post message');
+            }
+        }
+
+        // PROFILE & PASSWORD
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            const user = PortalAuth.getCurrentUser();
+            if (!user) return;
+
+            const updates = {
+                name: document.getElementById('profName').value,
+                email: document.getElementById('profEmail').value,
+                phone: document.getElementById('profPhone').value
+            };
+
+            const res = PortalMembers.updateProfile(user.id, updates);
+            if (res.success) {
+                showToast('Profile updated successfully!');
+                initAuth();
+            } else {
+                showToast(res.message || 'Update failed');
+            }
+        }
+
+        async function handlePasswordChange(e) {
+            e.preventDefault();
+            const user = PortalAuth.getCurrentUser();
+            if (!user) return;
+
+            const curr = document.getElementById('currPassword').value;
+            const newP = document.getElementById('newPasswordInput').value;
+            const conf = document.getElementById('confirmPasswordInput').value;
+
+            if (newP !== conf) {
+                showToast('New passwords do not match.');
+                return;
+            }
+
+            const res = await PortalMembers.changePassword(user.id, curr, newP);
+            if (res.success) {
+                showToast('Password updated securely!');
+                document.getElementById('passwordForm').reset();
+            } else {
+                showToast(res.message || 'Password update failed.');
             }
         }
 
