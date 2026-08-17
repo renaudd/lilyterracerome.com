@@ -482,6 +482,96 @@ const PortalEmail = {
             body: `Dear ${member.name},\n\nWe are pleased to inform you that your application for membership has been APPROVED!\n\nYou may now sign in to the Member Portal using your username (@${member.username}) and the password you created.\n\nWelcome to the residence,\nLily Terrace`,
             type: 'member_approved'
         });
+    },
+
+    // Notify admins & guest of new stay request
+    async notifyAdminsOfStayRequest(member, event) {
+        const db = PortalDB.get();
+        const admins = db.users.filter(u => u.role === 'admin' || u.role === 'co-admin');
+
+        // 1. Send confirmation to the guest
+        if (member && member.email) {
+            await this.send({
+                to: member.email,
+                recipientName: member.name,
+                subject: `Stay Request Received: ${event.startDate} to ${event.endDate}`,
+                body: `Dear ${member.name},\n\nThank you for submitting your stay request for ${event.startDate} to ${event.endDate} (${event.guestCount} ${event.guestCount === 1 ? 'guest' : 'guests'}).\n\nThe property administration has received your request and will review it shortly. You will receive an email confirmation once your stay is approved.\n\nWarm regards,\nLily Terrace`,
+                type: 'stay_request'
+            });
+        }
+
+        // 2. Send notification to admins and co-admins
+        for (const admin of admins) {
+            if (admin.email) {
+                await this.send({
+                    to: admin.email,
+                    recipientName: admin.name,
+                    subject: `New Stay Request: ${member ? member.name : event.guestName} (${event.startDate} to ${event.endDate})`,
+                    body: `A new stay request has been submitted by ${member ? member.name : event.guestName} (@${event.username}).\n\nDates: ${event.startDate} → ${event.endDate} (${event.guestCount} guests)\nNotes: "${event.notes || 'None'}"\n\nPlease log in to the Member Portal's Administration section to review and approve or decline.`,
+                    type: 'stay_request_admin'
+                });
+            }
+        }
+    },
+
+    // Notify of stay cancellation
+    async notifyBookingCancelled(member, event) {
+        const db = PortalDB.get();
+        const admins = db.users.filter(u => u.role === 'admin' || u.role === 'co-admin');
+
+        // 1. Send confirmation to the guest
+        if (member && member.email) {
+            await this.send({
+                to: member.email,
+                recipientName: member.name,
+                subject: `Stay Cancelled: ${event.startDate} to ${event.endDate}`,
+                body: `Dear ${member.name},\n\nYour stay booking/request for ${event.startDate} to ${event.endDate} (${event.guestCount} ${event.guestCount === 1 ? 'guest' : 'guests'}) has been successfully cancelled.\n\nIf you wish to reserve alternative dates, please log in to the Member Portal.\n\nWarm regards,\nLily Terrace`,
+                type: 'stay_cancelled'
+            });
+        }
+
+        // 2. Send notice to admins and co-admins
+        for (const admin of admins) {
+            if (admin.email) {
+                await this.send({
+                    to: admin.email,
+                    recipientName: admin.name,
+                    subject: `Stay Cancelled: ${member ? member.name : event.guestName} (${event.startDate} to ${event.endDate})`,
+                    body: `The stay booking/request for ${member ? member.name : event.guestName} (@${event.username}) for ${event.startDate} → ${event.endDate} has been cancelled.\n\nThe dates are now open and available on the calendar for other members.`,
+                    type: 'stay_cancelled_admin'
+                });
+            }
+        }
+    },
+
+    // Notify of stay modification request
+    async notifyModificationRequested(member, event, oldDates, newDates, modNotes = '') {
+        const db = PortalDB.get();
+        const admins = db.users.filter(u => u.role === 'admin' || u.role === 'co-admin');
+
+        // 1. Send confirmation to the guest
+        if (member && member.email) {
+            await this.send({
+                to: member.email,
+                recipientName: member.name,
+                subject: `Modification Request Received: ${newDates.startDate} to ${newDates.endDate}`,
+                body: `Dear ${member.name},\n\nWe have received your request to modify your booking at Lily Terrace.\n\nOriginal Dates: ${oldDates.startDate} → ${oldDates.endDate}\nRequested Dates: ${newDates.startDate} → ${newDates.endDate} (${event.guestCount} guests)\n${modNotes ? `Reason/Notes: "${modNotes}"\n\n` : '\n'}The property administration will review your requested dates shortly.\n\nWarm regards,\nLily Terrace`,
+                type: 'modification_requested'
+            });
+        }
+
+        // 2. Send notice to admins and co-admins
+        for (const admin of admins) {
+            if (admin.email) {
+                await this.send({
+                    to: admin.email,
+                    recipientName: admin.name,
+                    subject: `Stay Modification Request: ${member ? member.name : event.guestName}`,
+                    body: `A stay modification request has been submitted by ${member ? member.name : event.guestName} (@${event.username}).\n\nOriginal Dates: ${oldDates.startDate} → ${oldDates.endDate}\nRequested Dates: ${newDates.startDate} → ${newDates.endDate} (${event.guestCount} guests)\n${modNotes ? `Notes: "${modNotes}"\n\n` : '\n'}Please log in to the Member Portal's Administration section to review and approve or decline.`,
+                    type: 'modification_requested_admin'
+                });
+            }
+        }
     }
 };
 
@@ -636,7 +726,7 @@ const PortalCalendar = {
         return { status: 'available', event: null };
     },
 
-    checkRangeConflict(startDate, endDate) {
+    checkRangeConflict(startDate, endDate, excludeEventId = null) {
         const db = PortalDB.get();
         let cur = this.parseDate(startDate);
         const end = this.parseDate(endDate);
@@ -644,10 +734,10 @@ const PortalCalendar = {
         while (cur <= end) {
             const dateStr = this.formatDate(cur);
             const status = this.getDateStatus(dateStr, db);
-            if (status.status === 'reserved') {
+            if (status.status === 'reserved' && (!excludeEventId || (status.event && status.event.id !== excludeEventId))) {
                 return { conflict: true, type: 'reserved', date: dateStr, event: status.event };
             }
-            if (status.status === 'pending') {
+            if (status.status === 'pending' && (!excludeEventId || (status.event && status.event.id !== excludeEventId))) {
                 return { conflict: true, type: 'pending', date: dateStr, event: status.event };
             }
             cur.setDate(cur.getDate() + 1);
@@ -655,7 +745,7 @@ const PortalCalendar = {
         return { conflict: false };
     },
 
-    requestStay(userId, startDate, endDate, guestCount, notes) {
+    async requestStay(userId, startDate, endDate, guestCount, notes) {
         const db = PortalDB.get();
         const user = db.users.find(u => u.id === userId);
         if (!user) return { success: false, message: 'Member not found' };
@@ -689,7 +779,60 @@ const PortalCalendar = {
 
         db.events.push(newEvent);
         PortalDB.save(db);
+
+        // Send email notifications
+        await PortalEmail.notifyAdminsOfStayRequest(user, newEvent);
+
         return { success: true, event: newEvent };
+    },
+
+    async requestStayModification(userId, eventId, newStartDate, newEndDate, newGuestCount, modNotes = '') {
+        const db = PortalDB.get();
+        const user = db.users.find(u => u.id === userId);
+        if (!user) return { success: false, message: 'Member not found' };
+
+        const evt = db.events.find(e => e.id === eventId);
+        if (!evt) return { success: false, message: 'Booking not found' };
+
+        if (evt.userId !== user.id && evt.username !== user.username && user.role !== 'admin' && user.role !== 'co-admin') {
+            return { success: false, message: 'Permission denied' };
+        }
+
+        if (newStartDate < this.START_DATE || newEndDate > this.END_DATE) {
+            return { success: false, message: 'Dates must be between September 1, 2026 and August 31, 2028.' };
+        }
+
+        if (newStartDate > newEndDate) {
+            return { success: false, message: 'Check-out date must be after check-in date.' };
+        }
+
+        // Check conflicts excluding this event
+        const conflict = this.checkRangeConflict(newStartDate, newEndDate, eventId);
+        if (conflict.conflict && conflict.type === 'reserved') {
+            return { success: false, message: `The requested date ${conflict.date} is already reserved.` };
+        }
+
+        const oldDates = {
+            startDate: evt.originalStartDate || evt.startDate,
+            endDate: evt.originalEndDate || evt.endDate
+        };
+
+        evt.originalStartDate = oldDates.startDate;
+        evt.originalEndDate = oldDates.endDate;
+        evt.startDate = newStartDate;
+        evt.endDate = newEndDate;
+        evt.guestCount = parseInt(newGuestCount, 10) || evt.guestCount || 1;
+        evt.status = 'pending';
+        evt.isModification = true;
+        evt.modificationNotes = modNotes || '';
+        evt.modifiedAt = new Date().toISOString().replace('T', ' ').substring(0, 16);
+
+        PortalDB.save(db);
+
+        // Send email notifications
+        await PortalEmail.notifyModificationRequested(user, evt, oldDates, { startDate: newStartDate, endDate: newEndDate }, modNotes);
+
+        return { success: true, event: evt };
     },
 
     async approveRequest(eventId, adminNotes = '') {
@@ -698,6 +841,7 @@ const PortalCalendar = {
         if (!evt) return { success: false, message: 'Request not found' };
 
         evt.status = 'reserved';
+        evt.isModification = false;
         evt.adminNotes = adminNotes || 'Approved by Admin';
         PortalDB.save(db);
 
@@ -715,9 +859,19 @@ const PortalCalendar = {
         const evt = db.events.find(e => e.id === eventId);
         if (!evt) return { success: false, message: 'Request not found' };
 
-        evt.status = 'denied';
-        evt.adminNotes = adminNotes || 'Denied by Admin';
-        PortalDB.save(db);
+        // If it was a modification of an existing reserved stay, revert to original reserved dates
+        if (evt.isModification && evt.originalStartDate && evt.originalEndDate) {
+            evt.startDate = evt.originalStartDate;
+            evt.endDate = evt.originalEndDate;
+            evt.status = 'reserved';
+            evt.isModification = false;
+            evt.adminNotes = 'Modification denied: ' + (adminNotes || 'Dates unavailable');
+            PortalDB.save(db);
+        } else {
+            evt.status = 'denied';
+            evt.adminNotes = adminNotes || 'Denied by Admin';
+            PortalDB.save(db);
+        }
 
         // Find member and trigger email notification
         const member = db.users.find(u => u.id === evt.userId) || db.users.find(u => u.username === evt.username);
@@ -766,6 +920,28 @@ const PortalCalendar = {
         db.events.splice(index, 1);
         PortalDB.save(db);
         return { success: true };
+    },
+
+    async cancelStayByGuest(userId, eventId) {
+        const db = PortalDB.get();
+        const user = db.users.find(u => u.id === userId);
+        const evt = db.events.find(e => e.id === eventId);
+        if (!evt) return { success: false, message: 'Booking not found' };
+
+        if (user && evt.userId !== user.id && evt.username !== user.username && user.role !== 'admin' && user.role !== 'co-admin') {
+            return { success: false, message: 'Permission denied' };
+        }
+
+        const index = db.events.findIndex(e => e.id === eventId);
+        if (index !== -1) {
+            const removed = db.events.splice(index, 1)[0];
+            PortalDB.save(db);
+
+            const member = user || db.users.find(u => u.id === removed.userId || u.username === removed.username);
+            await PortalEmail.notifyBookingCancelled(member, removed);
+            return { success: true, event: removed };
+        }
+        return { success: false, message: 'Event not found' };
     }
 };
 

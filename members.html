@@ -684,6 +684,7 @@
         
         
         
+        
         /* Cookie Consent Banner */
         .cookie-banner {
             position: fixed;
@@ -964,6 +965,28 @@
                         </div>
 
                         <div class="guide-item">
+                            <h3><span class="guide-icon">🧺</span> Laundry</h3>
+                            <ol style="font-size: 0.88rem; padding-left: 20px; color: var(--text-dark); line-height: 1.6; margin: 0 0 12px 0;">
+                                <li>Add clothes to the washer (if the laundry fills the cylinder, it’s full; don’t stuff it.)</li>
+                                <li>Push down the lower metal flap (with the plastic latch).</li>
+                                <li>Push down the upper metal flap and lock it into the lower flap.</li>
+                                <li>When the lid is upright, it shows three openings. Pour detergent (half a cap full) into the opening on the right.</li>
+                                <li>Close the lid. Turn the dial to the left past zero. Then turn the dial to the right to the desired setting. The first number is temperature in degrees, the second number is cycle length.</li>
+                                <li>Hold the blinking “attiva” button for two seconds to start the machine.</li>
+                                <li>When the load is done, lift the lid and open the metal cylinder using the plastic latch.</li>
+                                <li>Hang the laundry in the veranda or on the terrace to dry.</li>
+                            </ol>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">There are two laundromats less than a block from the apartment. Their machines do not require detergent.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">🛁</span> Hot Water</h3>
+                            <p>If the hot water isn’t working, the most likely culprit is the gas apparatus, which can be found in the veranda against the kitchen wall.</p>
+                            <p>If the pressure dial indicates that it is lower than 1, gently unscrew the cap next to it, which should cause the pressure gauge to rise. Once the pressure sits between 1 and 2, screw the cap back to its off position. Then try the hot water again.</p>
+                            <p>If it still doesn’t work, call Dash.</p>
+                        </div>
+
+                        <div class="guide-item">
                             <h3><span class="guide-icon">♻️</span> Waste &amp; Recycling</h3>
                             <p>Separated collection per Rome regulations:</p>
                             <ul style="font-size: 0.85rem; padding-left: 20px; color: var(--text-muted);">
@@ -972,6 +995,10 @@
                                 <li><strong>Plastic &amp; Metal:</strong> Yellow bin</li>
                                 <li><strong>Glass:</strong> Green street bin (Piazza della Quercia)</li>
                             </ul>
+                            <p>Leave bagged trash around the corner on Vicolo delle Grotte next to the flamingo graffiti. Monday - Paper, Tuesday -
+                                Plastic, Wednesday - Mixed, Thursday - Paper, Friday - Plastic</p>
+                            <p>In the late afternoon, there are assorted bins at Campo, just in front of the Drunken Ship pub, for disposal of all
+                                types of waste including glass bottles and metal cans.</p>
                         </div>
 
                         <div class="guide-item">
@@ -1317,6 +1344,51 @@
             </div>
         </div>
 
+        <!-- Modify Stay Modal -->
+        <div id="modifyStayModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 20, 29, 0.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; box-sizing: border-box;">
+            <div style="background: #ffffff; border-radius: 16px; border: 1px solid var(--border-color); width: 100%; max-width: 500px; padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent-gold); margin: 0;">Request Booking Modification</h3>
+                    <button type="button" onclick="closeModifyStayModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                    Request to add or remove days from your booking. The administration will review your requested dates and confirm your updated itinerary.
+                </p>
+                <form id="modifyStayForm" onsubmit="handleModifyStaySubmit(event)">
+                    <input type="hidden" id="modEventId">
+                    <div style="background: rgba(197, 160, 89, 0.08); padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; border: 1px solid rgba(197, 160, 89, 0.2);">
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold); font-weight: 600;">Current Booking</div>
+                        <div id="modCurrentSummary" style="font-size: 0.95rem; font-weight: 600; color: var(--text-dark); margin-top: 4px;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>New Check-In Date</label>
+                        <input type="date" id="modStartDate" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Check-Out Date</label>
+                        <input type="date" id="modEndDate" class="form-control" min="2026-09-01" max="2028-08-31" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Guests</label>
+                        <select id="modGuestCount" class="form-control">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests (Max)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Reason / Details for Modification</label>
+                        <textarea id="modNotes" class="form-control" rows="3" placeholder="e.g. Extending stay by 2 days, departing one day earlier..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" onclick="closeModifyStayModal()" class="btn-sm">Cancel</button>
+                        <button type="submit" class="btn-primary" style="width: auto; margin-top: 0; padding: 10px 24px;">Submit Modification</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="toastNotification" class="toast"></div>
 
         <nav class="footer-nav">
@@ -1593,7 +1665,7 @@
             }
         }
 
-        function handleStayRequest(e) {
+        async function handleStayRequest(e) {
             e.preventDefault();
             const user = PortalAuth.getCurrentUser();
             if (!user) return;
@@ -1603,7 +1675,7 @@
             const count = document.getElementById('reqGuestCount').value;
             const notes = document.getElementById('reqNotes').value;
 
-            const res = PortalCalendar.requestStay(user.id, start, end, count, notes);
+            const res = await PortalCalendar.requestStay(user.id, start, end, count, notes);
             if (res.success) {
                 showToast('Stay request submitted! Pending admin approval.');
                 document.getElementById('stayRequestForm').reset();
@@ -1636,33 +1708,95 @@
             myEvts.forEach(evt => {
                 const card = document.createElement('div');
                 card.style.cssText = 'background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;';
+                
+                const isMod = evt.isModification;
+                const statusLabel = isMod ? 'Modification Pending' : evt.status;
+                const statusClass = isMod ? 'pending' : evt.status;
+
                 card.innerHTML = `
-                    <div>
-                        <div style="font-weight: 600; font-size: 1.05rem; color: #ffffff;">
-                            🗓️ ${evt.startDate} → ${evt.endDate}
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="font-weight: 600; font-size: 1.05rem; color: #ffffff; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <span>🗓️ ${evt.startDate} → ${evt.endDate}</span>
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
                         </div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 3px;">
+                        ${isMod && evt.originalStartDate ? `
+                        <div style="font-size: 0.82rem; color: #f59e0b; margin-top: 3px; font-weight: 500;">
+                            Requested modification from original dates: ${evt.originalStartDate} → ${evt.originalEndDate}
+                        </div>` : ''}
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
                             ${evt.guestCount} ${evt.guestCount === 1 ? 'Guest' : 'Guests'} &nbsp;|&nbsp; Submitted ${evt.createdAt}
                         </div>
-                        ${evt.notes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 4px;">Notes: "${evt.notes}"</div>` : ''}
+                        ${evt.modificationNotes ? `<div style="font-size: 0.85rem; color: #f59e0b; margin-top: 4px;">Modification notes: "${evt.modificationNotes}"</div>` : (evt.notes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 4px;">Notes: "${evt.notes}"</div>` : '')}
                     </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span class="status-badge ${evt.status}">${evt.status}</span>
-                        ${evt.status === 'pending' ? `<button onclick="cancelMyRequest('${evt.id}')" class="btn-sm" style="color: #dc2626;">Cancel</button>` : ''}
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <button onclick="openModifyStayModal('${evt.id}')" class="btn-sm" style="background: rgba(197, 160, 89, 0.15); color: #c5a059; border: 1px solid var(--accent-gold); font-weight: 600;">✏️ Request Modification</button>
+                        <button onclick="cancelMyStay('${evt.id}')" class="btn-sm" style="background: rgba(220, 38, 38, 0.08); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 600;">✕ Cancel Booking</button>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function cancelMyRequest(id) {
-            if (confirm('Are you sure you want to cancel this stay request?')) {
-                PortalCalendar.cancelEvent(id);
-                showToast('Request cancelled');
+        function openModifyStayModal(id) {
+            const db = PortalDB.get();
+            const evt = db.events.find(e => e.id === id);
+            if (!evt) return;
+
+            document.getElementById('modEventId').value = evt.id;
+            document.getElementById('modStartDate').value = evt.startDate;
+            document.getElementById('modEndDate').value = evt.endDate;
+            document.getElementById('modGuestCount').value = evt.guestCount || 2;
+            document.getElementById('modNotes').value = evt.modificationNotes || '';
+            document.getElementById('modCurrentSummary').innerText = `${evt.startDate} → ${evt.endDate} (${evt.guestCount} ${evt.guestCount === 1 ? 'guest' : 'guests'})`;
+
+            const modal = document.getElementById('modifyStayModal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeModifyStayModal() {
+            const modal = document.getElementById('modifyStayModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        async function handleModifyStaySubmit(e) {
+            e.preventDefault();
+            const user = PortalAuth.getCurrentUser();
+            if (!user) return;
+
+            const id = document.getElementById('modEventId').value;
+            const newStart = document.getElementById('modStartDate').value;
+            const newEnd = document.getElementById('modEndDate').value;
+            const newCount = document.getElementById('modGuestCount').value;
+            const modNotes = document.getElementById('modNotes').value;
+
+            const res = await PortalCalendar.requestStayModification(user.id, id, newStart, newEnd, newCount, modNotes);
+            if (res.success) {
+                showToast('Stay modification requested! Admin has been notified.');
+                closeModifyStayModal();
                 renderCalendar();
                 renderMyRequests();
-                const user = PortalAuth.getCurrentUser();
                 if (isUserAdmin(user)) renderAdminSection();
+            } else {
+                showToast(res.message);
+            }
+        }
+
+        async function cancelMyStay(id) {
+            const db = PortalDB.get();
+            const evt = db.events.find(e => e.id === id);
+            const dateLabel = evt ? ` (${evt.startDate} to ${evt.endDate})` : '';
+
+            if (confirm(`Are you sure you want to cancel this booking${dateLabel}? This will free up the dates on the calendar.`)) {
+                const user = PortalAuth.getCurrentUser();
+                const res = await PortalCalendar.cancelStayByGuest(user ? user.id : null, id);
+                if (res.success) {
+                    showToast('Booking cancelled. Notification email sent.');
+                    renderCalendar();
+                    renderMyRequests();
+                    if (isUserAdmin(user)) renderAdminSection();
+                } else {
+                    showToast(res.message || 'Error cancelling booking');
+                }
             }
         }
 
@@ -1951,22 +2085,30 @@
                 const member = PortalMembers.getById(req.userId) || PortalMembers.getByUsername(req.username);
                 const item = document.createElement('div');
                 item.style.cssText = 'background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;';
+                const isMod = req.isModification;
                 item.innerHTML = `
                     <div>
-                        <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">
-                            ${req.guestName} <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: normal;">(@${req.username})</span>
+                        <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span>${req.guestName}</span>
+                            <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: normal;">(@${req.username})</span>
+                            ${isMod ? `<span class="status-badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); font-weight: 600; font-size: 0.75rem;">🔄 Modification Request</span>` : ''}
                         </div>
                         <div style="font-size: 0.95rem; font-weight: 600; color: var(--accent-gold); margin: 3px 0;">
                             🗓️ ${req.startDate} → ${req.endDate} (${req.guestCount} ${req.guestCount === 1 ? 'Guest' : 'Guests'})
                         </div>
+                        ${isMod && req.originalStartDate ? `
+                        <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 3px;">
+                            <strong>Original Booking Dates:</strong> ${req.originalStartDate} → ${req.originalEndDate}
+                        </div>` : ''}
                         <div style="font-size: 0.85rem; color: var(--text-muted);">
                             ✉️ ${member ? member.email : 'N/A'} &nbsp;|&nbsp; 📞 ${member ? member.phone : 'N/A'}
                         </div>
-                        ${req.notes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 5px; background: rgba(197, 160, 89, 0.15); padding: 5px 10px; border-radius: 6px;">Notes: "${req.notes}"</div>` : ''}
+                        ${req.modificationNotes ? `<div style="font-size: 0.85rem; color: #f59e0b; margin-top: 5px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 6px 10px; border-radius: 6px;"><strong>Modification Reason:</strong> "${req.modificationNotes}"</div>` : ''}
+                        ${req.notes && !req.modificationNotes ? `<div style="font-size: 0.85rem; color: #ffffff; margin-top: 5px; background: rgba(197, 160, 89, 0.15); padding: 5px 10px; border-radius: 6px;">Notes: "${req.notes}"</div>` : ''}
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button onclick="approveStay('${req.id}')" class="btn-sm btn-action-approve">✓ Approve & Email</button>
-                        <button onclick="denyStay('${req.id}')" class="btn-sm btn-action-deny">✕ Deny & Email</button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="approveStay('${req.id}')" class="btn-sm btn-action-approve">✓ ${isMod ? 'Approve Modification' : 'Approve & Email'}</button>
+                        <button onclick="denyStay('${req.id}')" class="btn-sm btn-action-deny">✕ ${isMod ? 'Deny Modification' : 'Deny & Email'}</button>
                     </div>
                 `;
                 queueEl.appendChild(item);
