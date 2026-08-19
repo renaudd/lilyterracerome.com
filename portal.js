@@ -186,14 +186,33 @@ const INITIAL_DB = {
 const PortalFirebase = {
     dbRef: null,
     isInitialized: false,
+    initPromise: null,
 
     init() {
-        if (this.isInitialized) return;
-        if (typeof firebase !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY') {
+        if (this.initPromise) return this.initPromise;
+        if (typeof firebase === 'undefined' || typeof firebaseConfig === 'undefined' || !firebaseConfig.apiKey || firebaseConfig.apiKey === 'YOUR_API_KEY') {
+            return Promise.resolve();
+        }
+
+        this.initPromise = (async () => {
             try {
                 if (!firebase.apps || !firebase.apps.length) {
                     firebase.initializeApp(firebaseConfig);
                 }
+
+                // If Firebase Auth is loaded, ensure user is signed in (anonymously)
+                if (firebase.auth) {
+                    const auth = firebase.auth();
+                    if (!auth.currentUser) {
+                        try {
+                            await auth.signInAnonymously();
+                            console.log('%c[FIREBASE AUTH] Signed in anonymously', 'color: #28a745;');
+                        } catch (authErr) {
+                            console.warn('[FIREBASE AUTH] Anonymous sign-in warning:', authErr);
+                        }
+                    }
+                }
+
                 this.dbRef = firebase.database().ref('roma_portal_db');
                 this.isInitialized = true;
 
@@ -213,23 +232,29 @@ const PortalFirebase = {
                         }
                     } else {
                         // If cloud database is empty, seed it with initial database
-                        this.dbRef.set(INITIAL_DB);
+                        this.dbRef.set(INITIAL_DB).catch(err => {
+                            console.warn('[FIREBASE] Initial seed write warning:', err);
+                        });
                     }
+                }, (error) => {
+                    console.warn('[FIREBASE] Realtime listener permission or sync warning (using local storage):', error);
                 });
                 console.log('%c[FIREBASE] Realtime Cloud Database Connected & Synced', 'color: #28a745; font-weight: bold;');
             } catch (e) {
                 console.warn('[FIREBASE] Cloud initialization warning (using local storage fallback):', e);
             }
-        }
+        })();
+
+        return this.initPromise;
     },
 
-    syncToCloud(db) {
+    async syncToCloud(db) {
         if (!this.isInitialized) {
-            this.init();
+            await this.init();
         }
-        if (this.isInitialized && this.dbRef) {
+        if (this.dbRef) {
             try {
-                this.dbRef.set(db);
+                await this.dbRef.set(db);
             } catch (e) {
                 console.error('[FIREBASE] Sync to cloud error:', e);
             }

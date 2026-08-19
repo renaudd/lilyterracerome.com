@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "roma_portal_db": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
