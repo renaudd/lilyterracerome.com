@@ -99,12 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
         learnMoreBtn.addEventListener('click', () => {
             infoPanel.classList.toggle('visible');
             if (infoPanel.classList.contains('visible')) {
-                learnMoreBtn.innerText = 'Close';
+                learnMoreBtn.innerHTML = '<span style="font-size: 1.1rem; margin-right: 6px;">✕</span> Close';
                 setTimeout(() => {
                     infoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                learnMoreBtn.innerText = 'Explore the Pad';
+                learnMoreBtn.innerHTML = '<img src="bluegoldlogo.png" alt="" class="btn-icon"> Explore the Residence';
             }
         });
     }

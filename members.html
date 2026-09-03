@@ -288,6 +288,226 @@
             display: block;
         }
 
+        /* Member Portal Photos Grid */
+        .photos-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .photos-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0 0 10px 0;
+        }
+
+        .photos-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .member-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .member-photo-card {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .member-photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+            border-color: var(--accent-gold);
+        }
+
+        .member-photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .member-photo-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .member-photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px 16px 14px 16px;
+            background: linear-gradient(to top, rgba(10, 20, 29, 0.95) 0%, rgba(10, 20, 29, 0.6) 60%, transparent 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+
+        .member-photo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .member-photo-zoom {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .member-photo-card:hover .member-photo-zoom {
+            opacity: 1;
+        }
+
+        /* Lightbox Styles */
+        .portal-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 9, 15, 0.95);
+            backdrop-filter: blur(15px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: zoom-out;
+        }
+
+        .portal-lightbox.active {
+            display: flex;
+        }
+
+        .portal-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default;
+        }
+
+        .portal-lightbox-content img {
+            max-width: 100%;
+            max-height: 82vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+        }
+
+        .portal-lightbox-caption {
+            margin-top: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--accent-gold);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .portal-lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: rgba(10, 20, 29, 0.7);
+            border: 1px solid var(--border-color);
+            color: var(--accent-gold);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            z-index: 10001;
+            line-height: 1;
+        }
+
+        .portal-lightbox-close:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            transform: scale(1.1);
+        }
+
+        .portal-lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 20, 29, 0.7);
+            border: 1px solid var(--border-color);
+            color: var(--accent-gold);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            z-index: 10001;
+            backdrop-filter: blur(8px);
+        }
+
+        .portal-lightbox-nav:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .portal-lightbox-nav.prev {
+            left: 30px;
+        }
+
+        .portal-lightbox-nav.next {
+            right: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .member-photos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .portal-lightbox-nav.prev { left: 10px; }
+            .portal-lightbox-nav.next { right: 10px; }
+            .portal-lightbox-nav { width: 38px; height: 38px; font-size: 1.1rem; }
+            .portal-lightbox-close { top: 15px; right: 15px; width: 38px; height: 38px; font-size: 1.4rem; }
+            .member-photos-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .photos-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -836,6 +1056,7 @@
             <div class="portal-tabs">
                 <button class="portal-tab-btn active" onclick="switchTab('calendar')">🗓️ Calendar & Requests</button>
                 <button class="portal-tab-btn" onclick="switchTab('guide')">📖 Apartment Guide</button>
+                <button class="portal-tab-btn" onclick="switchTab('photos')">📷 Photos</button>
                 <button class="portal-tab-btn" onclick="switchTab('guestbook')">✍️ Guest Book</button>
                 <button class="portal-tab-btn" onclick="switchTab('profile')">👤 Profile & Security</button>
                 <!-- Admin-Only Tab Button (Strictly hidden for normal members) -->
@@ -1039,8 +1260,14 @@
                                     just in front of <a href="https://maps.app.goo.gl/M9YfDFNwSePiKQot7" target="_blank">Drunken Ship</a>.</li>
                             </ul>
                             <p><strong>Nearest sorted trash bins:</strong> Located at <a href="https://www.google.com/maps/search/?api=1&query=Via+della+Pieta+15+Rome" target="_blank">Via della Pietà, 15</a>.</p>
+                            <img src="assets/photos/Sorted_Trash.jpg" alt="Nearest sorted trash bins at Via della Pietà, 15"
+                                style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 10px; margin: 12px 0 18px 0; border: 1px solid var(--border-color); cursor: pointer;"
+                                onclick="openPortalLightbox('assets/photos/Sorted_Trash.jpg', 'Nearest sorted trash bins at Via della Pietà, 15')">
                             <p>Leave bagged trash around the corner on Vicolo delle Grotte next to the flamingo graffiti. Monday - Paper, Tuesday -
                                 Plastic, Wednesday - Mixed, Thursday - Paper, Friday - Plastic</p>
+                            <img src="assets/photos/Trash_Bags.jpg" alt="Trash bags collection point next to flamingo graffiti on Vicolo delle Grotte"
+                                style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 10px; margin: 12px 0 18px 0; border: 1px solid var(--border-color); cursor: pointer;"
+                                onclick="openPortalLightbox('assets/photos/Trash_Bags.jpg', 'Bagged trash collection point next to flamingo graffiti on Vicolo delle Grotte')">
                         </div>
 
                         <div class="guide-item">
@@ -1180,6 +1407,79 @@
                                     azienda agricola</a>, over by
                                 Piazza Navona. For high end charcuterie (French cheeses and Spanish ham), go to <a
                                     href="https://maps.app.goo.gl/VBMAUcFGAUCFhfWG7" target="_blank">Roscioli Salumeria</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: PHOTOS -->
+            <div id="tab-photos" class="tab-content">
+                <div class="photos-header">
+                    <h2>Residence Gallery</h2>
+                    <p>High-resolution photographs of the apartment, private terrace, and surrounding views.</p>
+                </div>
+                <div class="member-photos-grid">
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Front_Door.jpg', 'Front Door')">
+                        <img src="assets/photos/Front_Door.jpg" alt="Front Door" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Front Door</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_Bathroom.jpg', 'Bathroom')">
+                        <img src="assets/photos/Giglio_Bathroom.jpg" alt="Bathroom" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Bathroom</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_Fireplace.jpg', 'Fireplace')">
+                        <img src="assets/photos/Giglio_Fireplace.jpg" alt="Fireplace" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Fireplace</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Lily_Terrace.jpg', 'Lily Terrace')">
+                        <img src="assets/photos/Lily_Terrace.jpg" alt="Lily Terrace" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Lily Terrace</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_Exterior.jpg', 'Palazzo Exterior')">
+                        <img src="assets/photos/Giglio_Exterior.jpg" alt="Palazzo Exterior" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Palazzo Exterior</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_Master.jpg', 'Master Bedroom')">
+                        <img src="assets/photos/Giglio_Master.jpg" alt="Master Bedroom" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Master Bedroom</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_TV.jpg', 'Living Room & TV')">
+                        <img src="assets/photos/Giglio_TV.jpg" alt="Living Room & TV" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Living Room & TV</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Giglio_Twins.jpg', 'Twin Bedroom')">
+                        <img src="assets/photos/Giglio_Twins.jpg" alt="Twin Bedroom" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Twin Bedroom</span>
+                            <span class="member-photo-zoom">🔍</span>
+                        </div>
+                    </div>
+                    <div class="member-photo-card" onclick="openPortalLightbox('assets/photos/Rooftops.jpg', 'Roman Rooftops View')">
+                        <img src="assets/photos/Rooftops.jpg" alt="Roman Rooftops View" loading="lazy">
+                        <div class="member-photo-overlay">
+                            <span class="member-photo-title">Roman Rooftops</span>
+                            <span class="member-photo-zoom">🔍</span>
                         </div>
                     </div>
                 </div>
@@ -2537,7 +2837,90 @@
                 toast.classList.remove('visible');
             }, 4000);
         }
+
+        /* Lightbox Logic */
+        const memberGalleryPhotos = [
+            { src: 'assets/photos/Front_Door.jpg', title: 'Front Door' },
+            { src: 'assets/photos/Giglio_Bathroom.jpg', title: 'Bathroom' },
+            { src: 'assets/photos/Giglio_Fireplace.jpg', title: 'Fireplace' },
+            { src: 'assets/photos/Lily_Terrace.jpg', title: 'Lily Terrace' },
+            { src: 'assets/photos/Giglio_Exterior.jpg', title: 'Palazzo Exterior' },
+            { src: 'assets/photos/Giglio_Master.jpg', title: 'Master Bedroom' },
+            { src: 'assets/photos/Giglio_TV.jpg', title: 'Living Room & TV' },
+            { src: 'assets/photos/Giglio_Twins.jpg', title: 'Twin Bedroom' },
+            { src: 'assets/photos/Rooftops.jpg', title: 'Roman Rooftops' }
+        ];
+        let currentLightboxIndex = -1;
+
+        function openPortalLightbox(src, title) {
+            const modal = document.getElementById('portalLightboxModal');
+            const img = document.getElementById('portalLightboxImg');
+            const caption = document.getElementById('portalLightboxCaption');
+            const prevBtn = document.getElementById('portalLightboxPrev');
+            const nextBtn = document.getElementById('portalLightboxNext');
+
+            currentLightboxIndex = memberGalleryPhotos.findIndex(p => p.src === src);
+            if (modal && img) {
+                img.src = src;
+                img.alt = title || '';
+                if (caption) caption.textContent = title || '';
+
+                if (currentLightboxIndex >= 0) {
+                    if (prevBtn) prevBtn.style.display = 'flex';
+                    if (nextBtn) nextBtn.style.display = 'flex';
+                } else {
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                }
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function navigateLightbox(direction, e) {
+            if (e) e.stopPropagation();
+            if (currentLightboxIndex < 0) return;
+            currentLightboxIndex = (currentLightboxIndex + direction + memberGalleryPhotos.length) % memberGalleryPhotos.length;
+            const photo = memberGalleryPhotos[currentLightboxIndex];
+            const img = document.getElementById('portalLightboxImg');
+            const caption = document.getElementById('portalLightboxCaption');
+            if (img && photo) {
+                img.src = photo.src;
+                img.alt = photo.title;
+                if (caption) caption.textContent = photo.title;
+            }
+        }
+
+        function closePortalLightbox(e) {
+            if (e && e.target && e.target.id === 'portalLightboxImg') return;
+            const modal = document.getElementById('portalLightboxModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('portalLightboxModal');
+            if (modal && modal.classList.contains('active')) {
+                if (e.key === 'Escape') closePortalLightbox();
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+            }
+        });
     </script>
+
+    <!-- Lightbox Modal -->
+    <div id="portalLightboxModal" class="portal-lightbox" onclick="closePortalLightbox(event)">
+        <button class="portal-lightbox-close" onclick="closePortalLightbox(event)" aria-label="Close">&times;</button>
+        <button class="portal-lightbox-nav prev" id="portalLightboxPrev" onclick="navigateLightbox(-1, event)" aria-label="Previous">&#10094;</button>
+        <div class="portal-lightbox-content" onclick="event.stopPropagation()">
+            <img id="portalLightboxImg" src="" alt="">
+            <div id="portalLightboxCaption" class="portal-lightbox-caption"></div>
+        </div>
+        <button class="portal-lightbox-nav next" id="portalLightboxNext" onclick="navigateLightbox(1, event)" aria-label="Next">&#10095;</button>
+    </div>
 </body>
 
 </html>

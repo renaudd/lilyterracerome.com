@@ -494,6 +494,7 @@
         .info-panel.visible {
             background-color: #0a141d !important;
             color: #ffffff !important;
+            max-height: 6000px !important;
             padding: 60px 40px !important;
             margin-left: -40px !important;
             margin-right: -40px !important;
@@ -524,6 +525,137 @@
             color: #0a141d !important;
         }
 
+        /* Residence Photo Gallery */
+        .residence-gallery-section {
+            margin: 10px 0 35px 0;
+            text-align: center;
+        }
+
+        .residence-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0 0 35px 0;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .residence-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .residence-photo-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+        }
+
+        .residence-photo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent-gold);
+        }
+
+        .residence-photo-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .residence-photo-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .residence-photo-card.panoramic {
+            grid-column: 1 / -1;
+            aspect-ratio: 21 / 9;
+            max-height: 380px;
+        }
+
+        /* Lightbox Modal */
+        .residence-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 9, 15, 0.95);
+            backdrop-filter: blur(15px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 7000;
+            padding: 25px;
+            box-sizing: border-box;
+            cursor: zoom-out;
+        }
+
+        .residence-lightbox.active {
+            display: flex;
+        }
+
+        .residence-lightbox-content {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default;
+        }
+
+        .residence-lightbox-content img {
+            max-width: 100%;
+            max-height: 84vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .residence-lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            line-height: 1;
+            background: transparent;
+            border: none;
+        }
+
+        .residence-lightbox-close:hover {
+            transform: scale(1.15);
+            color: #ffffff;
+        }
+
+        @media (max-width: 650px) {
+            .residence-photo-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .residence-photo-card.panoramic {
+                grid-column: 1;
+                aspect-ratio: 16 / 9;
+            }
+            .residence-title {
+                font-size: 1.7rem;
+            }
+        }
     </style>
 </head>
 
@@ -568,33 +700,30 @@
                 Explore the Residence
             </button>
             <div class="info-panel" id="infoPanel">
-                <div class="property-grid">
-                    <div class="property-text">
-                        <h2>Historic Elegance in the Heart of Regola.</h2>
-                        <p>
-                            Occupying the upper levels of a historic palazzo, Lily Terrace epitomizes the timeless
-                            sophistication of Rome. Formerly
-                            the residence of legendary Spanish painter <strong><a href="https://museoramongaya.es/"
-                        target="_blank">Ramón Gaya</a></strong>, the residence offers a masterful
-                            blend of heritage and
-                            contemporary luxury.
-                        </p>
-                        <p>
-                            A stone's throw from
-                            Campo de' Fiori, the property is defined by extraordinary light, sweeping
-                            vistas across Roman rooftops, and
-                            an atmosphere of profound serenity.
-                        </p>
-                    </div>
-                    <div class="property-details">
-                        <ul class="amenities-list">
-                            <li>Climate Control <span>6kW Power / A/C</span></li>
-                            <li>Outdoor Living <span>Private Terrace</span></li>
-                            <li>Culinary Suite <span>Design / Dishwasher</span></li>
-                            <li>Laundry <span>Washer & Dryer</span></li>
-                            <li>Living Area <span>Wood-burning Fireplace</span></li>
-                            <li>Bathrooms <span>Modern Design</span></li>
-                        </ul>
+                <div class="residence-gallery-section">
+                    <h2 class="residence-title">Historic Home in the Heart of Rome</h2>
+                    <div class="residence-photo-grid">
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Exterior.jpg', 'Palazzo Exterior')">
+                            <img src="assets/photos/Giglio_Exterior.jpg" alt="Palazzo Exterior" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Master.jpg', 'Master Bedroom')">
+                            <img src="assets/photos/Giglio_Master.jpg" alt="Master Bedroom" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card panoramic" onclick="openResidenceLightbox('assets/photos/Trajan_Art.jpg', 'Trajan Art Panorama')">
+                            <img src="assets/photos/Trajan_Art.jpg" alt="Trajan Art" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_TV.jpg', 'Living Area & TV')">
+                            <img src="assets/photos/Giglio_TV.jpg" alt="Living Area & TV" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Twins.jpg', 'Twin Bedroom')">
+                            <img src="assets/photos/Giglio_Twins.jpg" alt="Twin Bedroom" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Palermo_Art.jpg', 'Palermo Art')">
+                            <img src="assets/photos/Palermo_Art.jpg" alt="Palermo Art" loading="lazy">
+                        </div>
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Caracalla_Art.jpg', 'Caracalla Art')">
+                            <img src="assets/photos/Caracalla_Art.jpg" alt="Caracalla Art" loading="lazy">
+                        </div>
                     </div>
                 </div>
 
@@ -712,8 +841,39 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Residence Lightbox Modal -->
+    <div id="residenceLightbox" class="residence-lightbox" onclick="closeResidenceLightbox(event)">
+        <button class="residence-lightbox-close" onclick="closeResidenceLightbox(event)" aria-label="Close">&times;</button>
+        <div class="residence-lightbox-content" onclick="event.stopPropagation()">
+            <img id="residenceLightboxImg" src="" alt="Historic Home in the Heart of Rome">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openResidenceLightbox(src, alt) {
+            const modal = document.getElementById('residenceLightbox');
+            const img = document.getElementById('residenceLightboxImg');
+            if (modal && img) {
+                img.src = src;
+                img.alt = alt || '';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeResidenceLightbox(e) {
+            if (e && e.target && e.target.id === 'residenceLightboxImg') return;
+            const modal = document.getElementById('residenceLightbox');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeResidenceLightbox();
+        });
+    </script>
 </body>
 
 </html>
