@@ -584,6 +584,37 @@
             max-height: 380px;
         }
 
+        .residence-photo-card.photo-trajan img {
+            object-fit: cover;
+            transform: scale(2.7);
+            transform-origin: 47% 50%;
+        }
+
+        .residence-photo-card.photo-trajan:hover img {
+            transform: scale(2.78);
+        }
+
+        .residence-photo-card.photo-palermo img {
+            object-fit: cover;
+            transform: scale(3.9);
+            transform-origin: 33.3% 6.4%;
+        }
+
+        .residence-photo-card.photo-palermo:hover img {
+            transform: scale(4.05);
+        }
+
+        .residence-photo-card.photo-caracalla img {
+            object-fit: cover;
+            object-position: center top;
+            transform-origin: center top;
+        }
+
+        .residence-photo-card.photo-caracalla:hover img {
+            transform: scale(1.04);
+            transform-origin: center top;
+        }
+
         /* Lightbox Modal */
         .residence-lightbox {
             position: fixed;
@@ -703,13 +734,15 @@
                 <div class="residence-gallery-section">
                     <h2 class="residence-title">Historic Home in the Heart of Rome</h2>
                     <div class="residence-photo-grid">
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Exterior.jpg', 'Palazzo Exterior')">
-                            <img src="assets/photos/Giglio_Exterior.jpg" alt="Palazzo Exterior" loading="lazy">
+                        <div class="residence-photo-card"
+                            onclick="openResidenceLightbox('assets/photos/Giglio_Exterior.jpg', 'Vicolo Exterior')">
+                            <img src="assets/photos/Giglio_Exterior.jpg" alt="Vicolo Exterior" loading="lazy">
                         </div>
                         <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Master.jpg', 'Master Bedroom')">
                             <img src="assets/photos/Giglio_Master.jpg" alt="Master Bedroom" loading="lazy">
                         </div>
-                        <div class="residence-photo-card panoramic" onclick="openResidenceLightbox('assets/photos/Trajan_Art.jpg', 'Trajan Art Panorama')">
+                        <div class="residence-photo-card panoramic photo-trajan"
+                            onclick="openResidenceLightbox('assets/photos/Trajan_Art.jpg', 'Trajan Art Panorama')">
                             <img src="assets/photos/Trajan_Art.jpg" alt="Trajan Art" loading="lazy">
                         </div>
                         <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_TV.jpg', 'Living Area & TV')">
@@ -718,22 +751,17 @@
                         <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Twins.jpg', 'Twin Bedroom')">
                             <img src="assets/photos/Giglio_Twins.jpg" alt="Twin Bedroom" loading="lazy">
                         </div>
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Palermo_Art.jpg', 'Palermo Art')">
+                        <div class="residence-photo-card photo-palermo" onclick="openResidenceLightbox('assets/photos/Palermo_Art.jpg', 'Palermo Art')">
                             <img src="assets/photos/Palermo_Art.jpg" alt="Palermo Art" loading="lazy">
                         </div>
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Caracalla_Art.jpg', 'Caracalla Art')">
+                        <div class="residence-photo-card photo-caracalla" onclick="openResidenceLightbox('assets/photos/Caracalla_Art.jpg', 'Caracalla Art')">
                             <img src="assets/photos/Caracalla_Art.jpg" alt="Caracalla Art" loading="lazy">
                         </div>
                     </div>
                 </div>
 
-                <div class="become-regola-section" style="text-align: center; margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(197, 160, 89, 0.25);">
-                    <div class="form-title"
-                        style="margin-bottom: 8px; font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold);">
-                        Apply for Membership</div>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
-                        Once approved by the administration, you will receive full access to our booking calendar and member portal.
-                    </p>
+                <div class="become-regola-section"
+                    style="text-align: center; margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(197, 160, 89, 0.25);">
                     <button type="button" class="btn-submit" onclick="openRegolaModal()" style="margin: 0 auto; display: inline-block; background: var(--accent-gold); color: #0a141d; border: none; padding: 12px 30px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
                         Become a Regola
                     </button>
@@ -744,10 +772,9 @@
         <!-- Become a Regola Application Modal -->
         <div id="regolaModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; box-sizing: border-box;">
             <div style="background: #0d1b27; border-radius: 20px; border: 1px solid var(--accent-gold); max-width: 480px; width: 100%; padding: 35px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); max-height: 90vh; overflow-y: auto; text-align: left;">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin: 0 0 10px 0; text-align: center;">Become a Regola</h3>
-                <p style="font-size: 0.88rem; color: var(--text-muted); text-align: center; margin-bottom: 25px;">
-                    Submit your membership application. All passwords are cryptographically protected.
-                </p>
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent-gold); margin: 0 0 10px 0; text-align: center;">
+                    Become a Regola</h3>
                 <form id="becomeRegolaForm" onsubmit="handleBecomeRegola(event)">
                     <div style="margin-bottom: 14px;">
                         <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px; color: var(--accent-gold);">Full Name</label>
