@@ -347,12 +347,15 @@ const PortalEmail = {
 
     async send({ to, recipientName = '', subject, body, type = 'general' }) {
         const db = PortalDB.get();
+        const automatedNotice = "\n\n---\nNote: This is an automated notification. Please do not reply directly to this email. For any questions or assistance, please contact Dash directly at dashiellrenaud@gmail.com.";
+        const fullBody = (body && !body.includes('dashiellrenaud@gmail.com')) ? (body + automatedNotice) : body;
+
         const emailRecord = {
             id: 'mail_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
             to,
             recipientName,
             subject,
-            body,
+            body: fullBody,
             type,
             sentAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
             status: 'queued'
@@ -374,9 +377,9 @@ const PortalEmail = {
                     replyTo: "dashiellrenaud@gmail.com",
                     reply_email: "dashiellrenaud@gmail.com",
                     subject: subject,
-                    message: body,
-                    body: body,
-                    content: body,
+                    message: fullBody,
+                    body: fullBody,
+                    content: fullBody,
                     notification_type: type
                 };
 
@@ -1227,12 +1230,16 @@ const PortalGuestbook = {
         return PortalDB.get().guestbook.sort((a, b) => b.id.localeCompare(a.id));
     },
 
-    add(userId, message) {
+    add(userId, message, photos = []) {
         if (!message || !message.trim()) return { success: false, message: 'Message cannot be empty' };
 
         const db = PortalDB.get();
         const user = db.users.find(u => u.id === userId);
         if (!user) return { success: false, message: 'User not found' };
+
+        const validPhotos = Array.isArray(photos)
+            ? photos.filter(p => typeof p === 'string' && p.trim().length > 0).slice(0, 4)
+            : [];
 
         const entry = {
             id: 'gb_' + Date.now(),
@@ -1240,7 +1247,8 @@ const PortalGuestbook = {
             author: user.name,
             username: user.username,
             date: new Date().toISOString().substring(0, 10),
-            message: message.trim()
+            message: message.trim(),
+            photos: validPhotos
         };
 
         db.guestbook.unshift(entry);

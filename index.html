@@ -650,11 +650,27 @@
 
         .residence-lightbox-content img {
             max-width: 100%;
-            max-height: 84vh;
+            max-height: 76vh;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .residence-lightbox-caption {
+            margin-top: 15px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+            max-width: 800px;
+            padding: 10px 22px;
+            background: rgba(10, 20, 29, 0.85);
+            border-radius: 8px;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            line-height: 1.5;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .residence-lightbox-close {
@@ -736,27 +752,27 @@
                     <h2 class="residence-title">Historic Home in the Heart of Rome</h2>
                     <div class="residence-photo-grid">
                         <div class="residence-photo-card"
-                            onclick="openResidenceLightbox('assets/photos/Giglio_Exterior.jpg', 'Vicolo Exterior')">
-                            <img src="assets/photos/Giglio_Exterior.jpg" alt="Vicolo Exterior" loading="lazy">
+                            onclick="openResidenceLightbox('assets/photos/Giglio_Exterior.jpg', 'Vicolo del Giglio is a quiet alley sandwiched between Campo de’ Fiori and Piazza Farnese.')">
+                            <img src="assets/photos/Giglio_Exterior.jpg" alt="Vicolo del Giglio is a quiet alley sandwiched between Campo de’ Fiori and Piazza Farnese." loading="lazy">
                         </div>
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Master.jpg', 'Master Bedroom')">
-                            <img src="assets/photos/Giglio_Master.jpg" alt="Master Bedroom" loading="lazy">
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Master.jpg', 'The upstairs bedroom is quiet, with a dedicated air conditioning unit.')">
+                            <img src="assets/photos/Giglio_Master.jpg" alt="The upstairs bedroom is quiet, with a dedicated air conditioning unit." loading="lazy">
                         </div>
                         <div class="residence-photo-card panoramic photo-trajan"
-                            onclick="openResidenceLightbox('assets/photos/Trajan_Art.jpg', 'Trajan Art Panorama')">
-                            <img src="assets/photos/Trajan_Art.jpg" alt="Trajan Art" loading="lazy">
+                            onclick="openResidenceLightbox('assets/photos/Trajan_Art.jpg', 'Mediterraneum by Oreste Baldini - Mercati di Traiano, Roma')">
+                            <img src="assets/photos/Trajan_Art.jpg" alt="Mediterraneum by Oreste Baldini - Mercati di Traiano, Roma" loading="lazy">
                         </div>
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_TV.jpg', 'Living Area & TV')">
-                            <img src="assets/photos/Giglio_TV.jpg" alt="Living Area & TV" loading="lazy">
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_TV.jpg', 'The living room features bright southeastern exposure and a fireplace.')">
+                            <img src="assets/photos/Giglio_TV.jpg" alt="The living room features bright southeastern exposure and a fireplace." loading="lazy">
                         </div>
-                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Twins.jpg', 'Twin Bedroom')">
-                            <img src="assets/photos/Giglio_Twins.jpg" alt="Twin Bedroom" loading="lazy">
+                        <div class="residence-photo-card" onclick="openResidenceLightbox('assets/photos/Giglio_Twins.jpg', 'There are two twin beds downstairs.')">
+                            <img src="assets/photos/Giglio_Twins.jpg" alt="There are two twin beds downstairs." loading="lazy">
                         </div>
-                        <div class="residence-photo-card photo-palermo" onclick="openResidenceLightbox('assets/photos/Palermo_Art.jpg', 'Palermo Art')">
-                            <img src="assets/photos/Palermo_Art.jpg" alt="Palermo Art" loading="lazy">
+                        <div class="residence-photo-card photo-palermo" onclick="openResidenceLightbox('assets/photos/Palermo_Art.jpg', 'Pompeiana hall fresco - Palazzo dei Normanni, Palermo')">
+                            <img src="assets/photos/Palermo_Art.jpg" alt="Pompeiana hall fresco - Palazzo dei Normanni, Palermo" loading="lazy">
                         </div>
-                        <div class="residence-photo-card photo-caracalla" onclick="openResidenceLightbox('assets/photos/Caracalla_Art.jpg', 'Caracalla Art')">
-                            <img src="assets/photos/Caracalla_Art.jpg" alt="Caracalla Art" loading="lazy">
+                        <div class="residence-photo-card photo-caracalla" onclick="openResidenceLightbox('assets/photos/Caracalla_Art.jpg', 'Domus fresco - Terme di Caracalla, Roma')">
+                            <img src="assets/photos/Caracalla_Art.jpg" alt="Domus fresco - Terme di Caracalla, Roma" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -876,16 +892,22 @@
         <button class="residence-lightbox-close" onclick="closeResidenceLightbox(event)" aria-label="Close">&times;</button>
         <div class="residence-lightbox-content" onclick="event.stopPropagation()">
             <img id="residenceLightboxImg" src="" alt="Historic Home in the Heart of Rome">
+            <div id="residenceLightboxCaption" class="residence-lightbox-caption"></div>
         </div>
     </div>
 
     <script type="text/javascript">
-        function openResidenceLightbox(src, alt) {
+        function openResidenceLightbox(src, caption) {
             const modal = document.getElementById('residenceLightbox');
             const img = document.getElementById('residenceLightboxImg');
+            const cap = document.getElementById('residenceLightboxCaption');
             if (modal && img) {
                 img.src = src;
-                img.alt = alt || '';
+                img.alt = caption || '';
+                if (cap) {
+                    cap.textContent = caption || '';
+                    cap.style.display = caption ? 'block' : 'none';
+                }
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }

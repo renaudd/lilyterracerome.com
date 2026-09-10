@@ -812,6 +812,99 @@
             margin: 0;
         }
 
+        /* Guest Book Photos */
+        .guestbook-upload-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .guestbook-photo-previews {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .guestbook-photo-chip {
+            position: relative;
+            width: 68px;
+            height: 68px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .guestbook-photo-chip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .guestbook-photo-chip-remove {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            padding: 0;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .guestbook-photo-chip-remove:hover {
+            background: #e04444;
+            transform: scale(1.1);
+        }
+
+        .guestbook-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+            max-width: 480px;
+        }
+
+        .guestbook-photo-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .guestbook-photo-item:hover {
+            transform: translateY(-2px) scale(1.02);
+            border-color: var(--accent-gold);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        .guestbook-photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         /* Guide Sections */
         .guide-grid {
             display: grid;
@@ -1153,12 +1246,20 @@
                             <h3><span class="guide-icon">🏠</span> Address</h3>
                             <p><strong>Vicolo del Giglio, 2a<br>Roma, RM 00186</strong></p>
                             <p>The closest major landmark is Piazza Farnese, which is the closest most cabs can reach.</p>
+                            <img src="assets/photos/Front_Door.jpg" alt="Building front door at Vicolo del Giglio, 2a"
+                                style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 10px; margin: 12px 0 18px 0; border: 1px solid var(--border-color); cursor: pointer;"
+                                onclick="openPortalLightbox('assets/photos/Front_Door.jpg', 'Building front door at Vicolo del Giglio, 2a')">
                         </div>
 
                         <div class="guide-item">
-                            <h3><span class="guide-icon">💸</span> Expenses</h3>
-                            <p>The condo is entirely free for you to use. But if you insist on covering expenses, it costs €70 to have the apartment cleaned, and utilities for the apartment cost roughly €10 a day.</p>
-                            <p>Contact Dash if you would like to have the condo cleaned during your stay.</p>
+                            <h3><span class="guide-icon">🔑</span> Key &amp; Building Access</h3>
+                            <p><strong>Building Door:</strong> Insert the long, round-back "CISA" key into the lower key hole with teeth up, turn clockwise a quarter turn, then push the door open.</p>
+                            <p>Once inside, press any button that has a little dot of light on it to illuminate the
+                                stairwell.</p>
+                            <p><strong>Apartment Door:</strong> At the top of the stairs, open the door on the left (unlocked), and follow the
+                                veranda to the green shutter door, which is also unlocked. The small round-back key opens the door to
+                                the apartment.</p>
+                            <p>All doors lock automatically when closed.</p>
                         </div>
 
                         <div class="guide-item">
@@ -1172,17 +1273,6 @@
                             <p>Clean and put away the dishes.</p>
                             <p>Leave any dirty sheets, pillowcases, and towels in the laundry hamper.</p>
                             <p>Leave the keys in the key bowl in the living room.</p>
-                        </div>
-
-                        <div class="guide-item">
-                            <h3><span class="guide-icon">🔑</span> Key &amp; Building Access</h3>
-                            <p><strong>Building Door:</strong> Long, round-back "CISA" key (insert with teeth up and turn clockwise).</p>
-                            <p>Once inside, press any button that has a little dot of light on it to illuminate the
-                                stairwell.</p>
-                            <p><strong>Apartment Door:</strong> At the top of the stairs, open the door on the left (unlocked), and follow the
-                                veranda to the green shutter door, which is also unlocked. The small round-back key opens the door to
-                                the apartment.</p>
-                            <p>All doors lock automatically when closed.</p>
                         </div>
 
                         <div class="guide-item">
@@ -1349,6 +1439,11 @@
                                 <li><strong>Excuse me</strong> – Scusi / Scusa</li>
                                 <li><strong>It's a pleasure to meet you</strong> – Piacere</li>
                                 <li><strong>Hello</strong> – Ciao / Salve / Salute / Buongiorno</li>
+                                <li><strong>I’m sorry</strong> – Mi dispiace</li>
+                                <li><strong>Forgive me</strong> – Perdonami</li>
+                                <li><strong>My apologies</strong> – Chiedo scusa</li>
+                                <li><strong>My mistake</strong> – Errore mio</li>
+                                <li><strong>You’re Right</strong> – Hai ragione</li>
                             </ul>
                         </div>
 
@@ -1407,6 +1502,12 @@
                                     azienda agricola</a>, over by
                                 Piazza Navona. For high end charcuterie (French cheeses and Spanish ham), go to <a
                                     href="https://maps.app.goo.gl/VBMAUcFGAUCFhfWG7" target="_blank">Roscioli Salumeria</a>.</p>
+                        </div>
+
+                        <div class="guide-item">
+                            <h3><span class="guide-icon">💸</span> Expenses</h3>
+                            <p>The condo is entirely free for you to use. But if you insist on covering expenses, it costs €70 to have the apartment cleaned, and utilities for the apartment cost roughly €10 a day.</p>
+                            <p>Contact Dash if you would like to have the condo cleaned during your stay.</p>
                         </div>
                     </div>
                 </div>
@@ -1497,11 +1598,24 @@
 
                     <!-- Add Comment Form -->
                     <form id="guestbookForm" onsubmit="handleGuestbookSubmit(event)" style="max-width: 650px; margin: 0 auto 40px auto; background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 15px; border: 1px solid var(--border-color);">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 0;">
                             <label>Leave a Reflection</label>
                             <textarea id="guestbookMessage" class="form-control" rows="3" placeholder="Share a favorite memory or recommendation..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-primary" style="width: auto; padding: 10px 24px;">Post to Guest Book</button>
+
+                        <!-- Photo Previews -->
+                        <div id="guestbookPhotoPreviews" class="guestbook-photo-previews"></div>
+
+                        <div class="guestbook-upload-row">
+                            <div>
+                                <input type="file" id="guestbookPhotoInput" accept="image/*" multiple style="display: none;" onchange="handleGuestbookPhotoSelect(event)">
+                                <button type="button" class="btn-outline" id="guestbookPhotoBtn" onclick="document.getElementById('guestbookPhotoInput').click()" style="width: auto; padding: 8px 16px; font-size: 0.85rem; border-color: var(--border-color); color: var(--text-main); display: inline-flex; align-items: center; gap: 8px;">
+                                    📷 Add Photos <span id="guestbookPhotoCount" style="color: var(--accent-gold); font-weight: 600;">(0/4)</span>
+                                </button>
+                                <small style="display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 5px;">Optional: attach up to 4 photos</small>
+                            </div>
+                            <button type="submit" id="guestbookSubmitBtn" class="btn-primary" style="width: auto; padding: 10px 24px;">Post to Guest Book</button>
+                        </div>
                     </form>
 
                     <!-- Comments Wall -->
@@ -2225,6 +2339,112 @@
         }
 
         // GUEST BOOK
+        let guestbookSelectedPhotos = [];
+
+        function handleGuestbookPhotoSelect(e) {
+            const files = Array.from(e.target.files || []);
+            if (!files.length) return;
+
+            const remaining = 4 - guestbookSelectedPhotos.length;
+            if (remaining <= 0) {
+                showToast('You have already added the maximum of 4 photos.');
+                e.target.value = '';
+                return;
+            }
+
+            const filesToProcess = files.slice(0, remaining);
+            if (files.length > remaining) {
+                showToast(`Only ${remaining} photo${remaining > 1 ? 's' : ''} added (maximum 4 per reflection).`);
+            }
+
+            let loaded = 0;
+            filesToProcess.forEach(file => {
+                if (!file.type || !file.type.startsWith('image/')) {
+                    loaded++;
+                    if (loaded === filesToProcess.length) renderGuestbookPhotoPreviews();
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const maxDim = 1000;
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) {
+                                h = Math.round((h * maxDim) / w);
+                                w = maxDim;
+                            } else {
+                                w = Math.round((w * maxDim) / h);
+                                h = maxDim;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+
+                        if (guestbookSelectedPhotos.length < 4) {
+                            guestbookSelectedPhotos.push(dataUrl);
+                        }
+                        loaded++;
+                        if (loaded === filesToProcess.length) {
+                            renderGuestbookPhotoPreviews();
+                        }
+                    };
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            e.target.value = '';
+        }
+
+        function removeGuestbookPhoto(idx) {
+            guestbookSelectedPhotos.splice(idx, 1);
+            renderGuestbookPhotoPreviews();
+        }
+
+        function renderGuestbookPhotoPreviews() {
+            const container = document.getElementById('guestbookPhotoPreviews');
+            const countBadge = document.getElementById('guestbookPhotoCount');
+            const btn = document.getElementById('guestbookPhotoBtn');
+
+            if (!container) return;
+            container.innerHTML = '';
+
+            guestbookSelectedPhotos.forEach((dataUrl, idx) => {
+                const chip = document.createElement('div');
+                chip.className = 'guestbook-photo-chip';
+                chip.innerHTML = `
+                    <img src="${dataUrl}" alt="Photo preview ${idx + 1}">
+                    <button type="button" class="guestbook-photo-chip-remove" onclick="removeGuestbookPhoto(${idx})" title="Remove photo">&times;</button>
+                `;
+                container.appendChild(chip);
+            });
+
+            if (countBadge) {
+                countBadge.textContent = `(${guestbookSelectedPhotos.length}/4)`;
+            }
+
+            if (btn) {
+                if (guestbookSelectedPhotos.length >= 4) {
+                    btn.style.opacity = '0.6';
+                    btn.disabled = true;
+                    btn.style.cursor = 'not-allowed';
+                } else {
+                    btn.style.opacity = '1';
+                    btn.disabled = false;
+                    btn.style.cursor = 'pointer';
+                }
+            }
+        }
+
         function renderGuestbook() {
             const list = PortalGuestbook.getAll();
             const wall = document.getElementById('guestbookWall');
@@ -2238,16 +2458,37 @@
             list.forEach(item => {
                 const el = document.createElement('div');
                 el.className = 'guestbook-entry';
+
+                let photosHtml = '';
+                if (Array.isArray(item.photos) && item.photos.length > 0) {
+                    const photosItems = item.photos.map((photo, pIdx) => `
+                        <div class="guestbook-photo-item" onclick="openGuestbookPhoto('${item.id}', ${pIdx})" title="Click to view full photo">
+                            <img src="${photo}" alt="Guest reflection photo ${pIdx + 1}" loading="lazy">
+                        </div>
+                    `).join('');
+                    photosHtml = `<div class="guestbook-photos-grid">${photosItems}</div>`;
+                }
+
                 el.innerHTML = `
                     <div class="guestbook-entry-header">
                         <span class="guestbook-author">${item.author} <small style="color: var(--accent-gold); font-weight: normal;">(@${item.username})</small></span>
                         <span class="guestbook-date">${item.date}</span>
                     </div>
                     <p class="guestbook-text">"${item.message}"</p>
+                    ${photosHtml}
                 `;
                 wall.appendChild(el);
             });
         }
+
+        window.openGuestbookPhoto = function(entryId, photoIndex) {
+            const list = PortalGuestbook.getAll();
+            const entry = list.find(e => e.id === entryId);
+            if (entry && entry.photos && entry.photos[photoIndex]) {
+                const authorStr = entry.author || 'Guest';
+                openPortalLightbox(entry.photos[photoIndex], `${authorStr}'s Reflection Photo (${photoIndex + 1} of ${entry.photos.length})`);
+            }
+        };
 
         function handleGuestbookSubmit(e) {
             e.preventDefault();
@@ -2255,10 +2496,12 @@
             if (!user) return;
 
             const msg = document.getElementById('guestbookMessage').value;
-            const res = PortalGuestbook.add(user.id, msg);
+            const res = PortalGuestbook.add(user.id, msg, guestbookSelectedPhotos);
             if (res.success) {
                 showToast('Reflection posted to Guest Book!');
                 document.getElementById('guestbookForm').reset();
+                guestbookSelectedPhotos = [];
+                renderGuestbookPhotoPreviews();
                 renderGuestbook();
             } else {
                 showToast(res.message);
