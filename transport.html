@@ -238,6 +238,37 @@
             font-size: 0.8rem;
         }
 
+        .trivia-layout-side {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .trivia-content {
+            flex: 1;
+        }
+
+        .trivia-image-side {
+            width: 140px;
+            height: auto;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .trivia-layout-side {
+                flex-direction: column;
+                gap: 25px;
+            }
+            .trivia-image-side {
+                width: 100%;
+                max-width: 180px;
+            }
+        }
+
         .footer-nav {
             margin-top: 80px;
             padding: 40px 0;
@@ -406,7 +437,7 @@
         <h1>Transportation</h1>
 
         <div class="mode">
-            <div class="mode-title">The "Zero Stress" Arrival</div>
+            <div class="mode-title">🛬 The "Zero Stress" Arrival</div>
             <p>
                 From Fiumicino (FCO), follow signs to the <strong><a href="https://www.adr.it/web/aeroporti-di-roma-en/pax-fco-taxi"
                         target="_blank">official white taxi stand</a></strong>. Ignore anyone inside the terminal
@@ -422,7 +453,7 @@
         </div>
 
         <div class="mode">
-            <div class="mode-title">Getting to Termini</div>
+            <div class="mode-title">🚉 Getting to Termini</div>
             <p>
                 We recommend <strong><a href="https://www.google.com/maps/search/?api=1&query=Bus+40+Express+Stop+Argentina+Rome"
                         target="_blank">Bus 40
@@ -433,28 +464,28 @@
         </div>
 
         <div class="mode">
-            <div class="mode-title">Taxis &amp; Uber</div>
+            <div class="mode-title">🚕 Taxis &amp; Uber</div>
             <p>
                 The closest taxi station is on the far side of Campo de' Fiori at <strong><a href="https://maps.app.goo.gl/dHZd5j3jtMT8Q8bg7" target="_blank">Piazza di San Pantaleo</a></strong>. The next closest taxi stand is at <strong><a href="https://maps.app.goo.gl/QyNK4C3b4u1auyNC7" target="_blank">Largo di Torre Argentina</a></strong>. Uber does exist in Rome but may take much longer than a cab; Uber may be cheaper than a cab, but that is not guaranteed.
             </p>
         </div>
 
         <div class="mode">
-            <div class="mode-title">Scooters &amp; Bikes</div>
+            <div class="mode-title">🛴 Scooters &amp; Bikes</div>
             <p>
                 Set up your account and install the app before riding, and start the ride directly through the app. If you start a Lime ride directly through the QR code on the bike without having an account set up, it will be impossible to end the ride when you’re done and you’ll pay for an extra 15 €0.39 minutes.
             </p>
         </div>
 
         <div class="mode">
-            <div class="mode-title">Bus Tickets &amp; Public Transit</div>
+            <div class="mode-title">🚌 Bus Tickets &amp; Public Transit</div>
             <p>
                 You can buy paper bus tickets (€1.50) at all <strong>tabacchi</strong> stores (tobacco shops, signaled by a white 'T' against a black background) and at the hexagonal green tourist shop / newspaper stands found in most piazzas. You have to validate your paper ticket in the machine on the bus or pay by card (not all cards work with tap to pay). They check for validated tickets on the bus and will fine you.
             </p>
         </div>
 
         <div class="mode">
-            <div class="mode-title">Trains</div>
+            <div class="mode-title">🚄 Trains</div>
             <p>
                 Standard train tickets need to be validated by using the validation machine at the station before boarding the train. If you purchase an e-ticket that has a barcode, you do not need to validate it. If you sit in the wrong seat/car on the train, you will be fined.
             </p>
@@ -464,7 +495,7 @@
         </div>
 
         <div class="mode">
-            <div class="mode-title">Rental Cars</div>
+            <div class="mode-title">🚗 Rental Cars</div>
             <p>
                 Take photos of the car from every angle (front, back, left, right, roof, and each of the four corners) before
                 leaving
@@ -473,30 +504,39 @@
         </div>
 
         <div class="mode">
-            <div class="mode-title">Flying Domestically in Italy</div>
+            <div class="mode-title">🛫 Flying Domestically in Italy</div>
             <p>
                 They do not appear to limit liquid container sizes in carry-on luggage and do not ask for identification on domestic flights within Italy.
             </p>
         </div>
 
         <div class="trivia-container">
-            <div class="trivia-question">A Naming Mystery</div>
-            <p style="margin-bottom: 25px;">Why is Rione Regola called "Regola"?</p>
-            <div class="trivia-options">
-                <button class="trivia-option" data-correct="true"
-                    onclick="selectTriviaOption(this, true, 'regola-feedback')">River Sand</button>
-                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Trade
-                    Regulations</button>
-                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Monastic
-                    Rules</button>
-                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Regal
-                    Palaces</button>
+            <div class="trivia-layout-side">
+                <div class="trivia-content">
+                    <div class="trivia-question">Architectural Trivia</div>
+                    <p style="margin-bottom: 25px; color: var(--text-muted); font-weight: 300;">Which Renaissance bridge
+                        connects Regola to Trastevere?</p>
+                    <div class="trivia-options">
+                        <button class="trivia-option" data-correct="true"
+                            onclick="selectTriviaOption(this, true, 'bridge-feedback')">A) Ponte Sisto</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">B) Ponte
+                            Garibaldi</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">C) Ponte
+                            Mazzini</button>
+                        <button class="trivia-option" onclick="selectTriviaOption(this, false, 'bridge-feedback')">D) Ponte
+                            Cestio</button>
+                    </div>
+                </div>
+                <div class="trivia-image-side">
+                    <img src="flower-logo.png" alt="Ponte Sisto" style="width: 100%; border-radius: 10px; opacity: 0.9;">
+                </div>
             </div>
-            <div class="trivia-feedback" id="regola-feedback">
+            <div class="trivia-feedback" id="bridge-feedback">
                 <span class="feedback-status"></span>
-                <p>The name comes from <em>Arenula</em> (little sand). Before the Tiber's high walls were built, the
-                    river would
-                    deposit fine silt here during floods, defining the ground you're walking on today.</p>
+                <p>Answer: <strong>A - Ponte Sisto</strong>.</p>
+                <p>Commissioned by Pope Sixtus IV and completed for the Jubilee of 1475, Ponte Sisto was the first new
+                    bridge built across the Tiber since antiquity, linking Regola directly to the bohemian lanes of Trastevere.
+                </p>
             </div>
         </div>
         <a href="index.html" class="back-link">Return to the Residence</a>

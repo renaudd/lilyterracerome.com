@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="flower-logo.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         :root {
             --bg-color: #0a141d;
@@ -120,12 +121,13 @@
         }
 
         .map-container header {
-            padding: 30px 40px;
+            padding: 24px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--bg-color);
             border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            gap: 15px;
         }
 
         .map-container .title {
@@ -156,19 +158,159 @@
             color: var(--accent-gold);
         }
 
+        .map-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .layer-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(197, 160, 89, 0.1);
+            cursor: pointer;
+        }
+
+        .layer-toggle-btn:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+        }
+
         iframe {
             flex-grow: 1;
             border: 0;
-            /* Filter removed for bright accessibility */
+        }
+
+        /* Leaflet Wine Crawl Map */
+        #wine-crawl-map {
+            background: #0a141d;
+            z-index: 1;
+        }
+
+        .wine-marker-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #c5a059;
+            color: #0a141d;
+            border: 2px solid #ffffff;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .wine-marker-badge:hover {
+            transform: scale(1.18);
+            background: #dfb76c;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: rgba(10, 20, 29, 0.96) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(197, 160, 89, 0.4) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+            backdrop-filter: blur(10px);
+            font-family: 'Outfit', sans-serif !important;
+            padding: 4px !important;
+        }
+
+        .leaflet-popup-content {
+            margin: 12px 16px !important;
+            line-height: 1.4 !important;
+        }
+
+        .leaflet-popup-tip {
+            background: #0a141d !important;
+            border: 1px solid rgba(197, 160, 89, 0.4) !important;
+        }
+
+        .leaflet-container a.leaflet-popup-close-button {
+            color: rgba(255, 255, 255, 0.6) !important;
+            padding: 8px 8px 0 0 !important;
+        }
+
+        .leaflet-container a.leaflet-popup-close-button:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        .wine-popup-step {
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .wine-popup-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin: 0 0 4px 0;
+            font-weight: 600;
+        }
+
+        .wine-popup-badge {
+            font-size: 0.75rem;
+            color: #c5a059;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .wine-popup-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
+
+        .wine-popup-link {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .wine-popup-link:hover {
+            color: #ffffff;
         }
 
         @media (max-width: 768px) {
             .map-container header {
-                padding: 20px;
+                padding: 16px 20px;
+                gap: 10px;
             }
 
             .map-container .title {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+
+            .layer-toggle-btn {
+                padding: 5px 10px;
+                font-size: 0.65rem;
+                letter-spacing: 1px;
             }
         }
     
@@ -311,10 +453,15 @@
         <div class="map-container">
             <header>
                 <a href="index.html" class="back">Back to the Terrace</a>
-                <div class="title">Neighborhood Guide</div>
+                <div class="title" id="map-header-title">Neighborhood Guide</div>
+                <div class="map-controls">
+                    <a href="map.html" id="view-all-places-btn" class="layer-toggle-btn" style="display:none;">🗺️ Full Guide</a>
+                    <a href="map.html?layer=campo-wine-crawl" id="view-wine-crawl-btn" class="layer-toggle-btn">🍷 Wine Crawl</a>
+                </div>
             </header>
             <iframe
                 src="https://www.google.com/maps/d/embed?mid=1bSnYXfwpI0n4DMh7fL9G3fgxS0RS9o4&ehbc=2E312F&noprof=1&z=17&ll=41.8953,12.4721"></iframe>
+            <div id="wine-crawl-map" style="display: none; flex-grow: 1; width: 100%; height: 100%;"></div>
             <nav class="footer-nav">
                 <a href="history.html">History</a>
                 <a href="food.html">Dining</a>
@@ -324,11 +471,198 @@
                 <a href="members.html" style="color: var(--accent-gold); font-weight: 600;">Members</a>
             </nav>
         </div>
+    </div>
 
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script>
+            let leafletMap = null;
+
+            const wineCrawlPlaces = [
+                {
+                    num: 1,
+                    name: "L’Angolo Divino Enoteca",
+                    tag: "★★★★★ · €6-€8",
+                    desc: "Directly downstairs from the apartment. Superb wines and knowledgeable English-speaking docents.",
+                    lat: 41.8946511,
+                    lng: 12.4721353,
+                    mapQuery: "L+Angolo+Divino+Rome"
+                },
+                {
+                    num: 2,
+                    name: "Vinaietto - Old Winery",
+                    tag: "★★★★★ · €5-€8",
+                    desc: "Historic local enoteca. Even their house pours are top tier. Great vinyl tunes and lively crowd.",
+                    lat: 41.8946458,
+                    lng: 12.4749205,
+                    mapQuery: "Il+Vinaietto+Rome"
+                },
+                {
+                    num: 3,
+                    name: "Ruma Bottega & Cucina Agricola",
+                    tag: "★★★★ · €6-€9",
+                    desc: "Artisanal natural wines, exceptional organic cheeses, and house-made gelato.",
+                    lat: 41.8987358,
+                    lng: 12.4708953,
+                    mapQuery: "Ruma+Bottega+Cucina+Agricola+Rome"
+                },
+                {
+                    num: 4,
+                    name: "Vino e vinili Roma",
+                    tag: "★★★ · €8",
+                    desc: "Intimate spot in Campo Marzio pairing Italian wines with spinning vinyl records.",
+                    lat: 41.8969334,
+                    lng: 12.4703835,
+                    mapQuery: "Vino+e+vinili+Rome"
+                },
+                {
+                    num: 5,
+                    name: "Enoteca Bortone",
+                    tag: "★★★★ · €9",
+                    desc: "Along Via dei Banchi Vecchi. Outstanding, carefully curated cellar selections.",
+                    lat: 41.8972144,
+                    lng: 12.4682361,
+                    mapQuery: "Enoteca+Bortone+Rome"
+                },
+                {
+                    num: 6,
+                    name: "La Barchetta",
+                    tag: "★★★★ · €8-€18",
+                    desc: "Right next door to Bortone—atmospheric wine bar with extensive regional bottles.",
+                    lat: 41.8971181,
+                    lng: 12.4683823,
+                    mapQuery: "Enoteca+La+Barchetta+Rome"
+                },
+                {
+                    num: 7,
+                    name: "Il Goccetto",
+                    tag: "★★★ · €7",
+                    desc: "Beloved 1980s institution with 16th-century painted ceilings, 800+ bottles, and classic aperitivo.",
+                    lat: 41.8978195,
+                    lng: 12.4673538,
+                    mapQuery: "Il+Goccetto+Rome"
+                }
+            ];
+
+            const wineCrawlPath = [
+                [41.89465, 12.47214], [41.89474, 12.47221], [41.89477, 12.47225], [41.89492, 12.47236], [41.89509, 12.47248],
+                [41.89518, 12.47256], [41.89521, 12.47259], [41.89512, 12.4727], [41.89495, 12.47292], [41.89487, 12.47303],
+                [41.89481, 12.47312], [41.89481, 12.47313], [41.8948, 12.47314], [41.89473, 12.47325], [41.89457, 12.47348],
+                [41.89452, 12.47356], [41.8945, 12.47361], [41.89445, 12.47371], [41.89444, 12.47376], [41.8944, 12.47387],
+                [41.89436, 12.47398], [41.89434, 12.47404], [41.89429, 12.47423], [41.89433, 12.47425], [41.89438, 12.47427],
+                [41.89446, 12.4743], [41.8945, 12.47431], [41.89457, 12.47432], [41.89467, 12.47432], [41.89467, 12.47436],
+                [41.89466, 12.47463], [41.89465, 12.47491], [41.89465, 12.47492], [41.89465, 12.47491], [41.89466, 12.47463],
+                [41.89467, 12.47436], [41.8947, 12.47435], [41.89481, 12.47434], [41.89482, 12.47434], [41.89485, 12.47434],
+                [41.89487, 12.47433], [41.89489, 12.47432], [41.89492, 12.47432], [41.89494, 12.47431], [41.895, 12.4743],
+                [41.89502, 12.47429], [41.89504, 12.47428], [41.89507, 12.47427], [41.89508, 12.47426], [41.89535, 12.47417],
+                [41.8954, 12.47416], [41.89543, 12.47414], [41.89567, 12.47407], [41.89602, 12.47407], [41.89614, 12.4741],
+                [41.89623, 12.47411], [41.89633, 12.47412], [41.89643, 12.47412], [41.89642, 12.47415], [41.89661, 12.47414],
+                [41.89662, 12.47408], [41.89664, 12.47393], [41.89666, 12.47375], [41.89667, 12.47362], [41.89668, 12.47356],
+                [41.89669, 12.47348], [41.89673, 12.47337], [41.89679, 12.47325], [41.89682, 12.47319], [41.89692, 12.47304],
+                [41.89695, 12.47297], [41.89694, 12.47296], [41.89694, 12.47293], [41.89696, 12.47284], [41.89694, 12.47282],
+                [41.89696, 12.47278], [41.897, 12.4726], [41.89702, 12.47261], [41.89703, 12.47251], [41.897, 12.47249],
+                [41.89702, 12.47241], [41.89708, 12.47222], [41.89718, 12.47178], [41.89719, 12.47173], [41.8973, 12.47126],
+                [41.89732, 12.47119], [41.89733, 12.47119], [41.89734, 12.47113], [41.89733, 12.47113], [41.89735, 12.47103],
+                [41.89743, 12.47068], [41.89766, 12.47078], [41.89774, 12.47075], [41.89786, 12.47075], [41.8981, 12.47074],
+                [41.89818, 12.47073], [41.89821, 12.47074], [41.89824, 12.47067], [41.89841, 12.47074], [41.89855, 12.47079],
+                [41.89861, 12.47081], [41.89865, 12.47084], [41.89869, 12.47086], [41.89873, 12.47089], [41.89874, 12.4709],
+                [41.89873, 12.47089], [41.89869, 12.47086], [41.89865, 12.47084], [41.89861, 12.47081], [41.89855, 12.47079],
+                [41.89841, 12.47074], [41.89824, 12.47067], [41.89821, 12.47074], [41.89818, 12.47073], [41.8981, 12.47074],
+                [41.89786, 12.47075], [41.89774, 12.47075], [41.89766, 12.47071], [41.89745, 12.47062], [41.89746, 12.47055],
+                [41.89745, 12.47055], [41.89733, 12.47049], [41.89741, 12.47013], [41.89712, 12.46998], [41.89709, 12.46996],
+                [41.89708, 12.47001], [41.89702, 12.47016], [41.89699, 12.47026], [41.89695, 12.47035], [41.89693, 12.47038],
+                [41.89695, 12.47035], [41.89699, 12.47026], [41.89702, 12.47016], [41.89708, 12.47001], [41.89711, 12.46988],
+                [41.89713, 12.4698], [41.89714, 12.46977], [41.89715, 12.46972], [41.89717, 12.46966], [41.89719, 12.46954],
+                [41.89722, 12.46941], [41.89724, 12.46929], [41.89725, 12.46921], [41.89726, 12.46908], [41.89728, 12.46886],
+                [41.8973, 12.46871], [41.89731, 12.46863], [41.89731, 12.46858], [41.89735, 12.4683], [41.89736, 12.46824],
+                [41.89736, 12.46817], [41.89736, 12.46814], [41.89736, 12.46812], [41.89736, 12.46802], [41.89732, 12.46806],
+                [41.89721, 12.46824], [41.89717, 12.4683], [41.89712, 12.46838], [41.89717, 12.4683], [41.89732, 12.46806],
+                [41.89736, 12.46802], [41.89736, 12.46811], [41.89736, 12.46812], [41.8974, 12.46812], [41.89738, 12.46798],
+                [41.89741, 12.46794], [41.89738, 12.46791], [41.89739, 12.46789], [41.89741, 12.46785], [41.89744, 12.46781],
+                [41.89764, 12.46756], [41.89767, 12.46752], [41.89777, 12.46742], [41.89779, 12.46739], [41.89782, 12.46735]
+            ];
+
+            function initWineCrawlMap() {
+                if (leafletMap) {
+                    leafletMap.invalidateSize();
+                    return;
+                }
+
+                leafletMap = L.map('wine-crawl-map', {
+                    zoomControl: true,
+                    attributionControl: true
+                });
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    subdomains: 'abcd',
+                    maxZoom: 20,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>'
+                }).addTo(leafletMap);
+
+                const polyline = L.polyline(wineCrawlPath, {
+                    color: '#c5a059',
+                    weight: 4,
+                    opacity: 0.9,
+                    lineCap: 'round',
+                    lineJoin: 'round'
+                }).addTo(leafletMap);
+
+                wineCrawlPlaces.forEach((place) => {
+                    const icon = L.divIcon({
+                        className: 'wine-marker',
+                        html: `<div class="wine-marker-badge">${place.num}</div>`,
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14],
+                        popupAnchor: [0, -14]
+                    });
+
+                    const popupContent = `
+                        <div class="wine-popup-step">Stop ${place.num} of 7</div>
+                        <div class="wine-popup-title">${place.name}</div>
+                        <div class="wine-popup-badge">${place.tag}</div>
+                        <div class="wine-popup-desc">${place.desc}</div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=${place.mapQuery}" target="_blank" class="wine-popup-link">Open in Google Maps &rarr;</a>
+                    `;
+
+                    L.marker([place.lat, place.lng], { icon: icon })
+                        .addTo(leafletMap)
+                        .bindPopup(popupContent);
+                });
+
+                leafletMap.fitBounds(polyline.getBounds(), { padding: [40, 40] });
+            }
+
+            function setMapView(layerName) {
+                const isWineCrawl = layerName === 'campo-wine-crawl' || layerName === 'wine-crawl';
+                const iframe = document.querySelector('iframe');
+                const wineMapEl = document.getElementById('wine-crawl-map');
+                const titleEl = document.getElementById('map-header-title');
+                const allBtn = document.getElementById('view-all-places-btn');
+                const wineBtn = document.getElementById('view-wine-crawl-btn');
+
+                if (isWineCrawl) {
+                    if (iframe) iframe.style.display = 'none';
+                    if (wineMapEl) wineMapEl.style.display = 'block';
+                    if (titleEl) titleEl.textContent = 'Campo Wine Crawl';
+                    if (allBtn) allBtn.style.display = 'inline-flex';
+                    if (wineBtn) wineBtn.style.display = 'none';
+
+                    initWineCrawlMap();
+                    setTimeout(() => {
+                        if (leafletMap) leafletMap.invalidateSize();
+                    }, 100);
+                } else {
+                    if (wineMapEl) wineMapEl.style.display = 'none';
+                    if (iframe) iframe.style.display = 'block';
+                    if (titleEl) titleEl.textContent = 'Neighborhood Guide';
+                    if (allBtn) allBtn.style.display = 'none';
+                    if (wineBtn) wineBtn.style.display = 'inline-flex';
+                }
+            }
+
             // Map Layer Toggle Logic
             document.addEventListener('DOMContentLoaded', () => {
                 const params = new URLSearchParams(window.location.search);
+                const layer = params.get('layer');
                 const directions = params.get('directions');
                 const mapIframe = document.querySelector('iframe');
 
@@ -346,6 +680,32 @@
                         mapIframe.src = baseUrl + "&z=17&ll=41.8953,12.4721";
                     }
                 }
+
+                setMapView(layer);
+
+                const allBtn = document.getElementById('view-all-places-btn');
+                const wineBtn = document.getElementById('view-wine-crawl-btn');
+
+                if (allBtn) {
+                    allBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        history.pushState(null, '', 'map.html');
+                        setMapView(null);
+                    });
+                }
+
+                if (wineBtn) {
+                    wineBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        history.pushState(null, '', 'map.html?layer=campo-wine-crawl');
+                        setMapView('campo-wine-crawl');
+                    });
+                }
+
+                window.addEventListener('popstate', () => {
+                    const currentParams = new URLSearchParams(window.location.search);
+                    setMapView(currentParams.get('layer'));
+                });
             });
         </script>
     <script src="script.js"></script>

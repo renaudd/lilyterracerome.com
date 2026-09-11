@@ -579,6 +579,26 @@
             </p>
         </div>
 
+        <div class="trivia-container">
+            <div class="trivia-question">A Naming Mystery</div>
+            <p style="margin-bottom: 25px; color: var(--text-muted); font-weight: 300;">Why is Rione Regola called "Regola"?</p>
+            <div class="trivia-options">
+                <button class="trivia-option" data-correct="true"
+                    onclick="selectTriviaOption(this, true, 'regola-feedback')">River Sand</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Trade
+                    Regulations</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Monastic
+                    Rules</button>
+                <button class="trivia-option" onclick="selectTriviaOption(this, false, 'regola-feedback')">Regal
+                    Palaces</button>
+            </div>
+            <div class="trivia-feedback" id="regola-feedback">
+                <span class="feedback-status"></span>
+                <p>The name comes from <em>Arenula</em> (little sand). Before the Tiber's high walls were built, the
+                    river would
+                    deposit fine silt here during floods, defining the ground you're walking on today.</p>
+            </div>
+        </div>
 
         <a href="index.html" class="back-link">Return to the Residence</a>
         <nav class="footer-nav">
