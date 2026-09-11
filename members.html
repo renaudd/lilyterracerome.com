@@ -822,6 +822,30 @@
             margin-top: 15px;
         }
 
+        .btn-guestbook-photo {
+            width: auto;
+            background: var(--accent-gold);
+            color: #0a141d;
+            border: 1px solid var(--accent-gold);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-guestbook-photo:hover {
+            background: var(--accent-gold-hover);
+            border-color: var(--accent-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.35);
+        }
+
         .guestbook-photo-previews {
             display: flex;
             gap: 10px;
@@ -1399,29 +1423,12 @@
                             <p>Please use sheets when sleeping on the sofa bed.</p>
                         </div>
 
-                        <div class="guide-item">
-                            <h3><span class="guide-icon">✈️</span> Travel</h3>
-                            <p><strong>Day Trips:</strong></p>
-                            <ul style="font-size: 0.88rem; padding-left: 20px; line-height: 1.6; margin: 0 0 10px 0;">
-                                <li>Hadrian's Villa</li>
-                                <li>Ostia</li>
-                                <li>Florence</li>
-                                <li>Bologna</li>
-                                <li>Naples</li>
-                            </ul>
-                            <p><strong>Overnight trips:</strong></p>
-                            <ul style="font-size: 0.88rem; padding-left: 20px; line-height: 1.6; margin: 0 0 10px 0;">
-                                <li>Venice</li>
-                                <li>Cinqueterre</li>
-                                <li>Ischia</li>
-                                <li>Sicily</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Skip fishing and Siracusa in the summer. For wine, visit Benanti and Girolamo Russo.</p>
-                        </div>
 
                         <div class="guide-item">
                             <h3><span class="guide-icon">🚙</span> Rental Cars</h3>
-                            <p>Take photos of the car from every angle (front, back, left, right, roof, and each of the four corners), whether or not you notice anything, and even if the agent at the pick up location notices issues and writes them down. As long as you have up-close photos of the car at the lot where you picked it up, you are unlikely to be fined for anything noticed upon returning the car (which there will be, even if the car looked new at pick up).</p>
+                            <p>Take photos of the car from every angle (front, back, left, right, roof, and each of the four corners) before
+                                leaving
+                                the lot. Having timestamped close-up photos at pick-up is necessary to avoid return fines.</p>
                         </div>
 
                         <div class="guide-item">
@@ -1477,25 +1484,6 @@
                                 Bernini), and San Pietro in Vincoli (Michelangelo). <strong>Note:</strong> Everyone's shoulders and knees need to be covered to visit the churches.</p>
                         </div>
 
-                        <div class="guide-item">
-                            <h3><span class="guide-icon">🏛️</span> All the Great Without the Wait</h3>
-                            <p>Top world-class cultural landmarks and museums that rarely have overwhelming lines:</p>
-                            <ul style="font-size: 0.85rem; padding-left: 20px; color: var(--text-muted); line-height: 1.6; margin: 0;">
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Mercati+di+Traiano+Museo+dei+Fori+Imperiali+Rome" target="_blank">Mercati di Traiano Museo dei Fori Imperiali</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Galleria+Doria+Pamphilj+Rome" target="_blank">Galleria Doria Pamphilj</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Chiesa+di+San+Luigi+dei+Francesi+Rome" target="_blank">Chiesa di San Luigi dei Francesi</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo+Rome" target="_blank">Castel Sant’Angelo</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Gallerie+Nazionali+di+Arte+Antica+Palazzo+Barberini+Rome" target="_blank">Gallerie Nazionali di Arte Antica - Palazzo Barberini</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Musei+Capitolini+Rome" target="_blank">Musei Capitolini</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Monumento+a+Vittorio+Emanuele+II+Rome" target="_blank">Monumento a Vittorio Emanuele II</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Museo+Nazionale+Romano+Terme+di+Diocleziano+Rome" target="_blank">Museo Nazionale Romano, Terme di Diocleziano</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Terme+di+Caracalla+Rome" target="_blank">Terme di Caracalla</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Basilica+di+Santo+Stefano+Rotondo+al+Celio+Rome" target="_blank">Basilica di Santo Stefano Rotondo al Celio</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Galleria+Spada+Rome" target="_blank">Galleria Spada</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Area+Archeologica+Stadio+di+Domiziano+Rome" target="_blank">Area Archeologica Stadio di Domiziano</a></li>
-                                <li><a href="https://www.google.com/maps/search/?api=1&query=Museo+Napoleonico+Rome" target="_blank">Museo Napoleonico</a></li>
-                            </ul>
-                        </div>
 
                         <div class="guide-item">
                             <h3><span class="guide-icon">🧀</span> Buying Cheese &amp; Salumi</h3>
@@ -1615,8 +1603,8 @@
                         <div class="guestbook-upload-row">
                             <div>
                                 <input type="file" id="guestbookPhotoInput" accept="image/*" multiple style="display: none;" onchange="handleGuestbookPhotoSelect(event)">
-                                <button type="button" class="btn-outline" id="guestbookPhotoBtn" onclick="document.getElementById('guestbookPhotoInput').click()" style="width: auto; padding: 8px 16px; font-size: 0.85rem; border-color: var(--border-color); color: var(--text-main); display: inline-flex; align-items: center; gap: 8px;">
-                                    📷 Add Photos <span id="guestbookPhotoCount" style="color: var(--accent-gold); font-weight: 600;">(0/4)</span>
+                                <button type="button" class="btn-guestbook-photo" id="guestbookPhotoBtn" onclick="document.getElementById('guestbookPhotoInput').click()">
+                                    📷 Add Photos <span id="guestbookPhotoCount" style="color: #0a141d; font-weight: 700; margin-left: 2px;">(0/4)</span>
                                 </button>
                                 <small style="display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 5px;">Optional: attach up to 4 photos</small>
                             </div>
@@ -1940,6 +1928,8 @@
             <a href="food.html">Dining</a>
             <a href="favorites.html">Favorites</a>
             <a href="planning.html">Planning</a>
+            <a href="transport.html">Transportation</a>
+            <a href="map.html">Map</a>
             <a href="members.html" style="color: var(--accent-gold); font-weight: bold;">Members</a>
         </nav>
     </div>
