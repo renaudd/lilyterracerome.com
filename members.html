@@ -1273,7 +1273,8 @@
                         <div class="guide-item">
                             <h3><span class="guide-icon">🏠</span> Address</h3>
                             <p><strong>Vicolo del Giglio, 2a<br>Roma, RM 00186</strong></p>
-                            <p>The closest major landmark is <a href="https://www.google.com/maps/search/?api=1&query=Piazza+Farnese+Rome" target="_blank">Piazza Farnese</a>, which is the closest most cabs can reach.</p>
+                            <p>The closest most cabs can reach is <a href="https://www.google.com/maps/search/?api=1&query=Piazza+Farnese+Rome"
+                                    target="_blank">Piazza Farnese</a>.</p>
                             <img src="assets/photos/Front_Door_Zoom.jpg" alt="Building front door at Vicolo del Giglio, 2a"
                                 style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 10px; margin: 12px 0 18px 0; border: 1px solid var(--border-color); cursor: pointer;"
                                 onclick="openPortalLightbox('assets/photos/Front_Door.jpg', 'Building front door at Vicolo del Giglio, 2a')">
@@ -2025,12 +2026,15 @@
 
                 // Check URL parameter for tab
                 const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('tab') === 'admin') {
+                const requestedTab = urlParams.get('tab');
+                if (requestedTab === 'admin') {
                     if (isUserAdmin(user)) {
                         switchTab('admin');
                     } else {
                         switchTab('calendar');
                     }
+                } else if (['guide', 'photos', 'guestbook', 'profile', 'calendar'].includes(requestedTab)) {
+                    switchTab(requestedTab);
                 }
             }
         }
@@ -2044,7 +2048,11 @@
             if (res.success) {
                 showToast(`Welcome back, ${res.user.name}`);
                 initAuth();
-                if (res.isAdmin) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const requestedTab = urlParams.get('tab');
+                if (requestedTab && ['guide', 'photos', 'guestbook', 'profile', 'calendar'].includes(requestedTab)) {
+                    switchTab(requestedTab);
+                } else if (res.isAdmin) {
                     switchTab('admin');
                 } else {
                     switchTab('calendar');

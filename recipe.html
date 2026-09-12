@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Rome at Home | Lily Terrace Rome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="flower-logo.png">
+    <style>
+        :root {
+            --bg-color: #0a141d;
+            --accent-gold: #c5a059;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(197, 160, 89, 0.25);
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('whitelogoplusspace.png'), url('whitelogoplusspace.png');
+            background-position: 0 0, 110px 110px;
+            background-size: 220px 220px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Translation Widget */
+        .goog-te-menu-value img { display: none !important; }
+        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        body { top: 0 !important; }
+
+        .custom-translate {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 2000;
+        }
+
+        .translate-btn {
+            background: rgba(10, 20, 29, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            padding: 0;
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(10, 20, 29, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            padding: 10px 0;
+            display: none;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .lang-menu.active { display: block; }
+
+        .lang-option {
+            padding: 10px 25px;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .lang-option:hover {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .branding-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .branding-logo {
+            max-width: 150px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .branding-logo:hover {
+            opacity: 1;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+
+        .recipe-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .ingredients-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .steps ol {
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        .steps li {
+            margin-bottom: 25px;
+            padding-left: 10px;
+        }
+
+        .note {
+            background: rgba(197, 160, 89, 0.08);
+            border-left: 3px solid var(--accent-gold);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            font-size: 0.92rem;
+            color: var(--text-main);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 60px;
+            line-height: 1.8;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 80px;
+            text-align: center;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: underline;
+            text-decoration-color: rgba(197, 160, 89, 0.5);
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration-color: var(--accent-gold);
+        }
+
+        .footer-nav {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 500px;
+            background: rgba(10, 20, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 3000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .cookie-banner.visible { bottom: 40px; }
+        .cookie-banner p {
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        .cookie-actions { display: flex; justify-content: center; gap: 15px; }
+        .cookie-btn {
+            background: transparent;
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            padding: 10px 30px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .cookie-btn.accept { background: #c5a059; color: #0a141d; }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2); }
+
+        @media (max-width: 768px) {
+            .ingredients-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cookie-consent" class="cookie-banner">
+        <p>This site uses cookies to remember your language preference and improve your experience. By continuing to use the site, you agree to our use of cookies.</p>
+        <div class="cookie-actions">
+            <button onclick="acceptCookies()" class="cookie-btn accept">Accept</button>
+            <button onclick="declineCookies()" class="cookie-btn">Decline</button>
+        </div>
+    </div>
+
+    <div class="custom-translate">
+        <button class="translate-btn" onclick="toggleLangMenu()" title="Translate">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a18.2 18.2 0 0 1 3 9 18.2 18.2 0 0 1-3 9M12 3a18.2 18.2 0 0 0-3 9 18.2 18.2 0 0 0 3 9" />
+            </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <div class="lang-option" onclick="changeLang('en')">English</div>
+            <div class="lang-option" onclick="changeLang('it')">Italiano</div>
+            <div class="lang-option" onclick="changeLang('es')">Español</div>
+            <div class="lang-option" onclick="changeLang('fr')">Français</div>
+            <div class="lang-option" onclick="changeLang('de')">Deutsch</div>
+            <div class="lang-option" onclick="changeLang('zh-CN')">中文</div>
+            <div class="lang-option" onclick="changeLang('ja')">日本語</div>
+        </div>
+    </div>
+    <div id="google_translate_element" style="display:none"></div>
+
+    <div class="container">
+        <div class="branding-header">
+            <a href="index.html">
+                <img src="logo.png" alt="Lily Terrace Rome" class="branding-logo">
+            </a>
+        </div>
+        <h1>Experience Rome at Home</h1>
+        <p class="subtitle">Spaghetti alla Puttanesca del Giglio</p>
+
+        <div class="recipe-card">
+            <div class="ingredients-tools">
+                <div class="ingredients">
+                    <h2>Ingredients</h2>
+                    <ul>
+                        <li>1 28oz can of <a href="https://www.biancodinapoli.com/" target="_blank">Whole peeled
+                                tomatoes</a></li>
+                        <li>2 boxes of <a href="https://flourandwaterfoods.com/" target="_blank">Pasta</a></li>
+                        <li>6-12 cloves of Garlic, halved</li>
+                        <li>4-10 Anchovy filets</li>
+                        <li>¼ tsp - ½ tsp of Red chili flakes</li>
+                        <li>1 Tbs Tomato paste</li>
+                        <li>40 grams (3 Tbs) of Extra virgin olive oil</li>
+                        <li>1-2 Tbs Capers</li>
+                        <li>1 bunch Basil, sliced thinly</li>
+                        <li>8-16 <a
+                                href="https://jeffsgardenfoods.com/our-products/olives/organic-pitted-whole-greek-kalamata-olives/"
+                                target="_blank">Pitted kalamata olives</a>, halved</li>
+                        <li>Black pepper</li>
+                        <li>Parmigiano Reggiano</li>
+                    </ul>
+                </div>
+                <div class="tools">
+                    <h2>Tools</h2>
+                    <ul>
+                        <li>Sauce pan or large skillet</li>
+                        <li>Pot (for the pasta)</li>
+                        <li>Wooden spoon</li>
+                        <li>Knife</li>
+                        <li>Can opener</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="steps">
+                <h2>Steps</h2>
+                <ol>
+                    <li>Bring a pot of water to boil.</li>
+                    <li>Add the garlic, half the anchovies, half the red chili flakes, and olive oil to a hot sauce pan
+                        or large skillet. Cook on medium-low heat until the garlic begins to turn color (1-2 min).</li>
+                    <li>Add the tomato paste and continue cooking until the tomato paste begins to darken (1 min).</li>
+                    <li>Gently pour the can of tomatoes into the pan and continue to cook. Working quickly, pull the
+                        whole tomatoes out of the pot to break up the stem scar/core by hand.
+                        <div class="note">Everything else gets broken up and integrated into the sauce with the spoon
+                            while stirring.</div>
+                    </li>
+                    <li>Add your pasta to the pot of boiling water. Set a timer for two minutes prior to the recommended
+                        cook time.</li>
+                    <li>Add the olives, capers, and the remainder of the anchovies. Add liquid from these jars to add
+                        salt (1-3 Tbs total).</li>
+                    <li>Add the rest of the chili flakes, and add black pepper to taste.
+                        <div class="note">If your sauce starts to brown, turn down the heat and add a ladle of pasta
+                            water.</div>
+                    </li>
+                    <li>Add the basil.</li>
+                    <li>When the pasta is al dente, turn off the heat and drain the pasta (mostly).</li>
+                    <li>Drain the last of the pasta water into the sauce and stir it in.</li>
+                    <li>Lightly salt and pepper the pasta and add a drop of olive oil or butter.</li>
+                    <li>Plate the pasta, top with sauce, and top with grated parmigiano. Pair with pinot noir.
+                        <div class="note">Sauce can be frozen and keeps well in the refrigerator up to a week.</div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="description">
+                <p>You don’t see Puttanesca on a lot of menus outside of Italy. That might partly be owed to the fact
+                    that “alla Puttanesca” literally translates to “in the way of the prostitute.”</p>
+                <p>Legend has it that some drunk diners came into a Neapolitan restaurant that was closing for the
+                    night, and the chef told them that he didn’t have ingredients to make anything. The patron told him
+                    to prepare some “pasta alla puttanesca,” meaning simply, ‘throw it together however.’ The result was
+                    this dish.</p>
+                <p>What’s beautiful is that, save for the basil, the recipe is all pantry items. So you can gather the
+                    ingredients and throw this together whenever you feel like it. Speaking of basil, don’t worry if
+                    you’re missing a couple of the ingredients. As long as you have a can of tomatoes, you can make some
+                    version of this sauce.</p>
+                <div class="note">The secret of what makes this sauce great is to NOT add any of the following: sugar,
+                    salt, rosemary, thyme, oregano, parsley, black olives, mushrooms, stock, water, flour, milk, cream.
+                </div>
+            </div>
+        </div>
+
+        <a href="food.html" class="back-link">Back to Dining</a>
+        <nav class="footer-nav">
+            <a href="history.html">History</a>
+            <a href="food.html">Dining</a>
+            <a href="planning.html">Planning</a>
+            <a href="transport.html">Transportation</a>
+            <a href="map.html">Map</a>
+            <a href="members.html" style="color: var(--accent-gold); font-weight: 600;">Members</a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,it,es,fr,de,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

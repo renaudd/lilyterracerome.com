@@ -398,6 +398,191 @@
             color: #0a141d !important;
         }
 
+        /* Trajan Market Narrow Band & Lightbox */
+        .trajan-band {
+            margin-top: 40px;
+            width: 100%;
+            height: 185px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .trajan-band:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.25);
+        }
+        .trajan-band img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 55%;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .trajan-band:hover img {
+            transform: scale(1.04);
+        }
+        .trajan-band-overlay {
+            position: absolute;
+            bottom: 12px;
+            right: 15px;
+            background: rgba(10, 20, 29, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            pointer-events: none;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .trajan-band:hover .trajan-band-overlay {
+            background: rgba(10, 20, 29, 0.92);
+            border-color: var(--accent-gold);
+        }
+        @media (max-width: 600px) {
+            .trajan-band {
+                height: 145px;
+            }
+        }
+
+        .planning-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 9, 15, 0.95);
+            backdrop-filter: blur(15px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 7000;
+            padding: 25px;
+            box-sizing: border-box;
+            cursor: zoom-out;
+            overflow-y: auto;
+        }
+        .planning-lightbox.active {
+            display: flex;
+        }
+        .planning-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default;
+            margin: auto;
+        }
+        .planning-lightbox-content img {
+            max-width: 100%;
+            max-height: 68vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(197, 160, 89, 0.35);
+        }
+        .planning-lightbox-caption {
+            margin-top: 15px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            text-align: center;
+            max-width: 800px;
+            padding: 16px 24px;
+            background: rgba(10, 20, 29, 0.9);
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            line-height: 1.55;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .planning-lightbox-title {
+            font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+        .planning-lightbox-caption p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.92);
+        }
+        .planning-lightbox-close {
+            position: fixed;
+            top: 25px;
+            right: 35px;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            z-index: 7001;
+        }
+        .planning-lightbox-close:hover {
+            transform: scale(1.15);
+            color: #ffffff;
+        }
+
+        .checklist-section {
+            margin: 0 0 60px 0;
+            padding: 35px 40px;
+            background: rgba(197, 160, 89, 0.04);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 15px;
+        }
+
+        .checklist-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 25px;
+        }
+
+        .time {
+            font-weight: 600;
+            min-width: 140px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding-top: 3px;
+        }
+
+        .timeline-content {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        @media (max-width: 600px) {
+            .timeline-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .checklist-section {
+                padding: 25px 20px;
+            }
+        }
+
     </style>
 </head>
 
@@ -437,6 +622,31 @@
         </div>
 
         <h1>Planning Your Stay</h1>
+
+        <div class="checklist-section">
+            <h2 style="text-align: center;">Master Booking Checklist</h2>
+            <p style="text-align: center; margin-bottom: 35px;">Rome rewards the prepared. Here is the temporal map for your reservations.</p>
+
+            <div class="timeline-item">
+                <div class="time">&gt;1 Month Out</div>
+                <div class="timeline-content">
+                    <strong><a href="https://www.tiqets.com/en/borghese-gallery-tickets-l144780/?partner=borghese.gallery" target="_blank">Galleria Borghese</a></strong>: Strictly mandatory. Tickets disappear instantly.
+                    <br><strong><a href="https://armandoalpantheon.it/prenota/" target="_blank">Armando al Pantheon</a></strong>: Tiny and historic. Book as soon as you have your dates.
+                    <br><strong><a href="https://visite-palazzofarnese.it/?lang=en" target="_blank">Palazzo Farnese Tour</a></strong>: Exclusive guided tours of the French Embassy (Sangallo, Michelangelo &amp; Carracci frescoes).
+                </div>
+            </div>
+
+            <div class="timeline-item" style="margin-bottom: 0;">
+                <div class="time">&gt;2 Weeks Out</div>
+                <div class="timeline-content">
+                    <strong><a href="https://www.museivaticani.va/content/museivaticani/en.html" target="_blank">Vatican Museums</a></strong>: Aim for the 8:00 AM slot.
+                    <br><strong><a href="https://ticketing.colosseo.it/en/" target="_blank">The Colosseum</a></strong>: Look for the "Full Experience" tickets.
+                    <br><strong><a href="https://www.seupizza.com/" target="_blank">Seu Pizza Illuminati</a></strong>: The best modern dough in the city.
+                    <br><strong><a href="https://www.cipassoitalia.it/en/" target="_blank">CiPASSO</a></strong>: Modern Roman pastas and bistrot dining.
+                    <br><strong><a href="https://www.google.com/maps/search/?api=1&query=53+Untitled+Rome" target="_blank">53 Untitled</a></strong>: Creative tasting plates right in our neighborhood.
+                </div>
+            </div>
+        </div>
 
         <div class="tip-box">
             <div class="tip-title">One Day Roman Holiday</div>
@@ -586,9 +796,14 @@
             </div>
         </div>
 
+        <div class="trajan-band" onclick="openPlanningLightbox()">
+            <img src="assets/photos/Trajan_Market.jpg" alt="La Via Biberatica - Trajan's Market" loading="lazy">
+            <div class="trajan-band-overlay">
+                <span>La Via Biberatica &middot; Click to view full image</span>
+            </div>
+        </div>
 
-
-        <div class="tip-box" style="margin-top: 40px;">
+        <div class="tip-box" style="margin-top: 25px;">
             <div class="tip-title" style="font-size: 1.6rem; margin-bottom: 15px;">All the Great Without the Wait</div>
             <p style="margin-bottom: 20px;">Top-tier cultural sites, ancient marvels, and world-class collections across Rome where you can experience extraordinary art and history without fighting massive ticket lines or booking months in advance:</p>
             <ul style="padding-left: 20px; color: var(--text-dark); line-height: 1.8; font-size: 0.95rem;">
@@ -723,6 +938,39 @@
     </script>
     <script type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Planning Lightbox Modal -->
+    <div id="planningLightbox" class="planning-lightbox" onclick="closePlanningLightbox(event)">
+        <button class="planning-lightbox-close" onclick="closePlanningLightbox(event)" aria-label="Close">&times;</button>
+        <div class="planning-lightbox-content" onclick="event.stopPropagation()">
+            <img src="assets/photos/Trajan_Market.jpg" alt="La Via Biberatica - Trajan's Market">
+            <div class="planning-lightbox-caption">
+                <div class="planning-lightbox-title">La Via Biberatica - Trajan's Market</div>
+                <p style="margin-bottom: 10px;">'Biberatica' is post-classical and likely originates from the Latin word <em>bibere</em> (to drink), pointing to the historical presence of taverns, wine shops, and grocers along the route connecting the upper and lower complexes of the market, built around 100-113 A.D.</p>
+                <p style="font-style: italic; opacity: 0.9;">Seen here empty at 1:20 p.m. on an August Friday, while the city around it swarms with tourists.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openPlanningLightbox() {
+            const modal = document.getElementById('planningLightbox');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closePlanningLightbox(e) {
+            const modal = document.getElementById('planningLightbox');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePlanningLightbox();
+        });
+    </script>
 </body>
 
 </html>
