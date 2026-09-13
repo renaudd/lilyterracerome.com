@@ -191,8 +191,25 @@
 
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 28px;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+        }
+
+        .guide-icons-row {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .guide-icons-row div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .guide-col h3 {
@@ -800,9 +817,9 @@
                 font-size: 2.4rem;
             }
 
-            .guide-grid {
+            .guide-grid, .guide-icons-row {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
             }
 
             .venue-grid {
@@ -996,19 +1013,11 @@
                         <li><span class="guide-key">$$$$</span> Over €60 euro per person.</li>
                     </ul>
                 </div>
-                <div class="guide-col">
-                    <h3>Booking &amp; Wait Guide</h3>
-                    <ul class="guide-list">
-                        <li>
-                            <span class="guide-key">📅</span>
-                            <span><strong>This restaurant needs to be booked in advance.</strong> Preceded by lead time (e.g. <a href="javascript:void(0)" onclick="openReservationModal('armando')" style="color: var(--accent-gold); text-decoration: underline;">31 days 📅</a>). Click to book online or open our <a href="javascript:void(0)" onclick="openReservationModal('53-untitled')" style="color: var(--accent-gold); text-decoration: underline;">Phone &amp; Italian Phrasebook</a>.</span>
-                        </li>
-                        <li>
-                            <span class="guide-key">⏳</span>
-                            <span><strong>You will wait.</strong> Preceded by typical wait time (e.g. <strong>1 hour ⏳</strong>).</span>
-                        </li>
-                    </ul>
-                </div>
+            </div>
+
+            <div class="guide-icons-row">
+                <div><span class="guide-key" style="min-width: auto;">📅</span> - make <a href="javascript:void(0)" onclick="openReservationModal('53-untitled')" style="color: var(--accent-gold); text-decoration: underline;">reservations</a> in advance.</div>
+                <div><span class="guide-key" style="min-width: auto;">⏳</span> - prepare to wait in line.</div>
             </div>
 
             <div id="insider-notes" class="guide-notes" style="margin-top: 25px; padding-top: 22px; border-top: 1px solid var(--border-color);">
@@ -1593,7 +1602,7 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Rome" target="_blank">Roscioli</a></h3>
                         <div class="venue-badges">
-                            <a href="https://www.salumeriaroscioli.com/prenotazioni/" target="_blank" class="badge-booking" title="Book online">3 days 📅</a>
+                            <a href="https://salumeriaroscioli.com/en/pages/prenota" target="_blank" class="badge-booking" title="Book online">3 days 📅</a>
                             <span class="badge-rating">★★★</span>
                             <span class="badge-price">$$$</span>
                         </div>
@@ -2070,7 +2079,7 @@
                 phoneDisplay: '+39 06 687 5287',
                 phoneHref: 'tel:+39066875287',
                 address: 'Via dei Giubbonari, 21, 00186 Roma',
-                webUrl: 'https://www.salumeriaroscioli.com/prenotazioni/'
+                webUrl: 'https://salumeriaroscioli.com/en/pages/prenota'
             }
         };
 

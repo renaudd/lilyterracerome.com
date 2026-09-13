@@ -13,19 +13,19 @@
     <link rel="icon" type="image/png" href="flower-logo.png">
     <style>
         :root {
-            --bg-color: #0a141d;
+            --bg-color: #fcfbf7;
             --accent-gold: #c5a059;
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
-            --border-color: rgba(197, 160, 89, 0.25);
+            --text-dark: #0a141d;
+            --text-muted: #4a4a4a;
+            --border-color: rgba(10, 20, 29, 0.1);
         }
 
         body {
             margin: 0;
             background: var(--bg-color);
             font-family: 'Outfit', sans-serif;
-            color: var(--text-main);
-            line-height: 1.8;
+            color: var(--text-dark);
+            line-height: 1.7;
         }
 
         body::before {
@@ -35,7 +35,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('whitelogoplusspace.png'), url('whitelogoplusspace.png');
+            background-image: url('orangelogoplusspace.png'), url('orangelogoplusspace.png');
             background-position: 0 0, 110px 110px;
             background-size: 220px 220px;
             opacity: 0.04;
@@ -56,7 +56,7 @@
         }
 
         .translate-btn {
-            background: rgba(10, 20, 29, 0.9);
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(197, 160, 89, 0.4);
             color: var(--accent-gold);
             width: 40px;
@@ -69,6 +69,7 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .lang-menu {
@@ -76,13 +77,13 @@
             top: 100%;
             right: 0;
             margin-top: 10px;
-            background: rgba(10, 20, 29, 0.95);
-            border: 1px solid rgba(197, 160, 89, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(197, 160, 89, 0.3);
             border-radius: 15px;
             padding: 10px 0;
             display: none;
             min-width: 160px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             backdrop-filter: blur(20px);
         }
 
@@ -90,7 +91,7 @@
 
         .lang-option {
             padding: 10px 25px;
-            color: var(--text-main);
+            color: var(--text-dark);
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 0.8rem;
@@ -113,8 +114,8 @@
         }
 
         .branding-logo {
-            max-width: 150px;
-            opacity: 0.85;
+            max-width: 120px;
+            opacity: 0.8;
             transition: opacity 0.3s ease;
         }
 
@@ -125,40 +126,35 @@
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            font-weight: 400;
             margin-bottom: 20px;
             text-align: center;
-            color: var(--accent-gold);
+            color: var(--text-dark);
         }
 
         .subtitle {
             text-align: center;
             font-size: 1.1rem;
-            color: var(--text-main);
+            color: var(--accent-gold);
             margin-bottom: 60px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            opacity: 0.9;
         }
 
         .recipe-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: white;
             padding: 60px;
-            border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-color);
             margin-bottom: 60px;
-            backdrop-filter: blur(10px);
         }
 
         h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            font-weight: 400;
-            color: var(--accent-gold);
             margin-bottom: 30px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 15px;
+            color: var(--text-dark);
         }
 
         .ingredients-tools {
@@ -188,14 +184,13 @@
         }
 
         .note {
-            background: rgba(197, 160, 89, 0.08);
+            background: #f9f7f0;
             border-left: 3px solid var(--accent-gold);
             padding: 20px;
             margin: 20px 0;
             font-style: italic;
             font-size: 0.92rem;
-            color: var(--text-main);
-            border-radius: 0 8px 8px 0;
+            color: var(--text-dark);
         }
 
         .description {
@@ -211,7 +206,7 @@
             display: block;
             margin-top: 80px;
             text-align: center;
-            color: var(--text-main);
+            color: var(--text-dark);
             text-decoration: none;
             text-transform: uppercase;
             font-size: 0.7rem;
@@ -220,20 +215,16 @@
         }
 
         a {
-            color: var(--accent-gold);
+            color: var(--text-dark);
             text-decoration: underline;
-            text-decoration-color: rgba(197, 160, 89, 0.5);
-            font-weight: 500;
-        }
-
-        a:hover {
             text-decoration-color: var(--accent-gold);
+            font-weight: 500;
         }
 
         .footer-nav {
             margin-top: 80px;
             padding: 40px 0;
-            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
             gap: 30px;
@@ -340,7 +331,7 @@
     <div class="container">
         <div class="branding-header">
             <a href="index.html">
-                <img src="logo.png" alt="Lily Terrace Rome" class="branding-logo">
+                <img src="gigliopadlogoblue.png" alt="Lily Terrace Rome" class="branding-logo">
             </a>
         </div>
         <h1>Experience Rome at Home</h1>
@@ -353,7 +344,7 @@
                     <ul>
                         <li>1 28oz can of <a href="https://www.biancodinapoli.com/" target="_blank">Whole peeled
                                 tomatoes</a></li>
-                        <li>2 boxes of <a href="https://flourandwaterfoods.com/" target="_blank">Pasta</a></li>
+                        <li>1 box of <a href="https://flourandwaterfoods.com/" target="_blank">Pasta</a></li>
                         <li>6-12 cloves of Garlic, halved</li>
                         <li>4-10 Anchovy filets</li>
                         <li>¼ tsp - ½ tsp of Red chili flakes</li>
