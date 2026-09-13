@@ -191,8 +191,8 @@
 
         .guide-grid {
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
         }
 
         .guide-col h3 {
@@ -252,11 +252,11 @@
         }
 
         .section-tag {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
-            font-weight: 500;
+            font-weight: 400;
         }
 
         /* Venue Cards */
@@ -315,6 +315,47 @@
             gap: 6px;
             align-items: center;
             flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .badge-booking {
+            background: rgba(197, 160, 89, 0.16);
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            color: var(--accent-gold);
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .badge-booking:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            transform: translateY(-1px);
+        }
+
+        .badge-wait {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: rgba(255, 255, 255, 0.92);
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .badge-rating {
@@ -336,6 +377,215 @@
             font-size: 0.8rem;
             font-weight: 600;
             white-space: nowrap;
+        }
+
+        /* Phone Reservation & Phrasebook Modal */
+        .res-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 11, 16, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 9000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .res-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .res-modal-card {
+            background: #0d1a26;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            border-radius: 18px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            color: var(--text-main);
+        }
+
+        .res-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            background: transparent;
+            border: none;
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px;
+        }
+
+        .res-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--accent-gold);
+            margin: 0 0 6px;
+            font-weight: 400;
+        }
+
+        .res-modal-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0 0 20px;
+        }
+
+        .res-venue-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .res-pill-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .res-pill-btn.active, .res-pill-btn:hover {
+            background: var(--accent-gold);
+            color: #0a141d;
+            border-color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .res-active-box {
+            background: rgba(197, 160, 89, 0.07);
+            border: 1px solid rgba(197, 160, 89, 0.28);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .res-venue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .res-venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .res-venue-lead {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .res-phone-display {
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .res-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .res-call-btn {
+            background: var(--accent-gold);
+            color: #0a141d;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .res-call-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .res-web-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.88rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .res-phrasebook-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin: 0 0 12px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 6px;
+            font-weight: 400;
+        }
+
+        .res-phrase-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .res-phrase-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-gold);
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .res-phrase-it {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .res-phrase-pron {
+            font-size: 0.82rem;
+            color: var(--accent-gold);
+            font-style: italic;
+            margin-bottom: 3px;
+        }
+
+        .res-phrase-en {
+            font-size: 0.84rem;
+            color: var(--text-muted);
         }
 
         .venue-card p {
@@ -746,6 +996,19 @@
                         <li><span class="guide-key">$$$$</span> Over €60 euro per person.</li>
                     </ul>
                 </div>
+                <div class="guide-col">
+                    <h3>Booking &amp; Wait Guide</h3>
+                    <ul class="guide-list">
+                        <li>
+                            <span class="guide-key">📅</span>
+                            <span><strong>This restaurant needs to be booked in advance.</strong> Preceded by lead time (e.g. <a href="javascript:void(0)" onclick="openReservationModal('armando')" style="color: var(--accent-gold); text-decoration: underline;">31 days 📅</a>). Click to book online or open our <a href="javascript:void(0)" onclick="openReservationModal('53-untitled')" style="color: var(--accent-gold); text-decoration: underline;">Phone &amp; Italian Phrasebook</a>.</span>
+                        </li>
+                        <li>
+                            <span class="guide-key">⏳</span>
+                            <span><strong>You will wait.</strong> Preceded by typical wait time (e.g. <strong>1 hour ⏳</strong>).</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div id="insider-notes" class="guide-notes" style="margin-top: 25px; padding-top: 22px; border-top: 1px solid var(--border-color);">
@@ -757,7 +1020,9 @@
                     </div>
                     <div style="background: rgba(197, 160, 89, 0.06); border-left: 3px solid var(--accent-gold); padding: 14px 18px; border-radius: 0 8px 8px 0;">
                         <strong style="color: var(--accent-gold); font-size: 1rem; display: block; margin-bottom: 5px;">Buttadentro</strong>
-                        <p style="margin: 0; font-size: 0.93rem; line-height: 1.65; color: var(--text-muted);">&ldquo;Throw-them-inside&rdquo;, pejoratively used to describe the wait staff whose job it is to get you to eat at a restaurant. All restaurants that feature these <em>acchiappaturisti</em> (tourist-catchers) should be avoided.</p>
+                        <p style="margin: 0; font-size: 0.93rem; line-height: 1.65; color: var(--text-muted);">&ldquo;Throw-them-inside&rdquo;,
+                            pejoratively used to describe the staff whose job it is to get you to eat at a restaurant. All restaurants that
+                            feature these <em>acchiappaturisti</em> (tourist-catchers) should be avoided.</p>
                     </div>
                 </div>
             </div>
@@ -775,7 +1040,7 @@
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Ruma+Bottega+Cucina+Agricola+Rome" target="_blank">Ruma</a></h3>
                     <div class="venue-badges">
                         <span class="badge-rating">★★★★★</span>
-                        <span class="badge-price">$</span>
+                        <span class="badge-price">$$</span>
                     </div>
                 </div>
                 <p>Tell Gui I sent you. Possibly the best gelato, cheese, and wine you'll have in Europe. Reasonably priced. Good music. Great location.</p>
@@ -789,15 +1054,16 @@
                         <span class="badge-price">$$</span>
                     </div>
                 </div>
-                <p>Carbonara A+, Amatriciana B+, bruschetta B+, squash blossom A, chicory A+. Cheap, never full, close.</p>
+                <p>Carbonara A+, Amatriciana B+, bruschetta B+, squash blossom A, chicory A+. Cheap and close.</p>
             </div>
 
             <div class="venue-card">
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Fuorinorma+Rome" target="_blank">Fuorinorma</a></h3>
                     <div class="venue-badges">
+                        <span class="badge-wait">10 minutes ⏳</span>
                         <span class="badge-rating">★★★★★</span>
-                        <span class="badge-price">$$</span>
+                        <span class="badge-price">$</span>
                     </div>
                 </div>
                 <p>“#16” porchetta, tonnato (tuna-mayonnaise sauce), sun dried tomato. Ask to add caramelized onion. Possibly the best porchetta sandwich in Rome. The #10 is also great.</p>
@@ -807,17 +1073,19 @@
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=L+Elementare+Trastevere+Rome" target="_blank">Elementare</a></h3>
                     <div class="venue-badges">
+                        <span class="badge-wait">30 min ⏳</span>
                         <span class="badge-rating">★★★★★</span>
                         <span class="badge-price">$$</span>
                     </div>
                 </div>
-                <p>Best Roman (thin crust) pizza and best supplis in town. This place gets busy, but you can order your food to go from the Trilussa location and eat it across the street at Ma Che Siete Venuti A Fà which is an excellent beer bar.</p>
+                <p>Best Roman (thin crust) pizza and best supplis in town. You can also order your food to go from the Trilussa location and eat it across the street at Ma Che Siete Venuti A Fà, an excellent beer bar.</p>
             </div>
 
             <div class="venue-card">
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=53+Untitled+Rome" target="_blank">53 Untitled</a></h3>
                     <div class="venue-badges">
+                        <a href="javascript:void(0)" onclick="openReservationModal('53-untitled')" class="badge-booking" title="Click for phone &amp; reservation phrasebook">7 days 📅</a>
                         <span class="badge-rating">★★★★</span>
                         <span class="badge-price">$$$</span>
                     </div>
@@ -829,6 +1097,7 @@
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=CiPASSO+Bistrot+Rome" target="_blank">CiPASSO</a></h3>
                     <div class="venue-badges">
+                        <a href="https://www.cipassoitalia.it/en/" target="_blank" class="badge-booking" title="Book online">3 days 📅</a>
                         <span class="badge-rating">★★★★★</span>
                         <span class="badge-price">$$$</span>
                     </div>
@@ -844,7 +1113,7 @@
                         <span class="badge-price">$$$</span>
                     </div>
                 </div>
-                <p>Excellent cocktails, wonderful inventive pastas, very close to the apartment, never a wait.</p>
+                <p>Excellent cocktails, wonderful inventive pastas, very close to the apartment.</p>
             </div>
 
             <div class="venue-card">
@@ -855,29 +1124,31 @@
                         <span class="badge-price">$</span>
                     </div>
                 </div>
-                <p>Closest sandwich shop to the apartment - Very cheap. Very good. No wait. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.</p>
+                <p>Closest sandwich shop to the apartment — Very cheap. Very good. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.</p>
             </div>
 
             <div class="venue-card">
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></h3>
                     <div class="venue-badges">
+                        <span class="badge-wait">1 hour ⏳</span>
                         <span class="badge-rating">★★★★★</span>
                         <span class="badge-price">$$</span>
                     </div>
                 </div>
-                <p>Even if you show up before they open, expect to wait in line. It is worth it. Order the yellow spice salami pie.</p>
+                <p>Order the yellow spice salami pie.</p>
             </div>
 
             <div class="venue-card">
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></h3>
                     <div class="venue-badges">
+                        <a href="https://armandoalpantheon.it/prenota/" target="_blank" class="badge-booking" title="Book online">31 days 📅</a>
                         <span class="badge-rating">★★★★</span>
                         <span class="badge-price">$$</span>
                     </div>
                 </div>
-                <p>Be on their website at 11:59 pm Italy time exactly one month before the day you want to eat there or you will not get to eat there. Definitely order the Amatriciana, it’s the best in town. The other stuff is just good, and the menu is heavy on offal.</p>
+                <p>Definitely order the Amatriciana, it’s the best in town. The other stuff is just good, and the menu is heavy on offal.</p>
             </div>
 
             <div class="venue-card">
@@ -888,7 +1159,7 @@
                         <span class="badge-price">$$</span>
                     </div>
                 </div>
-                <p>A block from the apartment and generally no wait. Attire recommended but not mandatory.</p>
+                <p>A block from the apartment. Attire recommended but not mandatory.</p>
             </div>
 
             <div class="venue-card">
@@ -899,7 +1170,7 @@
                         <span class="badge-price">$</span>
                     </div>
                 </div>
-                <p>The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Close, never a line.</p>
+                <p>The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Very close.</p>
             </div>
 
             <div class="venue-card">
@@ -928,11 +1199,12 @@
                 <div class="venue-header">
                     <h3 class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Rome" target="_blank">All’Antico Vinaio</a></h3>
                     <div class="venue-badges">
+                        <span class="badge-wait">20 min ⏳</span>
                         <span class="badge-rating">★★★★</span>
-                        <span class="badge-price">$$</span>
+                        <span class="badge-price">$</span>
                     </div>
                 </div>
-                <p>The Numero #1 is my second favorite porchetta sandwich in town. I recommend going in the evening to avoid the lines.</p>
+                <p>The Numero #1 is my second favorite porchetta sandwich in town.</p>
             </div>
         </div>
 
@@ -979,6 +1251,7 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Frigidarium+Gelateria+Rome" target="_blank">Frigidarium</a></h3>
                         <div class="venue-badges">
+                            <span class="badge-wait">10 minutes ⏳</span>
                             <span class="badge-rating">★★★★</span>
                             <span class="badge-price">€3</span>
                         </div>
@@ -1049,11 +1322,12 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Gelateria+La+Romana+Rome" target="_blank">1947 (La Romana)</a></h3>
                         <div class="venue-badges">
+                            <span class="badge-wait">10 minutes ⏳</span>
                             <span class="badge-rating">★★★</span>
                             <span class="badge-price">€3</span>
                         </div>
                     </div>
-                    <p>Cheap, close, high quality, small waffle cones. A bit of a wait, looks like a Starbucks, and not a ton of flavor choices.</p>
+                    <p>Cheap, close, high quality, small waffle cones. Looks like a Starbucks, and not a ton of flavor choices.</p>
                 </div>
             </div>
 
@@ -1103,7 +1377,7 @@
                             <span class="badge-price">$</span>
                         </div>
                     </div>
-                    <p>Closest sandwich shop to the apartment — Very cheap. Very good. No wait. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.</p>
+                    <p>Closest sandwich shop to the apartment — Very cheap. Very good. The Norcino (€8) is spectacular, and the orange juice (€3.50) is the cheapest around. Also does lunch plates. Popular with locals.</p>
                 </div>
             </div>
 
@@ -1113,8 +1387,9 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Fuorinorma+Rome" target="_blank">Fuorinorma</a></h3>
                         <div class="venue-badges">
+                            <span class="badge-wait">10 minutes ⏳</span>
                             <span class="badge-rating">★★★★★</span>
-                            <span class="badge-price">$$</span>
+                            <span class="badge-price">$</span>
                         </div>
                     </div>
                     <p>“#16” porchetta, tonnato (tuna-mayonnaise sauce), sun dried tomato. Ask to add caramelized onion. Possibly the best porchetta sandwich in Rome. The #10 is also great.</p>
@@ -1127,11 +1402,12 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Rome" target="_blank">All’Antico Vinaio</a></h3>
                         <div class="venue-badges">
+                            <span class="badge-wait">20 min ⏳</span>
                             <span class="badge-rating">★★★★</span>
-                            <span class="badge-price">$$</span>
+                            <span class="badge-price">$</span>
                         </div>
                     </div>
-                    <p>The Numero #1 is my second favorite porchetta sandwich in town. I recommend going in the evening to avoid the lines.</p>
+                    <p>The Numero #1 is my second favorite porchetta sandwich in town.</p>
                 </div>
             </div>
 
@@ -1145,7 +1421,7 @@
                             <span class="badge-price">$</span>
                         </div>
                     </div>
-                    <p>The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Close, never a line.</p>
+                    <p>The Ambaradan tastes like a honey mustard snack wrap in the best way. The sandwiches are small but super cheap and top quality. Very close.</p>
                 </div>
             </div>
 
@@ -1173,40 +1449,43 @@
         <div class="pizza-grid">
             <div class="pizza-card">
                 <div class="pizza-num">1</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=Piccolo+Buco+Rome" target="_blank">Piccolo Buco</a></h4>
-                    <span>Willing to wait</span>
+                    <span>Iconic high-hydration crust</span>
                 </div>
+                <span class="badge-wait">1 hour ⏳</span>
             </div>
 
             <div class="pizza-card">
                 <div class="pizza-num">2</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=SEU+Pizza+Via+Angelo+Bargoni+10+-+18+00153+Roma+RM+Italy"
                             target="_blank">Seu Illuminati</a></h4>
-                    <span>Willing to book ahead</span>
+                    <span>Modern artisanal pizza</span>
                 </div>
+                <a href="https://www.seupizza.com/" target="_blank" class="badge-booking" title="Book online">20 days 📅</a>
             </div>
 
             <div class="pizza-card">
                 <div class="pizza-num">3</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=L+Elementare+Trastevere+Rome" target="_blank">Elementare</a></h4>
                     <span>Best Roman thin crust &amp; supplì</span>
                 </div>
+                <span class="badge-wait">30 min ⏳</span>
             </div>
 
             <div class="pizza-card">
                 <div class="pizza-num">4</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Mariuccia+Rome" target="_blank">Mariuccia</a></h4>
-                    <span>Not willing to wait or book ahead or go far</span>
+                    <span>Right on Campo de' Fiori</span>
                 </div>
             </div>
 
             <div class="pizza-card">
                 <div class="pizza-num">5</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=Corner+Pizza+Rome" target="_blank">Corner Pizza</a></h4>
                     <span>For pizza al taglio</span>
                 </div>
@@ -1214,7 +1493,7 @@
 
             <div class="pizza-card">
                 <div class="pizza-num">6</div>
-                <div class="pizza-details">
+                <div class="pizza-details" style="flex: 1;">
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=Fiore+Rome" target="_blank">Fiori</a></h4>
                     <span>For montanare</span>
                 </div>
@@ -1239,14 +1518,14 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon+Rome" target="_blank">Armando al Pantheon</a></h3>
                         <div class="venue-badges">
+                            <a href="https://armandoalpantheon.it/prenota/" target="_blank" class="badge-booking" title="Book online">31 days 📅</a>
                             <span class="badge-rating">★★★★★</span>
                             <span class="badge-price">$$</span>
                         </div>
                     </div>
                     <p>The gold standard of Amatriciana (€16). I don’t know how they get their guanciale to be so crispy and delicious. The
                         other pastas on the menu are great, but stand out less (imho I like <a href="recipe.html" style="color: var(--accent-gold); text-decoration: underline;">my puttanesca</a> more than theirs), and the rest of
-                        the menu is very offal forward. Book at midnight Italian time one month before you want to eat there or you will not
-                        eat there.</p>
+                        the menu is very offal forward.</p>
                 </div>
             </div>
 
@@ -1256,6 +1535,7 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=53+Untitled+Rome" target="_blank">53 Untitled</a></h3>
                         <div class="venue-badges">
+                            <a href="javascript:void(0)" onclick="openReservationModal('53-untitled')" class="badge-booking" title="Click for phone &amp; reservation phrasebook">7 days 📅</a>
                             <span class="badge-rating">★★★★★</span>
                             <span class="badge-price">$$$</span>
                         </div>
@@ -1274,7 +1554,7 @@
                             <span class="badge-price">$$</span>
                         </div>
                     </div>
-                    <p>The only restaurant in Rome where I’ve felt judged for how poorly we were dressed, which is very fun. Their Amatriciana (€16) is just about as good as Armando’s, and the menu as a whole is more American-friendly. Excellent wines by the glass. Less than a block from the apartment. Generally no wait.</p>
+                    <p>The only restaurant in Rome where I’ve felt judged for how poorly we were dressed, which is very fun. Their Amatriciana (€16) is just about as good as Armando’s, and the menu as a whole is more American-friendly. Excellent wines by the glass. Less than a block from the apartment.</p>
                 </div>
             </div>
 
@@ -1284,11 +1564,12 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Antica+Pesa+Rome" target="_blank">Antica Pesa</a></h3>
                         <div class="venue-badges">
+                            <a href="javascript:void(0)" onclick="openReservationModal('antica-pesa')" class="badge-booking" title="Click for phone &amp; reservation phrasebook">1 day 📅</a>
                             <span class="badge-rating">★★★★</span>
                             <span class="badge-price">$$$$</span>
                         </div>
                     </div>
-                    <p>Overall, a little more form than function. But the Amatriciana is only €20 and is excellent (so is the spigola and the pork pluma). Not hard to get a reservation, but there is a €75 per person minimum, so don’t go with the aim of just eating a bowl of pasta.</p>
+                    <p>Overall, a little more form than function. But the Amatriciana is only €20 and is excellent (so is the spigola and the pork pluma). There is a €75 per person minimum, so don’t go with the aim of just eating a bowl of pasta.</p>
                 </div>
             </div>
 
@@ -1302,7 +1583,7 @@
                             <span class="badge-price">$$</span>
                         </div>
                     </div>
-                    <p>Also immediately next to the apartment. The owner is awesome. Never a wait. Not going to outclass Armando with the guanciale, but otherwise a terrific Amatriciana (€13). The menu is quite traditional, and not huge, but solid across the board. The Genovese meatball is stellar.</p>
+                    <p>Also immediately next to the apartment. The owner is awesome. Not going to outclass Armando with the guanciale, but otherwise a terrific Amatriciana (€13). The menu is quite traditional, and not huge, but solid across the board. The Genovese meatball is stellar.</p>
                 </div>
             </div>
 
@@ -1312,11 +1593,12 @@
                     <div class="sub-header">
                         <h3 class="sub-title"><a href="https://www.google.com/maps/search/?api=1&query=Roscioli+Salumeria+Rome" target="_blank">Roscioli</a></h3>
                         <div class="venue-badges">
+                            <a href="https://www.salumeriaroscioli.com/prenotazioni/" target="_blank" class="badge-booking" title="Book online">3 days 📅</a>
                             <span class="badge-rating">★★★</span>
                             <span class="badge-price">$$$</span>
                         </div>
                     </div>
-                    <p>The amatriciana (€17) is very good, but candidly, a distant sixth. Still better than anything you’ll eat at Campo. I’m a big fan of their deli. And I remember really loving their raviolo and burro e alici (butter and anchovy) pasta years ago, but it’s become a pricey tourist trap. You have to get reservations online, but they are often available with short notice.</p>
+                    <p>The amatriciana (€17) is very good, but candidly, a distant sixth. Still better than anything you’ll eat at Campo. I’m a big fan of their deli. And I remember really loving their raviolo and burro e alici (butter and anchovy) pasta years ago, but it’s become a pricey tourist trap.</p>
                 </div>
             </div>
         </div>
@@ -1573,7 +1855,7 @@
                             <span class="badge-price">$$$</span>
                         </div>
                     </div>
-                    <p>The sister restaurant of Miami Joe (they share a kitchen). Really good American food with decent prices and no wait.</p>
+                    <p>The sister restaurant of Miami Joe (they share a kitchen). Really good American food with decent prices.</p>
                 </div>
             </div>
 
@@ -1675,6 +1957,164 @@
         <a href="map.html">Map</a>
         <a href="members.html" style="color: var(--accent-gold); font-weight: 600;">Members</a>
     </nav>
+
+    <!-- Phone Reservation & Phrasebook Modal -->
+    <div id="reservationModal" class="res-modal-backdrop" onclick="if(event.target === this) closeReservationModal()">
+        <div class="res-modal-card" role="dialog" aria-modal="true" aria-labelledby="resModalTitle">
+            <button class="res-modal-close" onclick="closeReservationModal()" aria-label="Close modal">&times;</button>
+            <div class="res-modal-header">
+                <span class="res-modal-tag">Advance Reservation Helper</span>
+                <h3 class="res-modal-title" id="resModalTitle">Phone Booking &amp; Phrasebook</h3>
+                <p class="res-modal-subtitle">Select a restaurant below to dial directly or use the Italian phrasebook</p>
+            </div>
+
+            <div class="res-venue-selector" id="resVenueSelector">
+                <button type="button" class="res-venue-pill" data-venue="53-untitled" onclick="selectReservationVenue('53-untitled')">53 Untitled (7 days)</button>
+                <button type="button" class="res-venue-pill" data-venue="antica-pesa" onclick="selectReservationVenue('antica-pesa')">Antica Pesa (1 day)</button>
+                <button type="button" class="res-venue-pill" data-venue="armando" onclick="selectReservationVenue('armando')">Armando (31 days)</button>
+                <button type="button" class="res-venue-pill" data-venue="seu" onclick="selectReservationVenue('seu')">Seu Pizza (20 days)</button>
+                <button type="button" class="res-venue-pill" data-venue="cipasso" onclick="selectReservationVenue('cipasso')">CiPASSO (3 days)</button>
+                <button type="button" class="res-venue-pill" data-venue="roscioli" onclick="selectReservationVenue('roscioli')">Roscioli (3 days)</button>
+            </div>
+
+            <div class="res-phone-box">
+                <div class="res-phone-label" id="resVenueBookingWindow">Book 7 Days in Advance</div>
+                <div class="res-phone-number" id="resPhoneDisplay">+39 375 715 0155</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;" id="resVenueAddress">Via del Monte della Farina, 53, 00186 Roma</div>
+                <div class="res-call-actions">
+                    <a href="tel:+393757150155" id="resCallBtn" class="res-call-btn">
+                        <span>📞</span> Call Restaurant
+                    </a>
+                    <a href="https://www.untitledrestaurant.com/en/reservation/" id="resWebBtn" target="_blank" rel="noopener" class="res-web-btn">
+                        <span>🌐</span> Online Booking / Website
+                    </a>
+                </div>
+            </div>
+
+            <div class="res-phrasebook">
+                <h4>Italian Reservation Phrasebook</h4>
+                <div class="phrase-card">
+                    <div class="phrase-it">“Buonasera, vorrei prenotare un tavolo per favore.”</div>
+                    <div class="phrase-pron">Bwoh-nah-SEH-rah, vor-RAY preh-noh-TAH-reh oon TAH-voh-loh per fah-VOH-reh</div>
+                    <div class="phrase-en">Good evening, I would like to book a table, please.</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-it">“Per [due / quattro] persone, per [stasera / domani sera] alle [venti].”</div>
+                    <div class="phrase-pron">Per [DOO-eh / KWAHT-troh] per-SOH-neh, per [stah-SEH-rah / doh-MAH-nee SEH-rah] AHL-leh [VEN-tee]</div>
+                    <div class="phrase-en">For [2 / 4] people, for [tonight / tomorrow night] at [8:00 PM / 20:00].</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-it">“A nome di [Your Last Name].”</div>
+                    <div class="phrase-pron">Ah NOH-meh dee [...]</div>
+                    <div class="phrase-en">Under the name of [Your Last Name].</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-it">“Avete posto all’esterno / all’interno?”</div>
+                    <div class="phrase-pron">Ah-VEH-teh POHS-toh ahl-les-TER-noh / ahl-leen-TER-noh?</div>
+                    <div class="phrase-en">Do you have seating outside / inside?</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-it">“Grazie mille, a presto!”</div>
+                    <div class="phrase-pron">GRAHT-see-eh MEEL-leh, ah PRES-toh!</div>
+                    <div class="phrase-en">Thank you very much, see you soon!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const RESERVATION_VENUES = {
+            '53-untitled': {
+                name: '53 Untitled',
+                window: 'Book 7 Days in Advance',
+                phoneDisplay: '+39 375 715 0155',
+                phoneHref: 'tel:+393757150155',
+                address: 'Via del Monte della Farina, 53, 00186 Roma',
+                webUrl: 'https://www.untitledrestaurant.com/en/reservation/'
+            },
+            'antica-pesa': {
+                name: 'Antica Pesa',
+                window: 'Book 1 Day in Advance',
+                phoneDisplay: '+39 06 580 9236',
+                phoneHref: 'tel:+39065809236',
+                address: 'Via Garibaldi, 18, 00153 Roma (Trastevere)',
+                webUrl: 'https://www.anticapesa.it/prenota/'
+            },
+            'armando': {
+                name: 'Armando al Pantheon',
+                window: 'Book 31 Days in Advance',
+                phoneDisplay: '+39 06 6880 3034',
+                phoneHref: 'tel:+390668803034',
+                address: "Salita de' Crescenzi, 31, 00186 Roma",
+                webUrl: 'https://armandoalpantheon.it/prenota/'
+            },
+            'seu': {
+                name: 'Seu Pizza Illuminati',
+                window: 'Book 20 Days in Advance',
+                phoneDisplay: '+39 06 588 3384',
+                phoneHref: 'tel:+39065883384',
+                address: 'Via Angelo Bargoni, 10-18, 00153 Roma',
+                webUrl: 'https://www.seupizza.com/'
+            },
+            'cipasso': {
+                name: 'CiPASSO Bistrot',
+                window: 'Book 3 Days in Advance',
+                phoneDisplay: '+39 06 6880 3914',
+                phoneHref: 'tel:+390668803914',
+                address: 'Via Metastasio, 21, 00186 Roma',
+                webUrl: 'https://www.cipassoitalia.it/en/'
+            },
+            'roscioli': {
+                name: 'Salumeria Roscioli',
+                window: 'Book 3 Days in Advance',
+                phoneDisplay: '+39 06 687 5287',
+                phoneHref: 'tel:+39066875287',
+                address: 'Via dei Giubbonari, 21, 00186 Roma',
+                webUrl: 'https://www.salumeriaroscioli.com/prenotazioni/'
+            }
+        };
+
+        function selectReservationVenue(venueKey) {
+            const data = RESERVATION_VENUES[venueKey] || RESERVATION_VENUES['53-untitled'];
+            document.getElementById('resModalTitle').textContent = data.name;
+            document.getElementById('resVenueBookingWindow').textContent = data.window;
+            document.getElementById('resPhoneDisplay').textContent = data.phoneDisplay;
+            document.getElementById('resVenueAddress').textContent = data.address;
+            const callBtn = document.getElementById('resCallBtn');
+            callBtn.setAttribute('href', data.phoneHref);
+            const webBtn = document.getElementById('resWebBtn');
+            if (data.webUrl) {
+                webBtn.style.display = 'inline-flex';
+                webBtn.setAttribute('href', data.webUrl);
+            } else {
+                webBtn.style.display = 'none';
+            }
+            document.querySelectorAll('#resVenueSelector .res-venue-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-venue') === venueKey);
+            });
+        }
+
+        function openReservationModal(venueKey) {
+            selectReservationVenue(venueKey || '53-untitled');
+            const modal = document.getElementById('reservationModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeReservationModal() {
+            const modal = document.getElementById('reservationModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeReservationModal();
+        });
+    </script>
     
     <script src="script.js"></script>
     <script type="text/javascript">
