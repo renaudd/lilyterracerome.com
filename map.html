@@ -461,6 +461,7 @@
                 <div class="map-controls">
                     <a href="map.html" id="view-all-places-btn" class="layer-toggle-btn" style="display:none;">🗺️ Full Guide</a>
                     <a href="map.html?layer=campo-wine-crawl" id="view-wine-crawl-btn" class="layer-toggle-btn">🍷 Wine Crawl</a>
+                    <a href="map.html?layer=caravaggio-trail" id="view-caravaggio-btn" class="layer-toggle-btn">🎨 Caravaggio Trail</a>
                 </div>
             </header>
             <iframe
@@ -480,6 +481,7 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script>
             let leafletMap = null;
+            let trailLayerGroup = null;
 
             const wineCrawlPlaces = [
                 {
@@ -583,31 +585,196 @@
                 [41.89764, 12.46756], [41.89767, 12.46752], [41.89777, 12.46742], [41.89779, 12.46739], [41.89782, 12.46735]
             ];
 
-            function initWineCrawlMap() {
-                if (leafletMap) {
+            const caravaggioPlaces = [
+                {
+                    num: 1,
+                    name: "Chiesa di San Luigi dei Francesi",
+                    tag: "Contarelli Chapel · Free Admission",
+                    desc: "Home to The Saint Matthew Cycle (The Calling, The Inspiration, and The Martyrdom of Saint Matthew). Bring €1 or €2 coins to illuminate the chapel.",
+                    lat: 41.89958,
+                    lng: 12.47458,
+                    mapQuery: "Chiesa+di+San+Luigi+dei+Francesi+Rome"
+                },
+                {
+                    num: 2,
+                    name: "Basilica di Sant’Agostino",
+                    tag: "Cavalletti Chapel · Free Admission",
+                    desc: "Features Caravaggio's Madonna di Loreto (Madonna dei Pellegrini), depicting a barefoot Virgin Mary greeting kneeling pilgrims.",
+                    lat: 41.90063,
+                    lng: 12.47431,
+                    mapQuery: "Basilica+di+Sant+Agostino+Rome"
+                },
+                {
+                    num: 3,
+                    name: "Casa di Caravaggio (Vicolo del Divino Amore)",
+                    tag: "Historic Studio & Residence (1603–1605)",
+                    desc: "Caravaggio's atelier where he famously cut a hole in the ceiling for dramatic overhead lighting. Steps from Lena's doorway on Via dei Prefetti.",
+                    lat: 41.90222,
+                    lng: 12.47644,
+                    mapQuery: "Vicolo+del+Divino+Amore+Rome"
+                },
+                {
+                    num: 4,
+                    name: "Basilica di Santa Maria del Popolo",
+                    tag: "Cerasi Chapel · Free Admission",
+                    desc: "Houses two monumental canvases: The Crucifixion of Saint Peter and The Conversion on the Way to Damascus.",
+                    lat: 41.91147,
+                    lng: 12.47641,
+                    mapQuery: "Santa+Maria+del+Popolo+Rome"
+                },
+                {
+                    num: 5,
+                    name: "Galleria Borghese",
+                    tag: "Timed Entry · Advance Booking Required",
+                    desc: "World-renowned collection holding Boy with a Basket of Fruit, Young Sick Bacchus, David with the Head of Goliath, and Saint Jerome Writing.",
+                    lat: 41.91421,
+                    lng: 12.49218,
+                    mapQuery: "Galleria+Borghese+Rome"
+                },
+                {
+                    num: 6,
+                    name: "Palazzo Barberini",
+                    tag: "Gallerie Nazionali · Open until 7 PM",
+                    desc: "Soaring Baroque palace housing Judith Beheading Holofernes, Narcissus, and Saint Francis in Meditation. Closed Mondays.",
+                    lat: 41.90349,
+                    lng: 12.49014,
+                    mapQuery: "Palazzo+Barberini+Rome"
+                },
+                {
+                    num: 7,
+                    name: "Galleria Doria Pamphilj",
+                    tag: "Princely Palace · Via del Corso",
+                    desc: "Magnificent private gallery featuring Rest on the Flight into Egypt, Penitent Magdalene, and John the Baptist.",
+                    lat: 41.89773,
+                    lng: 12.48120,
+                    mapQuery: "Galleria+Doria+Pamphilj+Rome"
+                }
+            ];
+
+            const caravaggioPath = [
+                [41.89959, 12.47482], [41.89973, 12.47481], [41.89976, 12.47481], [41.89983, 12.47481], [41.89988, 12.47482],
+                [41.89991, 12.47481], [41.90001, 12.47481], [41.90008, 12.47482], [41.90009, 12.47482], [41.9001, 12.47481],
+                [41.90013, 12.47481], [41.90015, 12.47481], [41.90015, 12.47489], [41.90017, 12.47489], [41.90054, 12.47488],
+                [41.90054, 12.47484], [41.90054, 12.47478], [41.90054, 12.47459], [41.90053, 12.47445], [41.90053, 12.47431],
+                [41.90053, 12.47445], [41.90054, 12.47459], [41.90054, 12.47478], [41.90054, 12.47484], [41.90089, 12.47488],
+                [41.90167, 12.47497], [41.90187, 12.475], [41.90224, 12.47583], [41.90221, 12.47584], [41.90207, 12.47591],
+                [41.90208, 12.47596], [41.90208, 12.47599], [41.90208, 12.47609], [41.9021, 12.47608], [41.9021, 12.4764],
+                [41.9021, 12.47643], [41.9021, 12.4764], [41.9021, 12.47608], [41.90209, 12.47595], [41.90225, 12.47587],
+                [41.90229, 12.47584], [41.90228, 12.47583], [41.90259, 12.4756], [41.90262, 12.47555], [41.90263, 12.47554],
+                [41.90264, 12.47555], [41.90265, 12.47558], [41.90266, 12.47559], [41.90275, 12.47545], [41.90278, 12.47541],
+                [41.90293, 12.47522], [41.90293, 12.47521], [41.90312, 12.47524], [41.90314, 12.47525], [41.90315, 12.47526],
+                [41.90316, 12.47526], [41.90318, 12.47526], [41.90324, 12.47526], [41.90324, 12.47526], [41.90324, 12.47525],
+                [41.90325, 12.47525], [41.90325, 12.47525], [41.90326, 12.47525], [41.90439, 12.47542], [41.90441, 12.47547],
+                [41.90444, 12.47547], [41.90447, 12.47547], [41.9045, 12.47546], [41.90458, 12.47546], [41.90459, 12.47548],
+                [41.90461, 12.47548], [41.90464, 12.47547], [41.90478, 12.47549], [41.90479, 12.47547], [41.90481, 12.47547],
+                [41.90485, 12.47548], [41.90485, 12.47549], [41.90486, 12.4755], [41.90486, 12.47555], [41.90487, 12.47555],
+                [41.90489, 12.47555], [41.90492, 12.47556], [41.90494, 12.47556], [41.90496, 12.47557], [41.90496, 12.47553],
+                [41.90497, 12.47552], [41.90498, 12.47552], [41.90501, 12.47552], [41.90519, 12.47556], [41.90526, 12.47557],
+                [41.90533, 12.47558], [41.90539, 12.47559], [41.9054, 12.47559], [41.90541, 12.47557], [41.90541, 12.47554],
+                [41.90567, 12.47559], [41.90572, 12.4756], [41.90585, 12.47562], [41.90638, 12.4757], [41.90648, 12.47571],
+                [41.90652, 12.47572], [41.90654, 12.47572], [41.90663, 12.47573], [41.90673, 12.47575], [41.90694, 12.47578],
+                [41.90719, 12.47582], [41.90733, 12.47584], [41.90736, 12.47585], [41.90744, 12.47586], [41.90804, 12.47595],
+                [41.90858, 12.47604], [41.9086, 12.47605], [41.9086, 12.47599], [41.90863, 12.476], [41.90915, 12.47607],
+                [41.90916, 12.47607], [41.90919, 12.47608], [41.90921, 12.47608], [41.90922, 12.47609], [41.90974, 12.47618],
+                [41.90976, 12.47619], [41.90978, 12.47619], [41.9098, 12.47619], [41.9098, 12.47621], [41.90992, 12.47621],
+                [41.90999, 12.4762], [41.91008, 12.47619], [41.91012, 12.47618], [41.91014, 12.47617], [41.91014, 12.47617],
+                [41.91014, 12.47616], [41.91015, 12.47614], [41.91015, 12.47612], [41.91016, 12.47612], [41.9102, 12.4761],
+                [41.91024, 12.4762], [41.91025, 12.47627], [41.91031, 12.47651], [41.91054, 12.47641], [41.91047, 12.4761],
+                [41.91077, 12.47597], [41.91084, 12.4763], [41.91108, 12.4762], [41.91112, 12.47618], [41.91123, 12.47614],
+                [41.9115, 12.47601], [41.91155, 12.47599], [41.91159, 12.47597], [41.91164, 12.47618], [41.91167, 12.47635],
+                [41.91164, 12.47618], [41.91159, 12.47597], [41.91161, 12.47596], [41.91165, 12.47594], [41.91173, 12.47591],
+                [41.91177, 12.4759], [41.91179, 12.47589], [41.91182, 12.47588], [41.91185, 12.47587], [41.91188, 12.47586],
+                [41.9119, 12.47585], [41.91194, 12.47584], [41.91197, 12.47583], [41.91199, 12.47595], [41.91208, 12.47638],
+                [41.91214, 12.4764], [41.91212, 12.47667], [41.91214, 12.47671], [41.91217, 12.47677], [41.91224, 12.47693],
+                [41.91233, 12.47712], [41.91257, 12.47763], [41.91275, 12.47802], [41.91292, 12.47837], [41.913, 12.47853],
+                [41.91316, 12.47885], [41.91323, 12.479], [41.91329, 12.47912], [41.91331, 12.47916], [41.9137, 12.47996],
+                [41.91376, 12.48011], [41.91381, 12.48031], [41.91381, 12.48034], [41.91383, 12.48055], [41.91384, 12.48059],
+                [41.91385, 12.48069], [41.91386, 12.4808], [41.91384, 12.48088], [41.91376, 12.48123], [41.91371, 12.48144],
+                [41.91365, 12.48167], [41.91367, 12.48171], [41.91363, 12.4819], [41.91343, 12.48272], [41.9134, 12.48277],
+                [41.91337, 12.48291], [41.91334, 12.48299], [41.91329, 12.4831], [41.91325, 12.48319], [41.91314, 12.48344],
+                [41.91313, 12.48346], [41.91297, 12.48381], [41.91264, 12.48445], [41.91263, 12.48448], [41.91262, 12.48451],
+                [41.91264, 12.48466], [41.91263, 12.48477], [41.91261, 12.48486], [41.91257, 12.48492], [41.91254, 12.48495],
+                [41.91249, 12.48499], [41.91244, 12.48501], [41.9124, 12.48501], [41.91232, 12.48506], [41.91196, 12.4857],
+                [41.91181, 12.48595], [41.91167, 12.48611], [41.91168, 12.48616], [41.91135, 12.48755], [41.91131, 12.48775],
+                [41.91124, 12.48806], [41.91123, 12.48812], [41.91107, 12.4889], [41.9113, 12.48914], [41.91175, 12.48961],
+                [41.91239, 12.49028], [41.91246, 12.49035], [41.91253, 12.49042], [41.91257, 12.49046], [41.91293, 12.49085],
+                [41.91336, 12.49129], [41.91371, 12.49166], [41.91377, 12.49173], [41.91404, 12.49202], [41.91389, 12.49227],
+                [41.91386, 12.49232], [41.91398, 12.49246], [41.91412, 12.49262], [41.91415, 12.49265], [41.91423, 12.49251],
+                [41.91434, 12.49234], [41.91434, 12.49234], [41.91423, 12.49251], [41.91415, 12.49265], [41.91412, 12.49262],
+                [41.91398, 12.49246], [41.91386, 12.49232], [41.91389, 12.49227], [41.91404, 12.49202], [41.91377, 12.49173],
+                [41.91371, 12.49166], [41.91336, 12.49129], [41.91293, 12.49085], [41.91257, 12.49046], [41.91253, 12.49042],
+                [41.91246, 12.49035], [41.91239, 12.49028], [41.91175, 12.48961], [41.9113, 12.48914], [41.91107, 12.4889],
+                [41.91077, 12.48861], [41.91053, 12.48842], [41.91033, 12.48824], [41.91018, 12.48806], [41.91006, 12.48795],
+                [41.91002, 12.48792], [41.90998, 12.48788], [41.90991, 12.48791], [41.90988, 12.48793], [41.90987, 12.48789],
+                [41.90983, 12.48779], [41.90981, 12.48781], [41.90978, 12.48785], [41.90974, 12.48788], [41.9097, 12.48791],
+                [41.90949, 12.48812], [41.90947, 12.48814], [41.90944, 12.48817], [41.90934, 12.48826], [41.90925, 12.48833],
+                [41.90924, 12.48833], [41.90924, 12.48833], [41.90919, 12.48831], [41.90906, 12.48841], [41.90882, 12.48859],
+                [41.90879, 12.48861], [41.90878, 12.48862], [41.90875, 12.48865], [41.90873, 12.48866], [41.90872, 12.48866],
+                [41.90868, 12.4887], [41.90815, 12.48911], [41.9081, 12.48915], [41.90806, 12.48917], [41.908, 12.48921],
+                [41.90777, 12.4894], [41.90756, 12.48957], [41.90741, 12.48969], [41.90738, 12.48971], [41.90733, 12.48974],
+                [41.90728, 12.48978], [41.90724, 12.4898], [41.90696, 12.49001], [41.90692, 12.49004], [41.9069, 12.49005],
+                [41.90686, 12.49008], [41.90675, 12.49013], [41.90666, 12.49015], [41.90661, 12.49015], [41.90657, 12.49013],
+                [41.90651, 12.4901], [41.90646, 12.49007], [41.90642, 12.49004], [41.90641, 12.49005], [41.90634, 12.49013],
+                [41.90632, 12.49016], [41.90628, 12.49021], [41.90625, 12.49025], [41.90619, 12.49032], [41.90618, 12.49034],
+                [41.90588, 12.49078], [41.90586, 12.49076], [41.90584, 12.49079], [41.90581, 12.49084], [41.90579, 12.4908],
+                [41.90576, 12.49076], [41.90548, 12.49035], [41.90509, 12.49085], [41.90507, 12.49082], [41.90491, 12.49102],
+                [41.90489, 12.49104], [41.90487, 12.49106], [41.90486, 12.49107], [41.90486, 12.49107], [41.90486, 12.49108],
+                [41.90471, 12.49128], [41.90459, 12.49139], [41.90431, 12.49061], [41.90431, 12.49061], [41.90425, 12.49065],
+                [41.90418, 12.4907], [41.90402, 12.49024], [41.90393, 12.4903], [41.9036, 12.48935], [41.90327, 12.48956],
+                [41.90326, 12.48959], [41.90325, 12.48962], [41.90323, 12.48965], [41.90322, 12.48965], [41.90327, 12.48979],
+                [41.90342, 12.49019], [41.90327, 12.48979], [41.90322, 12.48965], [41.90321, 12.48966], [41.90318, 12.48967],
+                [41.90315, 12.48966], [41.90313, 12.48965], [41.90306, 12.48969], [41.90282, 12.48957], [41.90277, 12.48954],
+                [41.90275, 12.48952], [41.90273, 12.48949], [41.90272, 12.48948], [41.90268, 12.48944], [41.90256, 12.48967],
+                [41.90253, 12.48964], [41.90233, 12.48944], [41.9024, 12.48936], [41.90242, 12.4885], [41.90239, 12.48837],
+                [41.90237, 12.48831], [41.90221, 12.48747], [41.9021, 12.48687], [41.90213, 12.48684], [41.90218, 12.48678],
+                [41.9022, 12.48675], [41.9022, 12.4867], [41.90214, 12.48661], [41.90209, 12.48654], [41.902, 12.4864],
+                [41.902, 12.4864], [41.90167, 12.48573], [41.90126, 12.4849], [41.90135, 12.48483], [41.90126, 12.48466],
+                [41.90107, 12.48429], [41.90101, 12.48416], [41.90081, 12.48371], [41.9008, 12.48362], [41.9008, 12.48349],
+                [41.90079, 12.4834], [41.90078, 12.48331], [41.90076, 12.48323], [41.90072, 12.48313], [41.90071, 12.4831],
+                [41.90065, 12.48294], [41.90057, 12.48272], [41.90051, 12.48248], [41.90048, 12.48245], [41.90043, 12.48231],
+                [41.90033, 12.48182], [41.90016, 12.48103], [41.90013, 12.4809], [41.90008, 12.48092], [41.89981, 12.48103],
+                [41.89975, 12.48105], [41.89961, 12.48111], [41.89954, 12.48113], [41.8995, 12.48114], [41.8994, 12.48115],
+                [41.89934, 12.48117], [41.89926, 12.48119], [41.89925, 12.48114], [41.89924, 12.48109], [41.89922, 12.4811],
+                [41.89894, 12.48121], [41.89893, 12.48122], [41.89892, 12.48121], [41.89885, 12.481], [41.89882, 12.48091],
+                [41.8987, 12.48075], [41.89865, 12.48076], [41.89816, 12.48089], [41.89817, 12.48092], [41.89815, 12.48092],
+                [41.89794, 12.48099], [41.89794, 12.48099]
+            ];
+
+            function renderLeafletTrail(trailType) {
+                if (!leafletMap) {
+                    leafletMap = L.map('wine-crawl-map', {
+                        zoomControl: true,
+                        attributionControl: true
+                    });
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+                    }).addTo(leafletMap);
+
+                    trailLayerGroup = L.layerGroup().addTo(leafletMap);
+                } else {
                     leafletMap.invalidateSize();
-                    return;
+                    if (trailLayerGroup) {
+                        trailLayerGroup.clearLayers();
+                    } else {
+                        trailLayerGroup = L.layerGroup().addTo(leafletMap);
+                    }
                 }
 
-                leafletMap = L.map('wine-crawl-map', {
-                    zoomControl: true,
-                    attributionControl: true
-                });
+                const isCaravaggio = trailType === 'caravaggio';
+                const places = isCaravaggio ? caravaggioPlaces : wineCrawlPlaces;
+                const pathCoords = isCaravaggio ? caravaggioPath : wineCrawlPath;
 
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
-                }).addTo(leafletMap);
-
-                const polyline = L.polyline(wineCrawlPath, {
+                const polyline = L.polyline(pathCoords, {
                     color: '#c5a059',
                     weight: 4,
                     opacity: 0.9,
                     lineCap: 'round',
                     lineJoin: 'round'
-                }).addTo(leafletMap);
+                }).addTo(trailLayerGroup);
 
-                wineCrawlPlaces.forEach((place) => {
+                places.forEach((place) => {
                     const icon = L.divIcon({
                         className: 'wine-marker',
                         html: `<div class="wine-marker-badge">${place.num}</div>`,
@@ -617,7 +784,7 @@
                     });
 
                     const popupContent = `
-                        <div class="wine-popup-step">Stop ${place.num} of 7</div>
+                        <div class="wine-popup-step">Stop ${place.num} of ${places.length}</div>
                         <div class="wine-popup-title">${place.name}</div>
                         <div class="wine-popup-badge">${place.tag}</div>
                         <div class="wine-popup-desc">${place.desc}</div>
@@ -625,7 +792,7 @@
                     `;
 
                     L.marker([place.lat, place.lng], { icon: icon })
-                        .addTo(leafletMap)
+                        .addTo(trailLayerGroup)
                         .bindPopup(popupContent);
                 });
 
@@ -634,20 +801,23 @@
 
             function setMapView(layerName) {
                 const isWineCrawl = layerName === 'campo-wine-crawl' || layerName === 'wine-crawl';
+                const isCaravaggio = layerName === 'caravaggio-trail' || layerName === 'caravaggio';
                 const iframe = document.querySelector('iframe');
                 const wineMapEl = document.getElementById('wine-crawl-map');
                 const titleEl = document.getElementById('map-header-title');
                 const allBtn = document.getElementById('view-all-places-btn');
                 const wineBtn = document.getElementById('view-wine-crawl-btn');
+                const caravaggioBtn = document.getElementById('view-caravaggio-btn');
 
-                if (isWineCrawl) {
+                if (isWineCrawl || isCaravaggio) {
                     if (iframe) iframe.style.display = 'none';
                     if (wineMapEl) wineMapEl.style.display = 'block';
-                    if (titleEl) titleEl.textContent = 'Campo Wine Crawl';
+                    if (titleEl) titleEl.textContent = isCaravaggio ? 'The Caravaggio Trail' : 'Campo Wine Crawl';
                     if (allBtn) allBtn.style.display = 'inline-flex';
-                    if (wineBtn) wineBtn.style.display = 'none';
+                    if (wineBtn) wineBtn.style.display = isWineCrawl ? 'none' : 'inline-flex';
+                    if (caravaggioBtn) caravaggioBtn.style.display = isCaravaggio ? 'none' : 'inline-flex';
 
-                    initWineCrawlMap();
+                    renderLeafletTrail(isCaravaggio ? 'caravaggio' : 'wine');
                     setTimeout(() => {
                         if (leafletMap) leafletMap.invalidateSize();
                     }, 100);
@@ -657,6 +827,7 @@
                     if (titleEl) titleEl.textContent = 'Neighborhood Guide';
                     if (allBtn) allBtn.style.display = 'none';
                     if (wineBtn) wineBtn.style.display = 'inline-flex';
+                    if (caravaggioBtn) caravaggioBtn.style.display = 'inline-flex';
                 }
             }
 
@@ -686,6 +857,7 @@
 
                 const allBtn = document.getElementById('view-all-places-btn');
                 const wineBtn = document.getElementById('view-wine-crawl-btn');
+                const caravaggioBtn = document.getElementById('view-caravaggio-btn');
 
                 if (allBtn) {
                     allBtn.addEventListener('click', (e) => {
@@ -700,6 +872,14 @@
                         e.preventDefault();
                         history.pushState(null, '', 'map.html?layer=campo-wine-crawl');
                         setMapView('campo-wine-crawl');
+                    });
+                }
+
+                if (caravaggioBtn) {
+                    caravaggioBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        history.pushState(null, '', 'map.html?layer=caravaggio-trail');
+                        setMapView('caravaggio-trail');
                     });
                 }
 
